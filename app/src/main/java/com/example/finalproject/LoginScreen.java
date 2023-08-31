@@ -66,12 +66,19 @@ public class LoginScreen extends AppCompatActivity {
             Toast.makeText(LoginScreen.this, "Please full fill Username and Password.", Toast.LENGTH_SHORT).show();
             return false;
         }else{
+            // taking the user's data based on username.
             _LoginScreenUser = userFirebaseController.retrieveObjectsFirestoreByID(User.UserCollectionKey, userName);
         }
 
+        return verifyAccount(password);
+    }
+
+    private boolean verifyAccount(String password) {
         // Checking if there is valid user in the database which matched with both username and password.
-        if(_LoginScreenUser == null){
+        if(_LoginScreenUser == null || !_LoginScreenUser.get_UserPassword().equals(password)){
             Toast.makeText(LoginScreen.this, "username or password is incorrect. Try again!", Toast.LENGTH_SHORT).show();
+            _LoginScreenUser = null; // reset to null since we have taken the corresponding user data already, if password is incorrect
+                                    // we have to reset it to null.
             return false;
         }else return true;
     }

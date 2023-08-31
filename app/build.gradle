@@ -1,6 +1,5 @@
 plugins {
     id 'com.android.application'
-    // Add the Google services Gradle plugin
     id 'com.google.gms.google-services'
 }
 
@@ -31,6 +30,7 @@ android {
 }
 
 dependencies {
+    def fragment_version = "1.5.5"
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
@@ -48,4 +48,9 @@ dependencies {
     // https://firebase.google.com/docs/android/setup#available-libraries
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
+
+    // Java language implementation
+    implementation "androidx.fragment:fragment:$fragment_version"
+    // Kotlin
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
 }
