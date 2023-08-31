@@ -1,139 +1,101 @@
 package com.example.finalproject;
 
-
-// Note: Username is UNIQUE and be the ID of corresponding document on firestore.
 public class User {
+    String _username;
+    String _password;
+    String _firstname;
+    String _lastname;
+    String _dob;
+    String _join_date;
+    String _email;
+    String _phone;
 
-    static final public String UserCollectionKey = "Users";
-    String _UserName;
-    String _UserPassword;
-    String _UserFirstname;
-    String _UserLastname;
-    String _UserDoB;
-    String _UserJoinDate;
-    String _UserEmail;
-    String _UserPhone;
-    boolean _UserActive;
-    String _UserBio;
-    String _UserHobbies;
-
-    public User(){}
-    public User(String _UserName, String _UserPassword, String _UserFirstname, String _UserLastname, String _UserDoB, String _UserJoinDate, String _UserEmail, String _UserPhone, boolean _UserActive, String _UserBio, String _UserHobbies) {
-        this._UserName = _UserName;
-        this._UserPassword = _UserPassword;
-        this._UserFirstname = _UserFirstname;
-        this._UserLastname = _UserLastname;
-        this._UserDoB = _UserDoB;
-        this._UserJoinDate = _UserJoinDate;
-        this._UserEmail = _UserEmail;
-        this._UserPhone = _UserPhone;
-        this._UserActive = _UserActive;
-        this._UserBio = _UserBio;
-        this._UserHobbies = _UserHobbies;
+    public User(String _username, String _password, String _firstname, String _lastname, String _dob, String _join_date, String _email, String _phone) {
+        this._username = _username;
+        this._password = _password;
+        this._firstname = _firstname;
+        this._lastname = _lastname;
+        this._dob = _dob;
+        this._join_date = _join_date;
+        this._email = _email;
+        this._phone = _phone;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "_UserName='" + _UserName + '\'' +
-                ", _UserPassword='" + _UserPassword + '\'' +
-                ", _UserFirstname='" + _UserFirstname + '\'' +
-                ", _UserLastname='" + _UserLastname + '\'' +
-                ", _UserDoB='" + _UserDoB + '\'' +
-                ", _UserJoinDate='" + _UserJoinDate + '\'' +
-                ", _UserEmail='" + _UserEmail + '\'' +
-                ", _UserPhone='" + _UserPhone + '\'' +
-                ", _UserActive=" + _UserActive +
-                ", _UserBio='" + _UserBio + '\'' +
-                ", _UserHobbies='" + _UserHobbies + '\'' +
+                "_username='" + _username + '\'' +
+                ", _password='" + _password + '\'' +
+                ", _firstname='" + _firstname + '\'' +
+                ", _lastname='" + _lastname + '\'' +
+                ", _dob='" + _dob + '\'' +
+                ", _join_date='" + _join_date + '\'' +
+                ", _email='" + _email + '\'' +
+                ", _phone='" + _phone + '\'' +
                 '}';
     }
 
-    public String get_UserName() {
-        return _UserName;
+    public String get_username() {
+        return _username;
     }
 
-    public void set_UserName(String _UserName) {
-        this._UserName = _UserName;
+    public void set_username(String _username) {
+        this._username = _username;
     }
 
-    public String get_UserPassword() {
-        return _UserPassword;
+    public String get_password() {
+        return _password;
     }
 
-    public void set_UserPassword(String _UserPassword) {
-        this._UserPassword = _UserPassword;
+    public void set_password(String _password) {
+        this._password = _password;
     }
 
-    public String get_UserFirstname() {
-        return _UserFirstname;
+    public String get_firstname() {
+        return _firstname;
     }
 
-    public void set_UserFirstname(String _UserFirstname) {
-        this._UserFirstname = _UserFirstname;
+    public void set_firstname(String _firstname) {
+        this._firstname = _firstname;
     }
 
-    public String get_UserLastname() {
-        return _UserLastname;
+    public String get_lastname() {
+        return _lastname;
     }
 
-    public void set_UserLastname(String _UserLastname) {
-        this._UserLastname = _UserLastname;
+    public void set_lastname(String _lastname) {
+        this._lastname = _lastname;
     }
 
-    public String get_UserDoB() {
-        return _UserDoB;
+    public String get_dob() {
+        return _dob;
     }
 
-    public void set_UserDoB(String _UserDoB) {
-        this._UserDoB = _UserDoB;
+    public void set_dob(String _dob) {
+        this._dob = _dob;
     }
 
-    public String get_UserJoinDate() {
-        return _UserJoinDate;
+    public String get_join_date() {
+        return _join_date;
     }
 
-    public void set_UserJoinDate(String _UserJoinDate) {
-        this._UserJoinDate = _UserJoinDate;
+    public void set_join_date(String _join_date) {
+        this._join_date = _join_date;
     }
 
-    public String get_UserEmail() {
-        return _UserEmail;
+    public String get_email() {
+        return _email;
     }
 
-    public void set_UserEmail(String _UserEmail) {
-        this._UserEmail = _UserEmail;
+    public void set_email(String _email) {
+        this._email = _email;
     }
 
-    public String get_UserPhone() {
-        return _UserPhone;
+    public String get_phone() {
+        return _phone;
     }
 
-    public void set_UserPhone(String _UserPhone) {
-        this._UserPhone = _UserPhone;
-    }
-
-    public boolean is_UserActive() {
-        return _UserActive;
-    }
-
-    public void set_UserActive(boolean _UserActive) {
-        this._UserActive = _UserActive;
-    }
-
-    public String get_UserBio() {
-        return _UserBio;
-    }
-
-    public void set_UserBio(String _UserBio) {
-        this._UserBio = _UserBio;
-    }
-
-    public String get_UserHobbies() {
-        return _UserHobbies;
-    }
-
-    public void set_UserHobbies(String _UserHobbies) {
-        this._UserHobbies = _UserHobbies;
+    public void set_phone(String _phone) {
+        this._phone = _phone;
     }
 }
