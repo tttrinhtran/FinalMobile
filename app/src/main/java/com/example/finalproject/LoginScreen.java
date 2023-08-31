@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class LoginScreen extends AppCompatActivity {
 
     FirebaseFirestore database;
