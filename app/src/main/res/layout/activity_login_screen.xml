@@ -7,7 +7,7 @@
     tools:context=".LoginScreen">
 
     <EditText
-        android:id="@+id/LoginUsername"
+        android:id="@+id/LoginScreenUsernameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -17,22 +17,33 @@
         android:hint="Username"/>
 
     <EditText
-        android:id="@+id/LoginPassword"
+        android:id="@+id/LoginScreenPasswordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/LoginUsername"
+        app:layout_constraintTop_toBottomOf="@id/LoginScreenUsernameEditText"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="20dp"
         android:hint="Password"/>
 
-    <TextView
-        android:id="@+id/LoginRegister"
+    <Button
+        android:id="@+id/LoginScreenButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/LoginPassword"
+        app:layout_constraintTop_toBottomOf="@id/LoginScreenPasswordEditText"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="You have no account yet? Register now"/>
+        android:text="Log in"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/LoginScreenRegisterEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/LoginScreenButton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="You have no account yet? Register now"
+        android:layout_marginTop="20dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
