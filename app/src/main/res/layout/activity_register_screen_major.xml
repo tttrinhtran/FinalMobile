@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterScreen.RegisterScreenMajor">
+    <TextView
+        android:id="@+id/RegisterScreenMajorTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textStyle="bold"
+        android:text="Major"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/RegisterScreenMajorDescribeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/RegisterScreenMajorTitleText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textStyle="italic"
+        android:text="Please enter the required information to continue" />
+
+    <EditText
+        android:id="@+id/RegisterScreenMajorSchoolEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/RegisterScreenMajorDescribeText"
+        android:layout_marginTop="10dp"
+        android:hint="Your school/college/university"/>
+
+    <EditText
+        android:id="@+id/RegisterScreenMajorSpecializationEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/RegisterScreenMajorSchoolEditText"
+        android:layout_marginTop="10dp"
+        android:hint="Specialization"/>
+
+    <Button
+        android:id="@+id/RegisterScreenMajorNextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/RegisterScreenMajorSpecializationEditText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="next"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

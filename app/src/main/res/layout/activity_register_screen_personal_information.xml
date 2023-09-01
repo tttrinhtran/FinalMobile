@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterScreen.RegisterScreenPersonalInformation">
+
+    <TextView
+        android:id="@+id/RegisterScreenPersonalInformationTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textStyle="bold"
+        android:text="Personal Information"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/RegisterScreenPersonalInformationDescribeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/RegisterScreenPersonalInformationTitleText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textStyle="italic"
+        android:text="Please enter the required information to continue" />
+
+    <EditText
+        android:id="@+id/RegisterScreenPersonalInformationFirstNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/RegisterScreenPersonalInformationDescribeText"
+        android:layout_marginTop="10dp"
+        android:hint="First name"/>
+
+    <EditText
+        android:id="@+id/RegisterScreenPersonalInformationLastNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/RegisterScreenPersonalInformationFirstNameEditText"
+        android:layout_marginTop="10dp"
+        android:hint="Last name"/>
+
+    <EditText
+        android:id="@+id/RegisterScreenPersonalInformationPhoneNumberEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/RegisterScreenPersonalInformationLastNameEditText"
+        android:layout_marginTop="10dp"
+        android:hint="Phone number"/>
+
+    <EditText
+        android:id="@+id/RegisterScreenPersonalInformationEmailEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/RegisterScreenPersonalInformationPhoneNumberEditText"
+        android:layout_marginTop="10dp"
+        android:hint="Email"/>
+
+    <EditText
+        android:id="@+id/RegisterScreenPersonalInformationDoBEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/RegisterScreenPersonalInformationEmailEditText"
+        android:layout_marginTop="10dp"
+        android:hint="Date of Birth"/>
+
+    <Button
+        android:id="@+id/RegisterScreenPersonalInformationNextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/RegisterScreenPersonalInformationDoBEditText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="next"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

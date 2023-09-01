@@ -10,6 +10,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
+// Remind Firebase Firestore Structure: A Collection -> Many Document...
+
 public class FirebaseController<T> {
     final private FirebaseFirestore db = FirebaseFirestore.getInstance();
     final private Class<T> type;
@@ -20,23 +22,25 @@ public class FirebaseController<T> {
     }
 
     // this function used to add to the "new data" to the "collection", the new data document is marked by "new ID".
-    public boolean addToFirestore (String collection, String newID, T newData){
-        return db.collection(collection).document(newID)
-                .set(newData).isSuccessful();
+    public void addToFirestore (String collection, String newID, T newData){
+        db.collection(collection).document(newID)
+                .set(newData);
     }
 
-    public ArrayList<T> retrieveAllObjectsOfaCollection (String collection){
+
+    // This function is used to retrieve all documents ID of a specific Collection.
+    public ArrayList<String> retrieveAllDocumentsIDOfaCollection (String collection){
         CollectionReference _collection = db.collection(collection);
-        Task<QuerySnapshot> future = _collection.get();
-        ArrayList<T> list = new ArrayList<>();
+        Task<QuerySnapshot> _documentTask = _collection.get();
+        ArrayList<String> list = new ArrayList<>();
 
         // loop for waiting the future is completely retrieved from firestore
-        while(!future.isComplete()){}
+        while(!_documentTask.isComplete()){}
 
-        if(future.isSuccessful()){
-            for (QueryDocumentSnapshot document : future.getResult()) {
-                T obj = document.toObject(type);
-                list.add(obj);
+        // Traversing the list of documents and store them into an ArrayList.
+        if(_documentTask.isSuccessful()){
+            for (DocumentSnapshot document : _documentTask.getResult().getDocuments()) {
+                    list.add(document.getId().toString());
             }
         }
         return list;

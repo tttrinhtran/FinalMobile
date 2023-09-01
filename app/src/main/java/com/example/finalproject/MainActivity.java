@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.finalproject.RegisterScreen.RegisterScreenHobbies;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

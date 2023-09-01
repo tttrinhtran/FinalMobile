@@ -1,8 +1,10 @@
 package com.example.finalproject;
 
 
+import java.io.Serializable;
+
 // Note: Username is UNIQUE and be the ID of corresponding document on firestore.
-public class User {
+public class User implements Serializable {
 
     static final public String UserCollectionKey = "Users";
     String _UserName;
@@ -16,9 +18,14 @@ public class User {
     boolean _UserActive;
     String _UserBio;
     String _UserHobbies;
+    String _UserSchool;
+    String _UserSpecialization;
+
+
 
     public User(){}
-    public User(String _UserName, String _UserPassword, String _UserFirstname, String _UserLastname, String _UserDoB, String _UserJoinDate, String _UserEmail, String _UserPhone, boolean _UserActive, String _UserBio, String _UserHobbies) {
+
+    public User(String _UserName, String _UserPassword, String _UserFirstname, String _UserLastname, String _UserDoB, String _UserJoinDate, String _UserEmail, String _UserPhone, boolean _UserActive, String _UserBio, String _UserHobbies, String _UserSchool, String _UserSpecialization) {
         this._UserName = _UserName;
         this._UserPassword = _UserPassword;
         this._UserFirstname = _UserFirstname;
@@ -30,6 +37,8 @@ public class User {
         this._UserActive = _UserActive;
         this._UserBio = _UserBio;
         this._UserHobbies = _UserHobbies;
+        this._UserSchool = _UserSchool;
+        this._UserSpecialization = _UserSpecialization;
     }
 
     @Override
@@ -46,6 +55,8 @@ public class User {
                 ", _UserActive=" + _UserActive +
                 ", _UserBio='" + _UserBio + '\'' +
                 ", _UserHobbies='" + _UserHobbies + '\'' +
+                ", _UserSchool='" + _UserSchool + '\'' +
+                ", _UserSpecialization='" + _UserSpecialization + '\'' +
                 '}';
     }
 
@@ -135,5 +146,21 @@ public class User {
 
     public void set_UserHobbies(String _UserHobbies) {
         this._UserHobbies = _UserHobbies;
+    }
+
+    public String get_UserSchool() {
+        return _UserSchool;
+    }
+
+    public void set_UserSchool(String _UserSchool) {
+        this._UserSchool = _UserSchool;
+    }
+
+    public String get_UserSpecialization() {
+        return _UserSpecialization;
+    }
+
+    public void set_UserSpecialization(String _UserSpecialization) {
+        this._UserSpecialization = _UserSpecialization;
     }
 }

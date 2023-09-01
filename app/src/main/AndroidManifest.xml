@@ -13,7 +13,19 @@
         android:theme="@style/Theme.FinalProject"
         tools:targetApi="31">
         <activity
-            android:name=".RegisterScreen"
+            android:name=".RegisterScreen.RegisterScreenBiography"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterScreen.RegisterScreenHobbies"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterScreen.RegisterScreenMajor"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterScreen.RegisterScreenPersonalInformation"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterScreen.RegisterScreenSignup"
             android:exported="false" />
         <activity
             android:name=".LoginScreen"
