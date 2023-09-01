@@ -3,23 +3,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".RegisterScreen">
+    android:layout_height="match_parent">
 
+
+    <ImageView
+        android:id="@+id/InfoRegisterBackArrowIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="30dp"
+        android:src="@drawable/back_arrow_icon"/>
     <TextView
+        android:id="@+id/InfoRegisterTitle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Sign up"
-        android:textSize="30sp"
-        android:fontFamily= "@font/tommy_medium"
+        android:layout_marginTop="130dp"
+        android:text="Personal Information"
+        android:textSize="24sp"
         android:textColor="@color/primary_blue"
-        android:layout_marginTop="180dp"
+        android:fontFamily="@font/tommy_medium"
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/InfoRegisterTitle1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
+        android:text="Please enter the required information to continue"
+        android:textSize="14sp"
+        android:textColor="@color/primary_blue"
+        android:fontFamily="@font/tommy_regular"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/RegisterScreenUsernameLayout"
+        android:id="@+id/InfoRegisterNameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -30,7 +53,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp">
         <EditText
-            android:id="@+id/RegisterScreenUsernameEditText"
+            android:id="@+id/InfoRegisterNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,22 +61,23 @@
             app:layout_constraintTop_toTopOf="parent"
             android:paddingTop="20dp"
             android:paddingStart="10dp"
-            android:hint="Email or Phone number"
+            android:hint="Your name"
             android:textSize="14sp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/RegisterScreenPasswordLayout"
+        android:id="@+id/InfoRegisterPhoneLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/RegisterScreenUsernameLayout"
+        app:layout_constraintTop_toBottomOf="@id/InfoRegisterNameLayout"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="20dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp">
         <EditText
-            android:id="@+id/RegisterScreenPasswordEditText"
+            android:id="@+id/InfoRegisterPhoneEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,31 +85,23 @@
             app:layout_constraintTop_toTopOf="parent"
             android:paddingTop="20dp"
             android:paddingStart="10dp"
-            android:hint="Email or Phone number"
+            android:hint="Your phone number"
             android:textSize="14sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="5dp"
-            android:src="@drawable/hide_password_icon" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/RegisterScreenConfirmPasswordLayout"
+        android:id="@+id/InfoRegisterEmailLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/RegisterScreenPasswordLayout"
+        app:layout_constraintTop_toBottomOf="@id/InfoRegisterPhoneLayout"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="20dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp">
         <EditText
-            android:id="@+id/RegisterScreenConfirmPasswordEditText"
+            android:id="@+id/InfoRegisterEmailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -93,67 +109,52 @@
             app:layout_constraintTop_toTopOf="parent"
             android:paddingTop="20dp"
             android:paddingStart="10dp"
-            android:hint="Email or Phone number"
+            android:hint="Your email"
             android:textSize="14sp" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="5dp"
-            android:src="@drawable/hide_password_icon" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/InfoRegisterAgeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/InfoRegisterEmailLayout"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp">
+        <EditText
+            android:id="@+id/InfoRegisterAgeEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingTop="20dp"
+            android:paddingStart="10dp"
+            android:hint="Your age"
+            android:textSize="14sp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/LoginScreenButton"
+        android:id="@+id/InfoRegisterConfirmButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/primary_blue"
-        android:fontFamily="@font/roboto"
-        android:gravity="center"
+        android:layout_marginBottom="50dp"
         android:paddingHorizontal="30dp"
         android:paddingVertical="10dp"
-        android:text="Sign up"
-        android:textColor="@color/light_orange"
+        android:background="@color/primary_blue"
+        android:text="Confirm"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/RegisterScreenConfirmPasswordLayout" />
+        android:textColor="@color/white"
+        android:fontFamily="@font/lato"
+        android:gravity="center"/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/LoginScreenButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp">
 
-        <TextView
-            android:id="@+id/RegisterScreenAlreadyText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="Already have an account?"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:fontFamily="@font/lato"/>
 
-        <TextView
-            android:id="@+id/RegisterScreenRegisterEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/RegisterScreenAlreadyText"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="5dp"
-            android:text="Sign in"
-            android:textColor="@color/light_orange"
-            android:textSize="16sp"
-            android:fontFamily="@font/lato"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

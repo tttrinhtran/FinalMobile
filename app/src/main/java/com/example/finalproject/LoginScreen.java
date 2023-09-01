@@ -20,7 +20,7 @@ public class LoginScreen extends AppCompatActivity {
     User _LoginScreenUser;
     EditText _LoginScreenUsernameEditText;
     EditText _LoginScreenPasswordEditText;
-    Button _LoginScreenLoginButton;
+    TextView _LoginScreenLoginButton;
     TextView _LoginScreenRegisterText;
 
     @Override
@@ -50,7 +50,7 @@ public class LoginScreen extends AppCompatActivity {
     private void LoginScreen_LoadingUIElements() {
         _LoginScreenUsernameEditText = (EditText) findViewById(R.id.LoginScreenUsernameEditText);
         _LoginScreenPasswordEditText = (EditText) findViewById(R.id.LoginScreenPasswordEditText);
-        _LoginScreenLoginButton = (Button) findViewById(R.id.LoginScreenButton);
+        _LoginScreenLoginButton = (TextView) findViewById(R.id.LoginScreenButton);
         _LoginScreenRegisterText = (TextView) findViewById(R.id.LoginScreenRegisterEditText);
     }
 
