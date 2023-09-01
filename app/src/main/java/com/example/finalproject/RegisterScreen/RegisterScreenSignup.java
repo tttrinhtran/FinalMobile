@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.finalproject.R;
@@ -16,7 +17,7 @@ public class RegisterScreenSignup extends AppCompatActivity {
     private EditText _SignupUsername;
     private EditText _SignupPassword;
     private EditText _SignupConfirmPassword;
-    private Button _SignupNextButton;
+    private TextView _SignupNextButton;
 
     private User user;
 
@@ -41,10 +42,10 @@ public class RegisterScreenSignup extends AppCompatActivity {
     }
 
     private void RegisterScreenSignupFetchUIElements() {
-        _SignupUsername = (EditText) findViewById(R.id.RegisterScreenSignUpUsernameEditText);
-        _SignupPassword = (EditText) findViewById(R.id.RegisterScreenSignUpPasswordEditText);
-        _SignupConfirmPassword = (EditText) findViewById(R.id.RegisterScreenSignUpConfirmPasswordEditText);
-        _SignupNextButton = (Button) findViewById(R.id.RegisterScreenSignUpNextButton);
+        _SignupUsername = (EditText) findViewById(R.id.RegisterScreenUsernameEditText);
+        _SignupPassword = (EditText) findViewById(R.id.RegisterScreenPasswordEditText);
+        _SignupConfirmPassword = (EditText) findViewById(R.id.RegisterScreenConfirmPasswordEditText);
+        _SignupNextButton = (TextView) findViewById(R.id.RegisterScreenButton);
     }
 
     private boolean CreateNewUsernameAndPassword() {

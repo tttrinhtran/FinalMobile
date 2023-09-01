@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.finalproject.R;
@@ -19,7 +20,7 @@ public class RegisterScreenPersonalInformation extends AppCompatActivity {
     EditText _PersonalInformationPhoneNumber;
     EditText _PersonalInformationEmail;
     EditText _PersonalInformationDoB;
-    Button _PersonalInformationConfirmButton;
+    TextView _PersonalInformationConfirmButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +65,13 @@ public class RegisterScreenPersonalInformation extends AppCompatActivity {
     }
 
     private void RegisterScreenPersonalInformationFetchingUIElements() {
-        _PersonalInformationFirstName = (EditText) findViewById(R.id.RegisterScreenPersonalInformationFirstNameEditText);
-        _PersonalInformationLastName = (EditText) findViewById(R.id.RegisterScreenPersonalInformationLastNameEditText);
-        _PersonalInformationPhoneNumber = (EditText) findViewById(R.id.RegisterScreenPersonalInformationPhoneNumberEditText);
-        _PersonalInformationEmail = (EditText) findViewById(R.id.RegisterScreenPersonalInformationEmailEditText);
+        _PersonalInformationFirstName = (EditText) findViewById(R.id.InfoRegisterFirstNameEditText);
+        _PersonalInformationLastName = (EditText) findViewById(R.id.InfoRegisterLastNameEditText);
+        _PersonalInformationPhoneNumber = (EditText) findViewById(R.id.InfoRegisterPhoneEditText);
+        _PersonalInformationEmail = (EditText) findViewById(R.id.InfoRegisterEmailEditText);
 
         // Later, changing DoB to be selection, not type in EditText. For now, assume that user input correctly as dd/mm/yyyy
-        _PersonalInformationDoB = (EditText) findViewById(R.id.RegisterScreenPersonalInformationDoBEditText);
-        _PersonalInformationConfirmButton = (Button) findViewById(R.id.RegisterScreenPersonalInformationNextButton);
+        _PersonalInformationDoB = (EditText) findViewById(R.id.InfoRegisterAgeEditText);
+        _PersonalInformationConfirmButton = (TextView) findViewById(R.id.InfoRegisterConfirmButton);
     }
 }
