@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.finalproject.RegisterScreen.RegisterScreenHobbies;
+import com.example.finalproject.RegisterScreen.RegisterScreenSignup;
 
 public class MainActivity extends AppCompatActivity {
 

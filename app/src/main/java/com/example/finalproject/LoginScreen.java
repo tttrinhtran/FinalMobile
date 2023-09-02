@@ -60,7 +60,7 @@ public class LoginScreen extends AppCompatActivity {
         // Retrieve corresponding user from firestore if exist
         if(userName.isEmpty() || password.isEmpty()){
             // change Toast into notification later.
-            Toast.makeText(LoginScreen.this, "Please full fill Username and Password.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginScreen.this, "Please fulfill Username and Password.", Toast.LENGTH_SHORT).show();
             return false;
         }else{
             // taking the user's data based on username.
