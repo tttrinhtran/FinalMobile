@@ -4,7 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterScreen.RegisterScreenMajor">
+    tools:context=".RegisterScreen.RegisterScreenMajor"
+    android:paddingTop="50dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="20dp">
     <TextView
         android:id="@+id/RegisterScreenMajorTitleText"
         android:layout_width="wrap_content"
@@ -14,6 +18,9 @@
         app:layout_constraintRight_toRightOf="parent"
         android:textStyle="bold"
         android:text="Major"
+        android:textSize="30dp"
+        android:fontFamily="@font/tommy_medium"
+        android:textColor="@color/primary_blue"
         android:layout_marginTop="10dp"/>
 
     <TextView
@@ -24,6 +31,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:textStyle="italic"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/lato"
+        android:textSize="14dp"
         android:text="Please enter the required information to continue" />
 
     <EditText
@@ -31,8 +41,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/RegisterScreenMajorDescribeText"
-        android:layout_marginTop="10dp"
-        android:hint="Your school/college/university"/>
+        android:layout_marginTop="20dp"
+        android:hint="Your school/college/university"
+        android:backgroundTint="@color/dark_blue"/>
 
     <EditText
         android:id="@+id/RegisterScreenMajorSpecializationEditText"
@@ -40,15 +51,22 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/RegisterScreenMajorSchoolEditText"
         android:layout_marginTop="10dp"
-        android:hint="Specialization"/>
+        android:hint="Specialization"
+        android:backgroundTint="@color/dark_blue"
+
+        />
 
     <Button
         android:id="@+id/RegisterScreenMajorNextButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/RegisterScreenMajorSpecializationEditText"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="next"/>
+        android:text="Next"
+        android:fontFamily="@font/lato"
+        android:textSize="20dp"
+        android:background="@drawable/squared_button"
+        android:backgroundTint="@color/primary_blue"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,4 @@
+<!-- res/drawable/square_button.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="0dp" /> <!-- 0dp radius to make it square -->
+</shape>

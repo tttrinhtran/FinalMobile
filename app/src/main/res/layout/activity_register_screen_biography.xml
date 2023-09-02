@@ -4,25 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterScreen.RegisterScreenBiography">
+    tools:context=".RegisterScreen.RegisterScreenBiography"
+    android:paddingTop="50dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:layout_marginBottom="20dp">
     <TextView
         android:id="@+id/RegisterScreenBiographyTitleText"
+        android:textSize="30dp"
+        android:textColor="@color/primary_blue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:textStyle="bold"
+        android:fontFamily="@font/tommy_medium"
         android:layout_marginTop="20dp"
         android:text="Biography"/>
+
     <TextView
         android:id="@+id/RegisterScreenBiographyDescribeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/RegisterScreenBiographyTitleText"
+        android:layout_marginTop="20dp"
+        android:text="Tell us about you"
+        android:textSize="14dp"
+        android:fontFamily="@font/lato"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="Tell us about you"/>
+        app:layout_constraintTop_toBottomOf="@id/RegisterScreenBiographyTitleText" />
 
     <EditText
         android:id="@+id/RegisterScreenBiographyBioEditText"
@@ -32,15 +44,21 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:hint="Biography"
+        android:backgroundTint="@color/dark_blue"
         android:layout_marginTop="50dp"/>
+
     <Button
         android:id="@+id/RegisterScreenBiographyFinishButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/RegisterScreenBiographyBioEditText"
+        android:layout_marginTop="48dp"
+        android:text="Finish"
+        android:fontFamily="@font/lato"
+        android:textSize="20dp"
+        android:background="@drawable/squared_button"
+        android:backgroundTint="@color/primary_blue"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="10dp"
-        android:text="Finish"/>
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
