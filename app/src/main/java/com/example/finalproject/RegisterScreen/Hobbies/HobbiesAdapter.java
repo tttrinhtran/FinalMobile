@@ -30,7 +30,6 @@ public class HobbiesAdapter extends RecyclerView.Adapter<HobbiesAdapter.HobbieVi
 
     @Override
     public void onHobbiesClicked(int hobbieAdapter) {
-
     }
 
 

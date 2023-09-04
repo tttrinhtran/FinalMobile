@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.finalproject.FirebaseController;
@@ -28,7 +29,7 @@ public class RegisterScreenHobbies extends AppCompatActivity implements HobbiesS
     RecyclerView _RegisterScreenHobbiesOptions;
     HobbiesAdapter _hobbiesAdapter;
     ArrayList<String> _hobbiesList;
-    Button _RegisterScreenHobbiesNextButton;
+    TextView _RegisterScreenHobbiesNextButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class RegisterScreenHobbies extends AppCompatActivity implements HobbiesS
     // Inflate the UI elements with java file
     private void RegisterScreenHobbiesLoadingUIElements() {
         _RegisterScreenHobbiesOptions = (RecyclerView) findViewById(R.id.RegisterScreenHobbiesOptionsRecyclerView);
-        _RegisterScreenHobbiesNextButton = (Button) findViewById(R.id.RegisterScreenHobbiesNextButton);
+        _RegisterScreenHobbiesNextButton = (TextView) findViewById(R.id.RegisterScreenHobbiesNextButton);
     }
 
     private void FetchingHobbiesList() {

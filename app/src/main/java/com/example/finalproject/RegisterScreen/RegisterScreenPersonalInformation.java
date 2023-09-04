@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ public class RegisterScreenPersonalInformation extends AppCompatActivity {
     EditText _PersonalInformationEmail;
     EditText _PersonalInformationDoB;
     TextView _PersonalInformationConfirmButton;
+    ImageView _PersonalInformationBackButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,11 @@ public class RegisterScreenPersonalInformation extends AppCompatActivity {
                 intent.putExtra("new_user", user);
                 startActivity(intent);
             }
+        });
+
+        _PersonalInformationBackButton.setOnClickListener(view ->{
+            Intent intent = new Intent(RegisterScreenPersonalInformation.this, RegisterScreenSignup.class);
+            startActivity(intent);
         });
 
 
@@ -69,6 +76,7 @@ public class RegisterScreenPersonalInformation extends AppCompatActivity {
         _PersonalInformationLastName = (EditText) findViewById(R.id.InfoRegisterLastNameEditText);
         _PersonalInformationPhoneNumber = (EditText) findViewById(R.id.InfoRegisterPhoneEditText);
         _PersonalInformationEmail = (EditText) findViewById(R.id.InfoRegisterEmailEditText);
+        _PersonalInformationBackButton = (ImageView) findViewById(R.id.InfoRegisterBackArrowIcon);
 
         // Later, changing DoB to be selection, not type in EditText. For now, assume that user input correctly as dd/mm/yyyy
         _PersonalInformationDoB = (EditText) findViewById(R.id.InfoRegisterAgeEditText);

@@ -50,6 +50,7 @@
             android:paddingTop="20dp"
             android:paddingStart="10dp"
             android:hint="Email or Phone number"
+            android:textColor="@color/black"
             android:textSize="14sp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -74,6 +75,7 @@
             android:paddingTop="20dp"
             android:paddingStart="10dp"
             android:hint="Password"
+            android:textColor="@color/black"
             android:textSize="14sp"/>
         <ImageView
             android:layout_width="wrap_content"

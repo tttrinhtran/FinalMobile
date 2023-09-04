@@ -56,17 +56,22 @@
 
         />
 
-    <Button
+    <TextView
         android:id="@+id/RegisterScreenMajorNextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginHorizontal="30dp"
+        android:paddingHorizontal="22dp"
+        android:paddingVertical="10dp"
         android:text="Next"
+        android:textColor="@color/white"
         android:fontFamily="@font/lato"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:background="@drawable/squared_button"
-        android:backgroundTint="@color/primary_blue"/>
+        android:backgroundTint="@color/primary_blue"
+        android:gravity="center"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
