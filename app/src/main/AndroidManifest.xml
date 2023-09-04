@@ -13,6 +13,9 @@
         android:theme="@style/Theme.FinalProject"
         tools:targetApi="31">
         <activity
+            android:name=".HomeScreen"
+            android:exported="false" />
+        <activity
             android:name=".SectionRoomScreen"
             android:exported="false" />
         <activity

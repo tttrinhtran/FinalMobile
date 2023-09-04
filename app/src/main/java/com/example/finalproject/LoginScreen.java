@@ -34,7 +34,11 @@ public class LoginScreen extends AppCompatActivity {
         // Note: The following is written in Lambda format. In order words, view -> {LoginScreen_Datafetch();} is equivalent to
         // new View.OnClickListener(){...}
         _LoginScreenLoginButton.setOnClickListener(view -> {
-            LoginScreen_Datafetch();
+            boolean check = LoginScreen_Datafetch();
+            if(check){
+                Intent intent = new Intent(LoginScreen.this, HomeScreen.class);
+                startActivity(intent);
+            }
         });
 
         // Setting register

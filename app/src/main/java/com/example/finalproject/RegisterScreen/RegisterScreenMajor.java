@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.finalproject.R;
@@ -16,7 +17,7 @@ public class RegisterScreenMajor extends AppCompatActivity {
     User user;
     EditText _RegisterScreenMajorSchool;
     EditText _RegisterScreenMajorSpecialization;
-    Button _RegisterScreenMajorNextButton;
+    TextView _RegisterScreenMajorNextButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +27,7 @@ public class RegisterScreenMajor extends AppCompatActivity {
 
         _RegisterScreenMajorSchool = (EditText) findViewById(R.id.RegisterScreenMajorSchoolEditText);
         _RegisterScreenMajorSpecialization = (EditText) findViewById(R.id.RegisterScreenMajorSpecializationEditText);
-        _RegisterScreenMajorNextButton = (Button) findViewById(R.id.RegisterScreenMajorNextButton);
+        _RegisterScreenMajorNextButton = (TextView) findViewById(R.id.RegisterScreenMajorNextButton);
 
         // "view -> {...}" is lambda format, it is similar to "new View.OnClickListener(){...}"
         _RegisterScreenMajorNextButton.setOnClickListener(view -> {
