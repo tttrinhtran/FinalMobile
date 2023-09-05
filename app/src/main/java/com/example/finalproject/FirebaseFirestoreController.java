@@ -1,23 +1,33 @@
 package com.example.finalproject;
 
+import android.graphics.Bitmap;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 // Remind Firebase Firestore Structure: A Collection -> Many Document...
 
-public class FirebaseController<T> {
+public class FirebaseFirestoreController<T> {
     final private FirebaseFirestore db = FirebaseFirestore.getInstance();
     final private Class<T> type;
 
     // Instructor for getting type of T.
-    public FirebaseController(Class<T> type) {
+    public FirebaseFirestoreController(Class<T> type) {
         this.type = type;
     }
 

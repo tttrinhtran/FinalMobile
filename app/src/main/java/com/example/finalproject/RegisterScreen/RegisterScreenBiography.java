@@ -8,14 +8,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.finalproject.FirebaseController;
+import com.example.finalproject.FirebaseFirestoreController;
 import com.example.finalproject.LoginScreen;
 import com.example.finalproject.R;
 import com.example.finalproject.User;
 
 public class RegisterScreenBiography extends AppCompatActivity {
 
-    FirebaseController<User> UserDatabase;
+    FirebaseFirestoreController<User> UserDatabase;
     User user;
     EditText _RegisterScreenBiographyBio;
     Button _RegisterScreenBiographyFinishButton;
@@ -32,7 +32,7 @@ public class RegisterScreenBiography extends AppCompatActivity {
         _RegisterScreenBiographyFinishButton.setOnClickListener(view -> {
             boolean isSuccessful = CreateBiographyForNewUser();
             if(isSuccessful == true){
-                UserDatabase = new FirebaseController<>(User.class);
+                UserDatabase = new FirebaseFirestoreController<>(User.class);
                 UserDatabase.addToFirestore(User.UserCollectionKey, user.get_UserName(), user);
                 Toast.makeText(RegisterScreenBiography.this, "Register Successfully", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(RegisterScreenBiography.this, LoginScreen.class);

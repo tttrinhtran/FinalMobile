@@ -6,12 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.finalproject.FirebaseController;
-import com.example.finalproject.LoginScreen;
+import com.example.finalproject.FirebaseFirestoreController;
 import com.example.finalproject.R;
 import com.example.finalproject.RegisterScreen.Hobbies.HobbiesAdapter;
 import com.example.finalproject.RegisterScreen.Hobbies.HobbiesSelectListenerInterface;
@@ -25,7 +22,7 @@ public class RegisterScreenHobbies extends AppCompatActivity implements HobbiesS
 
     User user;
 
-    FirebaseController<String> HobbiesDatabase;
+    FirebaseFirestoreController<String> HobbiesDatabase;
     RecyclerView _RegisterScreenHobbiesOptions;
     HobbiesAdapter _hobbiesAdapter;
     ArrayList<String> _hobbiesList;
@@ -60,7 +57,7 @@ public class RegisterScreenHobbies extends AppCompatActivity implements HobbiesS
 
     private void FetchingHobbiesList() {
         _hobbiesList = new ArrayList<>();
-        HobbiesDatabase = new FirebaseController<>(String.class); // new Firebase controller for String type
+        HobbiesDatabase = new FirebaseFirestoreController<>(String.class); // new Firebase controller for String type
         _hobbiesList = HobbiesDatabase.retrieveAllDocumentsIDOfaCollection(RegisterScreenHobbies.HobbieFirestoreKey); // Taking all popular hobbies (stored in firestore)
     }
 

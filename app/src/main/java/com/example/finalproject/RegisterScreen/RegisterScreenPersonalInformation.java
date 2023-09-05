@@ -37,7 +37,7 @@ public class RegisterScreenPersonalInformation extends AppCompatActivity {
         _PersonalInformationConfirmButton.setOnClickListener(view -> {
             boolean isSuccessfull = setPersonalInformationForNewUser();
             if(isSuccessfull == true){
-                Intent intent = new Intent (RegisterScreenPersonalInformation.this, RegisterScreenMajor.class);
+                Intent intent = new Intent (RegisterScreenPersonalInformation.this, RegisterScreenAvatar.class);
                 intent.putExtra("new_user", user);
                 startActivity(intent);
             }

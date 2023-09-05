@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,7 +12,7 @@ import com.example.finalproject.RegisterScreen.RegisterScreenSignup;
 
 public class LoginScreen extends AppCompatActivity {
 
-    FirebaseController<User> userFirebaseController;
+    FirebaseFirestoreController<User> userFirebaseFirestoreController;
     User _LoginScreenUser;
     EditText _LoginScreenUsernameEditText;
     EditText _LoginScreenPasswordEditText;
@@ -28,7 +27,7 @@ public class LoginScreen extends AppCompatActivity {
         LoginScreen_LoadingUIElements();
 
         // init Firebase controller for User class.
-        userFirebaseController = new FirebaseController<>(User.class);
+        userFirebaseFirestoreController = new FirebaseFirestoreController<>(User.class);
 
         // setting up Login button
         // Note: The following is written in Lambda format. In order words, view -> {LoginScreen_Datafetch();} is equivalent to
@@ -68,7 +67,7 @@ public class LoginScreen extends AppCompatActivity {
             return false;
         }else{
             // taking the user's data based on username.
-            _LoginScreenUser = userFirebaseController.retrieveObjectsFirestoreByID(User.UserCollectionKey, userName);
+            _LoginScreenUser = userFirebaseFirestoreController.retrieveObjectsFirestoreByID(User.UserCollectionKey, userName);
         }
 
         return verifyAccount(password);
