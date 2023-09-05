@@ -5,9 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterScreen.RegisterScreenSignup"
-    android:background="@drawable/sign_srceenbg"
     >
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/sign_srceenbg"
+            android:scaleType="centerCrop"
+            ></ImageView>
+    </LinearLayout>
     <TextView
         android:id="@+id/RegisterScreenTitle"
         android:layout_width="wrap_content"
