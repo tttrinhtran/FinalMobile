@@ -1,11 +1,11 @@
 package com.example.finalproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.finalproject.Section.SectionRoomScreen;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.finalproject.openvcall.ui.SectionRoomVideoChatScreen;
 import com.yalantis.library.Koloda;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(MainActivity.this, SectionRoomScreen.class);
+        Intent intent = new Intent(MainActivity.this, SectionRoomVideoChatScreen.class);
         startActivity(intent);
     }
 }

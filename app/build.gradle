@@ -21,6 +21,7 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+
     }
 
     buildTypes {
@@ -54,11 +55,15 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs']
+        }
+    }
 }
 
 dependencies {
     implementation 'androidx.compose.ui:ui-tooling-preview-android:1.5.0'
-    implementation 'androidx.core:core-ktx:+'
 
     def fragment_version = "1.5.1"
     def nav_version = "2.7.1"
@@ -94,9 +99,7 @@ dependencies {
     //swipe
     implementation 'com.github.Yalantis:Koloda-Android:v0.0.2-alpha'
 
-    implementation 'io.agora.rtc:full-sdk:3.7.2'
-    implementation "com.github.AgoraIO-Community:Android-UIKit:v2.0.0"
-
+    implementation 'io.agora.rtc:full-sdk:3.1.0'
     // Compose
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1"
     implementation "androidx.navigation:navigation-compose:2.7.1"
@@ -114,4 +117,14 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
     // New dependency
     implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    implementation fileTree(dir: 'libs', include: ['*.jar']) // DO NOT CHANGE, CI may needs it when packaging
+    implementation 'org.slf4j:slf4j-api:1.7.25'
+    implementation 'com.github.tony19:logback-android-core:1.1.1-4'
+    implementation('com.github.tony19:logback-android-classic:1.1.1-4') {
+        // workaround issue #73
+        exclude group: 'com.google.android', module: 'android'
+    }
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'com.jayway.android.robotium:robotium-solo:5.6.3'
 }
