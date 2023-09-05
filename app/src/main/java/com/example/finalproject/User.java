@@ -163,4 +163,6 @@ public class User implements Serializable {
     public void set_UserSpecialization(String _UserSpecialization) {
         this._UserSpecialization = _UserSpecialization;
     }
+
+    public int get_UserID() { return 0; }
 }

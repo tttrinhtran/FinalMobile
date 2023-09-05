@@ -60,7 +60,9 @@
         <activity
             android:name=".HomeScreen"
             android:exported="false" />
-
+        <activity
+            android:name=".Home.HomeScreen"
+            android:exported="false" />
         <activity
             android:name=".RegisterScreen.RegisterScreenBiography"
             android:exported="false" />

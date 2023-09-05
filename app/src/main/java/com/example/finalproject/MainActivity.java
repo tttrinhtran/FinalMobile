@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finalproject.openvcall.ui.SectionRoomVideoChatScreen;
+import com.example.finalproject.Message.ChatActivity;
+import com.example.finalproject.Section.SectionRoomScreen;
 import com.yalantis.library.Koloda;
 
 import java.util.List;
