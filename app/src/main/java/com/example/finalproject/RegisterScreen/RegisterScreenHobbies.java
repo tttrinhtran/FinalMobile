@@ -79,6 +79,7 @@ public class RegisterScreenHobbies extends AppCompatActivity implements HobbiesS
         }
         else user_hobbies = user_hobbies + ',' + _hobbiesList.get(hobbieAdapter);
         user.set_UserHobbies(user_hobbies);
+
     }
 
     @Override

@@ -48,6 +48,7 @@ public class HobbiesAdapter extends RecyclerView.Adapter<HobbiesAdapter.HobbieVi
                         int pos = getAdapterPosition();
                         if(pos != RecyclerView.NO_POSITION){
                             hobbiesSelectListenerInterface.onHobbiesClicked(pos);
+                            hobbiesText.setBackgroundColor(R.drawable.btn_animation);
                         }
                     }
                 }

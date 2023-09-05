@@ -5,7 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterScreen.RegisterScreenPersonalInformation">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/sign_srceenbg"
+            android:scaleType="centerCrop"
+            ></ImageView>
+    </LinearLayout>
     <ImageView
         android:id="@+id/InfoRegisterBackArrowIcon"
         android:layout_width="wrap_content"

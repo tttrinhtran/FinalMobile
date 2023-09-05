@@ -39,6 +39,9 @@
             android:name=".HomeScreen"
             android:exported="false" />
         <activity
+            android:name=".Home.HomeScreen"
+            android:exported="false" />
+        <activity
             android:name=".SectionRoomScreen"
             android:exported="true"/>
         <activity
