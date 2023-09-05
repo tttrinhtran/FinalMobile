@@ -1,4 +1,4 @@
-package com.example.finalproject
+package com.example.finalproject.Section
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button

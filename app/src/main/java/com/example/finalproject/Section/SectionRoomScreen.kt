@@ -1,4 +1,4 @@
-package com.example.finalproject
+package com.example.finalproject.Section
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

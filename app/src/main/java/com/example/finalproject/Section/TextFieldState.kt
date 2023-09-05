@@ -1,4 +1,4 @@
-package com.example.finalproject
+package com.example.finalproject.Section
 
 data class TextFieldState(
     val text: String = "",
