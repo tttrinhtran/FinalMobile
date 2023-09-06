@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:id="@+id/ItemSwipeScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/ItemSwipeButtonLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="20dp"
+        android:scrollbars="none">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ItemSwipeViewSupporter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ItemSwipeImage"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sample"/>
+
+            <TextView
+                android:id="@+id/ItemSwipeLastName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/ItemSwipeImage"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:text="Pham Vo"
+                android:fontFamily="@font/tommy_medium"
+                android:textColor="@color/black"
+                android:textSize="24sp"/>
+
+            <TextView
+                android:id="@+id/ItemSwipeFirstName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/ItemSwipeLastName"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:text="Quynh Nhu"
+                android:fontFamily="@font/tommy_medium"
+                android:textColor="@color/black"
+                android:textSize="24sp"/>
+
+            <TextView
+                android:id="@+id/ItemSwipeAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/ItemSwipeFirstName"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:text="23"
+                android:fontFamily="@font/tommy_medium"
+                android:textColor="@color/black"
+                android:textSize="24sp"/>
+
+            <ImageView
+                android:id="@+id/ItemSwipeLocationIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/location_icon"
+                android:backgroundTint="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/ItemSwipeSchool"
+                app:layout_constraintBottom_toBottomOf="@id/ItemSwipeSchool"
+                app:layout_constraintTop_toBottomOf="@id/ItemSwipeAge"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="center"/>
+
+            <TextView
+                android:id="@+id/ItemSwipeSchool"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/ItemSwipeAge"
+                app:layout_constraintStart_toEndOf="@id/ItemSwipeLocationIcon"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:text="University of Science"
+                android:fontFamily="@font/tommy_regular"
+                android:textSize="12sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/ItemSwipBiography"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/ItemSwipeSchool"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:text="Biography"
+                android:fontFamily="@font/tommy_regular"
+                android:textSize="14sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/ItemSwipeAchievementsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/ItemSwipBiography"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Achievements:"
+                android:fontFamily="@font/tommy_regular"
+                android:textSize="10sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/ItemSwipeAchievements"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/ItemSwipeAchievementsTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:paddingHorizontal="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="3dp"
+                android:text="Won the ACM International Collegiate Programming Contest (ICPC) World Finals in 2022
+Received the Google Anita Borg Memorial Scholarship in 2023
+Published a paper on machine learning for natural language processing in the Journal of Machine Learning Research in 2023"
+                android:fontFamily="@font/tommy_regular"
+                android:textSize="10sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/ItemSwipeCareerTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/ItemSwipeAchievements"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Career goals:"
+                android:fontFamily="@font/tommy_regular"
+                android:textSize="10sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/ItemSwipeCareer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/ItemSwipeCareerTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="20dp"
+                android:paddingHorizontal="20dp"
+                android:layout_marginTop="3dp"
+                android:text="Won the ACM International Collegiate Programming Contest (ICPC) World Finals in 2022
+Received the Google Anita Borg Memorial Scholarship in 2023
+Published a paper on machine learning for natural language processing in the Journal of Machine Learning Research in 2023"
+                android:fontFamily="@font/tommy_regular"
+                android:textSize="10sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:layout_constraintTop_toBottomOf="@id/ItemSwipeCareer"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/ItemSwipeButtonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="100dp"
+        android:layout_marginBottom="5dp"
+        android:paddingTop="30dp"
+        android:weightSum="3"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/nope_icon"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="5dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/like_icon_green"
+            android:layout_gravity="center"
+            android:layout_marginVertical="5dp"
+            android:layout_marginHorizontal="5dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/match_icon"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="5dp"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
