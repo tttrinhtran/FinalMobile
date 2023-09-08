@@ -5,10 +5,18 @@ import android.content.SharedPreferences;
 
 public class PreferenceManager {
 
-    private final SharedPreferences sharedPreferences;
+    private  SharedPreferences sharedPreferences;
 
-    public PreferenceManager( Context context ) {
-        sharedPreferences = context.getSharedPreferences("chatAppPreference", Context.MODE_PRIVATE );
+    public PreferenceManager( Context context, String type ) {
+        switch (type)
+        {
+            case "chatAppPreference":
+                sharedPreferences = context.getSharedPreferences("chatAppPreference", Context.MODE_PRIVATE );
+                break;
+            case "User":
+                sharedPreferences = context.getSharedPreferences("User", Context.MODE_PRIVATE );
+                break;
+        }
     }
 
     public void putBoolean( String key, Boolean value ) {

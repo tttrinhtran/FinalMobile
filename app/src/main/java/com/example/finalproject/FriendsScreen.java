@@ -24,7 +24,7 @@ public class FriendsScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityFriendsScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        preferenceManager = new PreferenceManager(getApplicationContext());
+        preferenceManager = new PreferenceManager(getApplicationContext(), "chatAppPreference");
         setListener();
         getUser();
     }

@@ -14,8 +14,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.section_screen) ;
-
-        Intent intent = new Intent(MainActivity.this, FriendsScreen.class);
+        Intent intent = new Intent(MainActivity.this, LoginScreen.class);
         startActivity(intent);
     }
 }

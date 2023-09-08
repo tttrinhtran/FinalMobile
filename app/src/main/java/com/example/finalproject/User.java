@@ -2,6 +2,7 @@ package com.example.finalproject;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 // Note: Username is UNIQUE and be the ID of corresponding document on firestore.
 public class User implements Serializable {
@@ -21,6 +22,7 @@ public class User implements Serializable {
     String _UserSchool;
     String _UserSpecialization;
     String _UserAvatarUrl;
+    ArrayList<String> friends;
 
 
 
@@ -174,4 +176,12 @@ public class User implements Serializable {
     }
 
     public int get_UserID() { return 0; }
+
+    public ArrayList<String> getFriend() {
+        return friends;
+    }
+
+    public void setFriend(ArrayList<String> friend) {
+        friends = friend;
+    }
 }

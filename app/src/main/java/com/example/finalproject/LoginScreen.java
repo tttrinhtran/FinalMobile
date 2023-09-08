@@ -2,7 +2,9 @@ package com.example.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -12,6 +14,9 @@ import android.widget.Toast;
 
 import com.example.finalproject.Home.HomeScreen;
 import com.example.finalproject.RegisterScreen.RegisterScreenSignup;
+import com.google.gson.Gson;
+
+import java.lang.reflect.Type;
 
 public class LoginScreen extends AppCompatActivity {
 
@@ -40,6 +45,7 @@ public class LoginScreen extends AppCompatActivity {
             boolean check = LoginScreen_Datafetch();
             if(check){
                 Intent intent = new Intent(LoginScreen.this, HomeScreen.class);
+                passOnUser();
                 startActivity(intent);
             }
         });
@@ -86,4 +92,14 @@ public class LoginScreen extends AppCompatActivity {
             return false;
         }else return true;
     }
+    private  void  passOnUser()
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences("myUser", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String updateJsonString = gson.toJson(_LoginScreenUser);
+        editor.putString("myUserString", updateJsonString);
+        editor.apply();
+    }
+
 }
