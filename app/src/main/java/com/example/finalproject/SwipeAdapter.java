@@ -8,11 +8,11 @@ import android.widget.BaseAdapter;
 
 import java.util.List;
 
-public class SwipeAdater extends BaseAdapter {
+public class SwipeAdapter extends BaseAdapter {
     private Context context;
     private List<Integer> list;
 
-    public SwipeAdater(Context context, List<Integer> list) {
+    public SwipeAdapter(Context context, List<Integer> list) {
         this.context = context;
         this.list = list;
     }

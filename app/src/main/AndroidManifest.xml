@@ -33,9 +33,6 @@
             android:name=".Message.ChatActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeScreen"
-            android:exported="false" />
-        <activity
             android:name=".Home.HomeScreen"
             android:exported="false" />
         <activity

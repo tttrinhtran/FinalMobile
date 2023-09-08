@@ -102,7 +102,7 @@ public class ChatActivity extends AppCompatActivity {
             }
             binding.chatRecyclerView.setVisibility(View.VISIBLE);
         }
-        binding.progressBar.setVisibility(View.GONE);
+//        binding.progressBar.setVisibility(View.GONE);
     };
 
     private Bitmap getBitmapFromEncodedString( String encodedImage ) {
@@ -112,12 +112,12 @@ public class ChatActivity extends AppCompatActivity {
 
     private void loadReceiverDetails() {
         receiverUser = (User) getIntent().getSerializableExtra(Constants.KEY_USER);
-        binding.textName.setText(receiverUser.get_UserName());
+        binding.ChatUsername.setText(receiverUser.get_UserName());
 
     }
 
     private void setListener() {
-        binding.imageBack.setOnClickListener( v -> onBackPressed() );
+        binding.ChatBackArrow.setOnClickListener( v -> onBackPressed() );
         binding.layoutSend.setOnClickListener( v -> sendMessage() );
     }
 
