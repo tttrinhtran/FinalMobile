@@ -3,6 +3,7 @@ package com.example.finalproject;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -10,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalproject.Listeners.UserListener;
-import com.example.finalproject.databinding.ItemContainerUserBinding;
+import com.example.finalproject.databinding.ItemChatListBinding;
 
 import java.util.List;
 
@@ -22,17 +23,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     public UserAdapter( List<User> users, UserListener userListener ) {
         this.users = users;
         this.userListener = userListener;
+        for( User user : users ) Log.d( "Testing", "UserAdapter: " + user._UserName );
     }
 
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType ) {
-        ItemContainerUserBinding itemContainerUserBinding = ItemContainerUserBinding.inflate(
+        ItemChatListBinding itemChatListBinding = ItemChatListBinding.inflate(
                 LayoutInflater.from(parent.getContext()),
                 parent,
                 false
         );
-        return new UserViewHolder(itemContainerUserBinding);
+        return new UserViewHolder(itemChatListBinding);
     }
 
     @Override
@@ -45,18 +47,20 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     class UserViewHolder extends RecyclerView.ViewHolder {
 
-        ItemContainerUserBinding binding;
+        ItemChatListBinding binding;
 
-        UserViewHolder( ItemContainerUserBinding itemContainerUserBiding ) {
-            super(itemContainerUserBiding.getRoot());
-            binding = itemContainerUserBiding;
+        UserViewHolder( ItemChatListBinding itemChatListBinding ) {
+            super(itemChatListBinding.getRoot());
+            binding = itemChatListBinding;
         }
 
         void setUserData( User user ) {
-            binding.textName.setText(user._UserName);
-            binding.textEmail.setText(user._UserEmail);
 //            biding.imageProfile.setImageBitmap(getUserImage(user.image));
+            binding.ItemChatFriendName.setText(user._UserName);
+            // Just for testing
+            binding.ItemChatContent.setText(user._UserEmail);
             binding.getRoot().setOnClickListener( v -> userListener.onUserClicker(user));
+            Log.d( "Adapter", "setUserData: " + user._UserName );
         }
     }
 

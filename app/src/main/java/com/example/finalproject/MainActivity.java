@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.section_screen) ;
 
-//        Intent intent = new Intent(MainActivity.this, HomeScreen.class);
-//        startActivity(intent);
+        Intent intent = new Intent(MainActivity.this, FriendsScreen.class);
+        startActivity(intent);
     }
 }
