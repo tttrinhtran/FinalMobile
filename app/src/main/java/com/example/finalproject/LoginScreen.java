@@ -15,7 +15,7 @@ import com.example.finalproject.RegisterScreen.RegisterScreenSignup;
 
 public class LoginScreen extends AppCompatActivity {
 
-    FirebaseController<User> userFirebaseController;
+    FirebaseFirestoreController<User> userFirebaseController;
     User _LoginScreenUser;
     EditText _LoginScreenUsernameEditText;
     EditText _LoginScreenPasswordEditText;
@@ -31,7 +31,7 @@ public class LoginScreen extends AppCompatActivity {
         LoginScreen_LoadingUIElements();
 
         // init Firebase controller for User class.
-        userFirebaseController = new FirebaseController<>(User.class);
+        userFirebaseController = new FirebaseFirestoreController<>(User.class);
 
         // setting up Login button
         // Note: The following is written in Lambda format. In order words, view -> {LoginScreen_Datafetch();} is equivalent to

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/ItemChatAvatar"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:background="@drawable/background_image"
         android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,7 +23,7 @@
         app:layout_constraintStart_toEndOf="@id/ItemChatAvatar"
         app:layout_constraintTop_toTopOf="@id/ItemChatAvatar"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="0dp"
         android:text="Luu Van Phuc"
         android:fontFamily="@font/tommy_regular"
         android:textStyle="bold"
@@ -33,11 +34,11 @@
         android:id="@+id/ItemChatContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/ItemChatFriendName"
-        app:layout_constraintTop_toBottomOf="@id/ItemChatFriendName"
-        android:layout_marginTop="10dp"
+        android:fontFamily="@font/tommy_regular"
+
         android:text="You: What's a man "
-        android:fontFamily="@font/tommy_regular"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/ItemChatFriendName" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

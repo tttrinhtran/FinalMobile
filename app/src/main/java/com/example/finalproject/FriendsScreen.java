@@ -62,12 +62,10 @@ public class FriendsScreen extends AppCompatActivity {
                                    queryDocumentSnapshot.getString("_UserSpecialization")
                            );
                            friends.add(user);
-                           // Log.d( "CLM", user._UserName );
                        }
-                       Toast.makeText(this, friends.size(), Toast.LENGTH_SHORT ).show();
+
                        if( friends.size() > 0 ) {
                            // Phải sửa á
-                           for( User user : friends ) Log.d( "Testing", "getUser: " + user._UserName);
                            UserAdapter userAdapter = new UserAdapter( friends, null );
                            binding.FriendScreenChat.setAdapter(userAdapter);
                            binding.FriendScreenChat.setVisibility(View.VISIBLE);
@@ -79,7 +77,6 @@ public class FriendsScreen extends AppCompatActivity {
     }
 
     private void showErrorMessage() {
-        Toast.makeText( this, "Something wrong here", Toast.LENGTH_SHORT ).show();
     }
 
     private void loading( Boolean isLoading ) {
