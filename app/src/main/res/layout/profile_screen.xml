@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:id="@+id/ProfileScreenScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/HolderViewScreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ProfileScreenAvatar"
+                android:layout_width="135dp"
+                android:layout_height="135dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="20dp"
+                app:shapeAppearance="@style/Circular"
+                android:src="@drawable/sample"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:id="@+id/ProfileScreenUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ProfileScreenAvatar"
+                android:text="Tran Tran"
+                android:fontFamily="@font/tommy_medium"
+                android:textColor="@color/primary_blue"
+                android:textSize="24sp"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ProfileScreenLocationLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/ProfileScreenUsername"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="15dp">
+
+                <ImageView
+                    android:id="@+id/ProfileScreenLocationIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@drawable/location_icon"
+                    android:backgroundTint="@color/light_blue"/>
+
+                <TextView
+                    android:id="@+id/ProfileScreenLocationInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/ProfileScreenLocationIcon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="5dp"
+                    android:text="Ho Chi Minh City, Vietname"
+                    android:fontFamily="@font/lato"
+                    android:textSize="12sp"
+                    android:textColor="@color/light_blue" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/ProfileScreenMyAccountTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ProfileScreenLocationLayout"
+                android:text="My account"
+                android:fontFamily="@font/tommy_medium"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+
+            
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

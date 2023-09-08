@@ -50,7 +50,7 @@
             android:id="@+id/SectionScreenMySectionTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="My Section"
+            android:text="My Sections"
             android:layout_weight="1"
             android:fontFamily="@font/tommy_regular"
             android:textSize="16sp"
@@ -94,7 +94,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/SectionScreenSectionRecycler"
+        android:id="@+id/SectionScreenSectionListRecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/SectionScreenSearchBar"
