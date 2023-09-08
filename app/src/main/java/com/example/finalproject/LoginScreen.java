@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,7 +15,7 @@ import com.example.finalproject.RegisterScreen.RegisterScreenSignup;
 
 public class LoginScreen extends AppCompatActivity {
 
-    FirebaseFirestoreController<User> userFirebaseFirestoreController;
+    FirebaseController<User> userFirebaseController;
     User _LoginScreenUser;
     EditText _LoginScreenUsernameEditText;
     EditText _LoginScreenPasswordEditText;
@@ -23,12 +25,13 @@ public class LoginScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setContentView(R.layout.activity_login_screen);
 
         LoginScreen_LoadingUIElements();
 
         // init Firebase controller for User class.
-        userFirebaseFirestoreController = new FirebaseFirestoreController<>(User.class);
+        userFirebaseController = new FirebaseController<>(User.class);
 
         // setting up Login button
         // Note: The following is written in Lambda format. In order words, view -> {LoginScreen_Datafetch();} is equivalent to
@@ -68,7 +71,7 @@ public class LoginScreen extends AppCompatActivity {
             return false;
         }else{
             // taking the user's data based on username.
-            _LoginScreenUser = userFirebaseFirestoreController.retrieveObjectsFirestoreByID(User.UserCollectionKey, userName);
+            _LoginScreenUser = userFirebaseController.retrieveObjectsFirestoreByID(User.UserCollectionKey, userName);
         }
 
         return verifyAccount(password);

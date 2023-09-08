@@ -4,15 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="8dp"
-   android:background="@drawable/round_outline_btn">
-
-    <TextView
-        android:id="@+id/HobbiesCardviewText"
+    android:clickable="true"
+    android:foreground="@drawable/round_outline_btn">
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:hint="hobbie"/>
+        android:background="@drawable/round_solid_btn">
+        <TextView
+            android:id="@+id/HobbiesCardviewText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="hobbie"/>
+    </LinearLayout>
+
+
 
 
 </androidx.cardview.widget.CardView>
