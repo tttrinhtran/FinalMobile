@@ -7,7 +7,6 @@ import java.util.ArrayList;
 // Note: Username is UNIQUE and be the ID of corresponding document on firestore.
 public class User implements Serializable {
 
-    static final public String UserCollectionKey = "Users";
     String _UserName;
     String _UserPassword;
     String _UserFirstname;

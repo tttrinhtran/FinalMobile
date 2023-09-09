@@ -1,7 +1,9 @@
 package com.example.finalproject;
 
 public class Constants {
-    public static final String KEY_COLLECTION_USERS = "users";
+    public static final String KEY_COLLECTION_USERS = "Users";
+    public static final String KEY_SHARED_PREFERENCE_USERS = "users";
+
     public static final String KEY_NAME = "name";
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "password";
@@ -21,4 +23,12 @@ public class Constants {
 
     // For list friend
     public static final String KEY_COLLECTION_FRIENDS = "Users";
+
+    public static final String SHARED_PREFERENCE_LAST_LOCATION_KEY = "last_location";
+    public static final String FIRESTORE_LOCATION_KEY = "location";
+
+    // Using for comparison
+    public static final int EQUAL = 0;
+    public static final int SMALLER = 1;
+    public static final int LARGER = 2;
 }

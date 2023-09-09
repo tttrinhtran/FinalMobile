@@ -1,5 +1,8 @@
 package com.example.finalproject.RegisterScreen;
 
+
+import static com.example.finalproject.Constants.KEY_COLLECTION_USERS;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -33,7 +36,7 @@ public class RegisterScreenBiography extends AppCompatActivity {
             boolean isSuccessful = CreateBiographyForNewUser();
             if(isSuccessful == true){
                 UserDatabase = new FirebaseFirestoreController<>(User.class);
-                UserDatabase.addToFirestore(User.UserCollectionKey, user.get_UserName(), user);
+                UserDatabase.addToFirestore(KEY_COLLECTION_USERS, user.get_UserName(), user);
                 Toast.makeText(RegisterScreenBiography.this, "Register Successfully", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(RegisterScreenBiography.this, LoginScreen.class);
                 startActivity(intent);

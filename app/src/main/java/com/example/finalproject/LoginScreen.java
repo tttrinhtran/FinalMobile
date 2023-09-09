@@ -1,5 +1,8 @@
 package com.example.finalproject;
 
+import static com.example.finalproject.Constants.KEY_COLLECTION_USERS;
+import static com.example.finalproject.Constants.KEY_SHARED_PREFERENCE_USERS;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -44,7 +47,7 @@ public class LoginScreen extends AppCompatActivity {
         _LoginScreenLoginButton.setOnClickListener(view -> {
             boolean check = LoginScreen_Datafetch();
             if(check){
-                Intent intent = new Intent(LoginScreen.this, HomeScreen.class);
+                Intent intent = new Intent(LoginScreen.this, LocationUpdateActivity.class);
                 passOnUser();
                 startActivity(intent);
             }
@@ -77,7 +80,7 @@ public class LoginScreen extends AppCompatActivity {
             return false;
         }else{
             // taking the user's data based on username.
-            _LoginScreenUser = userFirebaseController.retrieveObjectsFirestoreByID(User.UserCollectionKey, userName);
+            _LoginScreenUser = userFirebaseController.retrieveObjectsFirestoreByID(KEY_COLLECTION_USERS, userName);
         }
 
         return verifyAccount(password);
@@ -94,12 +97,7 @@ public class LoginScreen extends AppCompatActivity {
     }
     private  void  passOnUser()
     {
-        SharedPreferences sharedPreferences = getSharedPreferences("myUser", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String updateJsonString = gson.toJson(_LoginScreenUser);
-        editor.putString("myUserString", updateJsonString);
-        editor.apply();
+        SharedPreferenceManager<User> sharedPreferences = new SharedPreferenceManager<>(User.class, LoginScreen.this);
+        sharedPreferences.storeSerializableObjectToSharedPreference(_LoginScreenUser, KEY_SHARED_PREFERENCE_USERS);
     }
-
 }
