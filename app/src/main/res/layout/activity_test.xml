@@ -4,22 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterScreen.RegisterScreenAvatar">
-
-    <Button
-        android:id="@+id/RegisterScreenAvatarCameraButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Open Camera"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/RegisterScreenAvatarPreviewImageView"
-        android:layout_marginTop="20dp"
-        tools:layout_editor_absoluteX="140dp"
-        tools:layout_editor_absoluteY="30dp" />
+    tools:context=".RegisterScreen.Test">
 
     <ImageView
-        android:id="@+id/RegisterScreenAvatarPreviewImageView"
+        android:id="@+id/screen"
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_marginStart="10dp"
@@ -30,15 +18,14 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
-        android:id="@+id/RegisterScreenAvatarNextButton"
+        android:id="@+id/fetch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save and Continue"
+        android:text="Fetch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/RegisterScreenAvatarCameraButton"
+        app:layout_constraintTop_toBottomOf="@id/screen"
         tools:layout_editor_absoluteX="140dp"
         tools:layout_editor_absoluteY="30dp" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

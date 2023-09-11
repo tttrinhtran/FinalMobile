@@ -38,7 +38,8 @@ class RegisterScreenAvatar : AppCompatActivity() {
         nextButton.setOnClickListener{
             if (imageBitmap != null){
                 user._UserAvatarUrl = uploadImageToFirebase(imageBitmap, user._UserName)
-                startActivity(Intent(this, RegisterScreenMajor::class.java).apply {
+
+                startActivity(Intent(this, Test::class.java).apply {
                     putExtra("new_user",user)
                 })
             }
@@ -64,10 +65,10 @@ class RegisterScreenAvatar : AppCompatActivity() {
         // Create a storage reference from our app
         val storageRef = storage.reference
 
-        // Create a reference to "mountains.jpg"
+        // Create a reference to "imageName.jpg"
         val mountainsRef = storageRef.child("$imageName.jpg")
 
-        // Create a reference to 'images/mountains.jpg'
+        // Create a reference to 'images/imageName.jpg'
         val mountainImagesRef = storageRef.child("images/$imageName.jpg")
 
         // While the file names are the same, the references point to different files
