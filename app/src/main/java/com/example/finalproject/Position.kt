@@ -41,7 +41,7 @@ class Position:Serializable{
 
     fun isEqual(pos:Position?) : Boolean{
         if (pos != null) {
-            return _latitude != pos.getLatitude() || _longitude != pos.getLongitude()
+            return _latitude == pos.getLatitude() && _longitude == pos.getLongitude()
         }else return false
     }
 }

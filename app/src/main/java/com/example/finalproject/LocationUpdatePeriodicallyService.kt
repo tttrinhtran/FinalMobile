@@ -108,15 +108,11 @@ class LocationUpdatePeriodicallyService : Service() {
             // IMPORTANT NOTE: Apps running on Android 8.0 and higher devices (regardless of
             // targetSdkVersion) may receive updates less frequently than this interval when the app
             // is no longer in the foreground.
-            interval = TimeUnit.SECONDS.toMillis(60)
+            interval = TimeUnit.SECONDS.toMillis(10)
 
             // Sets the fastest rate for active location updates. This interval is exact, and your
             // application will never receive updates more frequently than this value.
-            fastestInterval = TimeUnit.SECONDS.toMillis(30)
-
-            // Sets the maximum time when batched location updates are delivered. Updates may be
-            // delivered sooner than this interval.
-            maxWaitTime = TimeUnit.MINUTES.toMillis(2)
+            fastestInterval = TimeUnit.SECONDS.toMillis(10)
 
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }

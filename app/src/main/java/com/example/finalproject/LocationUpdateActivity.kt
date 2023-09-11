@@ -34,6 +34,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.edit
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.coloros.ocs.mediaunit.BuildConfig
 import com.example.finalproject.Home.HomeScreen
@@ -165,6 +166,8 @@ class LocationUpdateActivity : AppCompatActivity(), SharedPreferences.OnSharedPr
             unbindService(foregroundOnlyServiceConnection)
             foregroundOnlyLocationServiceBound = false
         }
+        sharedPreferences.edit { clear();commit() }
+
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
 
         super.onDestroy()
