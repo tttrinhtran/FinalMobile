@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="20dp"
+    android:layout_marginTop="20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ScrollView
@@ -11,7 +13,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingVertical="30dp"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintBottom_toTopOf="@id/ProfileScreenNaviBar"
+        android:scrollbars="none">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/HolderViewScreen"
@@ -79,18 +85,466 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ProfileScreenLocationLayout"
+                android:layout_marginTop="50dp"
                 android:text="My account"
                 android:fontFamily="@font/tommy_medium"
                 android:textSize="20sp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/dark_blue"/>
 
-            
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ProfileScreenPhoneLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ProfileScreenMyAccountTitle"
+                android:paddingVertical="20dp"
+                android:background="@drawable/border_bottom_black"
+                android:backgroundTint="@color/light_blue">
 
+                <TextView
+                    android:id="@+id/ProfileScreenPhoneTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="Phone Number"
+                    android:fontFamily="@font/tommy_regular"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="16sp"
+                    />
+                
+                <TextView
+                    android:id="@+id/ProfileScreenPhoneText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@id/ProfileScreenPhoneEditIcon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginEnd="5dp"
+                    android:text="999999999"
+                    android:fontFamily="@font/lato"
+                    android:textSize="14sp"
+                    android:textColor="@color/dark_blue"/>
+
+                <ImageView
+                    android:id="@+id/ProfileScreenPhoneEditIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/arrow_right_icon"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ProfileScreenEmailLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ProfileScreenPhoneLayout"
+                android:paddingVertical="20dp"
+                android:background="@drawable/border_bottom_black"
+                android:backgroundTint="@color/light_blue">
+
+                <TextView
+                    android:id="@+id/ProfileScreenEmailTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="Email"
+                    android:fontFamily="@font/tommy_regular"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="16sp"
+                    />
+
+                <TextView
+                    android:id="@+id/ProfileScreenEmailText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@id/ProfileScreenEmailEditIcon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginEnd="5dp"
+                    android:text="abc@gmail.com"
+                    android:fontFamily="@font/lato"
+                    android:textSize="14sp"
+                    android:textColor="@color/dark_blue"/>
+
+                <ImageView
+                    android:id="@+id/ProfileScreenEmailEditIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/arrow_right_icon"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ProfileScreenLocationEditLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ProfileScreenEmailLayout"
+                android:paddingVertical="20dp"
+                android:background="@drawable/border_bottom_black"
+                android:backgroundTint="@color/light_blue">
+
+                <TextView
+                    android:id="@+id/ProfileScreenLocationTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="Location"
+                    android:fontFamily="@font/tommy_regular"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="16sp"
+                    />
+
+                <TextView
+                    android:id="@+id/ProfileScreenLocationText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@id/ProfileScreenLocationEditIcon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginEnd="5dp"
+                    android:text="My Current location"
+                    android:fontFamily="@font/lato"
+                    android:textSize="14sp"
+                    android:textColor="@color/dark_blue"/>
+
+                <ImageView
+                    android:id="@+id/ProfileScreenLocationEditIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/arrow_right_icon"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ProfileScreenDistanceLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ProfileScreenLocationEditLayout"
+                android:paddingVertical="10dp"
+                android:background="@drawable/border_bottom_black"
+                android:backgroundTint="@color/light_blue">
+
+                <TextView
+                    android:id="@+id/ProfileScreenDistanceTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="Distance preference"
+                    android:fontFamily="@font/tommy_regular"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="16sp"
+                    />
+
+                <TextView
+                    android:id="@+id/ProfileScreenDistanceText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginEnd="5dp"
+                    android:text="33 mi"
+                    android:fontFamily="@font/lato"
+                    android:textSize="14sp"
+                    android:textColor="@color/dark_blue"/>
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/ProfileScreenDistanceSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ProfileScreenDistanceTitle"
+                    android:layout_marginTop="5dp"
+                    android:valueFrom="1"
+                    android:valueTo="100"
+                    app:thumbColor="@color/white"
+                    app:thumbStrokeColor="@color/black"
+                    app:trackColorActive="@color/primary_blue"
+                    app:trackColorInactive="@color/input_background" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/profileScreenShowDistanceLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_bottom_black"
+                android:backgroundTint="@color/light_blue"
+                android:paddingVertical="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ProfileScreenDistanceLayout">
+
+                <TextView
+                    android:id="@+id/ProfileScreenShowDistanceTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/tommy_regular"
+                    android:text="Only show people in this range"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Switch
+                    android:id="@+id/ProfileScreenShowDistanceSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:thumb="@drawable/thumb_selector"
+                    android:track="@drawable/track_selector"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ProfileScreenAgeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profileScreenShowDistanceLayout"
+                android:paddingVertical="10dp"
+                android:background="@drawable/border_bottom_black"
+                android:backgroundTint="@color/light_blue">
+
+                <TextView
+                    android:id="@+id/ProfileScreenAgeTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="Age preference"
+                    android:fontFamily="@font/tommy_regular"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="16sp"
+                    />
+
+                <TextView
+                    android:id="@+id/ProfileScreenAgeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginEnd="5dp"
+                    android:text="25-40"
+                    android:fontFamily="@font/lato"
+                    android:textSize="14sp"
+                    android:textColor="@color/dark_blue"/>
+
+                <com.google.android.material.slider.RangeSlider
+                    android:id="@+id/ProfileScreenAgeSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ProfileScreenAgeTitle"
+                    android:layout_marginTop="5dp"
+                    android:valueFrom="18"
+                    android:valueTo="50"
+                    app:values="@array/rangeSlider"
+                    app:thumbColor="@color/white"
+                    app:thumbStrokeColor="@color/black"
+                    app:trackColorActive="@color/primary_blue"
+                    app:trackColorInactive="@color/input_background"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/profileScreenShowAgeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_bottom_black"
+                android:backgroundTint="@color/light_blue"
+                android:paddingVertical="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ProfileScreenAgeLayout">
+
+                <TextView
+                    android:id="@+id/ProfileScreenShowAgeTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/tommy_regular"
+                    android:text="Only show people in this range"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Switch
+                    android:id="@+id/ProfileScreenShowAgeSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:thumb="@drawable/thumb_selector"
+                    android:track="@drawable/track_selector"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:layout_constraintTop_toBottomOf="@id/profileScreenShowAgeLayout"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/ProfileScreenNaviBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:weightSum="4"
+        android:layout_marginTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        android:orientation="horizontal"
+        android:elevation="25dp"
+        android:background="@drawable/top_bottom_grey">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/HomeScreenNaviBarHomeIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/home_icon"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/HomeScreenNaviBarHomeIcon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="5dp"
+                android:text="Home"
+                android:fontFamily="@font/tommy_medium"
+                android:textSize="10sp"
+                android:textColor="@color/primary_blue"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/HomeScreenNaviBarSectionIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/section_icon"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/HomeScreenNaviBarSectionIcon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="5dp"
+                android:text="Section"
+                android:fontFamily="@font/tommy_medium"
+                android:textSize="10sp"
+                android:textColor="@color/primary_blue"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/HomeScreenNaviBarFriendIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/friend_icon"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/HomeScreenNaviBarFriendIcon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="5dp"
+                android:text="Friend"
+                android:fontFamily="@font/tommy_medium"
+                android:textSize="10sp"
+                android:textColor="@color/primary_blue"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/HomeScreenNaviBarHomeIcon3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@color/light_orange"
+                app:shapeAppearance="@style/Circular"
+                app:srcCompat="@drawable/hide_password_icon"
+                android:layout_gravity="center" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/HomeScreenNaviBarHomeIcon3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="5dp"
+                android:text="Profile"
+                android:fontFamily="@font/tommy_medium"
+                android:textSize="10sp"
+                android:textColor="@color/primary_blue"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
