@@ -39,6 +39,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject"
         tools:targetApi="33">
+        <service
+            android:name=".LocationUpdatePeriodicallyService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="location" />
+        <activity
+            android:name=".LocationUpdateActivity"
+            android:exported="true" />
         <activity
             android:name=".RegisterScreen.Test"
             android:exported="false" />
