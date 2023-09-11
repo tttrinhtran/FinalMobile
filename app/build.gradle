@@ -144,4 +144,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.6.0-SNAPSHOT'
 
 
+    //Swipe
+    implementation 'com.yuyakaido.android:card-stack-view:2.3.4'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
