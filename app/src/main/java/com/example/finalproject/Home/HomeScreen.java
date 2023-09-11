@@ -159,15 +159,16 @@ public class HomeScreen extends AppCompatActivity {
     {
         userFirebaseController=new FirebaseFirestoreController<>(User.class);
         ArrayList<String> temp= user.get_UserFriend();
-        for(int i=0; i< temp.size(); i++)
-        {
+        if (temp != null) {
+            for (int i = 0; i < temp.size(); i++) {
 
-            User tmp=userFirebaseController.retrieveObjectsFirestoreByID(KEY_COLLECTION_USERS, temp.get(i));
-            if (activeFriend==null) {
-                activeFriend=new ArrayList<>();
+                User tmp = userFirebaseController.retrieveObjectsFirestoreByID(KEY_COLLECTION_USERS, temp.get(i));
+                if (activeFriend == null) {
+                    activeFriend = new ArrayList<>();
+                }
+                activeFriend.add(tmp);
+
             }
-            activeFriend.add(tmp);
-
         }
 
 
