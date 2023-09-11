@@ -67,4 +67,5 @@ public class FirebaseFirestoreController<T> {
         if(_documentSnapShot != null) tObject = _documentSnapShot.toObject(type);
         return tObject;
     }
+
 }

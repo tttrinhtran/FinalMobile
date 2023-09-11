@@ -6,6 +6,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 
 public class SharedPreferenceManager<T> {
     final private Class<T> type;
@@ -23,8 +26,8 @@ public class SharedPreferenceManager<T> {
         Gson gson = new Gson();
         String json = gson.toJson(object);
         editor.putString(key, json);
-        editor.commit();
-        editor.clear();
+//        editor.commit();
+//        editor.clear();
         editor.apply();
         return true;
     }
@@ -32,7 +35,7 @@ public class SharedPreferenceManager<T> {
     public T retrieveSerializableObjectFromSharedPreference(String key){
         sharedPreference = context.getSharedPreferences(key, MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = sharedPreference.getString(key, "");
+        String json = sharedPreference.getString(key, null);
         return gson.fromJson(json, type);
     }
 

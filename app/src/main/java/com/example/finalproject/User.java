@@ -21,7 +21,7 @@ public class User implements Serializable {
     String _UserSchool;
     String _UserSpecialization;
     String _UserAvatarUrl;
-    ArrayList<String> friends;
+    ArrayList<String> _UserFriend;
 
 
 
@@ -58,6 +58,7 @@ public class User implements Serializable {
                 ", _UserBio='" + _UserBio + '\'' +
                 ", _UserHobbies='" + _UserHobbies + '\'' +
                 ", _UserSchool='" + _UserSchool + '\'' +
+                ", _UserFriend='" + _UserFriend + '\'' +
                 ", _UserSpecialization='" + _UserSpecialization + '\'' +
                 '}';
     }
@@ -176,11 +177,11 @@ public class User implements Serializable {
 
     public int get_UserID() { return 0; }
 
-    public ArrayList<String> getFriend() {
-        return friends;
+    public ArrayList<String> get_UserFriend() {
+        return _UserFriend;
     }
 
-    public void setFriend(ArrayList<String> friend) {
-        friends = friend;
+    public void set_UserFriend(ArrayList<String> _UserFriend) {
+        this._UserFriend = _UserFriend;
     }
 }
