@@ -103,9 +103,8 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-     <include layout="@layout/nav_bar">
+     <include layout="@layout/nav_bar"></include>
 
-     </include>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

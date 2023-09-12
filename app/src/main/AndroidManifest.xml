@@ -50,6 +50,7 @@
         <activity
             android:name=".RegisterScreen.Test"
             android:exported="false" />
+
         <activity
             android:name=".FriendsScreen"
             android:exported="false" />

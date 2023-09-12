@@ -48,7 +48,7 @@ public class HomeScreen extends AppCompatActivity {
      ArrayList<User> activeFriend;
     FirebaseFirestoreController<User> userFirebaseController;
     private TextView titleText;
-     cardSwipeAdapter adapterSwipe;
+    cardSwipeAdapter adapterSwipe;
     CardStackLayoutManager manager;
 
     @Override
@@ -64,34 +64,28 @@ public class HomeScreen extends AppCompatActivity {
 
     private void swipe()
     {
+        final int[] curPos = new int[1];
 
         CardStackView cardStackView=findViewById(R.id.HomeScreenSwipeItem);
         manager=new CardStackLayoutManager(HomeScreen.this, new CardStackListener() {
             @Override
             public void onCardDragging(Direction direction, float ratio) {
                 Log.d(TAG, "onCardDragging: d=" + direction.name() + " ratio=" + ratio);
+                curPos[0] =manager.getTopPosition();
             }
 
             @Override
             public void onCardSwiped(Direction direction) {
                 Log.d(TAG, "onCardSwiped: p=" + manager.getTopPosition() + " d=" + direction);
                 if (direction == Direction.Right){
+                    user.check_SwipeRight(activeFriend.get(curPos[0]).get_UserName());
                     Toast.makeText(HomeScreen.this, "Direction Right", Toast.LENGTH_SHORT).show();
-                }
-                if (direction == Direction.Top){
-                    Toast.makeText(HomeScreen.this, "Direction Top", Toast.LENGTH_SHORT).show();
                 }
                 if (direction == Direction.Left){
                     Toast.makeText(HomeScreen.this, "Direction Left", Toast.LENGTH_SHORT).show();
-                }
-                if (direction == Direction.Bottom){
-                    Toast.makeText(HomeScreen.this, "Direction Bottom", Toast.LENGTH_SHORT).show();
+                    user.check_SwipeLeft(activeFriend.get(curPos[0]).get_UserName());
                 }
 
-//
-//                if (manager.getTopPosition() == adapterSwipe.getItemCount() - 5){
-//                    paginate();
-//                }
 
             }
 
@@ -114,16 +108,17 @@ public class HomeScreen extends AppCompatActivity {
             @Override
             public void onCardDisappeared(View view, int position) {
                 TextView tv = view.findViewById(R.id.HomeScreenUserName);
+                activeFriend.get(position);
                 Log.d(TAG, "onCardAppeared: " + position + ", nama: " + tv.getText());
             }
         });
-        manager.setStackFrom(StackFrom.None);
+        manager.setStackFrom(StackFrom.Top);
         manager.setVisibleCount(3);
         manager.setTranslationInterval(8.0f);
         manager.setScaleInterval(0.95f);
         manager.setSwipeThreshold(0.3f);
         manager.setMaxDegree(20.0f);
-        manager.setDirections(Direction.FREEDOM);
+        manager.setDirections(Direction.HORIZONTAL);
         manager.setCanScrollHorizontal(true);
         manager.setSwipeableMethod(SwipeableMethod.Manual);
         manager.setOverlayInterpolator(new LinearInterpolator());
@@ -131,6 +126,10 @@ public class HomeScreen extends AppCompatActivity {
         cardStackView.setLayoutManager(manager);
         cardStackView.setAdapter(adapterSwipe);
         cardStackView.setItemAnimator(new DefaultItemAnimator());
+    }
+    void setWaitingList(String data)
+    {
+
     }
 
     void setUp()
