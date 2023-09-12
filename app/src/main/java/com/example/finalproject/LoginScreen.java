@@ -47,7 +47,7 @@ public class LoginScreen extends AppCompatActivity {
         _LoginScreenLoginButton.setOnClickListener(view -> {
             boolean check = LoginScreen_Datafetch();
             if(check){
-                Intent intent = new Intent(LoginScreen.this, HomeScreen.class);
+                Intent intent = new Intent(LoginScreen.this, LocationUpdateActivity.class);
                 passOnUser();
                 startActivity(intent);
             }
@@ -95,7 +95,7 @@ public class LoginScreen extends AppCompatActivity {
             return false;
         }else return true;
     }
-    private  void  passOnUser()
+    private void  passOnUser()
     {
         SharedPreferenceManager<User> sharedPreferences = new SharedPreferenceManager<>(User.class, LoginScreen.this);
         sharedPreferences.storeSerializableObjectToSharedPreference(_LoginScreenUser, KEY_SHARED_PREFERENCE_USERS);

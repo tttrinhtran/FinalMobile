@@ -42,7 +42,9 @@ public class cardSwipeAdapter extends RecyclerView.Adapter<cardSwipeAdapter.MyVi
 
     @Override
     public int getItemCount() {
-        return swipeList.size() ;
+        if(swipeList != null)
+            return swipeList.size() ;
+        else return 0;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

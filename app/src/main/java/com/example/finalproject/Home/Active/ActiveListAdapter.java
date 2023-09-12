@@ -49,7 +49,10 @@ public class ActiveListAdapter extends RecyclerView.Adapter<ActiveListAdapter.My
 
     @Override
     public int getItemCount() {
-        return activeList.size();
+        if(activeList != null)
+            return activeList.size();
+        else
+            return 0;
     }
     public static class MyViewHolder extends RecyclerView.ViewHolder
     {

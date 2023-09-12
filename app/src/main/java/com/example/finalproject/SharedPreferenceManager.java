@@ -36,6 +36,7 @@ public class SharedPreferenceManager<T> {
         sharedPreference = context.getSharedPreferences(key, MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreference.getString(key, null);
+        if (json == null) return null;
         return gson.fromJson(json, type);
     }
 

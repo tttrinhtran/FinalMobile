@@ -1,5 +1,6 @@
 package com.example.finalproject
 
+import android.widget.Toast
 import com.example.finalproject.Constants.FIRESTORE_LOCATION_KEY
 import com.firebase.geofire.GeoFireUtils
 import com.firebase.geofire.GeoLocation
@@ -27,11 +28,7 @@ class FirestoreGeoHashQueries {
             "lat" to _latitude,
             "lng" to _longtitude,
         )
-        val ref = db.collection(FIRESTORE_LOCATION_KEY).document(user.get_UserName())
-        ref.update(updates)
-            .addOnCompleteListener {
-
-            }
+        db.collection(FIRESTORE_LOCATION_KEY).document(user.get_UserName()).set(updates)
     }
 
     fun QueryForLocationFireStore (pos: Position, distance: Double) : MutableList<DocumentSnapshot> {
