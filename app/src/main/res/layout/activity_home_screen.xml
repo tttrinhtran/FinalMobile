@@ -49,7 +49,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/hHomeScreenTitleLayout"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
         android:text="Active friends"
         android:textColor="@color/black"
         android:fontFamily="@font/tommy_medium"
@@ -63,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@id/HomeScreenFriendTitle"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/HomeScreenNearYouTitle"
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/HomeScreenFriendRecyclerView"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="20dp"
         android:text="Near You"
         android:textColor="@color/black"
@@ -80,25 +80,24 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/HomeScreenSwipeLayout"
-        android:layout_width="400dp"
+        android:layout_width="match_parent"
         android:layout_height="450dp"
         app:layout_constraintTop_toBottomOf="@id/HomeScreenNearYouTitle"
         app:layout_constraintBottom_toTopOf="@id/HomeScreenNaviBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp">
 
         <com.yuyakaido.android.cardstackview.CardStackView
             android:id="@+id/HomeScreenSwipeItem"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginHorizontal="5dp"
             app:koloda_card_layout="@layout/item_swipe"
-            tools:layout_editor_absoluteX="20dp"
-            tools:layout_editor_absoluteY="0dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

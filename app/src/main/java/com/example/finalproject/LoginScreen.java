@@ -47,7 +47,7 @@ public class LoginScreen extends AppCompatActivity {
         _LoginScreenLoginButton.setOnClickListener(view -> {
             boolean check = LoginScreen_Datafetch();
             if(check){
-                Intent intent = new Intent(LoginScreen.this, LocationUpdateActivity.class);
+                Intent intent = new Intent(LoginScreen.this, HomeScreen.class);
                 passOnUser();
                 startActivity(intent);
             }
