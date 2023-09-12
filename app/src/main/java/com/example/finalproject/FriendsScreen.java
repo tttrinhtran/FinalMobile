@@ -47,7 +47,7 @@ public class FriendsScreen extends AppCompatActivity {
                        for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult() ) {
                            if( currentUserId.equals(queryDocumentSnapshot.getId())) continue;
                            User user = new User(
-                                   queryDocumentSnapshot.getString("_UserName"),
+                /*                   queryDocumentSnapshot.getString("_UserName"),
                                    queryDocumentSnapshot.getString("_UserPassword"),
                                    queryDocumentSnapshot.getString("_UserFirstname"),
                                    queryDocumentSnapshot.getString("_UserLastname"),
@@ -59,7 +59,7 @@ public class FriendsScreen extends AppCompatActivity {
                                    queryDocumentSnapshot.getString("_UserBio"),
                                    queryDocumentSnapshot.getString("_UserHobbies"),
                                    queryDocumentSnapshot.getString("_UserSchool"),
-                                   queryDocumentSnapshot.getString("_UserSpecialization")
+                                   queryDocumentSnapshot.getString("_UserSpecialization"),*/
                            );
                            friends.add(user);
                        }

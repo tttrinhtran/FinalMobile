@@ -85,6 +85,7 @@ private const val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 34
  * notification. This dismisses the notification and stops the service.
  */
 class LocationUpdateActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
+    private lateinit var nextButt : Button
     private var foregroundOnlyLocationServiceBound = false
 
     // Provides location updates for while-in-use feature.
@@ -103,7 +104,6 @@ class LocationUpdateActivity : AppCompatActivity(), SharedPreferences.OnSharedPr
             foregroundOnlyLocationService = binder.service
             foregroundOnlyLocationServiceBound = true
             subcribeLocationUpdate()
-
         }
 
         override fun onServiceDisconnected(name: ComponentName) {
@@ -115,12 +115,19 @@ class LocationUpdateActivity : AppCompatActivity(), SharedPreferences.OnSharedPr
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_location_update)
 
         foregroundOnlyBroadcastReceiver = ForegroundOnlyBroadcastReceiver()
 
         sharedPreferences =
             getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
+
+        nextButt = findViewById(R.id.LocationUpdateNextButton)
+
+        nextButt.setOnClickListener {
+            val intent = Intent(this@LocationUpdateActivity, HomeScreen::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onStart() {

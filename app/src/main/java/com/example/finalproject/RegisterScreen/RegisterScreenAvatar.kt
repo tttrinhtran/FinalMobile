@@ -37,7 +37,7 @@ class RegisterScreenAvatar : AppCompatActivity() {
 
         nextButton.setOnClickListener{
             if (imageBitmap != null){
-                user._UserAvatarUrl = uploadImageToFirebase(imageBitmap, user._UserName)
+                uploadImageToFirebase(imageBitmap, user._UserName)
 
                 startActivity(Intent(this, Test::class.java).apply {
                     putExtra("new_user",user)
