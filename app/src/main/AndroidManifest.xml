@@ -40,7 +40,11 @@
         android:theme="@style/Theme.FinalProject"
         tools:targetApi="33">
         <activity
+<<<<<<< Updated upstream
             android:name=".RegisterScreen.Test"
+=======
+            android:name=".Nav_bar"
+>>>>>>> Stashed changes
             android:exported="false" />
         <activity
             android:name=".FriendsScreen"

@@ -3,6 +3,7 @@ package com.example.finalproject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 // Note: Username is UNIQUE and be the ID of corresponding document on firestore.
 public class User implements Serializable {
@@ -193,5 +194,13 @@ public class User implements Serializable {
 
     public void set_UserWaitingList(ArrayList<String> _UserWaitingList) {
         this._UserWaitingList = _UserWaitingList;
+    }
+
+    public String get_UserAge()
+
+    {   Calendar calendar = Calendar.getInstance();
+        int currentYear = calendar.get(Calendar.YEAR);
+        int Useryear= Integer.parseInt(this._UserDoB.substring(this._UserDoB.length() - 4));
+        return Integer.toString(currentYear-Useryear);
     }
 }

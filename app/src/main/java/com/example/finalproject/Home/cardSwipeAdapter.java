@@ -60,7 +60,7 @@ public class cardSwipeAdapter extends RecyclerView.Adapter<cardSwipeAdapter.MyVi
         void setData(User data) {
 
             tvName.setText(data.get_UserName());
-//        holder.tvAge.setText(swipeList.get(position).get_UserDoB());
+            tvAge.setText(data.get_UserAge());
             tvSchool.setText(data.get_UserSchool());
         }
     }

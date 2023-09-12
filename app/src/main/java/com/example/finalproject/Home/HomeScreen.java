@@ -16,11 +16,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.finalproject.FirebaseFirestoreController;
 import com.example.finalproject.Home.Active.ActiveListAdapter;
+import com.example.finalproject.NavBar;
 import com.example.finalproject.R;
 import com.example.finalproject.SharedPreferenceManager;
 import com.example.finalproject.SwipeAdapter;
@@ -41,12 +43,9 @@ import java.util.List;
 
 public class HomeScreen extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-//    private SwipeAdapter adapter;
     private List<Integer> list;
      User user;
      ArrayList<User> activeFriend;
-
-//    Koloda koloda;
     FirebaseFirestoreController<User> userFirebaseController;
     private TextView titleText;
      cardSwipeAdapter adapterSwipe;
@@ -59,13 +58,13 @@ public class HomeScreen extends AppCompatActivity {
         setUp();
         ActiveList();
         swipe();
+        NavBar();
+
     }
 
     private void swipe()
     {
-//        koloda = findViewById(R.id.HomeScreenSwipeItem);
-//        adapter = new SwipeAdapter(this, activeFriend);
-//        koloda.setAdapter(adapter);
+
         CardStackView cardStackView=findViewById(R.id.HomeScreenSwipeItem);
         manager=new CardStackLayoutManager(HomeScreen.this, new CardStackListener() {
             @Override
@@ -173,5 +172,27 @@ public class HomeScreen extends AppCompatActivity {
 
 
     }
+
+
+
+    public void NavBar()
+    {
+        ImageView home;
+        ImageView section;
+        ImageView Friend;
+        ImageView profile;
+        home= findViewById(R.id.HomeScreenNaviBarHomeIcon);
+        section= findViewById(R.id.HomeScreenNaviBarSectionIcon);
+        Friend= findViewById(R.id.HomeScreenNaviBarFriendIcon);
+        profile = findViewById(R.id.HomeScreenNaviBarHomeProfile);
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
 
 }
