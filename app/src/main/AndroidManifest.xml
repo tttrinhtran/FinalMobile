@@ -48,11 +48,7 @@
             android:name=".LocationUpdateActivity"
             android:exported="true" />
         <activity
-<<<<<<< Updated upstream
             android:name=".RegisterScreen.Test"
-=======
-            android:name=".Nav_bar"
->>>>>>> Stashed changes
             android:exported="false" />
         <activity
             android:name=".FriendsScreen"

@@ -1,23 +1,11 @@
 package com.example.finalproject;
 
-import android.graphics.Bitmap;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 // Remind Firebase Firestore Structure: A Collection -> Many Document...
@@ -68,4 +56,10 @@ public class FirebaseFirestoreController<T> {
         return tObject;
     }
 
+    // The following function is used to update a specific field of a document, for ex, the isActive atribute of UserName ABC.
+    // There are three parameters: Collection, id of Document (i.e., username in case of User class), field for updating (i.e., isActive)
+    public <Type> void updateDocumentField(String collection, String id, String field, Type newValue){
+        // Update an existing document
+        db.collection(collection).document(id).update(field, newValue);
+    }
 }

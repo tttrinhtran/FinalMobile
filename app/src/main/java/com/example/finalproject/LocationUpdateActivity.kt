@@ -104,8 +104,6 @@ class LocationUpdateActivity : AppCompatActivity(), SharedPreferences.OnSharedPr
             foregroundOnlyLocationServiceBound = true
             subcribeLocationUpdate()
 
-            val intent = Intent(this@LocationUpdateActivity, HomeScreen::class.java)
-            startActivity(intent)
         }
 
         override fun onServiceDisconnected(name: ComponentName) {
@@ -151,7 +149,8 @@ class LocationUpdateActivity : AppCompatActivity(), SharedPreferences.OnSharedPr
             foregroundOnlyLocationService?.unsubscribeToLocationUpdates()
         } else {
             // TODO: Step 1.0, Review Permissions: Checks and requests if needed.
-            if (foregroundPermissionApproved()) {
+            val isPermitted = foregroundPermissionApproved()
+            if (isPermitted) {
                 foregroundOnlyLocationService?.subscribeToLocationUpdates()
                     ?: Log.d(TAG, "Service Not Bound")
             } else {
