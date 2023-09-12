@@ -195,25 +195,35 @@ public class User implements Serializable {
     public void set_UserWaitingList(ArrayList<String> _UserWaitingList) {
         this._UserWaitingList = _UserWaitingList;
     }
-    public void check_SwipeRight(String _UserWaiting)
+    public void add_Friend(String _UserFriend)
     {
-        if(this._UserWaitingList==null)
+
+        if(this._UserFriend==null)
         {
-            _UserWaitingList=new ArrayList<>();
+            this._UserFriend=new ArrayList<>();
         }
-        if(this._UserWaitingList.contains(_UserWaiting))
-        {
-            this._UserFriend.add(_UserWaiting);
-        }
+            this._UserFriend.add(_UserFriend);
 
     }
-    public void check_SwipeLeft(String _UserWaiting)
+    public void add_WaitingList(String _UserWaiting)
     {
+
+        if(this._UserWaitingList==null)
+        {
+            this._UserWaitingList=new ArrayList<>();
+        }
         if(this._UserWaitingList.contains(_UserWaiting))
         {
-            this._UserWaitingList.remove(_UserWaiting);
+            return;
         }
 
+        this._UserWaitingList.add(_UserWaiting);
+
+    }
+
+    public  void remove_WaitingList(String user)
+    {
+        this._UserWaitingList.remove(user);
     }
 
     public String get_UserAge()
