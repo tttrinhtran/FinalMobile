@@ -1,5 +1,6 @@
 package com.example.finalproject.Home;
 
 public interface swipeListInterface {
-   void onClick(int pos);
+    void onSwipeLeft(int position);
+    void onSwipeRight(int position);
 }

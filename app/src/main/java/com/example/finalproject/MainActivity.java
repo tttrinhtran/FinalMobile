@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main) ;
 
-        Intent intent = new Intent(MainActivity.this, HomeScreen.class);
+        Intent intent = new Intent(MainActivity.this, LoginScreen.class);
         startActivity(intent);
     }
 }

@@ -11,13 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalproject.R;
 import com.example.finalproject.User;
+import com.google.android.material.imageview.ShapeableImageView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class cardSwipeAdapter extends RecyclerView.Adapter<cardSwipeAdapter.MyViewHolder> {
 
     private ArrayList<User> swipeList;
-
     Context context;
     public cardSwipeAdapter(Context context, ArrayList<User> list) {
         this.context = context;
@@ -56,8 +58,6 @@ public class cardSwipeAdapter extends RecyclerView.Adapter<cardSwipeAdapter.MyVi
             tvName= itemView.findViewById(R.id.HomeScreenUserName);
             tvAge= itemView.findViewById(R.id.HomeScreenUserAge);
             tvSchool= itemView.findViewById(R.id.HomeScreenUserSchool);
-
-
         }
         void setData(User data) {
 
