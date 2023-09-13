@@ -24,7 +24,6 @@ import com.example.finalproject.FirebaseFirestoreController;
 import com.example.finalproject.FriendsScreen;
 import com.example.finalproject.Home.Active.ActiveListAdapter;
 import com.example.finalproject.LocationUpdatePeriodicallyService;
-import com.example.finalproject.NavBar;
 import com.example.finalproject.R;
 import com.example.finalproject.SharedPreferenceManager;
 import com.example.finalproject.User;

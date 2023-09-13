@@ -16,6 +16,8 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.Objects;
 
 public class FirebaseAuthentication {
+    boolean isSuccess = false;
+
     private FirebaseUser user;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private Context context;
@@ -47,7 +49,7 @@ public class FirebaseAuthentication {
                 });
     }
 
-    public void UserSignUp(String email, String password){
+    public boolean UserSignUp(String email, String password){
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -56,14 +58,17 @@ public class FirebaseAuthentication {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            isSuccess = true;
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText((Activity)context, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+                            isSuccess = false;
                         }
                     }
                 });
+        return isSuccess;
     }
 
     public FirebaseUser getFirebaseCurrentUser(){
