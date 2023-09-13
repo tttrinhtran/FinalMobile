@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.finalproject.FirebaseFirestoreController;
 import com.example.finalproject.Home.Active.ActiveListAdapter;
+import com.example.finalproject.LocationUpdatePeriodicallyService;
 import com.example.finalproject.NavBar;
 import com.example.finalproject.R;
 import com.example.finalproject.SharedPreferenceManager;
@@ -50,7 +52,6 @@ public class HomeScreen extends AppCompatActivity {
     private TextView titleText;
     cardSwipeAdapter adapterSwipe;
     CardStackLayoutManager manager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +60,28 @@ public class HomeScreen extends AppCompatActivity {
         ActiveList();
         swipe();
         NavBar();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent serviceIntent = new Intent(HomeScreen.this, LocationUpdatePeriodicallyService.class);
+        startService(serviceIntent);
+
+    }
+
+    @Override
+    protected void onPause() {
+        Intent serviceIntent = new Intent(HomeScreen.this, LocationUpdatePeriodicallyService.class);
+        stopService(serviceIntent);
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        Intent serviceIntent = new Intent(HomeScreen.this, LocationUpdatePeriodicallyService.class);
+        startService(serviceIntent);
+        super.onStop();
     }
 
     private void swipe()

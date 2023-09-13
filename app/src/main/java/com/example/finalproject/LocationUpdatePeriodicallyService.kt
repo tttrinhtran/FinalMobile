@@ -161,6 +161,15 @@ class LocationUpdatePeriodicallyService : Service() {
             unsubscribeToLocationUpdates()
             stopSelf()
         }
+
+        try {
+            // TODO: Step 1.5, Subscribe to location changes.
+            fusedLocationProviderClient.requestLocationUpdates(
+                locationRequest, locationCallback, Looper.getMainLooper())
+        } catch (unlikely: SecurityException) {
+            SharedPreferenceUtil.saveLocationTrackingPref(this, false)
+            Log.e(TAG, "Lost location permissions. Couldn't remove updates. $unlikely")
+        }
         // Tells the system not to recreate the service after it's been killed.
         return START_NOT_STICKY
     }
@@ -221,15 +230,6 @@ class LocationUpdatePeriodicallyService : Service() {
         // ensure this Service can be promoted to a foreground service, i.e., the service needs to
         // be officially started (which we do here).
         startService(Intent(applicationContext, LocationUpdatePeriodicallyService::class.java))
-
-        try {
-            // TODO: Step 1.5, Subscribe to location changes.
-            fusedLocationProviderClient.requestLocationUpdates(
-                locationRequest, locationCallback, Looper.getMainLooper())
-        } catch (unlikely: SecurityException) {
-            SharedPreferenceUtil.saveLocationTrackingPref(this, false)
-            Log.e(TAG, "Lost location permissions. Couldn't remove updates. $unlikely")
-        }
     }
 
     fun unsubscribeToLocationUpdates() {
@@ -263,7 +263,7 @@ class LocationUpdatePeriodicallyService : Service() {
     }
 
     companion object {
-        private const val TAG = "ForegroundOnlyLocationService"
+        private const val TAG = "LocationUpdatePeriodicallyService"
 
         private const val PACKAGE_NAME = "com.example.android.whileinuselocation"
 
@@ -275,8 +275,5 @@ class LocationUpdatePeriodicallyService : Service() {
         private const val EXTRA_CANCEL_LOCATION_TRACKING_FROM_NOTIFICATION =
             "$PACKAGE_NAME.extra.CANCEL_LOCATION_TRACKING_FROM_NOTIFICATION"
 
-        private const val NOTIFICATION_ID = 12345678
-
-        private const val NOTIFICATION_CHANNEL_ID = "while_in_use_channel_01"
     }
 }

@@ -166,17 +166,14 @@ class LocationUpdateActivity : AppCompatActivity(), SharedPreferences.OnSharedPr
         }
     }
 
-    override fun onDestroy() {
+    override fun onStop() {
         if (foregroundOnlyLocationServiceBound) {
-            foregroundOnlyLocationService?.unsubscribeToLocationUpdates()
             unbindService(foregroundOnlyServiceConnection)
             foregroundOnlyLocationServiceBound = false
         }
-        sharedPreferences.edit { clear();commit() }
-
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
 
-        super.onDestroy()
+        super.onStop()
     }
 
     // TODO: Step 1.0, Review Permissions: Method checks if permissions approved.

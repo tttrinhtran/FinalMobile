@@ -20,7 +20,7 @@ class RegisterScreenAvatar : AppCompatActivity() {
     private lateinit var image: ImageView
     private lateinit var captureButton :Button
     private lateinit var nextButton :Button
-    private lateinit var imageBitmap: Bitmap
+    private var imageBitmap: Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,9 +37,9 @@ class RegisterScreenAvatar : AppCompatActivity() {
 
         nextButton.setOnClickListener{
             if (imageBitmap != null){
-                uploadImageToFirebase(imageBitmap, user._UserName)
+                uploadImageToFirebase(imageBitmap!!, user._UserName)
 
-                startActivity(Intent(this, Test::class.java).apply {
+                startActivity(Intent(this, RegisterScreenHobbies::class.java).apply {
                     putExtra("new_user",user)
                 })
             }
