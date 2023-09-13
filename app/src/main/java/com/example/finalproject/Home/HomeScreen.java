@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.finalproject.FirebaseFirestoreController;
+import com.example.finalproject.FriendsScreen;
 import com.example.finalproject.Home.Active.ActiveListAdapter;
 import com.example.finalproject.R;
 import com.example.finalproject.SharedPreferenceManager;
@@ -186,22 +188,37 @@ public class HomeScreen extends AppCompatActivity {
             }
         }
 
-
-
     }
 
-    public void NavBar()
+    private void NavBar()
     {
         ImageView home;
         ImageView section;
-        ImageView Friend;
+        ImageView friend;
         ImageView profile;
-        home= findViewById(R.id.NaviBarHomeIcon);
+
+
+        home= findViewById(R.id.NaviBarHomeIcon); home.setImageResource(R.drawable.home_icon_fill);
         section= findViewById(R.id.NaviBarSectionIcon);
-        Friend= findViewById(R.id.NaviBarFriendIcon);
+        friend= findViewById(R.id.NaviBarFriendIcon);
         profile = findViewById(R.id.NaviBarProfile);
 
-        home.setOnClickListener(new View.OnClickListener() {
+        section.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        friend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeScreen.this, FriendsScreen.class);
+                startActivity(intent);
+            }
+        });
+
+        profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

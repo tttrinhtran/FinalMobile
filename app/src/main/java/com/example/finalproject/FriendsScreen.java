@@ -1,12 +1,15 @@
 package com.example.finalproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.finalproject.Home.HomeScreen;
 import com.example.finalproject.databinding.ActivityFriendsScreenBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -27,6 +30,7 @@ public class FriendsScreen extends AppCompatActivity {
         preferenceManager = new PreferenceManager(getApplicationContext(), "chatAppPreference");
         setListener();
         getUser();
+        navBar();
     }
 
     private void setListener() {
@@ -80,5 +84,41 @@ public class FriendsScreen extends AppCompatActivity {
     }
 
     private void loading( Boolean isLoading ) {
+    }
+
+    private void navBar(){
+        ImageView home;
+        ImageView section;
+        ImageView friend;
+        ImageView profile;
+
+
+        home = findViewById(R.id.NaviBarHomeIcon);
+        section= findViewById(R.id.NaviBarSectionIcon);
+        friend= findViewById(R.id.NaviBarFriendIcon); friend.setImageResource(R.drawable.friend_icon_fill);
+        profile = findViewById(R.id.NaviBarProfile);
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FriendsScreen.this, HomeScreen.class);
+                startActivity(intent);
+            }
+        });
+
+        section.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 }
