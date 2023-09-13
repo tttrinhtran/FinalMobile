@@ -49,7 +49,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void init() {
-        preferenceManager = new PreferenceManager(getApplicationContext(),"chatAppPreference");
+        preferenceManager = new PreferenceManager(getApplicationContext(),Constants.CHAT_PREFERENCE);
         chatMessageList = new ArrayList<>();
         chatAdapter = new ChatAdapter(
                 chatMessageList,

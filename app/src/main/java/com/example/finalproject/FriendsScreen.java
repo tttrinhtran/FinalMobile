@@ -24,7 +24,7 @@ public class FriendsScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityFriendsScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        preferenceManager = new PreferenceManager(getApplicationContext(), "chatAppPreference");
+        preferenceManager = new PreferenceManager(getApplicationContext(), Constants.CHAT_PREFERENCE);
         setListener();
         getUser();
     }
@@ -36,44 +36,55 @@ public class FriendsScreen extends AppCompatActivity {
     private void getUser() {
         loading(true);
         FirebaseFirestore database = FirebaseFirestore.getInstance();
-        database.collection(Constants.KEY_COLLECTION_FRIENDS)
-                .get()
-                .addOnCompleteListener(task -> {
-                   loading(false);
-                   // String currentUserId = preferenceManager.getString(Constants.KEY_USER_ID);
-                   String currentUserId = "0777428999";
-                   if( task.isSuccessful() && task.getResult() != null ) {
-                       List<User> friends = new ArrayList<>();
-                       for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult() ) {
-                           if( currentUserId.equals(queryDocumentSnapshot.getId())) continue;
-                           User user = new User(
-                /*                   queryDocumentSnapshot.getString("_UserName"),
-                                   queryDocumentSnapshot.getString("_UserPassword"),
-                                   queryDocumentSnapshot.getString("_UserFirstname"),
-                                   queryDocumentSnapshot.getString("_UserLastname"),
-                                   queryDocumentSnapshot.getString("_UserDoB"),
-                                   queryDocumentSnapshot.getString("_UserJoinDate"),
-                                   queryDocumentSnapshot.getString("_UserEmail"),
-                                   queryDocumentSnapshot.getString("_UserPhone"),
-                                   queryDocumentSnapshot.getBoolean("_UserActive"),
-                                   queryDocumentSnapshot.getString("_UserBio"),
-                                   queryDocumentSnapshot.getString("_UserHobbies"),
-                                   queryDocumentSnapshot.getString("_UserSchool"),
-                                   queryDocumentSnapshot.getString("_UserSpecialization"),*/
-                           );
-                           friends.add(user);
-                       }
 
-                       if( friends.size() > 0 ) {
-                           // Phải sửa á
-                           UserAdapter userAdapter = new UserAdapter( friends, null );
-                           binding.FriendScreenChat.setAdapter(userAdapter);
-                           binding.FriendScreenChat.setVisibility(View.VISIBLE);
-                       }
-                       else showErrorMessage();
-                   }
-                   else showErrorMessage();
-                });
+//        database.collection(Constants.KEY_COLLECTION_FRIENDS)
+//                .get()
+//                .addOnCompleteListener(task -> {
+//                   loading(false);
+//                   // String currentUserId = preferenceManager.getString(Constants.KEY_USER_ID);
+//                   String currentUserId = "0777428999";
+//                   if( task.isSuccessful() && task.getResult() != null ) {
+//                       List<User> friends = new ArrayList<>();
+//                       for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult() ) {
+//                           if( currentUserId.equals(queryDocumentSnapshot.getId())) continue;
+//                           User user = new User(
+//                /*                   queryDocumentSnapshot.getString("_UserName"),
+//                                   queryDocumentSnapshot.getString("_UserPassword"),
+//                                   queryDocumentSnapshot.getString("_UserFirstname"),
+//                                   queryDocumentSnapshot.getString("_UserLastname"),
+//                                   queryDocumentSnapshot.getString("_UserDoB"),
+//                                   queryDocumentSnapshot.getString("_UserJoinDate"),
+//                                   queryDocumentSnapshot.getString("_UserEmail"),
+//                                   queryDocumentSnapshot.getString("_UserPhone"),
+//                                   queryDocumentSnapshot.getBoolean("_UserActive"),
+//                                   queryDocumentSnapshot.getString("_UserBio"),
+//                                   queryDocumentSnapshot.getString("_UserHobbies"),
+//                                   queryDocumentSnapshot.getString("_UserSchool"),
+//                                   queryDocumentSnapshot.getString("_UserSpecialization"),*/
+//                           );
+//                           friends.add(user);
+//                       }
+//
+//                       if( friends.size() > 0 ) {
+//                           // Phải sửa á
+//                           UserAdapter userAdapter = new UserAdapter( friends, null );
+//                           binding.FriendScreenChat.setAdapter(userAdapter);
+//                           binding.FriendScreenChat.setVisibility(View.VISIBLE);
+//                       }
+//                       else showErrorMessage();
+//                   }
+//                   else showErrorMessage();
+//                });
+
+        FirebaseFirestoreController<User> currentInstance = new FirebaseFirestoreController<>(User.class);
+        User currentUser = currentInstance.retrieveObjectsFirestoreByID( Constants.KEY_COLLECTION_USERS, preferenceManager.getString(Constants.KEY_USER_ID));
+        List<String> friendList = currentUser.get_UserFriend();
+        if( friendList.isEmpty() ) showErrorMessage();
+        else {
+            UserAdapter userAdapter = new UserAdapter( friendList, null );
+            binding.FriendScreenChat.setAdapter(userAdapter);
+            binding.FriendScreenChat.setVisibility(View.VISIBLE);
+        }
     }
 
     private void showErrorMessage() {

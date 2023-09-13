@@ -9,7 +9,7 @@ public class Constants {
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_PREFERENCE_NAME = "chatAppPreference";
     public static final String KEY_IS_SIGNED_IN = "isSignedIn";
-    public static final String KEY_USER_ID = "userId";
+    public static final String KEY_USER_ID = "currentUserName";
     public static final String KEY_IMAGE = "image";
     public static final String KEY_FCM_TOKEN = "fcmToken";
     public static final String KEY_USER = "user";
@@ -31,4 +31,7 @@ public class Constants {
     public static final int EQUAL = 0;
     public static final int SMALLER = 1;
     public static final int LARGER = 2;
+
+    // Preference
+    public static final String CHAT_PREFERENCE = "chatAppPreference";
 }

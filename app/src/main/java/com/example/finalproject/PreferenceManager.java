@@ -11,7 +11,7 @@ public class PreferenceManager {
         switch (type)
         {
             case "chatAppPreference":
-                sharedPreferences = context.getSharedPreferences("chatAppPreference", Context.MODE_PRIVATE );
+                sharedPreferences = context.getSharedPreferences(Constants.CHAT_PREFERENCE, Context.MODE_PRIVATE );
                 break;
             case "User":
                 sharedPreferences = context.getSharedPreferences("User", Context.MODE_PRIVATE );

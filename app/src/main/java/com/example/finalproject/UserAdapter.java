@@ -17,13 +17,12 @@ import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
-    private final List<User> users;
+    private final List<String> users;
     private final UserListener userListener;
 
-    public UserAdapter( List<User> users, UserListener userListener ) {
+    public UserAdapter( List<String> users, UserListener userListener ) {
         this.users = users;
         this.userListener = userListener;
-        for( User user : users ) Log.d( "Testing", "UserAdapter: " + user._UserName );
     }
 
     @NonNull
@@ -39,7 +38,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull UserAdapter.UserViewHolder holder, int position ) {
-        holder.setUserData(users.get(position));
+        // holder.setUserData(users.get(position));
+        FirebaseFirestoreController<User> currentInstance = new FirebaseFirestoreController<>(User.class);
+        User currentUser = currentInstance.retrieveObjectsFirestoreByID( Constants.KEY_COLLECTION_USERS, users.get(position) );
+        holder.setUserData(currentUser);
     }
 
     @Override
