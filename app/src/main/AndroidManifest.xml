@@ -42,9 +42,6 @@
         <activity
             android:name=".RegisterScreen.RegisterScreenEmailVerification"
             android:exported="false" />
-        <activity
-            android:name=".OTPScreen"
-            android:exported="false" />
 
         <service
             android:name=".LocationUpdatePeriodicallyService"
