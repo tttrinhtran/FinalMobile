@@ -22,8 +22,6 @@ public class Constants {
     public static final String KEY_LAST_MESSAGE  = "lastMessage";
 
     // For list friend
-    public static final String KEY_COLLECTION_FRIENDS = "Users";
-
     public static final String SHARED_PREFERENCE_LAST_LOCATION_KEY = "last_location";
     public static final String FIRESTORE_LOCATION_KEY = "location";
 
@@ -34,4 +32,7 @@ public class Constants {
 
     // Preference
     public static final String CHAT_PREFERENCE = "chatAppPreference";
+    public static final String RECEIVED_USER = "receivedUser";
+    public static final String SENDER_IMAGE = " senderImage";
+    public static final String RECEIVER_IMAGE = "receiverImage";
 }

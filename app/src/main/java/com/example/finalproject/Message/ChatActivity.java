@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finalproject.Constants;
 import com.example.finalproject.PreferenceManager;
+import com.example.finalproject.SharedPreferenceManager;
 import com.example.finalproject.User;
 import com.example.finalproject.databinding.ActivityChatBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,10 +32,11 @@ import java.util.Locale;
 public class ChatActivity extends AppCompatActivity {
 
     private ActivityChatBinding binding;
+    private User senderUser;
     private User receiverUser;
     private List<ChatMessage> chatMessageList;
     private ChatAdapter chatAdapter;
-    private PreferenceManager preferenceManager;
+    // private PreferenceManager preferenceManager;
     private FirebaseFirestore database;
     private String conversationId;
     @Override
@@ -42,20 +44,23 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityChatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setListener();
+        loadSenderDetails();
         loadReceiverDetails();
+        setListener();
         init();
         listenMessages();
     }
 
     private void init() {
-        preferenceManager = new PreferenceManager(getApplicationContext(),Constants.CHAT_PREFERENCE);
+        // preferenceManager = new PreferenceManager(getApplicationContext(),Constants.CHAT_PREFERENCE);
         chatMessageList = new ArrayList<>();
         chatAdapter = new ChatAdapter(
                 chatMessageList,
                 // This line should be replace later
-                getBitmapFromEncodedString("receiverUser.image"),
-                preferenceManager.getString(Constants.KEY_USER_ID)
+                // getBitmapFromEncodedString("receiverUser.image"),
+
+                senderUser.get_UserName()
+                // preferenceManager.getString(Constants.KEY_USER_ID)
         );
         binding.chatRecyclerView.setAdapter(chatAdapter);
         database = FirebaseFirestore.getInstance();
@@ -63,7 +68,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void sendMessage() {
         HashMap<String, Object> message = new HashMap<>();
-        message.put(Constants.KEY_SENDER_ID, preferenceManager.getString(Constants.KEY_USER_ID));
+        message.put(Constants.KEY_SENDER_ID, senderUser.get_UserName());
         message.put(Constants.KEY_RECEIVER_ID, receiverUser.get_UserName());
         message.put(Constants.KEY_MESSAGE, binding.inputMessage.getText().toString());
         message.put(Constants.KEY_TIMESTAMP, new Date());
@@ -72,10 +77,12 @@ public class ChatActivity extends AppCompatActivity {
         if( conversationId != null ) updateConversation(binding.inputMessage.getText().toString());
         else {
             HashMap<String, Object> conversationMap = new HashMap<>();
-            conversationMap.put(Constants.KEY_SENDER_ID, preferenceManager.getString(Constants.KEY_USER_ID));
-            // For sender image
+            conversationMap.put(Constants.KEY_SENDER_ID, senderUser.get_UserName());
+            // Must be filled later
+            conversationMap.put(Constants.SENDER_IMAGE, "null");
             conversationMap.put(Constants.KEY_RECEIVER_ID, receiverUser.get_UserName() );
-            // For receive image
+            // Must be filled later
+            conversationMap.put(Constants.RECEIVER_IMAGE, "null");
             conversationMap.put(Constants.KEY_LAST_MESSAGE, binding.inputMessage.getText().toString());
             conversationMap.put(Constants.KEY_TIMESTAMP, new Date() );
             addConversation(conversationMap);
@@ -86,12 +93,12 @@ public class ChatActivity extends AppCompatActivity {
 
     private void  listenMessages() {
         database.collection(Constants.KEY_COLLECTION_CHAT)
-                .whereEqualTo(Constants.KEY_SENDER_ID, preferenceManager.getString(Constants.KEY_USER_ID))
+                .whereEqualTo(Constants.KEY_SENDER_ID, senderUser.get_UserName())
                 .whereEqualTo(Constants.KEY_RECEIVER_ID, receiverUser.get_UserName() )
                 .addSnapshotListener(eventListener);
         database.collection(Constants.KEY_COLLECTION_CHAT)
                 .whereEqualTo(Constants.KEY_SENDER_ID, receiverUser.get_UserName())
-                .whereEqualTo(Constants.KEY_RECEIVER_ID, preferenceManager.getString(Constants.KEY_USER_ID))
+                .whereEqualTo(Constants.KEY_RECEIVER_ID, senderUser.get_UserName())
                 .addSnapshotListener(eventListener);
     }
 
@@ -128,10 +135,14 @@ public class ChatActivity extends AppCompatActivity {
         return BitmapFactory.decodeByteArray( bytes, 0, bytes.length );
     }
 
-    private void loadReceiverDetails() {
-        receiverUser = (User) getIntent().getSerializableExtra(Constants.KEY_USER);
-        binding.ChatUsername.setText(receiverUser.get_UserName());
+    private void loadSenderDetails() {
+        SharedPreferenceManager<User> currentInstance = new SharedPreferenceManager<>(User.class, this);
+        senderUser = currentInstance.retrieveSerializableObjectFromSharedPreference( Constants.KEY_SHARED_PREFERENCE_USERS );
+    }
 
+    private void loadReceiverDetails() {
+        receiverUser = (User) getIntent().getSerializableExtra(Constants.RECEIVED_USER);
+        binding.ChatUsername.setText(receiverUser.get_UserName());
     }
 
     private void setListener() {
@@ -159,8 +170,8 @@ public class ChatActivity extends AppCompatActivity {
 
     private void checkForConversation() {
         if( chatMessageList.size() != 0 ) {
-            checkForConversationRemotely( preferenceManager.getString(Constants.KEY_USER_ID), receiverUser.get_UserName() );
-            checkForConversationRemotely( receiverUser.get_UserName(), preferenceManager.getString(Constants.KEY_USER_ID));
+            checkForConversationRemotely( senderUser.get_UserName(), receiverUser.get_UserName() );
+            checkForConversationRemotely( receiverUser.get_UserName(), senderUser.get_UserName() );
         }
     }
     private void checkForConversationRemotely( String senderId, String receiverId ) {
