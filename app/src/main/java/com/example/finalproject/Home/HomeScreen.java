@@ -5,6 +5,7 @@ import static com.example.finalproject.Constants.KEY_SHARED_PREFERENCE_USERS;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.interpolator.view.animation.FastOutLinearInInterpolator;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +16,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AnticipateInterpolator;
+import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -132,7 +136,7 @@ public class HomeScreen extends AppCompatActivity {
             public void onCardDisappeared(View view, int position) {
                 TextView tv = view.findViewById(R.id.HomeScreenUserName);
                 activeFriend.get(position);
-                Log.d(TAG, "onCardAppeared: " + position + ", nama: " + tv.getText());
+                Log.d(TAG, "onCardDisappeared: " + position + ", nama: " + tv.getText());
             }
         });
         manager.setStackFrom(StackFrom.Top);
@@ -144,7 +148,12 @@ public class HomeScreen extends AppCompatActivity {
         manager.setDirections(Direction.HORIZONTAL);
         manager.setCanScrollHorizontal(true);
         manager.setSwipeableMethod(SwipeableMethod.Manual);
-        manager.setOverlayInterpolator(new LinearInterpolator());
+        manager.setOverlayInterpolator(new Interpolator() {
+            @Override
+            public float getInterpolation(float input) {
+                return 10.0f;
+            }
+        });
         adapterSwipe = new cardSwipeAdapter((Context) this, activeFriend);
         cardStackView.setLayoutManager(manager);
         cardStackView.setAdapter(adapterSwipe);

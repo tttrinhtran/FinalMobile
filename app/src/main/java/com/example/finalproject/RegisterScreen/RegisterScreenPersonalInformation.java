@@ -2,9 +2,13 @@ package com.example.finalproject.RegisterScreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,8 +17,13 @@ import android.widget.Toast;
 import com.example.finalproject.R;
 import com.example.finalproject.User;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class RegisterScreenPersonalInformation extends AppCompatActivity {
 
+    private static final String TAG = "RegisterScreenPersonalInformation";
     User user;
     EditText _PersonalInformationFirstName;
     EditText _PersonalInformationLastName;
@@ -79,7 +88,40 @@ public class RegisterScreenPersonalInformation extends AppCompatActivity {
         _PersonalInformationBackButton = (ImageView) findViewById(R.id.InfoRegisterBackArrowIcon);
 
         // Later, changing DoB to be selection, not type in EditText. For now, assume that user input correctly as dd/mm/yyyy
-        _PersonalInformationDoB = (EditText) findViewById(R.id.InfoRegisterAgeEditText);
+//        _PersonalInformationDoB = (EditText) findViewById(R.id.InfoRegisterAgeEditText);
+        _PersonalInformationDoB = (EditText) getDOB();
         _PersonalInformationConfirmButton = (TextView) findViewById(R.id.InfoRegisterConfirmButton);
     }
+
+    private EditText getDOB() {
+        final EditText tmp = (EditText) findViewById(R.id.InfoRegisterAgeEditText);
+
+        tmp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        RegisterScreenPersonalInformation.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                // Format the selected date and set it to the EditText
+                                Calendar selectedDate = Calendar.getInstance();
+                                selectedDate.set(year, monthOfYear, dayOfMonth);
+                                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                                tmp.setText(sdf.format(selectedDate.getTime()));
+                            }
+                        },
+                        year, month, day);
+                datePickerDialog.show();
+            }
+        });
+        return tmp;
+    }
+
 }
