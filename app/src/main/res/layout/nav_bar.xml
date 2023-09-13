@@ -24,19 +24,19 @@
             android:layout_gravity="center"
             android:layout_weight="1">
             <ImageView
-                android:id="@+id/HomeScreenNaviBarHomeIcon"
+                android:id="@+id/NaviBarHomeIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:src="@drawable/home_icon"
+                android:src="@drawable/home_icon_outline"
                 android:layout_gravity="center" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/HomeScreenNaviBarHomeIcon"
+                app:layout_constraintTop_toBottomOf="@id/NaviBarHomeIcon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="5dp"
@@ -55,19 +55,19 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/HomeScreenNaviBarSectionIcon"
+                android:id="@+id/NaviBarSectionIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:src="@drawable/section_icon"
+                android:src="@drawable/section_icon_outline"
                 android:layout_gravity="center" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/HomeScreenNaviBarSectionIcon"
+                app:layout_constraintTop_toBottomOf="@id/NaviBarSectionIcon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="5dp"
@@ -85,19 +85,19 @@
             android:layout_gravity="center"
             android:layout_weight="1">
             <ImageView
-                android:id="@+id/HomeScreenNaviBarFriendIcon"
+                android:id="@+id/NaviBarFriendIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:src="@drawable/friend_icon"
+                android:src="@drawable/friend_icon_outline"
                 android:layout_gravity="center" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/HomeScreenNaviBarFriendIcon"
+                app:layout_constraintTop_toBottomOf="@id/NaviBarFriendIcon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="5dp"
@@ -112,7 +112,7 @@
             android:layout_gravity="center"
             android:layout_weight="1">
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/HomeScreenNaviBarHomeProfile"
+                android:id="@+id/NaviBarProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
@@ -125,7 +125,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/HomeScreenNaviBarHomeProfile"
+                app:layout_constraintTop_toBottomOf="@id/NaviBarProfile"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="5dp"

@@ -17,10 +17,10 @@ public class NavBar extends AppCompatActivity {
     ImageView profile;
     public void onPress()
     {
-        home= findViewById(R.id.HomeScreenNaviBarHomeIcon);
-        section= findViewById(R.id.HomeScreenNaviBarSectionIcon);
-        Friend= findViewById(R.id.HomeScreenNaviBarFriendIcon);
-        profile = findViewById(R.id.HomeScreenNaviBarHomeProfile);
+        home= findViewById(R.id.NaviBarHomeIcon);
+        section= findViewById(R.id.NaviBarSectionIcon);
+        Friend= findViewById(R.id.NaviBarFriendIcon);
+        profile = findViewById(R.id.NaviBarProfile);
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override

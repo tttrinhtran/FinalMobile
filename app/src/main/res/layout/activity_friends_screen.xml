@@ -4,8 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".FriendsScreen"
-    android:layout_margin="20dp">
+    tools:context=".FriendsScreen">
 
     <TextView
         android:id="@+id/FriendScreenTitle"
@@ -16,7 +15,9 @@
         android:text="Friend"
         android:textColor="@color/black"
         android:fontFamily="@font/tommy_medium"
-        android:textSize="24sp"/>
+        android:textSize="24sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/FriendScreenActiveFriend"
@@ -40,5 +41,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"/>
+
+    <include layout="@layout/nav_bar"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
