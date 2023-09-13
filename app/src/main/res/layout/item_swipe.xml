@@ -92,10 +92,6 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -135,6 +131,51 @@
                     android:layout_marginHorizontal="5dp"/>
 
             </LinearLayout>
+            
+            <FrameLayout
+                android:id="@+id/left_overlay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp"
+                    android:background="@drawable/border_text_green"
+                    android:text="LIKE"
+                    android:textColor="@color/active_friends"
+                    android:textSize="40sp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:rotation="-20"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/right_overlay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp"
+                    android:background="@drawable/border_text_red"
+                    android:text="NOPE"
+                    android:textColor="@color/error"
+                    android:textSize="40sp"
+                    android:layout_marginStart="270dp"
+                    android:layout_marginTop="20dp"
+                    android:rotation="20"/>
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:src="@drawable/baseline_arrow_back_24"-->
+<!--                    android:layout_gravity="center"/>-->
+            </FrameLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

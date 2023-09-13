@@ -6,11 +6,11 @@ import static com.example.finalproject.Constants.KEY_SHARED_PREFERENCE_USERS;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,15 +21,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.finalproject.FirebaseFirestoreController;
+import com.example.finalproject.FriendsScreen;
 import com.example.finalproject.Home.Active.ActiveListAdapter;
-import com.example.finalproject.NavBar;
+import com.example.finalproject.LocationUpdatePeriodicallyService;
 import com.example.finalproject.R;
 import com.example.finalproject.SharedPreferenceManager;
-import com.example.finalproject.SwipeAdapter;
 import com.example.finalproject.User;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.yalantis.library.Koloda;
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
 import com.yuyakaido.android.cardstackview.CardStackListener;
 import com.yuyakaido.android.cardstackview.CardStackView;
@@ -37,29 +34,56 @@ import com.yuyakaido.android.cardstackview.Direction;
 import com.yuyakaido.android.cardstackview.StackFrom;
 import com.yuyakaido.android.cardstackview.SwipeableMethod;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeScreen extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private List<Integer> list;
-     User user;
-     ArrayList<User> activeFriend;
+    User user;
+    ArrayList<User> activeFriend;
     FirebaseFirestoreController<User> userFirebaseController;
     private TextView titleText;
     cardSwipeAdapter adapterSwipe;
     CardStackLayoutManager manager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        userFirebaseController=new FirebaseFirestoreController<>(User.class);
         setContentView(R.layout.activity_home_screen);
+        activeFriend=new ArrayList<>();
         setUp();
+        updateActiveStatus();
         ActiveList();
         swipe();
         NavBar();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent serviceIntent = new Intent(HomeScreen.this, LocationUpdatePeriodicallyService.class);
+        startService(serviceIntent);
+
+    }
+
+    @Override
+    protected void onPause() {
+        Intent serviceIntent = new Intent(HomeScreen.this, LocationUpdatePeriodicallyService.class);
+        stopService(serviceIntent);
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        Intent serviceIntent = new Intent(HomeScreen.this, LocationUpdatePeriodicallyService.class);
+        startService(serviceIntent);
+        super.onStop();
+    }
+    void updateActiveStatus()
+    {
+       user.set_UserActive(true);
+        userFirebaseController.updateDocumentField("Users",user.get_UserName(),"_UserActive", user.is_UserActive());
     }
 
     private void swipe()
@@ -78,14 +102,13 @@ public class HomeScreen extends AppCompatActivity {
             public void onCardSwiped(Direction direction) {
                 Log.d(TAG, "onCardSwiped: p=" + manager.getTopPosition() + " d=" + direction);
                 if (direction == Direction.Right){
-                    user.check_SwipeRight(activeFriend.get(curPos[0]).get_UserName());
+                    checkSwipeRight(activeFriend.get(curPos[0]));
                     Toast.makeText(HomeScreen.this, "Direction Right", Toast.LENGTH_SHORT).show();
                 }
                 if (direction == Direction.Left){
                     Toast.makeText(HomeScreen.this, "Direction Left", Toast.LENGTH_SHORT).show();
-                    user.check_SwipeLeft(activeFriend.get(curPos[0]).get_UserName());
+                    checkSwipeLeft(activeFriend.get(curPos[0]));
                 }
-
 
             }
 
@@ -122,13 +145,32 @@ public class HomeScreen extends AppCompatActivity {
         manager.setCanScrollHorizontal(true);
         manager.setSwipeableMethod(SwipeableMethod.Manual);
         manager.setOverlayInterpolator(new LinearInterpolator());
-        adapterSwipe = new cardSwipeAdapter(this, activeFriend);
+        adapterSwipe = new cardSwipeAdapter((Context) this, activeFriend);
         cardStackView.setLayoutManager(manager);
         cardStackView.setAdapter(adapterSwipe);
         cardStackView.setItemAnimator(new DefaultItemAnimator());
     }
-    void setWaitingList(String data)
+    void checkSwipeRight(User matchUser)
     {
+        if(user.get_UserWaitingList().contains(matchUser.get_UserName()))
+        {
+            user.add_Friend(matchUser.get_UserName());
+            userFirebaseController.updateDocumentField("Users",user.get_UserName(),"_UserFriend", user.get_UserFriend());
+
+        }
+        else
+        {
+            matchUser.add_WaitingList(user.get_UserName());
+            userFirebaseController.updateDocumentField("Users",matchUser.get_UserName(),"_UserWaitingList", matchUser.get_UserWaitingList());
+        }
+    }
+    void checkSwipeLeft(User leftUser)
+    {
+        if(user.get_UserWaitingList().contains(leftUser.get_UserName()))
+        {
+            user.remove_WaitingList(leftUser.get_UserName());
+
+        }
 
     }
 
@@ -148,14 +190,13 @@ public class HomeScreen extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     }
-     void getUser()
+    void getUser()
     {
         SharedPreferenceManager<User> sharedPreferenceManager = new SharedPreferenceManager<>(User.class, this);
         user = sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_SHARED_PREFERENCE_USERS);
     }
     private void getActiveFriend()
     {
-        userFirebaseController=new FirebaseFirestoreController<>(User.class);
         ArrayList<String> temp= user.get_UserFriend();
         if (temp != null) {
             for (int i = 0; i < temp.size(); i++) {
@@ -169,24 +210,37 @@ public class HomeScreen extends AppCompatActivity {
             }
         }
 
-
-
     }
 
-
-
-    public void NavBar()
+    private void NavBar()
     {
         ImageView home;
         ImageView section;
-        ImageView Friend;
+        ImageView friend;
         ImageView profile;
-        home= findViewById(R.id.HomeScreenNaviBarHomeIcon);
-        section= findViewById(R.id.HomeScreenNaviBarSectionIcon);
-        Friend= findViewById(R.id.HomeScreenNaviBarFriendIcon);
-        profile = findViewById(R.id.HomeScreenNaviBarHomeProfile);
 
-        home.setOnClickListener(new View.OnClickListener() {
+
+        home= findViewById(R.id.NaviBarHomeIcon); home.setImageResource(R.drawable.home_icon_fill);
+        section= findViewById(R.id.NaviBarSectionIcon);
+        friend= findViewById(R.id.NaviBarFriendIcon);
+        profile = findViewById(R.id.NaviBarProfile);
+
+        section.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        friend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeScreen.this, FriendsScreen.class);
+                startActivity(intent);
+            }
+        });
+
+        profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

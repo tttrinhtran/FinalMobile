@@ -23,6 +23,7 @@ import java.lang.reflect.Type;
 
 public class LoginScreen extends AppCompatActivity {
 
+    FirebaseAuthentication firebaseAuthentication;
     FirebaseFirestoreController<User> userFirebaseController;
     User _LoginScreenUser;
     EditText _LoginScreenUsernameEditText;
@@ -40,6 +41,8 @@ public class LoginScreen extends AppCompatActivity {
 
         // init Firebase controller for User class.
         userFirebaseController = new FirebaseFirestoreController<>(User.class);
+
+        firebaseAuthentication = new FirebaseAuthentication(LoginScreen.this);
 
         // setting up Login button
         // Note: The following is written in Lambda format. In order words, view -> {LoginScreen_Datafetch();} is equivalent to
@@ -80,21 +83,18 @@ public class LoginScreen extends AppCompatActivity {
             return false;
         }else{
             // taking the user's data based on username.
-            _LoginScreenUser = userFirebaseController.retrieveObjectsFirestoreByID(KEY_COLLECTION_USERS, userName);
+            if(verifyAccount(userName,password)) {
+                _LoginScreenUser = userFirebaseController.retrieveObjectsFirestoreByID(KEY_COLLECTION_USERS, userName);
+                return true;
+            }else return false;
         }
 
-        return verifyAccount(password);
     }
 
-    private boolean verifyAccount(String password) {
-        // Checking if there is valid user in the database which matched with both username and password.
-        if(_LoginScreenUser == null || !_LoginScreenUser.get_UserPassword().equals(password)){
-            Toast.makeText(LoginScreen.this, "username or password is incorrect. Try again!", Toast.LENGTH_SHORT).show();
-            _LoginScreenUser = null; // reset to null since we have taken the corresponding user data already, if password is incorrect
-                                    // we have to reset it to null.
-            return false;
-        }else return true;
+    private boolean verifyAccount(String userName, String password) {
+        return firebaseAuthentication.UserSignUp(userName, password);
     }
+
     private void  passOnUser()
     {
         SharedPreferenceManager<User> sharedPreferences = new SharedPreferenceManager<>(User.class, LoginScreen.this);

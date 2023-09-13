@@ -7,11 +7,11 @@ import java.util.Calendar;
 
 // Note: Username is UNIQUE and be the ID of corresponding document on firestore.
 public class User implements Serializable {
+
     String _UserName;
     String _UserPassword;
     String _UserFirstname;
     String _UserLastname;
-    String _UserAgePref;
     String _UserDoB;
     String _UserJoinDate;
     String _UserEmail;
@@ -21,15 +21,15 @@ public class User implements Serializable {
     String _UserHobbies;
     String _UserSchool;
     String _UserSpecialization;
+    String _UserAvatarUrl;
     ArrayList<String> _UserFriend;
     ArrayList<String> _UserWaitingList;
-    int _UserDistancePref;
 
 
 
     public User(){}
 
-    public User(String _UserName, String _UserPassword, String _UserFirstname, String _UserLastname, String _UserDoB, String _UserJoinDate, String _UserEmail, String _UserPhone, boolean _UserActive, String _UserBio, String _UserHobbies, String _UserSchool, String _UserSpecialization, ArrayList<String> _UserWaitingList, ArrayList<String> _UserFriend, String _UserAgePref, int _UserDistancePref) {
+    public User(String _UserName, String _UserPassword, String _UserFirstname, String _UserLastname, String _UserDoB, String _UserJoinDate, String _UserEmail, String _UserPhone, boolean _UserActive, String _UserBio, String _UserHobbies, String _UserSchool, String _UserSpecialization) {
         this._UserName = _UserName;
         this._UserPassword = _UserPassword;
         this._UserFirstname = _UserFirstname;
@@ -43,10 +43,6 @@ public class User implements Serializable {
         this._UserHobbies = _UserHobbies;
         this._UserSchool = _UserSchool;
         this._UserSpecialization = _UserSpecialization;
-        this._UserWaitingList = _UserWaitingList;
-        this._UserFriend = _UserFriend;
-        this._UserAgePref = _UserAgePref;
-        this._UserDistancePref = _UserDistancePref;
     }
 
     @Override
@@ -56,7 +52,6 @@ public class User implements Serializable {
                 ", _UserPassword='" + _UserPassword + '\'' +
                 ", _UserFirstname='" + _UserFirstname + '\'' +
                 ", _UserLastname='" + _UserLastname + '\'' +
-                ", _UserAgePref='" + _UserAgePref + '\'' +
                 ", _UserDoB='" + _UserDoB + '\'' +
                 ", _UserJoinDate='" + _UserJoinDate + '\'' +
                 ", _UserEmail='" + _UserEmail + '\'' +
@@ -65,10 +60,9 @@ public class User implements Serializable {
                 ", _UserBio='" + _UserBio + '\'' +
                 ", _UserHobbies='" + _UserHobbies + '\'' +
                 ", _UserSchool='" + _UserSchool + '\'' +
+                ", _UserFriend='" + _UserFriend + '\'' +
+                ", _UserWaitingList='" + _UserWaitingList + '\'' +
                 ", _UserSpecialization='" + _UserSpecialization + '\'' +
-                ", _UserFriend=" + _UserFriend +
-                ", _UserWaitingList=" + _UserWaitingList +
-                ", _UserDistancePref=" + _UserDistancePref +
                 '}';
     }
 
@@ -176,6 +170,14 @@ public class User implements Serializable {
         this._UserSpecialization = _UserSpecialization;
     }
 
+    public String get_UserAvatarUrl() {
+        return _UserAvatarUrl;
+    }
+
+    public void set_UserAvatarUrl(String _UserAvatarUrl) {
+        this._UserAvatarUrl = _UserAvatarUrl;
+    }
+
     public int get_UserID() { return 0; }
 
     public ArrayList<String> get_UserFriend() {
@@ -193,42 +195,35 @@ public class User implements Serializable {
     public void set_UserWaitingList(ArrayList<String> _UserWaitingList) {
         this._UserWaitingList = _UserWaitingList;
     }
-
-    public String get_UserAgePref() {
-        return _UserAgePref;
-    }
-
-    public void set_UserAgePref(String _UserAgePref) {
-        this._UserAgePref = _UserAgePref;
-    }
-
-    public int get_UserDistancePref() {
-        return _UserDistancePref;
-    }
-
-    public void set_UserDistancePref(int _UserDistancePref) {
-        this._UserDistancePref = _UserDistancePref;
-    }
-
-    public void check_SwipeRight(String _UserWaiting)
+    public void add_Friend(String _UserFriend)
     {
+
+        if(this._UserFriend==null)
+        {
+            this._UserFriend=new ArrayList<>();
+        }
+            this._UserFriend.add(_UserFriend);
+
+    }
+    public void add_WaitingList(String _UserWaiting)
+    {
+
         if(this._UserWaitingList==null)
         {
-            _UserWaitingList=new ArrayList<>();
+            this._UserWaitingList=new ArrayList<>();
         }
         if(this._UserWaitingList.contains(_UserWaiting))
         {
-            this._UserFriend.add(_UserWaiting);
+            return;
         }
+
+        this._UserWaitingList.add(_UserWaiting);
 
     }
-    public void check_SwipeLeft(String _UserWaiting)
-    {
-        if(this._UserWaitingList.contains(_UserWaiting))
-        {
-            this._UserWaitingList.remove(_UserWaiting);
-        }
 
+    public  void remove_WaitingList(String user)
+    {
+        this._UserWaitingList.remove(user);
     }
 
     public String get_UserAge()

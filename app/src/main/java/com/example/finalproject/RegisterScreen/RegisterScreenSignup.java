@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.finalproject.FirebaseAuthentication;
 import com.example.finalproject.R;
 import com.example.finalproject.User;
 
@@ -53,10 +54,16 @@ public class RegisterScreenSignup extends AppCompatActivity {
         String password = _SignupPassword.getText().toString();
         String confirm_password = _SignupConfirmPassword.getText().toString();
 
+
         if (username.isEmpty() || password.isEmpty() || confirm_password.isEmpty()){
             Toast.makeText(RegisterScreenSignup.this, "Please full fill the information.", Toast.LENGTH_SHORT).show();
             return false;
-        }else {
+        }
+        else if (password.length() <= 6) {
+            Toast.makeText(RegisterScreenSignup.this, "Password must more than 6 characters", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else {
             if (password.equals(confirm_password)){
                 user.set_UserName(username);
                 user.set_UserPassword(password);
