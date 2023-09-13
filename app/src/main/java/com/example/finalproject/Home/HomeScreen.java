@@ -36,8 +36,8 @@ import java.util.List;
 public class HomeScreen extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private List<Integer> list;
-     User user;
-     ArrayList<User> activeFriend;
+    User user;
+    ArrayList<User> activeFriend;
     FirebaseFirestoreController<User> userFirebaseController;
     private TextView titleText;
     cardSwipeAdapter adapterSwipe;
@@ -48,7 +48,9 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         userFirebaseController=new FirebaseFirestoreController<>(User.class);
         setContentView(R.layout.activity_home_screen);
+        activeFriend=new ArrayList<>();
         setUp();
+        updateActiveStatus();
         ActiveList();
         swipe();
         NavBar();
@@ -56,7 +58,7 @@ public class HomeScreen extends AppCompatActivity {
     }
     void updateActiveStatus()
     {
-        user.set_UserActive(true);
+       user.set_UserActive(true);
         userFirebaseController.updateDocumentField("Users",user.get_UserName(),"_UserActive", user.is_UserActive());
     }
 
@@ -129,13 +131,13 @@ public class HomeScreen extends AppCompatActivity {
         if(user.get_UserWaitingList().contains(matchUser.get_UserName()))
         {
             user.add_Friend(matchUser.get_UserName());
-            userFirebaseController.updateDocumentField("Users",user.get_UserName(),"_UserFriend", matchUser.get_UserName());
+            userFirebaseController.updateDocumentField("Users",user.get_UserName(),"_UserFriend", user.get_UserFriend());
 
         }
         else
         {
             matchUser.add_WaitingList(user.get_UserName());
-            userFirebaseController.updateDocumentField("Users",matchUser.get_UserName(),"_UserWaitingList", user.get_UserName());
+            userFirebaseController.updateDocumentField("Users",matchUser.get_UserName(),"_UserWaitingList", matchUser.get_UserWaitingList());
         }
     }
     void checkSwipeLeft(User leftUser)
@@ -164,7 +166,7 @@ public class HomeScreen extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     }
-     void getUser()
+    void getUser()
     {
         SharedPreferenceManager<User> sharedPreferenceManager = new SharedPreferenceManager<>(User.class, this);
         user = sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_SHARED_PREFERENCE_USERS);
