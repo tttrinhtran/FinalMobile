@@ -51,7 +51,11 @@
             android:paddingStart="10dp"
             android:hint="Email or Phone number"
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:fontFamily="@font/lato"
+            android:maxLines="1"
+            android:lines="1"
+            android:singleLine="true"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -76,7 +80,11 @@
             android:paddingStart="10dp"
             android:hint="Password"
             android:textColor="@color/black"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:fontFamily="@font/lato"
+            android:maxLines="1"
+            android:lines="1"
+            android:singleLine="true"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

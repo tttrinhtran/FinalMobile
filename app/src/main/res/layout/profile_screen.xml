@@ -434,7 +434,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:src="@drawable/home_icon"
+                android:src="@drawable/home_icon_outline"
                 android:layout_gravity="center" />
 
             <TextView
@@ -465,7 +465,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:src="@drawable/section_icon"
+                android:src="@drawable/section_icon_outline"
                 android:layout_gravity="center" />
 
             <TextView
@@ -495,7 +495,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:src="@drawable/friend_icon"
+                android:src="@drawable/friend_icon_outline"
                 android:layout_gravity="center" />
 
             <TextView
