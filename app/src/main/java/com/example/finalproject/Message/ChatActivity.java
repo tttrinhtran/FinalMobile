@@ -155,9 +155,14 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void addConversation( HashMap<String, Object> conversation ) {
+//        database.collection(Constants.KEY_COLLECTION_CONVERSATION)
+//                .add(conversation)
+//                .addOnSuccessListener( documentReference -> conversationId = documentReference.getId() );
+
         database.collection(Constants.KEY_COLLECTION_CONVERSATION)
-                .add(conversation)
-                .addOnSuccessListener( documentReference -> conversationId = documentReference.getId() );
+                .document((String)conversation.get(Constants.KEY_SENDER_ID) + "+" + (String)conversation.get(Constants.KEY_RECEIVER_ID))
+                .set(conversation)
+                .addOnSuccessListener( documentReference -> conversationId = (String)conversation.get(Constants.KEY_SENDER_ID) + "+" + (String)conversation.get(Constants.KEY_RECEIVER_ID) );
     }
 
     private void updateConversation( String message ) {
