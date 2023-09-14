@@ -31,6 +31,7 @@ ArrayList<String> tmp;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_section);
 //        tabSetup();
+        sectionFirebaseFirestoreController = new FirebaseFirestoreController<>(Section.class);
         getData();
     }
     void tabSetup()
@@ -56,9 +57,8 @@ ArrayList<String> tmp;
     }
     void getData()
     {
-
-        tmp=new ArrayList<>();
-        tmp=sectionFirebaseFirestoreController.retrieveAllDocumentsIDOfaCollection( KEY_COLLECTION_SECTION );
+        tmp = new ArrayList<>();
+        tmp = sectionFirebaseFirestoreController.retrieveAllDocumentsIDOfaCollection( KEY_COLLECTION_SECTION );
         for(int i=0; i<tmp.size(); i++)
         {
             if (sectionList==null)
