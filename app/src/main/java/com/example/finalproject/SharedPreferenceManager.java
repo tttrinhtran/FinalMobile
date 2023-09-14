@@ -40,5 +40,9 @@ public class SharedPreferenceManager<T> {
         return gson.fromJson(json, type);
     }
 
+    public void clearObject(String key) {
+        sharedPreference = context.getSharedPreferences(key, MODE_PRIVATE);
+        sharedPreference.edit().clear().apply();
+    }
 
 }

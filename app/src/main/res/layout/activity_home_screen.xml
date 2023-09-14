@@ -15,6 +15,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/border_bottom_black">
 
+        <ProgressBar
+            android:id="@+id/HomeScreenProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="visible"/>
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/HomeScreenAvatarTitle"
             android:layout_width="wrap_content"

@@ -16,28 +16,25 @@
 
 package com.example.finalproject
 
-import android.app.Notification
-import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.location.Location
 import android.os.Binder
-import android.os.Build
 import android.os.IBinder
 import android.os.Looper
 import android.util.Log
-import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.example.finalproject.Home.HomeScreen
+import com.example.finalproject.Constants.LOCATION_UPDATE_STATUS
+import com.example.finalproject.Constants.SHARED_PREFERENCE_LAST_LOCATION_KEY
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
+import com.google.firebase.firestore.GeoPoint
 import java.util.concurrent.TimeUnit
 
 /**
@@ -61,6 +58,7 @@ class LocationUpdatePeriodicallyService : Service() {
 
     private lateinit var user:User
 
+    private lateinit var sharedPreferenceLocationUpdateStatus : SharedPreferenceManager<Boolean>
     private lateinit var sharedPrefUser: SharedPreferenceManager<User>
     private lateinit var sharedPrefPosition: SharedPreferenceManager<Position>
     private lateinit var firebaseLocationUpdate: FirestoreGeoHashQueries
@@ -98,6 +96,9 @@ class LocationUpdatePeriodicallyService : Service() {
 
         firebaseLocationUpdate = FirestoreGeoHashQueries()
 
+        sharedPreferenceLocationUpdateStatus = SharedPreferenceManager<Boolean>(Boolean::class.java, this)
+
+
         // TODO: Step 1.3, Create a LocationRequest.
         locationRequest = LocationRequest.create().apply {
             // Sets the desired interval for active location updates. This interval is inexact. You
@@ -109,11 +110,11 @@ class LocationUpdatePeriodicallyService : Service() {
             // IMPORTANT NOTE: Apps running on Android 8.0 and higher devices (regardless of
             // targetSdkVersion) may receive updates less frequently than this interval when the app
             // is no longer in the foreground.
-            interval = TimeUnit.SECONDS.toMillis(10)
+            interval = TimeUnit.SECONDS.toMillis(1)
 
             // Sets the fastest rate for active location updates. This interval is exact, and your
             // application will never receive updates more frequently than this value.
-            fastestInterval = TimeUnit.SECONDS.toMillis(10)
+            fastestInterval = TimeUnit.SECONDS.toMillis(1)
 
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
@@ -138,14 +139,17 @@ class LocationUpdatePeriodicallyService : Service() {
 
                 // Updates notification content if this service is running as a foreground
                 // service.
-                val prev_pos = sharedPrefPosition.retrieveSerializableObjectFromSharedPreference(Constants.SHARED_PREFERENCE_LAST_LOCATION_KEY)
-                val pos = currentLocation?.let { Position(it.latitude, it.longitude) }
+                val prev_pos = sharedPrefPosition.retrieveSerializableObjectFromSharedPreference(SHARED_PREFERENCE_LAST_LOCATION_KEY)
+                val pos = currentLocation?.let { Position(GeoPoint( it.latitude, it.longitude)) }
 
                 if (pos != null) {
                     if(!pos.isEqual(prev_pos)){
-                        sharedPrefPosition.storeSerializableObjectToSharedPreference(pos, Constants.SHARED_PREFERENCE_LAST_LOCATION_KEY)
+                        sharedPrefPosition.storeSerializableObjectToSharedPreference(pos, SHARED_PREFERENCE_LAST_LOCATION_KEY)
                         firebaseLocationUpdate.UpdateLocationFirestore(user,pos)
                     }
+                    sharedPreferenceLocationUpdateStatus.storeSerializableObjectToSharedPreference(true,
+                        LOCATION_UPDATE_STATUS
+                    )
                 }
             }
         }
@@ -179,6 +183,8 @@ class LocationUpdatePeriodicallyService : Service() {
 
         // MainActivity (client) comes into foreground and binds to service, so the service can
         // become a background services.
+
+        sharedPrefPosition.clearObject(SHARED_PREFERENCE_LAST_LOCATION_KEY)
         stopForeground(true)
         serviceRunningInForeground = false
         configurationChange = false
