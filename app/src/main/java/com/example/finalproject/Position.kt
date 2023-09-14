@@ -3,45 +3,50 @@ package com.example.finalproject
 import com.firebase.geofire.GeoFireUtils
 import com.firebase.geofire.GeoLocation
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.GeoPoint
 import java.io.Serializable
 
 class Position:Serializable{
-     private var _latitude:Double
-     private var _longitude: Double
+     private lateinit var geoPoint : GeoPoint
+     private lateinit var geohash : String
 
     constructor() {
-        this._latitude = 0.toDouble()
-        this._longitude = 0.toDouble()
     }
 
-    constructor(_latitude: Double, _longtitude: Double) {
-        this._latitude = _latitude
-        this._longitude = _longtitude
+    constructor(geoPoint: GeoPoint) {
+        this.geoPoint = geoPoint
     }
 
-    override fun toString(): String {
-        return "Position(_latitude='$_latitude', _longtitude='$_longitude')"
+    constructor(geoPoint: GeoPoint, geohash:String) {
+        this.geoPoint = geoPoint
+        this.geohash = geohash
     }
 
-    fun set_latitude (latitude: Double){
-        this._latitude = latitude
+
+
+    fun setGeopoint (geoPoint: GeoPoint){
+        this.geoPoint = geoPoint
     }
 
-    fun getLatitude () : Double{
-        return this._latitude
+    fun getGeopoint () : GeoPoint{
+        return this.geoPoint
     }
 
-    fun setLongitude (longtitude: Double){
-        this._latitude = longtitude
-    }
-
-    fun getLongitude () : Double{
-        return this._longitude
-    }
 
     fun isEqual(pos:Position?) : Boolean{
-        if (pos != null) {
-            return _latitude == pos.getLatitude() && _longitude == pos.getLongitude()
-        }else return false
+        if(this.isInitGeopoint()) {
+            if (pos != null && pos.isInitGeopoint()) {
+                return this.geoPoint == pos.geoPoint
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
     }
+
+    fun isInitGeopoint() : Boolean{
+        return ::geoPoint.isInitialized
+    }
+
 }

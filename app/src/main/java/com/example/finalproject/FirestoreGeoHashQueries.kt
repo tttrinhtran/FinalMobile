@@ -16,8 +16,8 @@ class FirestoreGeoHashQueries {
     constructor()
 
     fun UpdateLocationFirestore(user: User, pos: Position){
-        val _latitude = pos.getLatitude()
-        val _longtitude = pos.getLongitude()
+        val _latitude = pos.getGeopoint().latitude
+        val _longtitude = pos.getGeopoint().longitude
         // Compute the GeoHash for a lat/lng point
         val hash = GeoFireUtils.getGeoHashForLocation(GeoLocation(_latitude, _longtitude))
 
@@ -25,8 +25,7 @@ class FirestoreGeoHashQueries {
         // for queries and the lat/lng for distance comparisons.
         val updates: MutableMap<String, Any> = mutableMapOf(
             "geohash" to hash,
-            "lat" to _latitude,
-            "lng" to _longtitude,
+            "geoPoint" to pos.getGeopoint(),
         )
         db.collection(FIRESTORE_LOCATION_KEY).document(user.get_UserName()).set(updates)
     }
@@ -34,7 +33,7 @@ class FirestoreGeoHashQueries {
     fun QueryForLocationFireStore (pos: Position, distance: Double) : MutableList<DocumentSnapshot> {
         var ListNearByUserName : MutableList<DocumentSnapshot> = ArrayList()
         // Find cities within 50km of London
-        val center = GeoLocation(pos.getLatitude(), pos.getLongitude())
+        val center = GeoLocation(pos.getGeopoint().latitude, pos.getGeopoint().longitude)
         val radiusInM = distance * 1000.0
 
         val bounds = GeoFireUtils.getGeoHashQueryBounds(center, radiusInM)
