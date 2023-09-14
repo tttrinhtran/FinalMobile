@@ -14,7 +14,7 @@ public class User implements Serializable {
     String _UserLastname;
     String _UserDoB;
     String _UserJoinDate;
-    String _UserEmail;
+    String _UserNickName;
     String _UserPhone;
     boolean _UserActive;
     String _UserBio;
@@ -29,14 +29,14 @@ public class User implements Serializable {
 
     public User(){}
 
-    public User(String _UserName, String _UserPassword, String _UserFirstname, String _UserLastname, String _UserDoB, String _UserJoinDate, String _UserEmail, String _UserPhone, boolean _UserActive, String _UserBio, String _UserHobbies, String _UserSchool, String _UserSpecialization) {
+    public User(String _UserName, String _UserPassword, String _UserFirstname, String _UserLastname, String _UserDoB, String _UserJoinDate, String _UserNickName, String _UserPhone, boolean _UserActive, String _UserBio, String _UserHobbies, String _UserSchool, String _UserSpecialization) {
         this._UserName = _UserName;
         this._UserPassword = _UserPassword;
         this._UserFirstname = _UserFirstname;
         this._UserLastname = _UserLastname;
         this._UserDoB = _UserDoB;
         this._UserJoinDate = _UserJoinDate;
-        this._UserEmail = _UserEmail;
+        this._UserNickName = _UserNickName;
         this._UserPhone = _UserPhone;
         this._UserActive = _UserActive;
         this._UserBio = _UserBio;
@@ -54,7 +54,7 @@ public class User implements Serializable {
                 ", _UserLastname='" + _UserLastname + '\'' +
                 ", _UserDoB='" + _UserDoB + '\'' +
                 ", _UserJoinDate='" + _UserJoinDate + '\'' +
-                ", _UserEmail='" + _UserEmail + '\'' +
+                ", _UserNickName='" + _UserNickName + '\'' +
                 ", _UserPhone='" + _UserPhone + '\'' +
                 ", _UserActive=" + _UserActive +
                 ", _UserBio='" + _UserBio + '\'' +
@@ -114,12 +114,12 @@ public class User implements Serializable {
         this._UserJoinDate = _UserJoinDate;
     }
 
-    public String get_UserEmail() {
-        return _UserEmail;
+    public String get__UserNickName() {
+        return _UserNickName;
     }
 
-    public void set_UserEmail(String _UserEmail) {
-        this._UserEmail = _UserEmail;
+    public void set_UserNickName(String _UserNickName) {
+        this._UserNickName = _UserNickName;
     }
 
     public String get_UserPhone() {

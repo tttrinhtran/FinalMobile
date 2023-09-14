@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,7 +26,7 @@ public class RegisterScreenPersonalInformation extends AppCompatActivity {
     EditText _PersonalInformationFirstName;
     EditText _PersonalInformationLastName;
     EditText _PersonalInformationPhoneNumber;
-    EditText _PersonalInformationEmail;
+    EditText _PersonalInformationNickname;
     EditText _PersonalInformationDoB;
     TextView _PersonalInformationConfirmButton;
     ImageView _PersonalInformationBackButton;
@@ -64,16 +62,16 @@ public class RegisterScreenPersonalInformation extends AppCompatActivity {
         String firstname = _PersonalInformationFirstName.getText().toString();
         String lastname = _PersonalInformationLastName.getText().toString();
         String phone = _PersonalInformationPhoneNumber.getText().toString();
-        String email = _PersonalInformationEmail.getText().toString();
+        String nickname = _PersonalInformationNickname.getText().toString();
         String DoB = _PersonalInformationDoB.getText().toString();
 
-        if (firstname.isEmpty() || lastname.isEmpty() || phone.isEmpty() || email.isEmpty() || DoB.isEmpty()){
+        if (firstname.isEmpty() || lastname.isEmpty() || phone.isEmpty() || nickname.isEmpty() || DoB.isEmpty()){
             Toast.makeText(RegisterScreenPersonalInformation.this, "Please full fill the information.", Toast.LENGTH_SHORT).show();
             return false;
         } else{
             user.set_UserFirstname(firstname);
             user.set_UserLastname(lastname);
-            user.set_UserEmail(email);
+            user.set_UserNickName(nickname);
             user.set_UserPhone(phone);
             user.set_UserDoB(DoB);
             return true;
@@ -84,7 +82,7 @@ public class RegisterScreenPersonalInformation extends AppCompatActivity {
         _PersonalInformationFirstName = (EditText) findViewById(R.id.InfoRegisterFirstNameEditText);
         _PersonalInformationLastName = (EditText) findViewById(R.id.InfoRegisterLastNameEditText);
         _PersonalInformationPhoneNumber = (EditText) findViewById(R.id.InfoRegisterPhoneEditText);
-        _PersonalInformationEmail = (EditText) findViewById(R.id.InfoRegisterEmailEditText);
+        _PersonalInformationNickname = (EditText) findViewById(R.id.InfoRegisterNicknameEditText);
         _PersonalInformationBackButton = (ImageView) findViewById(R.id.InfoRegisterBackArrowIcon);
 
         // Later, changing DoB to be selection, not type in EditText. For now, assume that user input correctly as dd/mm/yyyy
