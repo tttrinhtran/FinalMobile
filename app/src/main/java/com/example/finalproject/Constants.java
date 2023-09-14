@@ -2,6 +2,7 @@ package com.example.finalproject;
 
 public class Constants {
     public static final String KEY_COLLECTION_USERS = "Users";
+    public static final String KEY_COLLECTION_SECTION = "Section";
     public static final String KEY_SHARED_PREFERENCE_USERS = "users";
 
     public static final String KEY_NAME = "name";

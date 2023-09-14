@@ -1,47 +1,78 @@
 package com.example.finalproject.Section;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
-import com.example.finalproject.R;
-
 import java.util.ArrayList;
 
-public class Section extends AppCompatActivity {
-
-    Button btnSection;
-    Button btnMySection;
-    TextView sectionKind;
-    ArrayList<SectionModel> sectionList;
-
-    ArrayList<SectionModel> mySectionList;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_section);
+public class Section {
+    String _SectionDate;
+    String _SectionHour;
+    String _SectionName;
+    String _SectionDescript;
+    String _SectionHost;
+    ArrayList<String>_SectionParticipate;
+public Section(){}
+    public Section(String _SectionDate, String _SectionHour, String _SectionName, String _SectionDescript, String _SectionHost) {
+        this._SectionDate = _SectionDate;
+        this._SectionName = _SectionName;
+        this._SectionDescript = _SectionDescript;
+        this._SectionHost = _SectionHost;
+        this._SectionHour=_SectionHour;
     }
-    void tabSetup()
-    {
-        sectionKind=findViewById(R.id.section_kind);
-        btnSection=findViewById(R.id.Section_Tab);
-        btnSection.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sectionKind.setText("Section");
-            }
-        });
 
-        btnMySection=findViewById(R.id.MySection_Tab);
-        btnMySection.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sectionKind.setText("My Section");
-            }
-        });
+    public String toString() {
+        return "Section{" +
+                "_SectionDate='" +_SectionDate + '\'' +
+                "_SectionHour='" +_SectionHour + '\'' +
+                ", _SectionName='" + _SectionName + '\'' +
+                ", _SectionDescript='" + _SectionDescript + '\'' +
+                ", _SectionHost='" + _SectionHost + '\'' +
+                ", _SectionParticipate='" + _SectionParticipate + '\'' +
+                '}';
+    }
+    public String get_SectionDate() {
+        return _SectionDate;
+    }
+
+    public void set_SectionDate(String _SectionDate) {
+        this._SectionDate = _SectionDate;
+    }
+
+    public String get_SectionDescript() {
+        return _SectionDescript;
+    }
+
+    public void set_SectionDescript(String _SectionDescript) {
+        this._SectionDescript = _SectionDescript;
+    }
+
+    public String get_SectionHost() {
+        return _SectionHost;
+    }
+
+    public void set_SectionHost(String _SectionHost) {
+        this._SectionHost = _SectionHost;
+    }
+
+    public ArrayList<String> get_SectionParticipate() {
+        return _SectionParticipate;
+    }
+
+    public void set_SectionParticipate(ArrayList<String> _SectionParticipate) {
+        this._SectionParticipate = _SectionParticipate;
+    }
+
+    public String get_SectionName() {
+        return _SectionName;
+    }
+
+    public void set_SectionName(String _SectionName) {
+        this._SectionName = _SectionName;
+    }
+
+    public String get_SectionHour() {
+        return _SectionHour;
+    }
+
+    public void set_SectionHour(String _SectionHour) {
+        this._SectionHour = _SectionHour;
     }
 }
