@@ -14,7 +14,7 @@ import com.example.finalproject.User;
 
 import java.util.ArrayList;
 
-public class cardSwipeAdapter extends RecyclerView.Adapter<cardSwipeAdapter.MyViewHolder> {
+public class cardSwipeAdapter extends RecyclerView.Adapter<cardSwipeAdapter.MyViewHolder>{
 
     private ArrayList<User> swipeList;
 
@@ -35,6 +35,15 @@ public class cardSwipeAdapter extends RecyclerView.Adapter<cardSwipeAdapter.MyVi
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position)
     {
         holder.setData(swipeList.get(position));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    onItemClickListener.onItemClick(swipeList.get(position));
+                }
+            }
+        });
 
     }
 
@@ -66,4 +75,16 @@ public class cardSwipeAdapter extends RecyclerView.Adapter<cardSwipeAdapter.MyVi
             tvSchool.setText(data.get_UserSchool());
         }
     }
+
+    public interface OnItemClickListener{
+        void onItemClick(User user);
+    }
+
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.onItemClickListener = listener;
+    }
+
+
 }
