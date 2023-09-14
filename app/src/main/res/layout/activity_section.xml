@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Section.Section"
+    >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/white"
+        android:padding="20dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- Title -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/head"
+                android:background="@color/white">
+                <TextView
+                    android:id="@+id/SectionTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Section"
+                    android:textSize="24sp"
+                    android:padding="16dp"
+                    android:fontFamily="@font/tommy_medium"
+                    android:textColor="@color/primary_blue"
+                    android:layout_alignParentLeft="true"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <!-- Tab Layout -->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/head"
+                android:id="@+id/tab">
+
+                <!-- Tab 1 -->
+                <Button
+                    android:id="@+id/Section_Tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Section"
+                    android:fontFamily="@font/lato"
+                    android:background="@android:color/transparent"
+                    android:textAllCaps="false"
+                    android:textColor="@color/primary_blue"
+                    android:gravity="center"
+                    />
+
+                <!-- Tab 2 -->
+                <Button
+                    android:id="@+id/MySection_Tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="My Section"
+                    android:fontFamily="@font/lato"
+                    android:background="@android:color/transparent"
+                    android:textAllCaps="false"
+                    android:textColor="@color/primary_blue"
+                    android:gravity="center" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/section_kind"
+                android:text="Section"
+                android:layout_below="@+id/tab"
+                android:fontFamily="@font/tommy_regular"
+                android:textColor="@color/primary"
+                android:textSize="20dp"
+                android:layout_marginLeft="0dp">
+
+            </TextView>
+            <!-- Content area to display the tab's content -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/section_kind"
+                android:layout_marginTop="20dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/section_recycleView">
+                </androidx.recyclerview.widget.RecyclerView>
+            </FrameLayout>
+        </RelativeLayout>
+
+    </FrameLayout>
+
+    <include layout="@layout/nav_bar"></include>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

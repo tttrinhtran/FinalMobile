@@ -29,7 +29,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginBottom="30dp"
             android:text="Uyen's section"
-            android:fontFamily="@font/tommy_regular"
+            android:fontFamily="@font/tommy_medium"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -41,7 +41,19 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="15dp"
             android:layout_marginTop="3dp"
-            android:text="10h-12h Dec, 12, 2023"
+            android:text="10h-12h"
+            android:fontFamily="@font/tommy_regular"
+            android:textColor="@color/black"
+            android:textSize="12sp"/>
+        <TextView
+            android:id="@+id/SectionDateItemRecycler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/SectionNameItemRecycler"
+            app:layout_constraintStart_toEndOf="@id/SectionTimeItemRecycler"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="3dp"
+            android:text="Dec, 12, 2023"
             android:fontFamily="@font/tommy_regular"
             android:textColor="@color/black"
             android:textSize="12sp"/>
