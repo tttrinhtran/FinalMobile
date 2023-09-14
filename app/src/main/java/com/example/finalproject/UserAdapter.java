@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalproject.Listeners.UserListener;
 import com.example.finalproject.databinding.ItemChatListBinding;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
@@ -58,7 +59,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
         void setUserData( User user ) {
 //            biding.imageProfile.setImageBitmap(getUserImage(user.image));
-            binding.ItemChatFriendName.setText(user._UserName);
+            binding.ItemChatFriendName.setText(user._UserFirstname + " " + user._UserLastname);
             // Just for testing
             binding.ItemChatContent.setText(user._UserEmail);
             binding.getRoot().setOnClickListener( v -> userListener.onUserClicker(user));

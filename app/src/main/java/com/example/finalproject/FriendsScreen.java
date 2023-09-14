@@ -12,9 +12,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.finalproject.Home.HomeScreen;
 import com.example.finalproject.Listeners.UserListener;
 import com.example.finalproject.Message.ChatActivity;
+import com.example.finalproject.Message.ChatMessage;
 import com.example.finalproject.databinding.ActivityFriendsScreenBinding;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +26,8 @@ import java.util.List;
 public class FriendsScreen extends AppCompatActivity implements UserListener {
 
     private ActivityFriendsScreenBinding binding;
+    private List<String> friendList;
+    private UserAdapter userAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +48,11 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
         SharedPreferenceManager<User> currentInstance = new SharedPreferenceManager<>(User.class, this);
         User currentUser = currentInstance.retrieveSerializableObjectFromSharedPreference( Constants.KEY_SHARED_PREFERENCE_USERS );
 
-        List<String> friendList = currentUser.get_UserFriend();
+        friendList = currentUser.get_UserFriend();
+
         if( friendList.isEmpty() ) showErrorMessage();
         else {
-            UserAdapter userAdapter = new UserAdapter( friendList, this );
+            userAdapter = new UserAdapter( friendList, this );
             binding.FriendScreenChat.setAdapter(userAdapter);
             binding.FriendScreenChat.setVisibility(View.VISIBLE);
         }
@@ -97,4 +104,5 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
         startActivity(intent);
         // finish();
     }
+
 }

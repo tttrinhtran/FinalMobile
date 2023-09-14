@@ -1,8 +1,11 @@
 package com.example.finalproject.Message;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -85,6 +88,13 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         void setData( ChatMessage chatMessage ) {
             binding.textMessage.setText(chatMessage.message);
             binding.textDateTime.setText(chatMessage.dateTime);
+            binding.textDateTime.setVisibility(View.GONE);
+
+            binding.getRoot().setOnClickListener( v -> {
+                Log.d( "ChatAdapter", "setData: " + binding.textDateTime.getText() + " " + binding.textDateTime.getVisibility() );
+                if( binding.textDateTime.getVisibility() == View.VISIBLE ) binding.textDateTime.setVisibility(View.GONE);
+                else binding.textDateTime.setVisibility(View.VISIBLE);
+            });
         }
 
     }
@@ -102,6 +112,13 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             binding.textMessage.setText(chatMessage.message);
             binding.textDateTime.setText(chatMessage.dateTime);
             binding.imageProfile.setImageBitmap(receiverProfileImage);
+            binding.textDateTime.setVisibility(View.GONE);
+
+            binding.getRoot().setOnClickListener( v -> {
+                Log.d( "ChatAdapter", "setData: " + binding.textDateTime.getText() + " " + binding.textDateTime.getVisibility() );
+                if( binding.textDateTime.getVisibility() == View.VISIBLE ) binding.textDateTime.setVisibility(View.GONE);
+                else binding.textDateTime.setVisibility(View.VISIBLE);
+            });
         }
     }
 }
