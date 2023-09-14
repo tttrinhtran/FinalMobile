@@ -53,12 +53,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
-    private FirestoreGeoHashQueries firestoreGeoHashQueries;
-    private FirebaseFirestoreController<Position> positionfirebaseFirestoreController;
+
 
 public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.OnItemClickListener {
     private FirestoreGeoHashQueries firestoreGeoHashQueries;
-    private FirebaseFirestoreController<Position> positionfirebaseFirestoreController;    private static final String TAG = "MainActivity";
+    private FirebaseFirestoreController<Position> positionfirebaseFirestoreController;
+    private static final String TAG = "MainActivity";
     private List<Integer> list;
     User user;
     ArrayList<User> activeFriend;
