@@ -40,6 +40,12 @@
         android:theme="@style/Theme.FinalProject"
         tools:targetApi="33">
         <activity
+            android:name=".Setting.SettingScreenModifyPersonalInformation"
+            android:exported="false" />
+        <activity
+            android:name=".Setting.SettingScreen"
+            android:exported="false" />
+        <activity
             android:name=".Section.Section"
             android:exported="false" />
         <activity

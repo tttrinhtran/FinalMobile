@@ -58,7 +58,7 @@ import java.util.concurrent.Executors;
 public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.OnItemClickListener {
     private FirestoreGeoHashQueries firestoreGeoHashQueries;
     private FirebaseFirestoreController<Position> positionfirebaseFirestoreController;
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "HomeScreen";
     private List<Integer> list;
     User user;
     ArrayList<User> activeFriend;

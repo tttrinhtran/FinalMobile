@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Setting.SettingScreen">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/SettingScreenVerticalLeftGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/SettingScreenVerticalRightGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9"/>
+
+    <TextView
+        android:id="@+id/SettingScreenTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
+        android:text="Setting"/>
+
+    <Button
+        android:id="@+id/SettingScreenPersonalInformationButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/SettingScreenTitleTextView"
+        app:layout_constraintLeft_toRightOf="@id/SettingScreenVerticalLeftGuideline"
+        app:layout_constraintRight_toLeftOf="@id/SettingScreenVerticalRightGuideline"
+        android:layout_marginTop="10dp"
+        android:text="Personal Information Setting"/>
+
+
+    <Button
+        android:id="@+id/SettingScreenAccountButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/SettingScreenPersonalInformationButton"
+        app:layout_constraintLeft_toRightOf="@id/SettingScreenVerticalLeftGuideline"
+        app:layout_constraintRight_toLeftOf="@id/SettingScreenVerticalRightGuideline"
+        android:layout_marginTop="10dp"
+        android:text="Account"/>
+
+    <Button
+        android:id="@+id/SettingScreenHelpAndSupportButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/SettingScreenAccountButton"
+        app:layout_constraintLeft_toRightOf="@id/SettingScreenVerticalLeftGuideline"
+        app:layout_constraintRight_toLeftOf="@id/SettingScreenVerticalRightGuideline"
+        android:layout_marginTop="10dp"
+        android:text="Help and Support" />
+
+    <Button
+        android:id="@+id/SettingScreenAboutButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/SettingScreenHelpAndSupportButton"
+        app:layout_constraintLeft_toRightOf="@id/SettingScreenVerticalLeftGuideline"
+        app:layout_constraintRight_toLeftOf="@id/SettingScreenVerticalRightGuideline"
+        android:layout_marginTop="10dp"
+        android:text="About"/>
+
+    <Button
+        android:id="@+id/SettingScreenSignOutButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/SettingScreenAboutButton"
+        app:layout_constraintLeft_toRightOf="@id/SettingScreenVerticalLeftGuideline"
+        app:layout_constraintRight_toLeftOf="@id/SettingScreenVerticalRightGuideline"
+        android:layout_marginTop="10dp"
+        android:text="Sign out"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

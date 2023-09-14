@@ -56,8 +56,6 @@ public class RegisterScreenEmailVerification extends AppCompatActivity {
         firebaseAuthentication = new FirebaseAuthentication(RegisterScreenEmailVerification.this);
         UserDatabase = new FirebaseFirestoreController<>(User.class);
 
-        firebaseAuthentication.UserRegister(user.get_UserName(), user.get_UserPassword());
-
         timer = new Timer();
 
         _EmailResendButton.setOnClickListener(view -> {
@@ -91,7 +89,13 @@ public class RegisterScreenEmailVerification extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
+    protected void onResume() {
+        super.onResume();
+        firebaseAuthentication.UserRegister(user.get_UserName(), user.get_UserPassword());
+    }
+
+    @Override
+    protected void onPause() {
 
         firebaseAuthentication.getFirebaseCurrentUser().reload().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -102,18 +106,19 @@ public class RegisterScreenEmailVerification extends AppCompatActivity {
             }
         });
 
-        super.onStop();
+        super.onPause();
     }
 
     class HandleResendButton extends TimerTask {
 
         @Override
         public void run() {
-            for (int i = 0; i<30; i++) {
+            for (int i = 0; i <= 30; i++) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         _EmailSendNotification.setText(getTimerText());
+                        if(time == 0) _EmailResendButton.setEnabled(true);
                     }
                 });
                 try {
@@ -122,7 +127,6 @@ public class RegisterScreenEmailVerification extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
             }
-            _EmailResendButton.setEnabled(true);
             time = 30.0;
         }
 
