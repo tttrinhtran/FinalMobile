@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finalproject.Home.HomeScreen;
 import com.example.finalproject.Section.Section;
+import com.example.finalproject.Section.SectionScreen;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main) ;
 
-        Intent intent = new Intent(MainActivity.this, LoginScreen.class);
+        Intent intent = new Intent(MainActivity.this, SectionScreen.class);
         startActivity(intent);
     }
 }

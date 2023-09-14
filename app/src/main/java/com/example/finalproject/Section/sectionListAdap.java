@@ -14,11 +14,11 @@ import com.example.finalproject.R;
 import java.util.ArrayList;
 
 public class sectionListAdap  extends RecyclerView.Adapter<sectionListAdap.MyViewHolder> {
-    ArrayList<SectionModel> sectionList;
+    ArrayList<Section> sectionList;
     Context context;
     sectionListInterface sectionListInterface;
 
-    public sectionListAdap(ArrayList<SectionModel> sectionList, Context context, sectionListInterface sectionListInterface)
+    public sectionListAdap(ArrayList<Section> sectionList, Context context, sectionListInterface sectionListInterface)
     {
         this.sectionList=sectionList;
         this.context=context;

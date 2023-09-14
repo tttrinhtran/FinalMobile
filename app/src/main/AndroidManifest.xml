@@ -46,7 +46,7 @@
             android:name=".Setting.SettingScreen"
             android:exported="false" />
         <activity
-            android:name=".Section.Section"
+            android:name=".Section.SectionScreen"
             android:exported="false" />
         <activity
             android:name=".RegisterScreen.RegisterScreenEmailVerification"
