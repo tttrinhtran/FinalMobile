@@ -109,18 +109,21 @@ public class RegisterScreenEmailVerification extends AppCompatActivity {
 
         @Override
         public void run() {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    _EmailSendNotification.setText(getTimerText());
+            for (int i = 0; i<30; i++) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        _EmailSendNotification.setText(getTimerText());
+                    }
+                });
+                try {
+                    onComplete();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
-            });
-            time --;
-            if(time == 0.0) {
-                _EmailResendButton.setEnabled(true);
-                time = 30.0;
-                return;
             }
+            _EmailResendButton.setEnabled(true);
+            time = 30.0;
         }
 
         private String getTimerText(){
@@ -128,6 +131,11 @@ public class RegisterScreenEmailVerification extends AppCompatActivity {
             int second = ((rounder%86400)%3600)%60;
 
             return String.format("%02d", second);
+        }
+
+        private void onComplete() throws InterruptedException {
+            Thread.sleep(1000);
+            time --;
         }
     };
 }

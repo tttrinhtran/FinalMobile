@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.Objects;
 
 public class FirebaseAuthentication {
+    boolean isCompleted = false;
     boolean isSuccess = false;
 
     private FirebaseUser user;
@@ -50,25 +51,26 @@ public class FirebaseAuthentication {
     }
 
     public boolean UserSignUp(String email, String password){
-        mAuth.signInWithEmailAndPassword(email, password)
+        isCompleted = false;
+         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
                             isSuccess = true;
+                            isCompleted = true;
+
                         } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText((Activity)context, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
                             isSuccess = false;
+                            isCompleted = true;
+
                         }
                     }
                 });
-        return isSuccess;
+         while(!isCompleted){}
+         return isSuccess;
     }
 
     public FirebaseUser getFirebaseCurrentUser(){

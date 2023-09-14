@@ -1,6 +1,5 @@
 package com.example.finalproject
 
-import android.widget.Toast
 import com.example.finalproject.Constants.FIRESTORE_LOCATION_KEY
 import com.firebase.geofire.GeoFireUtils
 import com.firebase.geofire.GeoLocation
@@ -30,7 +29,7 @@ class FirestoreGeoHashQueries {
         db.collection(FIRESTORE_LOCATION_KEY).document(user.get_UserName()).set(updates)
     }
 
-    fun QueryForLocationFireStore (pos: Position, distance: Double) : MutableList<DocumentSnapshot> {
+    fun  QueryForLocationFireStore (user:User, pos: Position, distance: Double, container : ArrayList<User>) {
         var ListNearByUserName : MutableList<DocumentSnapshot> = ArrayList()
         // Find cities within 50km of London
         val center = GeoLocation(pos.getGeopoint().latitude, pos.getGeopoint().longitude)
@@ -39,7 +38,7 @@ class FirestoreGeoHashQueries {
         val bounds = GeoFireUtils.getGeoHashQueryBounds(center, radiusInM)
         val tasks: MutableList<Task<QuerySnapshot>> = ArrayList()
         for (b in bounds) {
-            val q = db.collection("cities")
+            val q = db.collection(FIRESTORE_LOCATION_KEY)
                 .orderBy("geohash")
                 .startAt(b.startHash)
                 .endAt(b.endHash)
@@ -48,24 +47,37 @@ class FirestoreGeoHashQueries {
 
         Tasks.whenAllComplete(tasks)
             .addOnCompleteListener {
-                ListNearByUserName.clear()
                 for (task in tasks) {
                     val snap = task.result
                     for (doc in snap!!.documents) {
-                        val lat = doc.getDouble("lat")!!
-                        val lng = doc.getDouble("lng")!!
+                        val geopoint = doc.getGeoPoint("geoPoint")
 
                         // We have to filter out a few false positives due to GeoHash
                         // accuracy, but most will match
-                        val docLocation = GeoLocation(lat, lng)
-                        val distanceInM = GeoFireUtils.getDistanceBetween(docLocation, center)
-                        if (distanceInM <= radiusInM) {
-                            ListNearByUserName.add(doc)
+                        val docLocation = geopoint?.let { it1 -> GeoLocation(it1.latitude, geopoint.longitude) }
+                        val distanceInM =
+                            docLocation?.let { it1 -> GeoFireUtils.getDistanceBetween(it1, center) }
+                        if (distanceInM != null) {
+                            if (distanceInM <= radiusInM) {
+                                ListNearByUserName.add(doc)
+                            }
                         }
                     }
 
                 }
+
+                val userFirebaseController = FirebaseFirestoreController<User>(User::class.java)
+
+                for (d in ListNearByUserName) {
+                    if(d.id.equals(user.get_UserName())) continue
+                    else {
+                        val user_temp: User = userFirebaseController.retrieveObjectsFirestoreByID(
+                            Constants.KEY_COLLECTION_USERS,
+                            d.id
+                        )
+                        container.add(user_temp)
+                    }
+                }
             }
-        return ListNearByUserName
     }
 }

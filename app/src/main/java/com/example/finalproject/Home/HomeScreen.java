@@ -79,6 +79,9 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
         setContentView(R.layout.activity_home_screen);
         activeFriend = new ArrayList<>();
         setUp();
+
+        activeUsers = new ArrayList<>();
+
         firestoreGeoHashQueries = new FirestoreGeoHashQueries();
         positionfirebaseFirestoreController = new FirebaseFirestoreController<>(Position.class);
         isLocationUpdatedSharedPreference = new SharedPreferenceManager<>(Boolean.class,HomeScreen.this);
@@ -105,15 +108,7 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
                 if(isLocationUpdatedSharedPreference.retrieveSerializableObjectFromSharedPreference(LOCATION_UPDATE_STATUS)) {
                     Position pos = null;
                     pos = positionfirebaseFirestoreController.retrieveObjectsFirestoreByID(FIRESTORE_LOCATION_KEY, user.get_UserName());
-                    List<DocumentSnapshot> nearbyListUsername = firestoreGeoHashQueries.QueryForLocationFireStore(pos, 500);
-
-                    for (DocumentSnapshot d : nearbyListUsername) {
-                        User user_temp = userFirebaseController.retrieveObjectsFirestoreByID(KEY_COLLECTION_USERS, d.getId());
-                        if (activeUsers == null) {
-                            activeUsers = new ArrayList<>();
-                        }
-                        activeUsers.add(user_temp);
-                    }
+                    firestoreGeoHashQueries.QueryForLocationFireStore(user, pos, 500, activeUsers);
                 }
                 handler.post(new Runnable() {
 
