@@ -11,6 +11,7 @@ import androidx.interpolator.view.animation.FastOutLinearInInterpolator;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ActivityOptions;
 import android.content.Context;
@@ -21,6 +22,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AnticipateInterpolator;
 import android.view.animation.Interpolator;
@@ -72,19 +74,42 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
     cardSwipeAdapter adapterSwipe;
     CardStackLayoutManager manager;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private ProgressBar progressBar;
+    private CardStackView cardStackView;
+    private TextView tv;
+    private RecyclerView recyclerView;
+    private ImageView home;
+    private ImageView section;
+    private ImageView friend;
+    private ImageView profile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        userFirebaseController = new FirebaseFirestoreController<>(User.class);
         setContentView(R.layout.activity_home_screen);
-        activeFriend = new ArrayList<>();
-        setUp();
 
+        HomeScren_UIElementsSetup();
+
+        userFirebaseController = new FirebaseFirestoreController<>(User.class);
+        activeFriend = new ArrayList<>();
         activeUsers = new ArrayList<>();
 
         firestoreGeoHashQueries = new FirestoreGeoHashQueries();
         positionfirebaseFirestoreController = new FirebaseFirestoreController<>(Position.class);
         isLocationUpdatedSharedPreference = new SharedPreferenceManager<>(Boolean.class,HomeScreen.this);
+    }
+
+    private void HomeScren_UIElementsSetup(){
+        swipeRefreshLayout = findViewById(R.id.HomeScreenRefreshLayout);
+        progressBar = findViewById(R.id.HomeScreenProgressBar);
+        cardStackView = findViewById(R.id.HomeScreenSwipeItem);
+        titleText = (TextView) findViewById(R.id.HomeScreenTitleText);
+        recyclerView = findViewById(R.id.HomeScreenFriendRecyclerView);
+        home = findViewById(R.id.NaviBarHomeIcon);
+        section = findViewById(R.id.NaviBarSectionIcon);
+        friend = findViewById(R.id.NaviBarFriendIcon);
+        profile = findViewById(R.id.NaviBarProfile);
     }
 
     @Override
@@ -99,11 +124,12 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
 
         Handler handler = new Handler(Looper.getMainLooper());
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-        ProgressBar progressBar = findViewById(R.id.HomeScreenProgressBar);
 
         executorService.execute(new Runnable() {
             @Override
             public void run() {
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 while (!isLocationUpdatedSharedPreference.retrieveSerializableObjectFromSharedPreference(LOCATION_UPDATE_STATUS)){}
                 if(isLocationUpdatedSharedPreference.retrieveSerializableObjectFromSharedPreference(LOCATION_UPDATE_STATUS)) {
                     Position pos = null;
@@ -114,14 +140,15 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
 
                     @Override
                     public void run() {
-                        progressBar.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.INVISIBLE);
+                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     }
                 });
             }
         });
 
+        setUp();
         updateActiveStatus();
-
         ActiveList();
         swipe();
         NavBar();
@@ -149,7 +176,6 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
     private void swipe() {
         final int[] curPos = new int[1];
 
-        CardStackView cardStackView = findViewById(R.id.HomeScreenSwipeItem);
         manager = new CardStackLayoutManager(HomeScreen.this, new CardStackListener() {
             @Override
             public void onCardDragging(Direction direction, float ratio) {
@@ -236,15 +262,61 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
     }
 
     void setUp() {
+        // Setting for Hello Text
         getUser();
-        titleText = (TextView) findViewById(R.id.HomeScreenTitleText);
         String temp = "Hello! " + user.get_UserName();
         titleText.setText(temp);
+
+
+        // Setting for refresh layout
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                isLocationUpdatedSharedPreference.clearObject(LOCATION_UPDATE_STATUS);
+                isLocationUpdatedSharedPreference.storeSerializableObjectToSharedPreference(false, LOCATION_UPDATE_STATUS);
+
+                Handler handler = new Handler(Looper.getMainLooper());
+                ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+                progressBar.setVisibility(View.VISIBLE);
+
+                executorService.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                        handler.post(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                progressBar.setVisibility(View.VISIBLE);
+                            }
+                        });
+
+                        while (!isLocationUpdatedSharedPreference.retrieveSerializableObjectFromSharedPreference(LOCATION_UPDATE_STATUS)){}
+                        if(isLocationUpdatedSharedPreference.retrieveSerializableObjectFromSharedPreference(LOCATION_UPDATE_STATUS)) {
+                            Position pos = null;
+                            pos = positionfirebaseFirestoreController.retrieveObjectsFirestoreByID(FIRESTORE_LOCATION_KEY, user.get_UserName());
+                            firestoreGeoHashQueries.QueryForLocationFireStore(user, pos, 500, activeUsers);
+                        }
+                        handler.post(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                progressBar.setVisibility(View.INVISIBLE);
+                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                            }
+                        });
+                    }
+                });
+
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     void ActiveList() {
         getActiveFriend();
-        RecyclerView recyclerView = findViewById(R.id.HomeScreenFriendRecyclerView);
         ActiveListAdapter adapter = new ActiveListAdapter(activeFriend, (Context) this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -271,17 +343,7 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
     }
 
     private void NavBar() {
-        ImageView home;
-        ImageView section;
-        ImageView friend;
-        ImageView profile;
-
-
-        home = findViewById(R.id.NaviBarHomeIcon);
         home.setImageResource(R.drawable.home_icon_fill);
-        section = findViewById(R.id.NaviBarSectionIcon);
-        friend = findViewById(R.id.NaviBarFriendIcon);
-        profile = findViewById(R.id.NaviBarProfile);
 
         section.setOnClickListener(new View.OnClickListener() {
             @Override

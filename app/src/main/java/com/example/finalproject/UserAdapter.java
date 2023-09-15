@@ -61,7 +61,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 //            biding.imageProfile.setImageBitmap(getUserImage(user.image));
             binding.ItemChatFriendName.setText(user._UserFirstname + " " + user._UserLastname);
             // Just for testing
-            binding.ItemChatContent.setText(user._UserEmail);
+            binding.ItemChatContent.setText(user._UserName);
             binding.getRoot().setOnClickListener( v -> userListener.onUserClicker(user));
             Log.d( "Adapter", "setUserData: " + user._UserName );
         }

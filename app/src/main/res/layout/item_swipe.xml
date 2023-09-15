@@ -22,7 +22,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 app:shapeAppearanceOverlay="@style/RoundedSquare"
-                app:srcCompat="@drawable/sample"/>
+                />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/SwipeItemImagegradient"
@@ -191,66 +191,68 @@
 
                 </LinearLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/left_overlay"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/shape">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="170dp"
-                    android:layout_marginTop="30dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:background="@drawable/border_text_red"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="5dp"
-                    android:rotation="20"
-                    android:text="NOPE"
-                    android:textColor="@color/error"
-                    android:textSize="40sp" />
-
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/left_overlay"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginHorizontal="100dp"
-                    android:layout_marginBottom="15dp"
-                    android:weightSum="3"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="0dp">
 
-                    <ImageView
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/nope_icon_fill"
-                        android:layout_gravity="center"
-                        android:layout_marginHorizontal="5dp"/>
+                        android:layout_marginStart="170dp"
+                        android:layout_marginTop="30dp"
+                        android:background="@drawable/border_text_red"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="5dp"
+                        android:rotation="20"
+                        android:text="NOPE"
+                        android:textColor="@color/error"
+                        android:textSize="40sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/like_icon"
-                        android:layout_gravity="center"
-                        android:layout_marginHorizontal="5dp"/>
+                        android:layout_marginHorizontal="100dp"
+                        android:layout_marginBottom="15dp"
+                        android:orientation="horizontal"
+                        android:weightSum="3"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/match_icon"
-                        android:layout_gravity="center"
-                        android:layout_marginHorizontal="5dp"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="5dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/nope_icon_fill" />
 
-                </LinearLayout>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="5dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/like_icon" />
 
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="5dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/match_icon" />
+
+                    </LinearLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
