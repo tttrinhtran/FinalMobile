@@ -39,6 +39,9 @@
         android:theme="@style/Theme.FinalProject"
         tools:targetApi="33">
         <activity
+            android:name=".ProfileScreen"
+            android:exported="false" />
+        <activity
             android:name=".Setting.SettingAccountScreen"
             android:exported="false" />
         <activity
