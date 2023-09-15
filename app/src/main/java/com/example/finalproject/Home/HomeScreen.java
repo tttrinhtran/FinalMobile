@@ -357,7 +357,8 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeScreen.this, FriendsScreen.class);
-                startActivity(intent);
+                Bundle b = ActivityOptions.makeSceneTransitionAnimation(HomeScreen.this).toBundle();
+                startActivity(intent, b);
             }
         });
 
