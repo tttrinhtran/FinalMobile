@@ -22,10 +22,10 @@ class FirebaseCloudStorageManager : AppCompatActivity() {
         imageview = findViewById(R.id.screen)
         but = findViewById(R.id.fetch)
 
-        but.setOnClickListener { fetching(user, imageview) }
+        but.setOnClickListener { FetchingImageFromFirebase(user, imageview) }
     }
 
-    fun fetching (user_temp:User, imageview_temp : ImageView) {
+    fun FetchingImageFromFirebase (user_temp:User, imageview_temp : ImageView) {
         val storageRef = FirebaseStorage.getInstance().reference.child(user_temp._UserName+".jpg")
 
         val localFile = File.createTempFile("tempImage", "jpg")
@@ -33,6 +33,7 @@ class FirebaseCloudStorageManager : AppCompatActivity() {
             imageview_temp.setImageBitmap(BitmapFactory.decodeFile(localFile.absolutePath))
         }
     }
+
     fun uploadImageToFirebase(image: Bitmap, imageName: String): String? {
         val storage = FirebaseStorage.getInstance()
         // Create a storage reference from our app

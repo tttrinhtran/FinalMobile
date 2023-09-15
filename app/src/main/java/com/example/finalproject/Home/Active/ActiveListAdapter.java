@@ -1,7 +1,6 @@
 package com.example.finalproject.Home.Active;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +48,7 @@ public class ActiveListAdapter extends RecyclerView.Adapter<ActiveListAdapter.My
 
         FirebaseCloudStorageManager firebaseCloudStorageManager = new FirebaseCloudStorageManager();
         holder.img.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        firebaseCloudStorageManager.fetching(activeList.get(position), holder.img);
+        firebaseCloudStorageManager.FetchingImageFromFirebase(activeList.get(position), holder.img);
 
     }
 

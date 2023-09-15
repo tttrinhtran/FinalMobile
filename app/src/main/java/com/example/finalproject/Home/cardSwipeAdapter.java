@@ -8,11 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalproject.FirebaseCloudStorageManager;
-import com.example.finalproject.Home.Active.ActiveListAdapter;
 import com.example.finalproject.R;
 import com.example.finalproject.User;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -54,7 +52,7 @@ public class cardSwipeAdapter extends RecyclerView.Adapter<cardSwipeAdapter.MyVi
 
         FirebaseCloudStorageManager firebaseCloudStorageManager = new FirebaseCloudStorageManager();
         holder.img.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        firebaseCloudStorageManager.fetching(swipeList.get(position), holder.img);
+        firebaseCloudStorageManager.FetchingImageFromFirebase(swipeList.get(position), holder.img);
     }
 
     @Override

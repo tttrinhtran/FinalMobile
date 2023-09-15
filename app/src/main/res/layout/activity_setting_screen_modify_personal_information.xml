@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -28,6 +29,7 @@
         app:layout_constraintGuide_percent="0.3"/>
 
     <ImageView
+        android:id="@+id/SettingPersonalInformationScreenAvatarImageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:layout_constraintTop_toTopOf="parent"
@@ -36,43 +38,52 @@
         app:layout_constraintRight_toRightOf="@id/SettingPersonalInformationScreenVerticalRightGuideline"/>
 
     <EditText
-        android:id="@+id/SettingPersonalInformationScreenFirstNameEditName"
+        android:id="@+id/SettingPersonalInformationScreenFirstNameEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/SettingPersonalInformationScreenNickNameEditName"
+        app:layout_constraintTop_toBottomOf="@id/SettingPersonalInformationScreenNickNameEditText"
         app:layout_constraintLeft_toRightOf="@id/SettingPersonalInformationScreenVerticalLeftGuideline"
         app:layout_constraintRight_toLeftOf="@id/SettingPersonalInformationScreenVerticalRightGuideline"
         android:hint="First Name"/>
 
     <EditText
-        android:id="@+id/SettingPersonalInformationScreenLastNameEditName"
+        android:id="@+id/SettingPersonalInformationScreenLastNameEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/SettingPersonalInformationScreenFirstNameEditName"
+        app:layout_constraintTop_toBottomOf="@id/SettingPersonalInformationScreenFirstNameEditText"
         app:layout_constraintLeft_toRightOf="@id/SettingPersonalInformationScreenVerticalLeftGuideline"
         app:layout_constraintRight_toLeftOf="@id/SettingPersonalInformationScreenVerticalRightGuideline"
         android:hint="Last Name"/>
 
     <EditText
-        android:id="@+id/SettingPersonalInformationScreenSchoolEditName"
+        android:id="@+id/SettingPersonalInformationScreenPhoneEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/SettingPersonalInformationScreenLastNameEditName"
+        app:layout_constraintTop_toBottomOf="@id/SettingPersonalInformationScreenLastNameEditText"
+        app:layout_constraintLeft_toRightOf="@id/SettingPersonalInformationScreenVerticalLeftGuideline"
+        app:layout_constraintRight_toLeftOf="@id/SettingPersonalInformationScreenVerticalRightGuideline"
+        android:hint="Phone"/>
+
+    <EditText
+        android:id="@+id/SettingPersonalInformationScreenSchoolEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/SettingPersonalInformationScreenPhoneEditText"
         app:layout_constraintLeft_toRightOf="@id/SettingPersonalInformationScreenVerticalLeftGuideline"
         app:layout_constraintRight_toLeftOf="@id/SettingPersonalInformationScreenVerticalRightGuideline"
         android:hint="School"/>
 
     <EditText
-        android:id="@+id/SettingPersonalInformationScreenSpecializationEditName"
+        android:id="@+id/SettingPersonalInformationScreenSpecializationEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/SettingPersonalInformationScreenSchoolEditName"
+        app:layout_constraintTop_toBottomOf="@id/SettingPersonalInformationScreenSchoolEditText"
         app:layout_constraintLeft_toRightOf="@id/SettingPersonalInformationScreenVerticalLeftGuideline"
         app:layout_constraintRight_toLeftOf="@id/SettingPersonalInformationScreenVerticalRightGuideline"
         android:hint="Specialization"/>
 
     <EditText
-        android:id="@+id/SettingPersonalInformationScreenNickNameEditName"
+        android:id="@+id/SettingPersonalInformationScreenNickNameEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/SettingPersonalInformationScreenHorizontalTopGuideline"
