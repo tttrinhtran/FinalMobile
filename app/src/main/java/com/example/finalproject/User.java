@@ -31,6 +31,10 @@ public class User implements Serializable {
     ArrayList<String> _UserFriend;
     ArrayList<String> _UserWaitingList;
 
+    int _UserMinAge = 18;
+    int _UserMaxAge = 50;
+    int _UserRadius = 5000;
+
 
 
     public User(){}
@@ -69,6 +73,9 @@ public class User implements Serializable {
                 ", _UserFriend='" + _UserFriend + '\'' +
                 ", _UserWaitingList='" + _UserWaitingList + '\'' +
                 ", _UserSpecialization='" + _UserSpecialization + '\'' +
+                ", _UserMinAge='" + _UserMinAge + '\'' +
+                ", _UserMaxAge='" + _UserMaxAge + '\'' +
+                ", _UserRadius='" + _UserRadius + '\'' +
                 '}';
     }
 
@@ -176,8 +183,6 @@ public class User implements Serializable {
         this._UserSpecialization = _UserSpecialization;
     }
 
-    public int get_UserID() { return 0; }
-
     public ArrayList<String> get_UserFriend() {
         return _UserFriend;
     }
@@ -193,6 +198,14 @@ public class User implements Serializable {
     public void set_UserWaitingList(ArrayList<String> _UserWaitingList) {
         this._UserWaitingList = _UserWaitingList;
     }
+
+    public void set_UserMinAge( int value ) { this._UserMinAge = value; }
+    public int get_UserMinAge() { return this._UserMinAge; }
+    public void set_UserMaxAge( int value ) { this._UserMaxAge = value; }
+    public int get_UserMaxAge() { return this._UserMaxAge; }
+    public void set_UserRadius( int value ) { this._UserRadius = value; }
+    public int get_UserRadius() { return this._UserRadius; }
+
     public void add_Friend(String _UserFriend)
     {
 
