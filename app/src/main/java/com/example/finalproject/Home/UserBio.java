@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.finalproject.FirebaseCloudStorageManager;
 import com.example.finalproject.R;
 import com.example.finalproject.User;
 
@@ -22,8 +23,8 @@ public class UserBio extends AppCompatActivity {
     TextView _school;
     TextView _biography;
     TextView _specilization;
-    ImageView _nopeButton;
-    ImageView _matchButton;
+    ImageView _backButton;
+    ImageView _userAvatar;
 
 
 
@@ -41,24 +42,27 @@ public class UserBio extends AppCompatActivity {
     }
 
     private void onButtonClicked() {
-        _nopeButton.setOnClickListener(new View.OnClickListener() {
+        _backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _nopeButton.setImageResource(R.drawable.nope_icon_fill);
                 Intent i = new Intent(UserBio.this, HomeScreen.class);
-                startActivity(i);
+                Bundle b = ActivityOptions.makeSceneTransitionAnimation(UserBio.this).toBundle();
+                startActivity(i, b);
             }
         });
     }
 
     private void setDataBio(User user) {
-
         _lastName.setText(user.get_UserLastname());
         _firstName.setText(user.get_UserFirstname());
         _age.setText(user.get_UserAge());
         _school.setText(user.get_UserSchool());
         _biography.setText(user.get_UserBio());
         _specilization.setText(user.get_UserSpecialization());
+
+        FirebaseCloudStorageManager firebaseCloudStorageManager = new FirebaseCloudStorageManager();
+        firebaseCloudStorageManager.FetchingImageFromFirebase(user, _userAvatar);
+        _userAvatar.setScaleType(ImageView.ScaleType.CENTER_CROP);
     }
 
     private void fetchUI() {
@@ -68,7 +72,7 @@ public class UserBio extends AppCompatActivity {
         _school = (TextView) findViewById(R.id.ItemSwipeSchool);
         _biography = (TextView) findViewById(R.id.ItemSwipeBiography);
         _specilization = (TextView) findViewById(R.id.ItemSwipeSpecialization);
-        _nopeButton = (ImageView) findViewById(R.id.ItemSwipeNopeButton);
-        _matchButton = (ImageView) findViewById(R.id.ItemSwipeMatchButton);
+        _backButton = (ImageView) findViewById(R.id.ItemSwipeBackArrow);
+        _userAvatar = (ImageView) findViewById(R.id.ItemSwipeImage);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -86,7 +87,8 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FriendsScreen.this, HomeScreen.class);
-                startActivity(intent);
+                Bundle b = ActivityOptions.makeSceneTransitionAnimation(FriendsScreen.this).toBundle();
+                startActivity(intent, b);
             }
         });
 
