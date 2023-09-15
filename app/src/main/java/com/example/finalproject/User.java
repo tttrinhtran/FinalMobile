@@ -1,9 +1,14 @@
 package com.example.finalproject;
 
 
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 
 // Note: Username is UNIQUE and be the ID of corresponding document on firestore.
 public class User implements Serializable {
@@ -198,12 +203,37 @@ public class User implements Serializable {
     public void add_Friend(String _UserFriend)
     {
 
-        if(this._UserFriend==null)
-        {
-            this._UserFriend=new ArrayList<>();
-        }
-            this._UserFriend.add(_UserFriend);
+        // Add new friend into user friend list
+        if( this._UserFriend == null )  this._UserFriend = new ArrayList<>();
+        this._UserFriend.add(_UserFriend);
 
+        // Initialize conversation
+        HashMap<String, Object> conversationMap = new HashMap<>();
+        conversationMap.put(Constants.KEY_SENDER_ID, this.get_UserName());
+            // Must be filled later
+        conversationMap.put(Constants.SENDER_IMAGE, "null");
+        conversationMap.put(Constants.KEY_RECEIVER_ID, _UserFriend );
+            // Must be filled later
+        conversationMap.put(Constants.RECEIVER_IMAGE, "null");
+        conversationMap.put(Constants.KEY_LAST_MESSAGE, "Let's say bonjour <3");
+        conversationMap.put(Constants.KEY_TIMESTAMP, new Date() );
+
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        String conversationID = _UserFriend + "+" + this.get_UserName();
+
+        database.collection(Constants.KEY_COLLECTION_CONVERSATION)
+                .document(conversationID)
+                .get()
+                .addOnCompleteListener( task -> {
+                    if( task.isSuccessful() ) {
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        if( documentSnapshot.exists() == false ) {
+                            database.collection(Constants.KEY_COLLECTION_CONVERSATION)
+                                    .document( this.get_UserName() + "+" + _UserFriend)
+                                    .set(conversationMap);
+                        }
+                    }
+                } );
     }
     public void add_WaitingList(String _UserWaiting)
     {
