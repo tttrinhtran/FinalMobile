@@ -62,6 +62,9 @@ public class RegisterScreenSignup extends AppCompatActivity {
         else if (password.length() <= 6) {
             Toast.makeText(RegisterScreenSignup.this, "Password must more than 6 characters", Toast.LENGTH_SHORT).show();
             return false;
+        } else if (!EmailValidator.Companion.isValidEmail(username)) {
+            Toast.makeText(RegisterScreenSignup.this, "Invalid Email Format", Toast.LENGTH_SHORT).show();
+            return false;
         }
         else {
             if (password.equals(confirm_password)){

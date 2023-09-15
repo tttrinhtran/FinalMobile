@@ -40,7 +40,6 @@
         android:textSize="24sp"
         android:textColor="@color/primary_blue"
         android:fontFamily="@font/tommy_medium" />
-
     <TextView
         android:id="@+id/InfoRegisterTitle2"
         android:layout_width="wrap_content"
@@ -154,7 +153,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/InfoRegisterEmailLayout"
+        android:id="@+id/InfoRegisterNicknameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -174,6 +173,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:paddingTop="20dp"
             android:paddingStart="10dp"
+            android:paddingEnd="20dp"
             android:hint="Nick name"
             android:backgroundTint="@android:color/transparent"
             android:textSize="14sp"
@@ -181,15 +181,25 @@
             android:fontFamily="@font/lato"
             android:maxLines="1"
             android:lines="1"
-            android:singleLine="true"/>
+            android:singleLine="true"
+            android:maxLength="10" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/InfoRegisterNumberofCharacterCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/InfoRegisterNicknameLayout"
+        app:layout_constraintBottom_toBottomOf="@id/InfoRegisterNicknameLayout"
+        app:layout_constraintRight_toRightOf="@id/InfoRegisterNicknameLayout" />
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/InfoRegisterAgeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/InfoRegisterEmailLayout"
+        app:layout_constraintTop_toBottomOf="@id/InfoRegisterNicknameLayout"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="10dp"

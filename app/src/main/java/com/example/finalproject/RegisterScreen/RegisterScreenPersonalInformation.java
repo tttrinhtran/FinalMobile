@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -21,7 +23,6 @@ import java.util.Locale;
 
 public class RegisterScreenPersonalInformation extends AppCompatActivity {
 
-    private static final String TAG = "RegisterScreenPersonalInformation";
     User user;
     EditText _PersonalInformationFirstName;
     EditText _PersonalInformationLastName;
@@ -30,6 +31,7 @@ public class RegisterScreenPersonalInformation extends AppCompatActivity {
     EditText _PersonalInformationDoB;
     TextView _PersonalInformationConfirmButton;
     ImageView _PersonalInformationBackButton;
+    TextView _PersonalInformationNicknameCharactersCounter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,7 @@ public class RegisterScreenPersonalInformation extends AppCompatActivity {
         // "view -> {...}" is lambda format instead of "new View.OnClickListener(){...}"
         _PersonalInformationConfirmButton.setOnClickListener(view -> {
             boolean isSuccessfull = setPersonalInformationForNewUser();
-            if(isSuccessfull == true){
+            if(isSuccessfull){
                 Intent intent = new Intent (RegisterScreenPersonalInformation.this, RegisterScreenAvatar.class);
                 intent.putExtra("new_user", user);
                 startActivity(intent);
@@ -55,7 +57,22 @@ public class RegisterScreenPersonalInformation extends AppCompatActivity {
             startActivity(intent);
         });
 
+        _PersonalInformationNickname.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                _PersonalInformationNicknameCharactersCounter.setText(_PersonalInformationNickname.getText().toString().length() + "/10");
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     private boolean setPersonalInformationForNewUser() {
@@ -89,6 +106,8 @@ public class RegisterScreenPersonalInformation extends AppCompatActivity {
 //        _PersonalInformationDoB = (EditText) findViewById(R.id.InfoRegisterAgeEditText);
         _PersonalInformationDoB = (EditText) getDOB();
         _PersonalInformationConfirmButton = (TextView) findViewById(R.id.InfoRegisterConfirmButton);
+
+        _PersonalInformationNicknameCharactersCounter = findViewById(R.id.InfoRegisterNumberofCharacterCounter);
     }
 
     private EditText getDOB() {
