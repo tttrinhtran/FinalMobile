@@ -32,13 +32,10 @@ import com.example.finalproject.User;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.io.IOException;
+import java.util.zip.Inflater;
 
 public class SettingScreenPersonalInformationBottomSheetFragment extends BottomSheetDialogFragment {
 
-    private FirebaseCloudStorageManager firebaseCloudStorageManager;
-    private SharedPreferenceManager<User> sharedPreferenceManager;
-
-    private User user;
     private final int REQUEST_IMAGE_CAPTURE_CAMERA = 1;
     private final int REQUEST_IMAGE_CAPTURE_GALLARY = 2;
 
@@ -78,18 +75,12 @@ public class SettingScreenPersonalInformationBottomSheetFragment extends BottomS
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.activity_setting_screen_personal_information_bottom_sheet_fragment, container, false);
 
+        View parent_view = getLayoutInflater().inflate(R.layout.activity_setting_screen_modify_personal_information, null,false);
+
         _SettingPersonalInformationBottomSheetCameraButton = view.findViewById(R.id.SettingPersonalInformationBottomSheetFragmentCameraButton);
         _SettingPersonalInformationBottomSheetLibraryButton = view.findViewById(R.id.SettingPersonalInformationBottomSheetFragmentLibraryButton);
         _SettingPersonalInformationBottomSheetCancelButton = view.findViewById(R.id.SettingPersonalInformationBottomSheetFragmentCancelButton);
-
-        firebaseCloudStorageManager = new FirebaseCloudStorageManager();
-
-        sharedPreferenceManager = new SharedPreferenceManager<>(User.class, requireActivity());
-        user = sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_SHARED_PREFERENCE_USERS);
-
-        assert Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU || getArguments() != null;
-
-        _SettingPersonalInformationAvatarRender = (ImageView) getArguments().getSerializable("user_avatar");
+        _SettingPersonalInformationAvatarRender = parent_view.findViewById(R.id.SettingPersonalInformationScreenAvatarImageView);
 
         _SettingPersonalInformationBottomSheetCameraButton.setOnClickListener(v -> {
 
@@ -125,9 +116,6 @@ public class SettingScreenPersonalInformationBottomSheetFragment extends BottomS
                 GetImageFromGallary();
             }
         });
-
-        _SettingPersonalInformationBottomSheetCancelButton.setOnClickListener(v -> finish_fragment());
-
         return view;
     }
 
@@ -141,7 +129,8 @@ public class SettingScreenPersonalInformationBottomSheetFragment extends BottomS
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_CAPTURE_CAMERA){
+        if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_IMAGE_CAPTURE_CAMERA && data != null){
+            // newAvatarBitmap = ImagePicker.getImageFromResult(this, resultCode, data);
             ChangeAvatar();
         }
     }
@@ -159,13 +148,6 @@ public class SettingScreenPersonalInformationBottomSheetFragment extends BottomS
     }
 
     private void ChangeAvatar() {
-        firebaseCloudStorageManager.uploadImageToFirebase(newAvatarBitmap, user.get_UserName());
         _SettingPersonalInformationAvatarRender.setImageBitmap(newAvatarBitmap);
-        finish_fragment();
-    }
-
-    private void finish_fragment() {
-        FragmentManager fm = requireActivity().getSupportFragmentManager();
-        fm.popBackStack ("settingScreenPersonalInformationBottomSheetFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 }
