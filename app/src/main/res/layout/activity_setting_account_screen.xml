@@ -32,24 +32,52 @@
         android:textStyle="bold"/>
 
     <EditText
-        android:id="@+id/SettingAccountScreenEmailTextView"
+        android:id="@+id/SettingAccountScreenOldPasswordEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/SettingAccountScreenTitleTextView"
         app:layout_constraintLeft_toRightOf="@id/SettingAccountScreenLeftGuideline"
         app:layout_constraintRight_toLeftOf="@id/SettingAccountScreenRightGuideline"
-        android:hint="Email"
+        android:hint="Old Password"
         android:layout_marginTop="10dp"/>
 
     <EditText
-        android:id="@+id/SettingAccountScreenPasswordTextView"
+        android:id="@+id/SettingAccountScreenNewPasswordEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/SettingAccountScreenEmailTextView"
+        app:layout_constraintTop_toBottomOf="@id/SettingAccountScreenOldPasswordEditText"
         app:layout_constraintLeft_toLeftOf="@id/SettingAccountScreenLeftGuideline"
         app:layout_constraintRight_toRightOf="@id/SettingAccountScreenRightGuideline"
         android:layout_marginTop="10dp"
-        android:text="Password" />
+        android:hint="New Password" />
+
+    <Button
+        android:id="@+id/SettingAccountScreenSubmitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/SettingAccountScreenNewPasswordEditText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
+        android:text="Submit"/>
+
+    <ImageButton
+        android:id="@+id/SettingAccountScreenBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@id/SettingAccountScreenLeftGuideline"
+        android:src="@drawable/back_arrow_icon"/>
+    <ProgressBar
+        android:id="@+id/SectionAccountScreenProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="invisible"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
