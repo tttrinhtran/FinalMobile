@@ -16,14 +16,16 @@ import java.util.ArrayList;
 public class sectionListAdap  extends RecyclerView.Adapter<sectionListAdap.MyViewHolder> {
     ArrayList<Section> sectionList;
     Context context;
-    sectionListInterface sectionListInterface;
 
-    public sectionListAdap(ArrayList<Section> sectionList, Context context, sectionListInterface sectionListInterface)
+    private final sectionListInterface sectionListInterface;
+
+
+    public sectionListAdap(ArrayList<Section> sectionList, Context context, com.example.finalproject.Section.sectionListInterface sectionListInterface)
     {
         this.sectionList=sectionList;
         this.context=context;
-        this.sectionListInterface=sectionListInterface;
 
+        this.sectionListInterface = sectionListInterface;
     }
 
     @NonNull
@@ -53,11 +55,24 @@ public class sectionListAdap  extends RecyclerView.Adapter<sectionListAdap.MyVie
         TextView tvDate;
 
 //        ShapeableImageView img;
-        public MyViewHolder(@NonNull View itemView, com.example.finalproject.Section.sectionListInterface sectionListInterface) {
+        public MyViewHolder(@NonNull View itemView, sectionListInterface sectionListInterface) {
             super(itemView);
             tvName=itemView.findViewById(R.id.SectionNameItemRecycler);
             tvHour=itemView.findViewById(R.id.SectionTimeItemRecycler);
             tvDate=itemView.findViewById(R.id.SectionDateItemRecycler);
+            int pos=getAbsoluteAdapterPosition();
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (sectionListInterface != null) {
+                        int pos = getAdapterPosition();
+                        if (pos != RecyclerView.NO_POSITION) {
+                            sectionListInterface.onItemClick(pos);
+                        }
+
+                    }
+                }
+            });
         }
     }
 }

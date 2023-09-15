@@ -38,8 +38,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject"
         tools:targetApi="33">
-        <activity android:name=".Home.UserBio"
-            android:exported="false"/>
+        <activity
+            android:name=".Setting.SettingAccountScreen"
+            android:exported="false" />
+        <activity
+            android:name=".Home.UserBio"
+            android:exported="false" />
+        <activity
+            android:name=".Section.SectionDetail"
+            android:exported="false" />
         <activity
             android:name=".Setting.SettingScreenModifyPersonalInformation"
             android:exported="false" />

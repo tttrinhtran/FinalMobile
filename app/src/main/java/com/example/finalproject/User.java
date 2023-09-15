@@ -1,6 +1,8 @@
 package com.example.finalproject;
 
 
+import android.graphics.Bitmap;
+
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -26,7 +28,6 @@ public class User implements Serializable {
     String _UserHobbies;
     String _UserSchool;
     String _UserSpecialization;
-    String _UserAvatarUrl;
     ArrayList<String> _UserFriend;
     ArrayList<String> _UserWaitingList;
 
@@ -173,14 +174,6 @@ public class User implements Serializable {
 
     public void set_UserSpecialization(String _UserSpecialization) {
         this._UserSpecialization = _UserSpecialization;
-    }
-
-    public String get_UserAvatarUrl() {
-        return _UserAvatarUrl;
-    }
-
-    public void set_UserAvatarUrl(String _UserAvatarUrl) {
-        this._UserAvatarUrl = _UserAvatarUrl;
     }
 
     public int get_UserID() { return 0; }

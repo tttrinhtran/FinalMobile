@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Setting.SettingAccountScreen">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/SettingAccountScreenLeftGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/SettingAccountScreenRightGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9"/>
+
+    <TextView
+        android:id="@+id/SettingAccountScreenTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
+        android:text="Account"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/SettingAccountScreenEmailTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/SettingAccountScreenTitleTextView"
+        app:layout_constraintLeft_toRightOf="@id/SettingAccountScreenLeftGuideline"
+        app:layout_constraintRight_toLeftOf="@id/SettingAccountScreenRightGuideline"
+        android:hint="Email"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/SettingAccountScreenPasswordTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/SettingAccountScreenEmailTextView"
+        app:layout_constraintLeft_toLeftOf="@id/SettingAccountScreenLeftGuideline"
+        app:layout_constraintRight_toRightOf="@id/SettingAccountScreenRightGuideline"
+        android:layout_marginTop="10dp"
+        android:text="Password" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

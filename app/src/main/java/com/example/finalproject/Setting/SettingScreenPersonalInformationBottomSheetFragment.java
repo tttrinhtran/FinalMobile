@@ -32,6 +32,7 @@ import com.example.finalproject.User;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.zip.Inflater;
 
 public class SettingScreenPersonalInformationBottomSheetFragment extends BottomSheetDialogFragment {
@@ -48,7 +49,7 @@ public class SettingScreenPersonalInformationBottomSheetFragment extends BottomS
 
     private ImageView _SettingPersonalInformationAvatarRender;
 
-    private Bitmap newAvatarBitmap;
+    private Bitmap newAvatarBitmap = null;
 
 
     private ActivityResultLauncher<Intent> RetrieveImageFromGallary = registerForActivityResult(
@@ -57,10 +58,10 @@ public class SettingScreenPersonalInformationBottomSheetFragment extends BottomS
                     Intent data = result.getData();
                     if (data != null && data.getData() != null) {
                         Uri selectedImageUri = data.getData();
-                        try {
-                            newAvatarBitmap = MediaStore.Images.Media.getBitmap(
-                                    requireActivity().getContentResolver(),
-                                    selectedImageUri);
+                            try {
+                                newAvatarBitmap = MediaStore.Images.Media.getBitmap(
+                                        requireActivity().getContentResolver(),
+                                        selectedImageUri);
                         }
                         catch (IOException e) {
                             e.printStackTrace();
@@ -101,19 +102,15 @@ public class SettingScreenPersonalInformationBottomSheetFragment extends BottomS
         });
 
         _SettingPersonalInformationBottomSheetLibraryButton.setOnClickListener(v -> {
-            if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-
-                if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(),
-                        Manifest.permission.READ_EXTERNAL_STORAGE)) {} else {
-                    ActivityCompat.requestPermissions(requireActivity(),
-                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                            REQUEST_IMAGE_CAPTURE_GALLARY);
-                    if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
-                            == PackageManager.PERMISSION_GRANTED) GetImageFromGallary();
-                }
-            } else {
+            if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED){
                 GetImageFromGallary();
+            } else {
+                ActivityCompat.requestPermissions(requireActivity(),
+                        new String[]{Manifest.permission.READ_MEDIA_IMAGES},
+                        REQUEST_IMAGE_CAPTURE_GALLARY);
+                if(ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    GetImageFromGallary();
+                }
             }
         });
         return view;
@@ -130,8 +127,8 @@ public class SettingScreenPersonalInformationBottomSheetFragment extends BottomS
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_IMAGE_CAPTURE_CAMERA && data != null){
-            // newAvatarBitmap = ImagePicker.getImageFromResult(this, resultCode, data);
-            ChangeAvatar();
+            Bundle extras = data.getExtras();
+            newAvatarBitmap = (Bitmap) extras.get("data");
         }
     }
 
@@ -142,12 +139,17 @@ public class SettingScreenPersonalInformationBottomSheetFragment extends BottomS
 
         RetrieveImageFromGallary.launch(intent);
 
-        if(newAvatarBitmap != null){
-            ChangeAvatar();
-        }
     }
 
-    private void ChangeAvatar() {
-        _SettingPersonalInformationAvatarRender.setImageBitmap(newAvatarBitmap);
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Activity activity = getActivity();
+        if (activity != null) {
+            ImageView avatarImageView = activity.findViewById(R.id.SettingPersonalInformationScreenAvatarImageView);
+            if(newAvatarBitmap != null) {
+                avatarImageView.setImageBitmap(newAvatarBitmap);
+            }
+        }
     }
 }
