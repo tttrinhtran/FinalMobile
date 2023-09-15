@@ -1,8 +1,6 @@
 package com.example.finalproject;
 
 
-import android.graphics.Bitmap;
-
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -31,9 +29,9 @@ public class User implements Serializable {
     ArrayList<String> _UserFriend;
     ArrayList<String> _UserWaitingList;
 
-    int _UserMinAge = 18;
-    int _UserMaxAge = 50;
-    int _UserRadius = 5000;
+    float _UserMinAge = 18;
+    float _UserMaxAge = 50;
+    float _UserDistancePref;
 
 
 
@@ -75,7 +73,7 @@ public class User implements Serializable {
                 ", _UserSpecialization='" + _UserSpecialization + '\'' +
                 ", _UserMinAge='" + _UserMinAge + '\'' +
                 ", _UserMaxAge='" + _UserMaxAge + '\'' +
-                ", _UserRadius='" + _UserRadius + '\'' +
+                ", _UserDistancePref='" + _UserDistancePref + '\'' +
                 '}';
     }
 
@@ -200,11 +198,11 @@ public class User implements Serializable {
     }
 
     public void set_UserMinAge( int value ) { this._UserMinAge = value; }
-    public int get_UserMinAge() { return this._UserMinAge; }
+    public float get_UserMinAge() { return this._UserMinAge; }
     public void set_UserMaxAge( int value ) { this._UserMaxAge = value; }
-    public int get_UserMaxAge() { return this._UserMaxAge; }
-    public void set_UserRadius( int value ) { this._UserRadius = value; }
-    public int get_UserRadius() { return this._UserRadius; }
+    public float get_UserMaxAge() { return this._UserMaxAge; }
+    public void set_UserDistancePref(int value ) { this._UserDistancePref = value; }
+    public float get_UserDistancePref() { return this._UserDistancePref; }
 
     public void add_Friend(String _UserFriend)
     {

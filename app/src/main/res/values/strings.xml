@@ -40,8 +40,8 @@
     <string name="frame_rate_value_with_unit">%d fps</string>
 
     <string-array name="rangeSlider">
-        <item>25</item>
-        <item>40</item>
+        <item>50</item>
+        <item>99</item>
     </string-array>
 
     <string name="launch_activity">Launch activity</string>

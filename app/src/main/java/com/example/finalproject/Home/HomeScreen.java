@@ -38,6 +38,7 @@ import com.example.finalproject.FriendsScreen;
 import com.example.finalproject.Home.Active.ActiveListAdapter;
 import com.example.finalproject.LocationUpdatePeriodicallyService;
 import com.example.finalproject.Position;
+import com.example.finalproject.ProfileScreen;
 import com.example.finalproject.R;
 import com.example.finalproject.Setting.SettingScreen;
 import com.example.finalproject.SharedPreferenceManager;
@@ -365,7 +366,7 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeScreen.this, SettingScreen.class);
+                Intent intent = new Intent(HomeScreen.this, ProfileScreen.class);
                 startActivity(intent);
             }
         });

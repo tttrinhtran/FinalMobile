@@ -2,13 +2,112 @@ package com.example.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+
+import com.example.finalproject.Home.HomeScreen;
+import com.example.finalproject.databinding.ActivityProfileScreenBinding;
+
+import java.util.List;
 
 public class ProfileScreen extends AppCompatActivity {
+
+    private ActivityProfileScreenBinding binding;
+    private User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_screen);
+        binding = ActivityProfileScreenBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        init();
+        setListener();
+        navBar();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        init();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SharedPreferenceManager<User> currentInstance = new SharedPreferenceManager<>(User.class, this);
+        currentInstance.storeSerializableObjectToSharedPreference(currentUser, Constants.KEY_SHARED_PREFERENCE_USERS);
+    }
+
+    private void init() {
+
+        SharedPreferenceManager<User> currentInstance = new SharedPreferenceManager<>(User.class, this);
+        currentUser = currentInstance.retrieveSerializableObjectFromSharedPreference( Constants.KEY_SHARED_PREFERENCE_USERS );
+
+        binding.ProfileScreenPhoneText.setText(currentUser._UserPhone);
+        binding.ProfileScreenEmailText.setText(currentUser._UserName);
+        binding.ProfileScreenUsername.setText(currentUser._UserFirstname + " " + currentUser._UserLastname);
+
+        binding.ProfileScreenDistanceSlider.setValue(currentUser._UserDistancePref);
+        binding.ProfileScreenDistanceText.setText( (int)currentUser._UserDistancePref + " mi");
+        binding.ProfileScreenAgeSlider.setValues( currentUser._UserMinAge, currentUser._UserMaxAge);
+        binding.ProfileScreenAgeText.setText( (int)currentUser._UserMinAge + "-" + (int)currentUser._UserMaxAge);
+    }
+
+    private void setListener() {
+
+        binding.ProfileScreenDistanceSlider.addOnChangeListener( (slider, value, fromUser) -> {
+            currentUser._UserDistancePref = value;
+            binding.ProfileScreenDistanceText.setText( (int)value + " mi");
+        } );
+
+        binding.ProfileScreenAgeSlider.addOnChangeListener( (rangeSlider, value, fromUser) -> {
+            List<Float> values = rangeSlider.getValues();
+
+            currentUser._UserMinAge = values.get(0);
+            currentUser._UserMaxAge = values.get(1);
+
+            binding.ProfileScreenAgeText.setText( (int)currentUser._UserMinAge + "-" + (int)currentUser._UserMaxAge);
+        } );
+
+    }
+
+    private void navBar(){
+        ImageView home;
+        ImageView section;
+        ImageView friend;
+        ImageView profile;
+
+
+        home = findViewById(R.id.NaviBarHomeIcon);
+        section= findViewById(R.id.NaviBarSectionIcon);
+        friend= findViewById(R.id.NaviBarFriendIcon); friend.setImageResource(R.drawable.friend_icon_fill);
+        profile = findViewById(R.id.NaviBarProfile);
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileScreen.this, HomeScreen.class);
+                Bundle b = ActivityOptions.makeSceneTransitionAnimation(ProfileScreen.this).toBundle();
+                startActivity(intent, b);
+            }
+        });
+
+        section.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 }
