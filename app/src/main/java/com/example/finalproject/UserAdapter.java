@@ -47,11 +47,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         Log.d("Hoktro", "onBindViewHolder: " + position);
         FirebaseFirestoreController<User> currentInstance = new FirebaseFirestoreController<>(User.class);
         User receiverUser;
+        int state = 0;
+        if(!Objects.equals(currentUser.get_UserName(), currentConversation.senderId)) state = 1;
 
         if(Objects.equals(currentConversation.senderId, currentUser.get_UserName())) receiverUser = currentInstance.retrieveObjectsFirestoreByID(Constants.KEY_COLLECTION_USERS, currentConversation.receiverId);
         else receiverUser = currentInstance.retrieveObjectsFirestoreByID(Constants.KEY_COLLECTION_USERS, currentConversation.senderId);
 
-        holder.setUserData( receiverUser, currentConversation.message );
+        holder.setUserData( receiverUser, currentConversation.message, state );
     }
 
     @Override
@@ -69,10 +71,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             binding = itemChatListBinding;
         }
 
-        void setUserData( User user, String lastMessage ) {
+        void setUserData( User user, String lastMessage, int state ) {
 //            biding.imageProfile.setImageBitmap(getUserImage(user.image));
             binding.ItemChatFriendName.setText(user._UserFirstname + " " + user._UserLastname);
-            // Just for testing
+            if( state == 0 ) lastMessage = "You: " + lastMessage;
             binding.ItemChatContent.setText(lastMessage);
             binding.getRoot().setOnClickListener( v -> userListener.onUserClicker(user));
             Log.d( "Adapter", "setUserData: " + user._UserName );

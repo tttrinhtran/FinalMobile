@@ -141,7 +141,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void loadReceiverDetails() {
         receiverUser = (User) getIntent().getSerializableExtra(Constants.RECEIVED_USER);
-        binding.ChatUsername.setText(receiverUser.get_UserName());
+        binding.ChatUsername.setText(receiverUser.get_UserFirstname() + receiverUser.get_UserLastname());
     }
 
     private void setListener() {
@@ -164,6 +164,8 @@ public class ChatActivity extends AppCompatActivity {
     private void updateConversation( String message ) {
         DocumentReference documentReference = database.collection(Constants.KEY_COLLECTION_CONVERSATION).document(conversationId);
         documentReference.update(
+                Constants.KEY_SENDER_ID, senderUser.get_UserName(),
+                Constants.KEY_RECEIVER_ID, receiverUser.get_UserName(),
                 Constants.KEY_LAST_MESSAGE, message,
                 Constants.KEY_TIMESTAMP, new Date()
         );
