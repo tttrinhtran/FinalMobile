@@ -41,6 +41,9 @@
         <activity android:name=".Home.UserBio"
             android:exported="false"/>
         <activity
+            android:name=".Section.SectionDetail"
+            android:exported="false" />
+        <activity
             android:name=".Setting.SettingScreenModifyPersonalInformation"
             android:exported="false" />
         <activity
