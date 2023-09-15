@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.example.finalproject.FirebaseAuthentication;
+import com.example.finalproject.LoginScreen;
 import com.example.finalproject.R;
 
 public class SettingScreen extends AppCompatActivity {
@@ -27,6 +29,18 @@ public class SettingScreen extends AppCompatActivity {
             startActivity(intent);
         });
 
+        _SettingScreenChangeAccountButton.setOnClickListener(view -> {
+            Intent intent = new Intent(SettingScreen.this, SettingAccountScreen.class);
+            startActivity(intent);
+        });
+
+        _SettingScreenSignOutButton.setOnClickListener(view -> {
+            FirebaseAuthentication firebaseAuthentication = new FirebaseAuthentication(SettingScreen.this);
+            firebaseAuthentication.SignOut();
+
+            Intent intent = new Intent(SettingScreen.this, LoginScreen.class);
+            startActivity(intent);
+        });
     }
 
     private void SettingScreen_UIElementsFetching() {

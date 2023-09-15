@@ -75,10 +75,11 @@
         android:id="@+id/SettingScreenSignOutButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/SettingScreenAboutButton"
+        android:text="Sign out"
         app:layout_constraintLeft_toRightOf="@id/SettingScreenVerticalLeftGuideline"
         app:layout_constraintRight_toLeftOf="@id/SettingScreenVerticalRightGuideline"
-        android:layout_marginTop="10dp"
-        android:text="Sign out"/>
+        app:layout_constraintTop_toBottomOf="@id/SettingScreenAboutButton"
+        android:layout_marginTop="10dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
