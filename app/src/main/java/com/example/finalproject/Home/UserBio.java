@@ -24,8 +24,7 @@ public class UserBio extends AppCompatActivity {
     TextView _specilization;
     ImageView _nopeButton;
     ImageView _matchButton;
-    Intent i = getIntent();
-    User user = (User) i.getSerializableExtra("USER_OBJECT");
+
 
 
     @Override
@@ -33,8 +32,11 @@ public class UserBio extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_bio);
 
+        Intent i = getIntent();
+        User user = (User) i.getSerializableExtra("USER_OBJECT");
+
         fetchUI();
-        setDataBio();
+        setDataBio(user);
         onButtonClicked();
     }
 
@@ -44,14 +46,12 @@ public class UserBio extends AppCompatActivity {
             public void onClick(View v) {
                 _nopeButton.setImageResource(R.drawable.nope_icon_fill);
                 Intent i = new Intent(UserBio.this, HomeScreen.class);
-                User cur = user;
-                i.putExtra("USER_OBJECT_BIO", cur);
                 startActivity(i);
             }
         });
     }
 
-    private void setDataBio() {
+    private void setDataBio(User user) {
 
         _lastName.setText(user.get_UserLastname());
         _firstName.setText(user.get_UserFirstname());
