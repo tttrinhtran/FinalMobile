@@ -20,7 +20,7 @@ public class Constants {
     public static final String KEY_MESSAGE = "message";
     public static final String KEY_TIMESTAMP = "timestamp";
     public static final String KEY_COLLECTION_CONVERSATION  = "conversation";
-    public static final String KEY_LAST_MESSAGE  = "lastMessage";
+    public static final String KEY_LAST_MESSAGE  = "message";
 
     // For list friend
     public static final String SHARED_PREFERENCE_LAST_LOCATION_KEY = "last_location";
