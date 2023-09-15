@@ -5,12 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Section.SectionDetail"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
-    android:paddingBottom="20dp">
+    android:padding="20dp">
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="@id/SectionBioJoinBtn"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,6 +19,14 @@
             android:id="@+id/SectionBio"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <ImageButton
+                android:id="@+id/SectionBioBackBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_back_white"
+                android:backgroundTint="@color/primary_blue">
+
+            </ImageButton>
 
             <ImageView
                 android:id="@+id/SecrionBioImg"
@@ -30,7 +36,7 @@
                 android:src="@drawable/sample"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/SectionBioBackBtn" />
 
             <TextView
                 android:id="@+id/SectionBioName"

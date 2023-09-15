@@ -65,7 +65,7 @@ public class sectionListAdap  extends RecyclerView.Adapter<sectionListAdap.MyVie
                 @Override
                 public void onClick(View v) {
                     if (sectionListInterface != null) {
-                        int pos = getAdapterPosition();
+                        int pos = getAbsoluteAdapterPosition();
                         if (pos != RecyclerView.NO_POSITION) {
                             sectionListInterface.onItemClick(pos);
                         }

@@ -20,25 +20,26 @@ public class FirebaseFirestoreController<T> {
     }
 
     // this function used to add to the "new data" to the "collection", the new data document is marked by "new ID".
-    public void addToFirestore (String collection, String newID, T newData){
+    public void addToFirestore(String collection, String newID, T newData) {
         db.collection(collection).document(newID)
                 .set(newData);
     }
 
 
     // This function is used to retrieve all documents ID of a specific Collection.
-    public ArrayList<String> retrieveAllDocumentsIDOfaCollection (String collection){
+    public ArrayList<String> retrieveAllDocumentsIDOfaCollection(String collection) {
         CollectionReference _collection = db.collection(collection);
         Task<QuerySnapshot> _documentTask = _collection.get();
         ArrayList<String> list = new ArrayList<>();
 
         // loop for waiting the future is completely retrieved from firestore
-        while(!_documentTask.isComplete()){}
+        while (!_documentTask.isComplete()) {
+        }
 
         // Traversing the list of documents and store them into an ArrayList.
-        if(_documentTask.isSuccessful()){
+        if (_documentTask.isSuccessful()) {
             for (DocumentSnapshot document : _documentTask.getResult().getDocuments()) {
-                    list.add(document.getId().toString());
+                list.add(document.getId().toString());
             }
         }
         return list;
@@ -46,19 +47,20 @@ public class FirebaseFirestoreController<T> {
 
     // Retrieving by ID. ID is also the name of the document, in the other words, this function get the corresponding document.
     // This firestore assumes every document ID are unique. For example, there is only one user whose ID 01.
-    public T retrieveObjectsFirestoreByID (String collection, String id){
+    public T retrieveObjectsFirestoreByID(String collection, String id) {
         T tObject = null;
         DocumentReference _documentShot = db.collection(collection).document(id);
         Task _documentTask = _documentShot.get();
-        while(!_documentTask.isComplete()){}
+        while (!_documentTask.isComplete()) {
+        }
         DocumentSnapshot _documentSnapShot = (DocumentSnapshot) _documentTask.getResult();
-        if(_documentSnapShot != null) tObject = _documentSnapShot.toObject(type);
+        if (_documentSnapShot != null) tObject = _documentSnapShot.toObject(type);
         return tObject;
     }
 
     // The following function is used to update a specific field of a document, for ex, the isActive atribute of UserName ABC.
     // There are three parameters: Collection, id of Document (i.e., username in case of User class), field for updating (i.e., isActive)
-    public <Type> void updateDocumentField(String collection, String id, String field, Type newValue){
+    public <Type> void updateDocumentField(String collection, String id, String field, Type newValue) {
         // Update an existing document
         db.collection(collection).document(id).update(field, newValue);
     }
