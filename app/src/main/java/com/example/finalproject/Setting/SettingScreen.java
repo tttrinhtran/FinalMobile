@@ -2,6 +2,7 @@ package com.example.finalproject.Setting;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -20,6 +21,11 @@ public class SettingScreen extends AppCompatActivity {
         setContentView(R.layout.activity_setting_screen);
 
         SettingScreen_UIElementsFetching();
+
+        _SettingScreenChangePersonalInformationButton.setOnClickListener(v -> {
+            Intent intent = new Intent(SettingScreen.this, SettingScreenModifyPersonalInformation.class);
+            startActivity(intent);
+        });
 
     }
 

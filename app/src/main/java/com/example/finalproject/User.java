@@ -119,7 +119,7 @@ public class User implements Serializable {
         this._UserJoinDate = _UserJoinDate;
     }
 
-    public String get__UserNickName() {
+    public String get_UserNickName() {
         return _UserNickName;
     }
 

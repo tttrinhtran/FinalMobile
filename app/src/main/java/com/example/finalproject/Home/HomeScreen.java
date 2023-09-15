@@ -39,6 +39,7 @@ import com.example.finalproject.Home.Active.ActiveListAdapter;
 import com.example.finalproject.LocationUpdatePeriodicallyService;
 import com.example.finalproject.Position;
 import com.example.finalproject.R;
+import com.example.finalproject.Setting.SettingScreen;
 import com.example.finalproject.SharedPreferenceManager;
 import com.example.finalproject.User;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -264,7 +265,7 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
     void setUp() {
         // Setting for Hello Text
         getUser();
-        String temp = "Hello! " + user.get_UserName();
+        String temp = "Hello! " + user.get_UserFirstname();
         titleText.setText(temp);
 
 
@@ -363,7 +364,8 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(HomeScreen.this, SettingScreen.class);
+                startActivity(intent);
             }
         });
     }
