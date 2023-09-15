@@ -11,18 +11,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalproject.Listeners.UserListener;
+import com.example.finalproject.Message.ChatMessage;
 import com.example.finalproject.databinding.ItemChatListBinding;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
+import java.util.Objects;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
-    private final List<String> users;
+    private final List<ChatMessage> conversations;
+    private final User currentUser;
     private final UserListener userListener;
 
-    public UserAdapter( List<String> users, UserListener userListener ) {
-        this.users = users;
+    public UserAdapter( List<ChatMessage> conversations, User currentUser, UserListener userListener ) {
+        this.conversations = conversations;
+        this.currentUser = currentUser;
         this.userListener = userListener;
     }
 
@@ -39,14 +42,25 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull UserAdapter.UserViewHolder holder, int position ) {
-        // holder.setUserData(users.get(position));
+
+        ChatMessage currentConversation = conversations.get(position);
+        Log.d("Hoktro", "onBindViewHolder: " + position);
         FirebaseFirestoreController<User> currentInstance = new FirebaseFirestoreController<>(User.class);
-        User currentUser = currentInstance.retrieveObjectsFirestoreByID( Constants.KEY_COLLECTION_USERS, users.get(position) );
-        holder.setUserData(currentUser);
+        User receiverUser;
+        int state = 0;
+        if(!Objects.equals(currentUser.get_UserName(), currentConversation.senderId)) state = 1;
+
+        if(Objects.equals(currentConversation.senderId, currentUser.get_UserName())) receiverUser = currentInstance.retrieveObjectsFirestoreByID(Constants.KEY_COLLECTION_USERS, currentConversation.receiverId);
+        else receiverUser = currentInstance.retrieveObjectsFirestoreByID(Constants.KEY_COLLECTION_USERS, currentConversation.senderId);
+
+        holder.setUserData( receiverUser, currentConversation.message, state );
     }
 
     @Override
-    public int getItemCount() { return users.size(); }
+    public int getItemCount() {
+        // Log.d("Hoktro", "getItemCount: " + conversations.size());
+        return conversations.size();
+    }
 
     class UserViewHolder extends RecyclerView.ViewHolder {
 
@@ -57,11 +71,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             binding = itemChatListBinding;
         }
 
-        void setUserData( User user ) {
+        void setUserData( User user, String lastMessage, int state ) {
 //            biding.imageProfile.setImageBitmap(getUserImage(user.image));
             binding.ItemChatFriendName.setText(user._UserFirstname + " " + user._UserLastname);
-            // Just for testing
-            binding.ItemChatContent.setText(user._UserName);
+            if( state == 0 ) lastMessage = "You: " + lastMessage;
+            binding.ItemChatContent.setText(lastMessage);
             binding.getRoot().setOnClickListener( v -> userListener.onUserClicker(user));
             Log.d( "Adapter", "setUserData: " + user._UserName );
         }

@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -72,7 +71,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        if( chatMessage.get(position).senderID.equals(senderID)) return VIEW_TYPE_SENT;
+        if( chatMessage.get(position).senderId.equals(senderID)) return VIEW_TYPE_SENT;
         return VIEW_TYPE_RECEIVED;
     }
 

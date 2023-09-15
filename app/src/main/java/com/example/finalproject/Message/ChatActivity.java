@@ -9,7 +9,6 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finalproject.Constants;
-import com.example.finalproject.PreferenceManager;
 import com.example.finalproject.SharedPreferenceManager;
 import com.example.finalproject.User;
 import com.example.finalproject.databinding.ActivityChatBinding;
@@ -110,15 +109,15 @@ public class ChatActivity extends AppCompatActivity {
 
                 if( documentChange.getType() == DocumentChange.Type.ADDED ) {
                     ChatMessage chatMessage = new ChatMessage();
-                    chatMessage.senderID = documentChange.getDocument().getString(Constants.KEY_SENDER_ID);
-                    chatMessage.receiverID = documentChange.getDocument().getString(Constants.KEY_RECEIVER_ID);
+                    chatMessage.senderId = documentChange.getDocument().getString(Constants.KEY_SENDER_ID);
+                    chatMessage.receiverId = documentChange.getDocument().getString(Constants.KEY_RECEIVER_ID);
                     chatMessage.message = documentChange.getDocument().getString(Constants.KEY_MESSAGE);
                     chatMessage.dateTime = getReadableDateTime(documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP));
-                    chatMessage.dateObject = documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP);
+                    chatMessage.timestamp = documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP);
                     chatMessageList.add(chatMessage);
                 }
             }
-            Collections.sort(chatMessageList, (obj1, obj2) -> obj1.dateObject.compareTo(obj2.dateObject));
+            Collections.sort(chatMessageList, (obj1, obj2) -> obj1.timestamp.compareTo(obj2.timestamp));
             if( count == 0 ) chatAdapter.notifyDataSetChanged();
             else {
                 chatAdapter.notifyItemRangeInserted(chatMessageList.size(), chatMessageList.size());
@@ -142,7 +141,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void loadReceiverDetails() {
         receiverUser = (User) getIntent().getSerializableExtra(Constants.RECEIVED_USER);
-        binding.ChatUsername.setText(receiverUser.get_UserName());
+        binding.ChatUsername.setText(receiverUser.get_UserFirstname() + " " + receiverUser.get_UserLastname());
     }
 
     private void setListener() {
@@ -155,9 +154,6 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void addConversation( HashMap<String, Object> conversation ) {
-//        database.collection(Constants.KEY_COLLECTION_CONVERSATION)
-//                .add(conversation)
-//                .addOnSuccessListener( documentReference -> conversationId = documentReference.getId() );
 
         database.collection(Constants.KEY_COLLECTION_CONVERSATION)
                 .document((String)conversation.get(Constants.KEY_SENDER_ID) + "+" + (String)conversation.get(Constants.KEY_RECEIVER_ID))
@@ -168,6 +164,8 @@ public class ChatActivity extends AppCompatActivity {
     private void updateConversation( String message ) {
         DocumentReference documentReference = database.collection(Constants.KEY_COLLECTION_CONVERSATION).document(conversationId);
         documentReference.update(
+                Constants.KEY_SENDER_ID, senderUser.get_UserName(),
+                Constants.KEY_RECEIVER_ID, receiverUser.get_UserName(),
                 Constants.KEY_LAST_MESSAGE, message,
                 Constants.KEY_TIMESTAMP, new Date()
         );

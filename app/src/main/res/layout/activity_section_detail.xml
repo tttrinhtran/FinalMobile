@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Section.SectionDetail"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="20dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/SectionBioJoinBtn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:scrollbars="none">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/SectionBio"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/SecrionBioImg"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sample"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/SectionBioName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/SecrionBioImg"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="Mobile"
+                android:fontFamily="@font/tommy_medium"
+                android:textColor="@color/primary_blue"
+                android:textSize="30sp"/>
+
+
+            <TextView
+                android:id="@+id/SectionBioHost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/SectionBioName"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="5dp"
+                android:text="Host:Uyen"
+                android:fontFamily="@font/tommy_regular"
+                android:textColor="@color/black"
+                android:textSize="12sp"/>
+
+            <ImageView
+                android:id="@+id/SectionBioHourIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/location_icon"
+                android:backgroundTint="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/SectionBioHost"
+                android:layout_marginTop="10dp"
+                android:scaleType="center"/>
+
+            <TextView
+                android:id="@+id/SectionBioHour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/SectionBioHost"
+                app:layout_constraintStart_toEndOf="@id/SectionBioHourIcon"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:text="12H"
+                android:fontFamily="@font/tommy_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/SectionBioDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/SectionBioHost"
+                app:layout_constraintStart_toEndOf="@id/SectionBioHour"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:text="12/11/2023"
+                android:fontFamily="@font/tommy_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/SectionBioDescriptionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/SectionBioHour"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="20dp"
+                android:text="Description"
+                android:fontFamily="@font/tommy_regular"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/primary_dark"/>
+
+            <TextView
+                android:id="@+id/SectionBioDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/SectionBioDescriptionTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="10dp"
+                android:text="Hello let learn mobile with me"
+                android:fontFamily="@font/tommy_regular"
+                android:textSize="14sp"
+                android:textColor="@color/black"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+   <TextView
+       android:layout_width="match_parent"
+       android:layout_height="40dp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       android:id="@+id/SectionBioJoinBtn"
+       android:background="@color/primary_blue"
+       android:text="Join Section"
+       android:gravity="center"
+       android:textSize="18sp"
+       android:fontFamily="@font/tommy_regular"
+       android:textColor="@color/light_orange"
+       >
+
+   </TextView>
+</androidx.constraintlayout.widget.ConstraintLayout>
