@@ -264,7 +264,7 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
     void setUp() {
         // Setting for Hello Text
         getUser();
-        String temp = "Hello! " + user.get_UserName();
+        String temp = "Hello! " + user.get_UserFirstname();
         titleText.setText(temp);
 
 
