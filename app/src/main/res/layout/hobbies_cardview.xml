@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/HobbiesCardviewContainer"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:clickable="true"
-    android:foreground="@drawable/round_outline_btn">
+    android:background="@drawable/round_outline_btn"
+    android:layout_margin="8dp">
     <LinearLayout
+        android:id="@+id/HobbiesCardLayout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/round_solid_btn">
+        android:layout_height="wrap_content">
         <TextView
             android:id="@+id/HobbiesCardviewText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:hint="hobbie"/>
+            android:hint="hobbies"
+            android:textSize="15sp"/>
     </LinearLayout>
 
 

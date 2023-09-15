@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.finalproject.Home.HomeScreen;
 import com.example.finalproject.RegisterScreen.RegisterScreenSignup;
+import com.example.finalproject.Section.SectionScreen;
 import com.google.gson.Gson;
 
 import java.lang.reflect.Type;
@@ -108,7 +109,7 @@ public class LoginScreen extends AppCompatActivity {
 
                 if(isLoginSuccessful) {
                     _LoginScreenUser = userFirebaseController.retrieveObjectsFirestoreByID(KEY_COLLECTION_USERS, userName);
-                    Intent intent = new Intent(LoginScreen.this, LocationUpdateActivity.class);
+                    Intent intent = new Intent(LoginScreen.this, SectionScreen.class);
                     passOnUser();
                     startActivity(intent);
                 } else {

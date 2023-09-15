@@ -1,8 +1,9 @@
 package com.example.finalproject.Section;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Section {
+public class Section implements Serializable {
     String _SectionDate;
     String _SectionHour;
     String _SectionName;
@@ -74,5 +75,12 @@ public Section(){}
 
     public void set_SectionHour(String _SectionHour) {
         this._SectionHour = _SectionHour;
+    }
+    public void add_SectionParticipate(String user)
+    {
+        if(this._SectionParticipate==null) {
+            this._SectionParticipate = new ArrayList<>();
+        }
+        this._SectionParticipate.add(user);
     }
 }

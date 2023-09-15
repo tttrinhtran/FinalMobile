@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.finalproject.FirebaseFirestoreController;
@@ -27,6 +28,7 @@ public class RegisterScreenHobbies extends AppCompatActivity implements HobbiesS
     HobbiesAdapter _hobbiesAdapter;
     ArrayList<String> _hobbiesList;
     TextView _RegisterScreenHobbiesNextButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
