@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,16 +16,18 @@ import com.example.finalproject.databinding.ActivityFriendsScreenBinding;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class FriendsScreen extends AppCompatActivity implements UserListener {
 
     private ActivityFriendsScreenBinding binding;
     private List<String> friendList;
+    private List<ChatMessage> conversations;
+    private User currentUser;
     private UserAdapter userAdapter;
 
     @Override
@@ -36,6 +37,7 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
         setContentView(binding.getRoot());
         setListener();
         getUser();
+        listenConversation();
         navBar();
     }
 
@@ -46,16 +48,15 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
     private void getUser() {
 
         SharedPreferenceManager<User> currentInstance = new SharedPreferenceManager<>(User.class, this);
-        User currentUser = currentInstance.retrieveSerializableObjectFromSharedPreference( Constants.KEY_SHARED_PREFERENCE_USERS );
+        currentUser = currentInstance.retrieveSerializableObjectFromSharedPreference( Constants.KEY_SHARED_PREFERENCE_USERS );
 
         friendList = currentUser.get_UserFriend();
+        conversations = new ArrayList<>();
 
-        if( friendList.isEmpty() ) showErrorMessage();
-        else {
-            userAdapter = new UserAdapter( friendList, this );
-            binding.FriendScreenChat.setAdapter(userAdapter);
-            binding.FriendScreenChat.setVisibility(View.VISIBLE);
-        }
+         userAdapter = new UserAdapter( conversations, currentUser, this );
+         binding.FriendScreenChat.setAdapter(userAdapter);
+         binding.FriendScreenChat.setVisibility(View.VISIBLE);
+
     }
 
     private void showErrorMessage() {
@@ -104,5 +105,56 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
         startActivity(intent);
         // finish();
     }
+
+    private void listenConversation() {
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        database.collection(Constants.KEY_COLLECTION_CONVERSATION)
+                .whereEqualTo(Constants.KEY_SENDER_ID, currentUser.get_UserName() )
+                .addSnapshotListener(eventListener);
+        database.collection(Constants.KEY_COLLECTION_CONVERSATION)
+                .whereEqualTo(Constants.KEY_RECEIVER_ID, currentUser.get_UserName() )
+                .addSnapshotListener(eventListener);
+    }
+
+    private final EventListener<QuerySnapshot> eventListener = ( value, error ) -> {
+        if( error != null || value == null ) return;
+        for( DocumentChange documentChange : value.getDocumentChanges() ) {
+            if( documentChange.getType() == DocumentChange.Type.ADDED ) {
+                Log.d("Hoktro", "Added");
+                String senderId = documentChange.getDocument().getString(Constants.KEY_SENDER_ID);
+                String receiverId = documentChange.getDocument().getString(Constants.KEY_RECEIVER_ID);
+                ChatMessage chatMessage = new ChatMessage();
+                chatMessage.senderId = senderId;
+                chatMessage.receiverId = receiverId;
+                if( currentUser.get_UserName().equals(senderId) ) {
+                    chatMessage.conversationImage = documentChange.getDocument().getString(Constants.RECEIVER_IMAGE);
+                    chatMessage.conversationId = documentChange.getDocument().getString(Constants.KEY_RECEIVER_ID);
+                }
+                else {
+                    chatMessage.conversationImage = documentChange.getDocument().getString(Constants.SENDER_IMAGE);
+                    chatMessage.conversationId = documentChange.getDocument().getString(Constants.KEY_SENDER_ID);
+                }
+                chatMessage.message = documentChange.getDocument().getString(Constants.KEY_LAST_MESSAGE);
+                chatMessage.timestamp = documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP);
+                conversations.add(chatMessage);
+            }
+            else if ( documentChange.getType() == DocumentChange.Type.MODIFIED ) {
+                Log.d("Hoktro", "Modified");
+                for( int i = 0; i < conversations.size(); ++i ) {
+                    String senderId = documentChange.getDocument().getString(Constants.KEY_SENDER_ID);
+                    String receiverId = documentChange.getDocument().getString(Constants.KEY_RECEIVER_ID);
+                    if( conversations.get(i).senderId.equals(senderId) && conversations.get(i).receiverId.equals(receiverId) ) {
+                        conversations.get(i).message = documentChange.getDocument().getString(Constants.KEY_LAST_MESSAGE);
+                        conversations.get(i).timestamp = documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP);
+                        break;
+                    }
+                }
+            }
+        }
+        Collections.sort( conversations, ( obj1, obj2 ) -> obj2.timestamp.compareTo(obj1.timestamp) );
+        userAdapter.notifyDataSetChanged();
+        binding.FriendScreenChat.smoothScrollToPosition(0);
+        binding.FriendScreenChat.setVisibility(View.VISIBLE);
+    };
 
 }
