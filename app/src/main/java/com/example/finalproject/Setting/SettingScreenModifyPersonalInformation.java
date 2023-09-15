@@ -4,11 +4,11 @@ import static com.example.finalproject.Constants.KEY_COLLECTION_USERS;
 import static com.example.finalproject.Constants.KEY_SHARED_PREFERENCE_USERS;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,8 +18,6 @@ import com.example.finalproject.FirebaseFirestoreController;
 import com.example.finalproject.R;
 import com.example.finalproject.SharedPreferenceManager;
 import com.example.finalproject.User;
-
-import java.io.Serializable;
 
 public class SettingScreenModifyPersonalInformation extends AppCompatActivity {
 
@@ -48,30 +46,22 @@ public class SettingScreenModifyPersonalInformation extends AppCompatActivity {
         firebaseCloudStorageManager = new FirebaseCloudStorageManager();
         userSharedPreferenceManager = new SharedPreferenceManager<>(User.class, SettingScreenModifyPersonalInformation.this);
 
-        user = userSharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_SHARED_PREFERENCE_USERS);
+        UserPreparation();
 
-        _SettingPersonalInfoAvatar.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        firebaseCloudStorageManager.FetchingImageFromFirebase(user,_SettingPersonalInfoAvatar);
+        OriginalDataFetching();
+
 
         _SettingPersonalInfoAvatar.setOnClickListener(view -> {
             SettingScreenPersonalInformationBottomSheetFragment settingScreenPersonalInformationBottomSheetFragment = new SettingScreenPersonalInformationBottomSheetFragment();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("user", user);
+            settingScreenPersonalInformationBottomSheetFragment.setArguments(bundle);
             settingScreenPersonalInformationBottomSheetFragment.show(getSupportFragmentManager(), "settingScreenPersonalInformationBottomSheetFragment");
         });
 
-        _SettingPersonalInfoNickname.setText(user.get_UserNickName());
-        _SettingPersonalInfoFirstname.setText(user.get_UserFirstname());
-        _SettingPersonalInfoLastname.setText(user.get_UserLastname());
-        _SettingPersonalInfoSchool.setText(user.get_UserSchool());
-        _SettingPersonalInfoSpecialization.setText(user.get_UserSpecialization());
-        _SettingPersonalInfoPhone.setText(user.get_UserPhone());
-
         _SettingPersonalInfoConfirmButton.setOnClickListener(v -> {
-            user.set_UserNickName(_SettingPersonalInfoNickname.getText().toString());
-            user.set_UserFirstname(_SettingPersonalInfoFirstname.getText().toString());
-            user.set_UserLastname(_SettingPersonalInfoLastname.getText().toString());
-            user.set_UserSchool(_SettingPersonalInfoSchool.getText().toString());
-            user.set_UserSpecialization(_SettingPersonalInfoSpecialization.getText().toString());
-            user.set_UserPhone(_SettingPersonalInfoPhone.getText().toString());
+
+            UserSetting();
 
             FirebaseFirestoreController<User> firebaseFirestoreController = new FirebaseFirestoreController<>(User.class);
             firebaseFirestoreController.addToFirestore(KEY_COLLECTION_USERS, user.get_UserName(), user);
@@ -90,6 +80,30 @@ public class SettingScreenModifyPersonalInformation extends AppCompatActivity {
         _SettingPersonalInforBackButton.setOnClickListener(v -> finish());
     }
 
+    private void UserPreparation() {
+        user = userSharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_SHARED_PREFERENCE_USERS);
+
+        _SettingPersonalInfoAvatar.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        firebaseCloudStorageManager.FetchingImageFromFirebase(user, _SettingPersonalInfoAvatar);
+    }
+
+    private void UserSetting() {
+        user.set_UserNickName(_SettingPersonalInfoNickname.getText().toString());
+        user.set_UserFirstname(_SettingPersonalInfoFirstname.getText().toString());
+        user.set_UserLastname(_SettingPersonalInfoLastname.getText().toString());
+        user.set_UserSchool(_SettingPersonalInfoSchool.getText().toString());
+        user.set_UserSpecialization(_SettingPersonalInfoSpecialization.getText().toString());
+        user.set_UserPhone(_SettingPersonalInfoPhone.getText().toString());
+    }
+
+    private void OriginalDataFetching() {
+        _SettingPersonalInfoNickname.setText(user.get_UserNickName());
+        _SettingPersonalInfoFirstname.setText(user.get_UserFirstname());
+        _SettingPersonalInfoLastname.setText(user.get_UserLastname());
+        _SettingPersonalInfoSchool.setText(user.get_UserSchool());
+        _SettingPersonalInfoSpecialization.setText(user.get_UserSpecialization());
+        _SettingPersonalInfoPhone.setText(user.get_UserPhone());
+    }
 
 
     private void SettingPersonalInformation_UIElementsFetching() {
