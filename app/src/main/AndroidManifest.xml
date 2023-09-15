@@ -62,7 +62,7 @@
             android:name=".LocationUpdateActivity"
             android:exported="true" />
         <activity
-            android:name=".RegisterScreen.Test"
+            android:name=".FirebaseCloudStorageManager"
             android:exported="false" />
         <activity
             android:name=".FriendsScreen"

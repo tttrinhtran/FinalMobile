@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.finalproject.FirebaseCloudStorageManager
 import com.example.finalproject.R
 import com.example.finalproject.User
 import com.google.firebase.storage.FirebaseStorage
@@ -26,6 +27,8 @@ class RegisterScreenAvatar : AppCompatActivity() {
     private lateinit var nextButton :Button
     private var imageBitmap: Bitmap? = null
 
+    private lateinit var firebaseCloudStorageManager: FirebaseCloudStorageManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_screen_avatar)
@@ -33,6 +36,8 @@ class RegisterScreenAvatar : AppCompatActivity() {
         RegisterScreenAvatar_FetchingUIElements()
 
         user = intent.getSerializableExtra("new_user") as User
+
+        firebaseCloudStorageManager = FirebaseCloudStorageManager()
 
         request_permission()
 
@@ -46,7 +51,7 @@ class RegisterScreenAvatar : AppCompatActivity() {
 
         nextButton.setOnClickListener{
             if (imageBitmap != null){
-                uploadImageToFirebase(imageBitmap!!, user._UserName)
+                firebaseCloudStorageManager.uploadImageToFirebase(imageBitmap!!, user._UserName)
 
                 startActivity(Intent(this, RegisterScreenHobbies::class.java).apply {
                     putExtra("new_user",user)
@@ -81,29 +86,5 @@ class RegisterScreenAvatar : AppCompatActivity() {
             imageBitmap = data.extras!!.get("data") as Bitmap
             image.setImageBitmap(imageBitmap)
         }
-    }
-
-    fun uploadImageToFirebase(image: Bitmap, imageName: String): String? {
-        val storage = FirebaseStorage.getInstance()
-        // Create a storage reference from our app
-        val storageRef = storage.reference
-
-        // Create a reference to "imageName.jpg"
-        val mountainsRef = storageRef.child("$imageName.jpg")
-
-        // Create a reference to 'images/imageName.jpg'
-        val mountainImagesRef = storageRef.child("images/$imageName.jpg")
-
-        // While the file names are the same, the references point to different files
-        mountainsRef.name == mountainImagesRef.name // true
-        mountainsRef.path == mountainImagesRef.path // false
-        val baos = ByteArrayOutputStream()
-        image.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        val data = baos.toByteArray()
-        val uploadTask = mountainsRef.putBytes(data)
-        uploadTask.addOnFailureListener {
-            // Handle unsuccessful uploads
-        }.addOnSuccessListener { }
-        return mountainsRef.downloadUrl.toString()
     }
 }

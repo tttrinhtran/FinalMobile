@@ -30,7 +30,10 @@ import android.os.Bundle
 import android.os.IBinder
 import android.provider.Settings
 import android.util.Log
+import android.view.View
+import android.view.View.VISIBLE
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -96,6 +99,8 @@ class LocationUpdateActivity : AppCompatActivity(), SharedPreferences.OnSharedPr
 
     private lateinit var sharedPreferences: SharedPreferences
 
+    private lateinit var loadingProgressBar: ProgressBar
+
     // Monitors connection to the while-in-use service.
     private val foregroundOnlyServiceConnection = object : ServiceConnection {
 
@@ -122,12 +127,18 @@ class LocationUpdateActivity : AppCompatActivity(), SharedPreferences.OnSharedPr
         sharedPreferences =
             getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
 
-        nextButt = findViewById(R.id.LocationUpdateNextButton)
+        LocationUpdate_UIElements()
 
         nextButt.setOnClickListener {
+            loadingProgressBar.visibility = VISIBLE
             val intent = Intent(this@LocationUpdateActivity, HomeScreen::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun LocationUpdate_UIElements() {
+        nextButt = findViewById(R.id.LocationUpdateNextButton)
+        loadingProgressBar = findViewById(R.id.LocationUpdateProgressBar)
     }
 
     override fun onStart() {
