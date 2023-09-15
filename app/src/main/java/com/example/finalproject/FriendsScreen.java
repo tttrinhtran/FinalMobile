@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.finalproject.Home.Active.ActiveListAdapter;
 import com.example.finalproject.Home.HomeScreen;
 import com.example.finalproject.Listeners.UserListener;
 import com.example.finalproject.Message.ChatActivity;
@@ -21,14 +22,17 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class FriendsScreen extends AppCompatActivity implements UserListener {
 
     private ActivityFriendsScreenBinding binding;
     private List<String> friendList;
+    private ArrayList<User> friendActive;
     private List<ChatMessage> conversations;
     private User currentUser;
     private UserAdapter userAdapter;
+    private ActiveListAdapter activeListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +56,14 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
 
         friendList = currentUser.get_UserFriend();
         conversations = new ArrayList<>();
+        friendActive = new ArrayList<>();
 
-         userAdapter = new UserAdapter( conversations, currentUser, this );
-         binding.FriendScreenChat.setAdapter(userAdapter);
-         binding.FriendScreenChat.setVisibility(View.VISIBLE);
+        userAdapter = new UserAdapter( conversations, currentUser, this );
+        binding.FriendScreenChat.setAdapter(userAdapter);
+        binding.FriendScreenChat.setVisibility(View.VISIBLE);
+
+        activeListAdapter = new ActiveListAdapter( friendActive, this );
+        binding.FriendScreenActiveFriend.setAdapter(activeListAdapter);
 
     }
 
@@ -108,12 +116,17 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
 
     private void listenConversation() {
         FirebaseFirestore database = FirebaseFirestore.getInstance();
+
         database.collection(Constants.KEY_COLLECTION_CONVERSATION)
                 .whereEqualTo(Constants.KEY_SENDER_ID, currentUser.get_UserName() )
                 .addSnapshotListener(eventListener);
+
         database.collection(Constants.KEY_COLLECTION_CONVERSATION)
                 .whereEqualTo(Constants.KEY_RECEIVER_ID, currentUser.get_UserName() )
                 .addSnapshotListener(eventListener);
+
+        database.collection(Constants.KEY_COLLECTION_USERS)
+                .addSnapshotListener(eventActive);
     }
 
     private final EventListener<QuerySnapshot> eventListener = ( value, error ) -> {
@@ -157,4 +170,24 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
         binding.FriendScreenChat.setVisibility(View.VISIBLE);
     };
 
+    private final EventListener<QuerySnapshot> eventActive = ( value, error ) -> {
+        if( error != null || value == null ) return;
+        FirebaseFirestoreController<User> instance = new FirebaseFirestoreController<>(User.class);
+
+        for( DocumentChange documentChange : value.getDocumentChanges() ) {
+            if( documentChange.getType() == DocumentChange.Type.ADDED ) {
+                String friend = documentChange.getDocument().getString("_UserName");
+                // if( documentChange.getDocument().getBoolean(Constants.KEY_USER_ACTIVE) && friendList.contains(friend)) friendActive.add(instance.retrieveObjectsFirestoreByID(Constants.KEY_COLLECTION_USERS, friend));
+                if( friendList.contains(friend) ) friendActive.add(instance.retrieveObjectsFirestoreByID(Constants.KEY_COLLECTION_USERS, friend));
+            }
+            else if ( documentChange.getType() == DocumentChange.Type.MODIFIED ) {
+                Log.d("Hoktro", "Modified");
+                String friend = documentChange.getDocument().getString("_UserName");
+                for( User user : friendActive ) if(Objects.equals(user.get_UserName(), friend)) user._UserActive = documentChange.getDocument().getBoolean(Constants.KEY_USER_ACTIVE);
+            }
+        }
+
+        activeListAdapter.notifyDataSetChanged();
+        binding.FriendScreenActiveFriend.smoothScrollToPosition(0);
+    };
 }
