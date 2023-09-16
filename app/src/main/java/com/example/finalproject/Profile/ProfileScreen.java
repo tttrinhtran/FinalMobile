@@ -17,7 +17,6 @@ import com.example.finalproject.Home.HomeScreen;
 import com.example.finalproject.Login.LoginScreen;
 import com.example.finalproject.R;
 import com.example.finalproject.Section.SectionScreen;
-import com.example.finalproject.Setting.SettingScreenPersonalInformationBottomSheetFragment;
 import com.example.finalproject.SharedPreferenceManager;
 import com.example.finalproject.User;
 import com.example.finalproject.databinding.ActivityProfileScreenBinding;
@@ -141,7 +140,7 @@ public class ProfileScreen extends AppCompatActivity {
             settingScreenPersonalInformationBottomSheetFragment.show(getSupportFragmentManager(), "settingScreenPersonalInformationBottomSheetFragment");
         });
 
-        binding.LogOutText.setOnClickListener(view -> {
+        binding.LogoutLayout.setOnClickListener(view -> {
             FirebaseAuthentication firebaseAuthentication = new FirebaseAuthentication(ProfileScreen.this);
             firebaseAuthentication.SignOut();
 

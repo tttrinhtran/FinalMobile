@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.finalproject.FirebaseAuthentication;
 import com.example.finalproject.FirebaseFirestoreController;
+import com.example.finalproject.Home.HomeScreen;
 import com.example.finalproject.LocationUpdateActivity;
 import com.example.finalproject.R;
 import com.example.finalproject.RegisterScreen.EmailValidator;
