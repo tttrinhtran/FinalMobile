@@ -14,7 +14,6 @@ import com.example.finalproject.FriendsScreen;
 import com.example.finalproject.Home.HomeScreen;
 import com.example.finalproject.R;
 import com.example.finalproject.Section.SectionScreen;
-import com.example.finalproject.Setting.SettingScreenPersonalInformationBottomSheetFragment;
 import com.example.finalproject.SharedPreferenceManager;
 import com.example.finalproject.User;
 import com.example.finalproject.databinding.ActivityProfileScreenBinding;
