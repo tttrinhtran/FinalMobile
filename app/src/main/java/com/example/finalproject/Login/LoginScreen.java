@@ -1,33 +1,30 @@
-package com.example.finalproject;
+package com.example.finalproject.Login;
 
-import static com.example.finalproject.Constants.FIRESTORE_LOCATION_KEY;
 import static com.example.finalproject.Constants.KEY_COLLECTION_USERS;
 import static com.example.finalproject.Constants.KEY_SHARED_PREFERENCE_USERS;
-import static com.example.finalproject.Constants.LOCATION_UPDATE_STATUS;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.finalproject.Home.HomeScreen;
+import com.example.finalproject.FirebaseAuthentication;
+import com.example.finalproject.FirebaseFirestoreController;
+import com.example.finalproject.LocationUpdateActivity;
+import com.example.finalproject.R;
 import com.example.finalproject.RegisterScreen.EmailValidator;
 import com.example.finalproject.RegisterScreen.RegisterScreenSignup;
-import com.example.finalproject.Section.SectionScreen;
-import com.google.gson.Gson;
+import com.example.finalproject.SharedPreferenceManager;
+import com.example.finalproject.User;
 
-import java.lang.reflect.Type;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -40,6 +37,7 @@ public class LoginScreen extends AppCompatActivity {
     EditText _LoginScreenPasswordEditText;
     TextView _LoginScreenLoginButton;
     TextView _LoginScreenRegisterText;
+    TextView _LoginScreenForgotPassword;
 
     ProgressBar progressBar;
 
@@ -68,6 +66,11 @@ public class LoginScreen extends AppCompatActivity {
             Intent intent = new Intent(LoginScreen.this, RegisterScreenSignup.class);
             startActivity(intent);
         });
+
+        _LoginScreenForgotPassword.setOnClickListener(view ->{
+            Intent intent = new Intent(LoginScreen.this, LoginScreenForgotPassword.class);
+            startActivity(intent);
+        });
     }
 
     private void LoginScreen_LoadingUIElements() {
@@ -76,6 +79,7 @@ public class LoginScreen extends AppCompatActivity {
         _LoginScreenLoginButton = (TextView) findViewById(R.id.LoginScreenButton);
         _LoginScreenRegisterText = (TextView) findViewById(R.id.LoginScreenRegisterEditText);
         progressBar = (ProgressBar) findViewById(R.id.LoginScreenProgressBar);
+        _LoginScreenForgotPassword = findViewById(R.id.LoginScreenForgotPassword);
     }
 
     // This function used to check the user account. If it is exist then the data of corresponding user will be fetched

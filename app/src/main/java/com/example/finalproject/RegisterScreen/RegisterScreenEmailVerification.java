@@ -13,17 +13,17 @@ import android.widget.Toast;
 
 import com.example.finalproject.FirebaseAuthentication;
 import com.example.finalproject.FirebaseFirestoreController;
-import com.example.finalproject.LoginScreen;
+import com.example.finalproject.Login.LoginScreen;
 import com.example.finalproject.R;
 import com.example.finalproject.User;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import org.w3c.dom.Text;
-
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -77,9 +77,17 @@ public class RegisterScreenEmailVerification extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (firebaseAuthentication.getFirebaseCurrentUser().isEmailVerified()){
+                        user.set_UserDistancePref(500);
+                        user.set_UserMinAge(18);
+                        user.set_UserMaxAge(30);
+
+                        Date date = Calendar.getInstance().getTime();
+                        DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy hh:mm:ss");
+                        String strDate = dateFormat.format(date);
+
+                        user.set_UserJoinDate(strDate);
                         UserDatabase.addToFirestore(KEY_COLLECTION_USERS, user.get_UserName(), user);
                         Toast.makeText(RegisterScreenEmailVerification.this, "Register Successfully", Toast.LENGTH_SHORT).show();
-
                         Intent intent = new Intent(RegisterScreenEmailVerification.this, LoginScreen.class);
                         startActivity(intent);
                     }else Toast.makeText(RegisterScreenEmailVerification.this, "Verify email before continue", Toast.LENGTH_SHORT).show();

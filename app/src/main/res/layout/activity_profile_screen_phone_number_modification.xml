@@ -31,15 +31,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.9"/>
 
-    <TextView
-        android:id="@+id/ProfileScreenPhoneModificationTitleTextview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/ProfileScreenPhoneModificationTopGuideline"
-        app:layout_constraintBottom_toBottomOf="@id/ProfileScreenPhoneModificationBackButton"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:text="Phone Number Setting"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ProfileScreenPhoneModificationNewPhoneLayout"
@@ -74,16 +65,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <Button
-        android:id="@+id/ProfileScreenPhoneModificationConfirmButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/ProfileScreenPhoneModificationBottomGuideline"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:text="Confirm"/>
-
     <ProgressBar
         android:id="@+id/ProfileScreenPhoneModificationProgressBar"
         android:layout_width="wrap_content"
@@ -94,12 +75,43 @@
         app:layout_constraintRight_toRightOf="parent"
         android:visibility="invisible"/>
 
-    <ImageButton
+    <ImageView
         android:id="@+id/ProfileScreenPhoneModificationBackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/ProfileScreenPhoneModificationTopGuideline"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="@id/ProfileScreenPhoneModificationLeftGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="30dp"
         android:src="@drawable/back_arrow_icon"/>
+
+    <TextView
+        android:id="@+id/ProfileScreenPhoneModificationTitleTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="150dp"
+        android:text="Phone reset"
+        android:fontFamily="@font/tommy_medium"
+        android:textSize="30sp"
+        android:textColor="@color/primary_blue"/>
+
+
+    <TextView
+        android:id="@+id/ProfileScreenPhoneModificationConfirmButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/ProfileScreenPhoneModificationBottomGuideline"
+        app:layout_constraintRight_toLeftOf="@id/ProfileScreenPhoneModificationRightGuideline"
+        app:layout_constraintLeft_toRightOf="@id/ProfileScreenPhoneModificationLeftGuideline"
+        android:padding="10dp"
+        android:background="@color/primary_blue"
+        android:text="Confirm"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/lato"
+        android:gravity="center"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,7 +33,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="20dp"
                 app:shapeAppearance="@style/Circular"
-                android:src="@drawable/sample"
                 android:scaleType="centerCrop"/>
 
             <TextView

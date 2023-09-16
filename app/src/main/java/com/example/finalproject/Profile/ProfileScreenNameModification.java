@@ -52,7 +52,7 @@ public class ProfileScreenNameModification extends AppCompatActivity {
             user.set_UserLastname(newLastname);
             user.set_UserNickName(newNickname);
 
-            userSharedPreferenceManager.storeSerializableObjectToSharedPreference(user, "KEY_SHARED_PREFERENCE_USERS");
+            userSharedPreferenceManager.storeSerializableObjectToSharedPreference(user, KEY_SHARED_PREFERENCE_USERS);
 
             userFirebaseFirestoreController.updateDocumentField(KEY_COLLECTION_USERS, user.get_UserName(), "_UserFirstname", newFirstname);
             userFirebaseFirestoreController.updateDocumentField(KEY_COLLECTION_USERS, user.get_UserName(), "_UserLastname", newLastname);

@@ -1,8 +1,6 @@
 package com.example.finalproject.RegisterScreen;
 
 
-import static com.example.finalproject.Constants.KEY_COLLECTION_USERS;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,13 +9,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.finalproject.FirebaseAuthentication;
-import com.example.finalproject.FirebaseFirestoreController;
-import com.example.finalproject.LoginScreen;
 import com.example.finalproject.R;
 import com.example.finalproject.User;
 

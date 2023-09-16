@@ -53,7 +53,7 @@ class RegisterScreenAvatar : AppCompatActivity() {
             if (imageBitmap != null){
                 firebaseCloudStorageManager.uploadImageToFirebase(imageBitmap!!, user._UserName)
 
-                startActivity(Intent(this, RegisterScreenHobbies::class.java).apply {
+                startActivity(Intent(this, RegisterScreenMajor::class.java).apply {
                     putExtra("new_user",user)
                 })
             }

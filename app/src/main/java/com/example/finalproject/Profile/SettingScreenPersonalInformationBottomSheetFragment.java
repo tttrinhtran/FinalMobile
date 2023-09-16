@@ -1,6 +1,8 @@
 package com.example.finalproject.Profile;
 
+import static com.example.finalproject.Constants.FIRESTORE_LOCATION_KEY;
 import static com.example.finalproject.Constants.KEY_SHARED_PREFERENCE_USERS;
+import static com.example.finalproject.Constants.LOCATION_UPDATE_STATUS;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -18,14 +20,18 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.finalproject.FirebaseCloudStorageManager;
+import com.example.finalproject.Position;
 import com.example.finalproject.R;
 import com.example.finalproject.SharedPreferenceManager;
 import com.example.finalproject.User;
@@ -33,12 +39,19 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.zip.Inflater;
+
+
 
 public class SettingScreenPersonalInformationBottomSheetFragment extends BottomSheetDialogFragment {
 
+    private String user_name;
     private final int REQUEST_IMAGE_CAPTURE_CAMERA = 1;
     private final int REQUEST_IMAGE_CAPTURE_GALLARY = 2;
+
+    private boolean isComplete = false;
 
 
     private Button _SettingPersonalInformationBottomSheetLibraryButton;
@@ -62,7 +75,9 @@ public class SettingScreenPersonalInformationBottomSheetFragment extends BottomS
                                 newAvatarBitmap = MediaStore.Images.Media.getBitmap(
                                         requireActivity().getContentResolver(),
                                         selectedImageUri);
-                        }
+                                StoreAndUpdateAvatar(newAvatarBitmap);
+
+                            }
                         catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -82,6 +97,8 @@ public class SettingScreenPersonalInformationBottomSheetFragment extends BottomS
         _SettingPersonalInformationBottomSheetLibraryButton = view.findViewById(R.id.SettingPersonalInformationBottomSheetFragmentLibraryButton);
         _SettingPersonalInformationBottomSheetCancelButton = view.findViewById(R.id.SettingPersonalInformationBottomSheetFragmentCancelButton);
         _SettingPersonalInformationAvatarRender = parent_view.findViewById(R.id.SettingPersonalInformationScreenAvatarImageView);
+
+        user_name = getArguments().getString("user");
 
         _SettingPersonalInformationBottomSheetCameraButton.setOnClickListener(v -> {
 
@@ -129,6 +146,9 @@ public class SettingScreenPersonalInformationBottomSheetFragment extends BottomS
         if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_IMAGE_CAPTURE_CAMERA && data != null){
             Bundle extras = data.getExtras();
             newAvatarBitmap = (Bitmap) extras.get("data");
+
+            StoreAndUpdateAvatar(newAvatarBitmap);
+
         }
     }
 
@@ -138,18 +158,32 @@ public class SettingScreenPersonalInformationBottomSheetFragment extends BottomS
         intent.setAction(Intent.ACTION_GET_CONTENT);
 
         RetrieveImageFromGallary.launch(intent);
-
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    private void StoreAndUpdateAvatar(Bitmap newAvatarBitmap) {
         Activity activity = getActivity();
         if (activity != null) {
             ImageView avatarImageView = activity.findViewById(R.id.ProfileScreenAvatar);
             if(newAvatarBitmap != null) {
+                // Get  user
+                FirebaseCloudStorageManager firebaseCloudStorageManager = new FirebaseCloudStorageManager();
+                firebaseCloudStorageManager.uploadImageToFirebase(newAvatarBitmap, user_name);
+
                 avatarImageView.setImageBitmap(newAvatarBitmap);
+
+                removeSelf();
+
             }
         }
+    }
+
+    private void removeSelf(){
+        requireActivity().getSupportFragmentManager().beginTransaction()
+                .remove(this).commit();
     }
 }
