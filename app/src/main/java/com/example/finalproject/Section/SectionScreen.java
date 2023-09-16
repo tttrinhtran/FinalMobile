@@ -47,7 +47,20 @@ public class SectionScreen extends AppCompatActivity implements sectionListInter
         tabSetup();
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sectionFirebaseFirestoreController = new FirebaseFirestoreController<>(Section.class);
+        clear();
+        getData();
+        tabSetup();
+    }
+    void clear()
+    {
+        sectionList.clear();
+        mySectionList.clear();
+        recyclerViewList.clear();
+    }
 
     void tabSetup()
     {

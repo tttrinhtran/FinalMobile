@@ -236,7 +236,7 @@
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:backgroundTint="@android:color/transparent"
-            android:hint="Enter date"
+            android:hint="Birthday"
             android:paddingTop="20dp"
             android:paddingStart="10dp"
             android:textSize="14sp"

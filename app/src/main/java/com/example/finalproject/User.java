@@ -31,7 +31,7 @@ public class User implements Serializable {
 
     float _UserMinAge = 18;
     float _UserMaxAge = 50;
-    float _UserDistancePref;
+    float _UserDistancePref = 5000;
 
 
 
