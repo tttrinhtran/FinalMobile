@@ -241,19 +241,30 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
     }
 
     void checkSwipeRight(User matchUser) {
-        if (user.get_UserWaitingList().contains(matchUser.get_UserName())) {
+        Log.d("MATCH_USER", matchUser.get_UserName());
+
+        if (user.get_UserWaitingList() != null && user.get_UserWaitingList().contains(matchUser.get_UserName())) {
+            Log.d("MATCH_USER_CONTAIN", matchUser.get_UserName());
             user.add_Friend(matchUser.get_UserName());
             userFirebaseController.updateDocumentField("Users", user.get_UserName(), "_UserFriend", user.get_UserFriend());
+            matchUser.add_Friend(user.get_UserName());
+            userFirebaseController.updateDocumentField("Users", matchUser.get_UserName(), "_UserFriend", matchUser.get_UserFriend());
+
+            user.remove_WaitingList(matchUser.get_UserName());
+            userFirebaseController.updateDocumentField("Users", user.get_UserName(), "_UserWaitingList", user.get_UserWaitingList());
 
         } else {
+            Log.d("MATCH_USER_NOT_CONTAINT", matchUser.get_UserName());
             matchUser.add_WaitingList(user.get_UserName());
             userFirebaseController.updateDocumentField("Users", matchUser.get_UserName(), "_UserWaitingList", matchUser.get_UserWaitingList());
         }
     }
 
     void checkSwipeLeft(User leftUser) {
-        if (user.get_UserWaitingList().contains(leftUser.get_UserName())) {
+        Log.d("LEFT_USER", leftUser.get_UserName());
+        if (user.get_UserWaitingList() != null && user.get_UserWaitingList().contains(leftUser.get_UserName())) {
             user.remove_WaitingList(leftUser.get_UserName());
+            userFirebaseController.updateDocumentField("Users", user.get_UserName(), "_UserWaitingList", user.get_UserWaitingList());
         }
     }
 
