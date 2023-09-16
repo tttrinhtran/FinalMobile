@@ -6,6 +6,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -72,7 +73,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         }
 
         void setUserData( User user, String lastMessage, int state ) {
-//            biding.imageProfile.setImageBitmap(getUserImage(user.image));
+
+            FirebaseCloudStorageManager firebaseCloudStorageManager = new FirebaseCloudStorageManager();
+            binding.ItemChatAvatar.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            firebaseCloudStorageManager.FetchingImageFromFirebase( user, binding.ItemChatAvatar );
+
             binding.ItemChatFriendName.setText(user._UserFirstname + " " + user._UserLastname);
             if( state == 0 ) lastMessage = "You: " + lastMessage;
             binding.ItemChatContent.setText(lastMessage);

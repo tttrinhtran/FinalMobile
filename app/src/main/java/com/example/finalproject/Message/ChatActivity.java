@@ -1,5 +1,6 @@
 package com.example.finalproject.Message;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finalproject.Constants;
+import com.example.finalproject.FriendBio;
 import com.example.finalproject.SharedPreferenceManager;
 import com.example.finalproject.User;
 import com.example.finalproject.databinding.ActivityChatBinding;
@@ -57,7 +59,7 @@ public class ChatActivity extends AppCompatActivity {
                 chatMessageList,
                 // This line should be replace later
                 // getBitmapFromEncodedString("receiverUser.image"),
-
+                receiverUser,
                 senderUser.get_UserName()
                 // preferenceManager.getString(Constants.KEY_USER_ID)
         );
@@ -147,6 +149,11 @@ public class ChatActivity extends AppCompatActivity {
     private void setListener() {
         binding.ChatBackArrow.setOnClickListener( v -> onBackPressed() );
         binding.layoutSend.setOnClickListener( v -> sendMessage() );
+        binding.ChatUserInfo.setOnClickListener( view -> {
+            Intent intent = new Intent( getApplicationContext(), FriendBio.class );
+            intent.putExtra( Constants.FRIEND_USER, receiverUser );
+            startActivity(intent);
+        });
     }
 
     private String getReadableDateTime( Date date ) {

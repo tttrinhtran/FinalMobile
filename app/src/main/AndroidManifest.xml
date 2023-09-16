@@ -39,6 +39,9 @@
         android:theme="@style/Theme.FinalProject"
         tools:targetApi="33">
         <activity
+            android:name=".FriendBio"
+            android:exported="false" />
+        <activity
             android:name=".Profile.ProfileScreenPasswordModification"
             android:exported="false" />
         <activity

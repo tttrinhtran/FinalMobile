@@ -48,7 +48,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/FriendBioName"
         android:layout_marginTop="7dp"
-        android:text="Age: "
+        android:text="Age: 18"
         android:fontFamily="@font/tommy_regular"
         android:textColor="@color/black"
         android:textSize="20sp"

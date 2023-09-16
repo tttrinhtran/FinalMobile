@@ -16,6 +16,7 @@ import com.example.finalproject.Message.ChatActivity;
 import com.example.finalproject.Message.ChatMessage;
 import com.example.finalproject.Profile.ProfileScreen;
 import com.example.finalproject.Section.SectionScreen;
+import com.example.finalproject.databinding.ActivityFriendsScreenBinding;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
