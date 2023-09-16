@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="20dp"
+    tools:context=".Section.AddSectionScreen">
+
+
+    <ImageView
+        android:id="@+id/AddSectionBackIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/back_arrow_icon"/>
+
+    <TextView
+        android:id="@+id/AddSectionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="130dp"
+        android:text="Add New Section"
+        android:fontFamily="@font/tommy_medium"
+        android:textSize="25sp"
+        android:textColor="@color/primary_blue"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/AddSectionNameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/AddSectionTitle"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="42dp"
+        android:layout_marginHorizontal="2dp"
+        android:hint=""
+        app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/AddSectionName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingTop="20dp"
+            android:paddingStart="10dp"
+            android:hint="Section name"
+            android:backgroundTint="@android:color/transparent"
+            android:textSize="14sp"
+            android:fontFamily="@font/lato"
+            android:textColor="@color/black"
+            android:maxLines="1"
+            android:lines="1"
+            android:singleLine="true"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/AddSectionDescriptLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/AddSectionNameLayout"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="2dp"
+        android:hint=""
+        app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/AddSectionDescript"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingTop="20dp"
+            android:paddingStart="10dp"
+            android:hint="Description"
+            android:backgroundTint="@android:color/transparent"
+            android:textSize="14sp"
+            android:fontFamily="@font/lato"
+            android:textColor="@color/black"
+            android:maxLines="1"
+            android:lines="1"
+            android:singleLine="true"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/AddSectionDateLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/AddSectionDescriptLayout"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="2dp"
+        android:hint=""
+        app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/AddSectionDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:backgroundTint="@android:color/transparent"
+            android:hint="Date"
+            android:paddingTop="20dp"
+            android:paddingStart="10dp"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/lato"
+            android:maxLines="1"
+            android:lines="1"
+            android:singleLine="true"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/AddSectionConfirmButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="2dp"
+        android:layout_marginBottom="50dp"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="10dp"
+        android:background="@color/primary_blue"
+        android:text="Confirm"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/lato"
+        android:gravity="center"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

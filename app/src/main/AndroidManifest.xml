@@ -39,6 +39,9 @@
         android:theme="@style/Theme.FinalProject"
         tools:targetApi="33">
         <activity
+            android:name=".Section.AddSectionScreen"
+            android:exported="false" />
+        <activity
             android:name=".ProfileScreen"
             android:exported="false" />
         <activity
