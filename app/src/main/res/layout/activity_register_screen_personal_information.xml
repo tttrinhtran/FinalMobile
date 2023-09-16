@@ -143,6 +143,7 @@
             android:paddingTop="20dp"
             android:paddingStart="10dp"
             android:hint="Your phone number"
+            android:inputType="number"
             android:textSize="14sp"
             android:backgroundTint="@android:color/transparent"
             android:textColor="@color/black"

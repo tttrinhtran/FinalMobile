@@ -37,6 +37,7 @@ public class Constants {
     public static final String RECEIVED_USER = "receivedUser";
     public static final String SENDER_IMAGE = " senderImage";
     public static final String RECEIVER_IMAGE = "receiverImage";
+    public static final String FRIEND_USER = "friendUser";
 
     public static final String LOCATION_UPDATE_STATUS = "LOCATION_UPDATE_STATUS";
 }

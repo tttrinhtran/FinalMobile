@@ -1,14 +1,21 @@
 package com.example.finalproject.Message;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finalproject.Constants;
+import com.example.finalproject.FirebaseCloudStorageManager;
+import com.example.finalproject.FriendBio;
+import com.example.finalproject.R;
 import com.example.finalproject.SharedPreferenceManager;
 import com.example.finalproject.User;
 import com.example.finalproject.databinding.ActivityChatBinding;
@@ -48,6 +55,35 @@ public class ChatActivity extends AppCompatActivity {
         setListener();
         init();
         listenMessages();
+        checkText();
+    }
+
+    private void checkText() {
+        // Inside onCreate method
+        binding.inputMessage.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Not needed, but required by TextWatcher interface
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Check if there is text in the input message
+                if (s.toString().trim().length() > 0) {
+                    // Set the send button's background color to blue
+                    binding.layoutSend.setBackgroundResource(R.drawable.background_chat_accept);
+                } else {
+                    // Set the send button's background color to its default color (if different)
+                    binding.layoutSend.setBackgroundResource(R.drawable.background_chat_input);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
     }
 
     private void init() {
@@ -57,7 +93,7 @@ public class ChatActivity extends AppCompatActivity {
                 chatMessageList,
                 // This line should be replace later
                 // getBitmapFromEncodedString("receiverUser.image"),
-
+                receiverUser,
                 senderUser.get_UserName()
                 // preferenceManager.getString(Constants.KEY_USER_ID)
         );
@@ -142,11 +178,20 @@ public class ChatActivity extends AppCompatActivity {
     private void loadReceiverDetails() {
         receiverUser = (User) getIntent().getSerializableExtra(Constants.RECEIVED_USER);
         binding.ChatUsername.setText(receiverUser.get_UserFirstname() + " " + receiverUser.get_UserLastname());
+
+        FirebaseCloudStorageManager firebaseCloudStorageManager = new FirebaseCloudStorageManager();
+        firebaseCloudStorageManager.FetchingImageFromFirebase(receiverUser, binding.ChatAvatar);
+        binding.ChatAvatar.setScaleType(ImageView.ScaleType.CENTER_CROP);
     }
 
     private void setListener() {
         binding.ChatBackArrow.setOnClickListener( v -> onBackPressed() );
-        binding.layoutSend.setOnClickListener( v -> sendMessage() );
+        binding.layoutSend.setOnClickListener( v -> sendMessage());
+        binding.ChatUserInfo.setOnClickListener( view -> {
+            Intent intent = new Intent( getApplicationContext(), FriendBio.class );
+            intent.putExtra( Constants.FRIEND_USER, receiverUser );
+            startActivity(intent);
+        });
     }
 
     private String getReadableDateTime( Date date ) {

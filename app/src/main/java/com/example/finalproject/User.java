@@ -257,7 +257,10 @@ public class User implements Serializable {
 
     public  void remove_WaitingList(String user)
     {
-        this._UserWaitingList.remove(user);
+        if(this._UserWaitingList != null && this._UserWaitingList.contains(user)){
+            this._UserWaitingList.remove(user);
+        }
+
     }
 
     public String get_UserAge()

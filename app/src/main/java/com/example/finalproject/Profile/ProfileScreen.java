@@ -66,10 +66,7 @@ public class ProfileScreen extends AppCompatActivity {
 
         binding.ProfileScreenPhoneText.setText(currentUser.get_UserPhone());
 
-        String passwordhide = "";
-        for (int i = 0; i < currentUser.get_UserPassword().toString().length(); i++){
-            passwordhide += "*";
-        }
+        String passwordhide = new String(new char[currentUser.get_UserPassword().length()]).replace('\0', '*');
         binding.ProfileScreenPasswordText.setText(passwordhide);
 
         binding.ProfileScreenUsername.setText(currentUser.get_UserFirstname() + " " + currentUser.get_UserLastname() + " (" + currentUser.get_UserNickName() + ")");

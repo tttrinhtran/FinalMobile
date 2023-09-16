@@ -5,10 +5,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.finalproject.FirebaseCloudStorageManager;
+import com.example.finalproject.User;
 import com.example.finalproject.databinding.ItemContainerReceivedMessageBinding;
 import com.example.finalproject.databinding.ItemContainerSentMessageBinding;
 
@@ -17,23 +20,23 @@ import java.util.List;
 public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final List<ChatMessage> chatMessage;
-    private final Bitmap receiverProfileImage;
+    private final User receiverUser;
     private final String senderID;
 
     public static final int VIEW_TYPE_SENT = 1;
     public static final int VIEW_TYPE_RECEIVED = 2;
 
-    public ChatAdapter(List<ChatMessage> chatMessage, Bitmap receiverProfileImage, String senderID) {
+    public ChatAdapter(List<ChatMessage> chatMessage, User receiverUser, String senderID) {
         this.chatMessage = chatMessage;
-        this.receiverProfileImage = receiverProfileImage;
+        this.receiverUser = receiverUser;
         this.senderID = senderID;
     }
 
-    public ChatAdapter(List<ChatMessage> chatMessage, String senderID) {
-        this.chatMessage = chatMessage;
-        this.receiverProfileImage = null;
-        this.senderID = senderID;
-    }
+//    public ChatAdapter(List<ChatMessage> chatMessage, String senderID) {
+//        this.chatMessage = chatMessage;
+//        this.receiverProfileImage = null;
+//        this.senderID = senderID;
+//    }
 
     @NonNull
     @Override
@@ -61,7 +64,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if( getItemViewType(position) == VIEW_TYPE_SENT ) ((SentMessageViewHolder) holder).setData(chatMessage.get(position));
-        else ((ReceivedMessageViewHolder) holder).setData(chatMessage.get(position), receiverProfileImage );
+        else ((ReceivedMessageViewHolder) holder).setData(chatMessage.get(position), receiverUser );
     }
 
     @Override
@@ -107,11 +110,15 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             binding = itemContainerReceivedMessageBinding;
         }
 
-        void setData(ChatMessage chatMessage, Bitmap receiverProfileImage ) {
+        void setData(ChatMessage chatMessage, User receiverUser ) {
             binding.textMessage.setText(chatMessage.message);
             binding.textDateTime.setText(chatMessage.dateTime);
-            binding.imageProfile.setImageBitmap(receiverProfileImage);
+            // binding.imageProfile.setImageBitmap(receiverProfileImage);
             binding.textDateTime.setVisibility(View.GONE);
+
+            FirebaseCloudStorageManager firebaseCloudStorageManager = new FirebaseCloudStorageManager();
+            binding.imageProfile.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            firebaseCloudStorageManager.FetchingImageFromFirebase( receiverUser, binding.imageProfile );
 
             binding.getRoot().setOnClickListener( v -> {
                 Log.d( "ChatAdapter", "setData: " + binding.textDateTime.getText() + " " + binding.textDateTime.getVisibility() );
