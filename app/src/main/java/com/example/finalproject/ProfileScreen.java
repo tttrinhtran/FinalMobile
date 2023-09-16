@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.example.finalproject.Home.HomeScreen;
 import com.example.finalproject.databinding.ActivityProfileScreenBinding;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
@@ -37,8 +38,18 @@ public class ProfileScreen extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+
         SharedPreferenceManager<User> currentInstance = new SharedPreferenceManager<>(User.class, this);
         currentInstance.storeSerializableObjectToSharedPreference(currentUser, Constants.KEY_SHARED_PREFERENCE_USERS);
+
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        database.collection(Constants.KEY_COLLECTION_USERS)
+                .document(currentUser._UserName)
+                .update(
+                        "_UserMinAge", currentUser._UserMinAge,
+                        "_UserMaxAge", currentUser._UserMaxAge,
+                        "_UserDistancePref", currentUser._UserDistancePref
+                );
     }
 
     private void init() {
@@ -92,6 +103,7 @@ public class ProfileScreen extends AppCompatActivity {
                 Intent intent = new Intent(ProfileScreen.this, HomeScreen.class);
                 Bundle b = ActivityOptions.makeSceneTransitionAnimation(ProfileScreen.this).toBundle();
                 startActivity(intent, b);
+                finish();
             }
         });
 

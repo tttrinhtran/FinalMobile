@@ -89,6 +89,7 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
                 Intent intent = new Intent(FriendsScreen.this, HomeScreen.class);
                 Bundle b = ActivityOptions.makeSceneTransitionAnimation(FriendsScreen.this).toBundle();
                 startActivity(intent, b);
+                finish();
             }
         });
 
