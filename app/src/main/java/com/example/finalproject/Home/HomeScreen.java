@@ -57,12 +57,9 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
     private FirestoreGeoHashQueries firestoreGeoHashQueries;
     private FirebaseFirestoreController<Position> positionfirebaseFirestoreController;
     private static final String TAG = "HomeScreen";
-    private List<Integer> list;
     User user;
     ArrayList<User> activeFriend;
-
     ArrayList<User> activeUsers;
-
     FirebaseFirestoreController<User> userFirebaseController;
     private SharedPreferenceManager<Boolean> isLocationUpdatedSharedPreference;
 
@@ -183,12 +180,12 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
             public void onCardSwiped(Direction direction) {
                 Log.d(TAG, "onCardSwiped: p=" + manager.getTopPosition() + " d=" + direction);
                 if (direction == Direction.Right) {
-                    checkSwipeRight(activeFriend.get(curPos[0]));
+                    checkSwipeRight(activeUsers.get(curPos[0]));
                     Toast.makeText(HomeScreen.this, "Direction Right", Toast.LENGTH_SHORT).show();
                 }
                 if (direction == Direction.Left) {
                     Toast.makeText(HomeScreen.this, "Direction Left", Toast.LENGTH_SHORT).show();
-                    checkSwipeLeft(activeFriend.get(curPos[0]));
+                    checkSwipeLeft(activeUsers.get(curPos[0]));
                 }
 
             }
@@ -212,7 +209,7 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
             @Override
             public void onCardDisappeared(View view, int position) {
                 TextView tv = view.findViewById(R.id.HomeScreenUserName);
-                activeFriend.get(position);
+                activeUsers.get(position);
                 Log.d(TAG, "onCardDisappeared: " + position + ", nama: " + tv.getText());
             }
         });
@@ -231,11 +228,15 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
                 return 10.0f;
             }
         });
-        adapterSwipe = new cardSwipeAdapter((Context) this, activeFriend);
+        adapterSwipe = new cardSwipeAdapter((Context) this, activeUsers);
         cardStackView.setLayoutManager(manager);
         cardStackView.setAdapter(adapterSwipe);
         adapterSwipe.setOnItemClickListener(this);
         cardStackView.setItemAnimator(new DefaultItemAnimator());
+
+//        for(User u : activeUsers){
+//            Log.d("ACTIVE_USERS", u.get_UserName());
+//        }
     }
 
     void checkSwipeRight(User matchUser) {
