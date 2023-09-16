@@ -38,8 +38,7 @@ public class sectionListAdap  extends RecyclerView.Adapter<sectionListAdap.MyVie
 
     @Override
     public void onBindViewHolder(@NonNull sectionListAdap.MyViewHolder holder, int position) {
-        holder.tvDate.setText(sectionList.get(position).get_SectionDate());
-        holder.tvHour.setText(sectionList.get(position).get_SectionHour());
+        holder.tvDate.setText(sectionList.get(position).get_SectionDate().toString());
         holder.tvName.setText(sectionList.get(position).get_SectionName());
 
     }

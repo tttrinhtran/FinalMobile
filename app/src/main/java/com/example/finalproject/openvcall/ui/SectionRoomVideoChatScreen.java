@@ -1,5 +1,6 @@
 package com.example.finalproject.openvcall.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finalproject.R;
 import com.example.finalproject.openvcall.model.ConstantApp;
+import com.example.finalproject.openvcall.model.CurrentUserSettings;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -115,24 +117,28 @@ public class SectionRoomVideoChatScreen extends BaseActivity {
         }
     }
 
-    public void onClickJoin(View view) {
-        forwardToRoom();
-    }
+    public void forwardToRoom(Context context, String channel, String encryption) {
 
-    public void forwardToRoom() {
-        EditText v_channel = (EditText) findViewById(R.id.channel_name);
-        String channel = v_channel.getText().toString();
-        vSettings().mChannelName = channel;
+        BaseActivity baseActivity = new BaseActivity() {
+            @Override
+            protected void initUIandEvent() {
 
-        EditText v_encryption_key = (EditText) findViewById(R.id.encryption_key);
-        String encryption = v_encryption_key.getText().toString();
-        vSettings().mEncryptionKey = encryption;
+            }
 
-        Intent i = new Intent(SectionRoomVideoChatScreen.this, CallActivity.class);
+            @Override
+            protected void deInitUIandEvent() {
+
+            }
+        };
+
+        CurrentUserSettings vSetting = baseActivity.vSettings();
+        vSetting.mChannelName = channel;
+
+        vSetting.mEncryptionKey = encryption;
+
+        Intent i = new Intent(context, CallActivity.class);
         i.putExtra(ConstantApp.ACTION_KEY_CHANNEL_NAME, channel);
         i.putExtra(ConstantApp.ACTION_KEY_ENCRYPTION_KEY, encryption);
-        i.putExtra(ConstantApp.ACTION_KEY_ENCRYPTION_MODE, getResources().getStringArray(R.array.encryption_mode_values)[vSettings().mEncryptionModeIndex]);
-
         startActivity(i);
     }
 

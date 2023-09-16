@@ -145,7 +145,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         application().remoteEventHandler(handler);
     }
 
-    protected CurrentUserSettings vSettings() {
+    public CurrentUserSettings vSettings() {
         return application().userSettings();
     }
 

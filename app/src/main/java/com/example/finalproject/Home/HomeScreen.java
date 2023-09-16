@@ -40,6 +40,7 @@ import com.example.finalproject.LocationUpdatePeriodicallyService;
 import com.example.finalproject.Position;
 import com.example.finalproject.ProfileScreen;
 import com.example.finalproject.R;
+import com.example.finalproject.Section.SectionScreen;
 import com.example.finalproject.Setting.SettingScreen;
 import com.example.finalproject.SharedPreferenceManager;
 import com.example.finalproject.User;
@@ -369,6 +370,11 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
                 Intent intent = new Intent(HomeScreen.this, ProfileScreen.class);
                 startActivity(intent);
             }
+        });
+
+        section.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeScreen.this, SectionScreen.class);
+            startActivity(intent);
         });
     }
 

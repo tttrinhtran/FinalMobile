@@ -19,12 +19,15 @@
             android:id="@+id/SectionBio"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <ImageButton
                 android:id="@+id/SectionBioBackBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_back_white"
-                android:backgroundTint="@color/primary_blue">
+                android:backgroundTint="@color/primary_blue"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/SectionBio">
 
             </ImageButton>
 

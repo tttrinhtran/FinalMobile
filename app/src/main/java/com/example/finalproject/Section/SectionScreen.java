@@ -18,6 +18,7 @@ import com.example.finalproject.FirebaseFirestoreController;
 import com.example.finalproject.R;
 import com.example.finalproject.SharedPreferenceManager;
 import com.example.finalproject.User;
+import com.example.finalproject.openvcall.ui.SectionRoomVideoChatScreen;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -44,15 +45,14 @@ public class SectionScreen extends AppCompatActivity implements sectionListInter
         sectionFirebaseFirestoreController = new FirebaseFirestoreController<>(Section.class);
         getData();
         tabSetup();
-
     }
 
 
 
     void tabSetup()
     {
-        sectionKind=findViewById(R.id.section_kind);
-        btnSection=findViewById(R.id.Section_Tab);
+        sectionKind = findViewById(R.id.section_kind);
+        btnSection = findViewById(R.id.Section_Tab);
         sectionRecycler();
         btnSection.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +61,7 @@ public class SectionScreen extends AppCompatActivity implements sectionListInter
             }
         });
 
-        btnMySection=findViewById(R.id.MySection_Tab);
+        btnMySection = findViewById(R.id.MySection_Tab);
         btnMySection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,20 +80,20 @@ public class SectionScreen extends AppCompatActivity implements sectionListInter
         tmp = sectionFirebaseFirestoreController.retrieveAllDocumentsIDOfaCollection( KEY_COLLECTION_SECTION );
         for(int i=0; i<tmp.size(); i++)
         {
-            if (sectionList==null)
+            if (sectionList == null)
             {
-                sectionList=new ArrayList<>();
+                sectionList = new ArrayList<>();
             }
             sectionList.add(sectionFirebaseFirestoreController.retrieveObjectsFirestoreByID(KEY_COLLECTION_SECTION, tmp.get(i)));
        }
-        if(mySectionList==null)
+        if(mySectionList == null)
         {
-            mySectionList=new ArrayList<>();
+            mySectionList = new ArrayList<>();
         }
         ArrayList<Section> sectionsToRemove = new ArrayList<>();
-        for(int i=0; i<sectionList.size(); i++)
+        for(int i = 0; i < sectionList.size(); i++)
         {
-           if(check_mySection(sectionList.get(i))==true)
+           if(check_mySection(sectionList.get(i)) == true)
            {
                mySectionList.add(sectionList.get(i));
                sectionsToRemove.add(sectionList.get(i));
@@ -104,9 +104,9 @@ public class SectionScreen extends AppCompatActivity implements sectionListInter
     }
     boolean check_mySection(Section section)
     {
-        if(section.get_SectionParticipate()==null)
+        if(section.get_SectionParticipate() == null)
         {
-            section._SectionParticipate=new ArrayList<>();
+            section._SectionParticipate = new ArrayList<>();
         }
         if((section.get_SectionHost().equals(user.get_UserName()))||(section.get_SectionParticipate().contains(user.get_UserName())))
         {
@@ -117,8 +117,8 @@ public class SectionScreen extends AppCompatActivity implements sectionListInter
     }
 private void recyclerView(ArrayList<Section> recyclerViewList)
 {
-    SectionRecyclerView= findViewById(R.id.section_recycleView);
-    sectionAdap=new sectionListAdap(recyclerViewList, (Context) SectionScreen.this, this);
+    SectionRecyclerView = findViewById(R.id.section_recycleView);
+    sectionAdap = new sectionListAdap(recyclerViewList, (Context) SectionScreen.this, this);
     SectionRecyclerView.setAdapter(sectionAdap);
     SectionRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 }
@@ -126,7 +126,7 @@ private void recyclerView(ArrayList<Section> recyclerViewList)
     private void mySectionRecycler()
     {
         sectionKind.setText("My Section");
-        recyclerViewList=mySectionList;
+        recyclerViewList = mySectionList;
         recyclerView(recyclerViewList);
 
 
@@ -134,14 +134,14 @@ private void recyclerView(ArrayList<Section> recyclerViewList)
     private void sectionRecycler()
     {
         sectionKind.setText("Section");
-        recyclerViewList=sectionList;
+        recyclerViewList = sectionList;
         recyclerView(recyclerViewList);
     }
 
 
     @Override
     public void onItemClick(int position) {
-        Intent i =new Intent(this, SectionDetail.class);
+        Intent i = new Intent(this, SectionDetail.class);
          i.putExtra("section", (Serializable) recyclerViewList.get(position));
         startActivity(i);
     }
