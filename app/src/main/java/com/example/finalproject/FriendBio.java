@@ -2,11 +2,13 @@ package com.example.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.example.finalproject.databinding.ActivityFriendsScreenBinding;
 import com.example.finalproject.databinding.FriendBioBinding;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -63,6 +65,31 @@ public class FriendBio extends AppCompatActivity {
     private void setListener() {
 
         binding.FrienBioBackArrow.setOnClickListener( view -> onBackPressed() );
+        binding.UnfriendLayout.setOnClickListener( view -> {
+
+            // Update local
+            currentUser._UserFriend.remove( currentFriend._UserName );
+            currentFriend._UserFriend.remove( currentFriend._UserName );
+
+            // Update share preference
+            SharedPreferenceManager<User> currentInstance = new SharedPreferenceManager<>(User.class, this);
+            currentInstance.storeSerializableObjectToSharedPreference(currentUser, Constants.KEY_SHARED_PREFERENCE_USERS);
+
+            // Update firebase
+            FirebaseFirestore database = FirebaseFirestore.getInstance();
+            database.collection(Constants.KEY_COLLECTION_USERS)
+                    .document(currentUser._UserName)
+                    .update( "_UserFriend", currentUser._UserFriend );
+            database.collection(Constants.KEY_COLLECTION_USERS)
+                    .document(currentFriend._UserName)
+                    .update("_UserFriend", currentFriend._UserFriend );
+
+            // Return to Friend Screen
+            Intent intent = new Intent(this, FriendsScreen.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        });
 
     }
 }
