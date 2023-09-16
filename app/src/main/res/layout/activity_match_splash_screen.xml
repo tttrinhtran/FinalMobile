@@ -6,4 +6,105 @@
     android:layout_height="match_parent"
     tools:context=".Home.MatchSplashScreen">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/sign_srceenbg"
+            android:scaleType="centerCrop"
+            ></ImageView>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/MatchTitle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="130dp"
+        android:text="Congratulation!"
+        android:textColor="@color/pink"
+        android:textSize="25sp"
+        android:fontFamily="@font/tommy_medium"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/MatchFriendName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/MatchTitle1"
+        android:layout_marginTop="30dp"
+        android:text="You and Bao Long"
+        android:textColor="@color/pink"
+        android:textSize="20sp"
+        android:fontFamily="@font/tommy_medium" />
+
+    <TextView
+        android:id="@+id/MatchTitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/MatchFriendName"
+        android:layout_marginTop="10dp"
+        android:text="Have become friends!!!"
+        android:textColor="@color/pink"
+        android:textSize="20sp"
+        android:fontFamily="@font/tommy_medium" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/MatchTitle2"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/MatchScreenAvatar1"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"
+            app:shapeAppearance="@style/Circular"
+            android:scaleType="centerCrop"
+            />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/MatchScreenAvatar2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/MatchScreenAvatar1"
+            app:layout_constraintEnd_toStartOf="@id/MatchScreenAvatar3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="10dp"
+            app:shapeAppearance="@style/Circular"
+            android:src="@drawable/friendship"
+            android:scaleType="centerCrop"
+            android:layout_weight="1"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/MatchScreenAvatar3"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            app:layout_constraintStart_toEndOf="@id/MatchScreenAvatar2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"
+            app:shapeAppearance="@style/Circular"
+            android:scaleType="centerCrop"
+            android:layout_weight="1"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

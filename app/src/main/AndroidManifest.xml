@@ -39,6 +39,9 @@
         android:theme="@style/Theme.FinalProject"
         tools:targetApi="33">
         <activity
+            android:name=".Home.MatchSplashScreen"
+            android:exported="false"/>
+        <activity
             android:name=".Login.LoginScreenForgotPassword"
             android:exported="false" />
         <activity
@@ -47,8 +50,6 @@
         <activity
             android:name=".Profile.ProfileScreenPhoneNumberModification"
             android:exported="false" />
-        <activity
-            android:name=".Home.MatchSplashScreen"/>
         <activity
             android:name=".FriendBio"
             android:exported="false" />

@@ -253,6 +253,12 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
             user.remove_WaitingList(matchUser.get_UserName());
             userFirebaseController.updateDocumentField("Users", user.get_UserName(), "_UserWaitingList", user.get_UserWaitingList());
 
+            Intent i = new Intent(HomeScreen.this, MatchSplashScreen.class);
+            i.putExtra("USER_MATCH", matchUser);
+            Bundle b = ActivityOptions.makeSceneTransitionAnimation(HomeScreen.this).toBundle();
+            startActivity(i, b);
+
+
         } else {
             Log.d("MATCH_USER_NOT_CONTAINT", matchUser.get_UserName());
             matchUser.add_WaitingList(user.get_UserName());
