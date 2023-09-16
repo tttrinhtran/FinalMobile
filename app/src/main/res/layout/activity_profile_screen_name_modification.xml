@@ -4,58 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Profile.ProfileScreenPasswordModification">
+    tools:context=".Profile.ProfileScreenNameModification">
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/ProfileScreenPasswordModificationTopGuideline"
+        android:id="@+id/ProfileScreenNameModificationTopGuideline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.1"/>
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/ProfileScreenPasswordModificationBottomGuideline"
+        android:id="@+id/ProfileScreenNameModificationBottomGuideline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.9"/>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/ProfileScreenPasswordModificationLeftGuideline"
+        android:id="@+id/ProfileScreenNameModificationLeftGuideline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.1"/>
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/ProfileScreenPasswordModificationRightGuideline"
+        android:id="@+id/ProfileScreenNameModificationRightGuideline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.9"/>
 
     <TextView
-        android:id="@+id/ProfileScreenPasswordModificationTitleTextview"
+        android:id="@+id/ProfileScreenNamedModificationTitleTextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/ProfileScreenPasswordModificationBackButton"
-        app:layout_constraintBottom_toBottomOf="@id/ProfileScreenPasswordModificationBackButton"
+        app:layout_constraintTop_toTopOf="@id/ProfileScreenNameModificationBackButton"
+        app:layout_constraintBottom_toBottomOf="@id/ProfileScreenNameModificationBackButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="Password"/>
+        android:text="Edit Name"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ProfileScreenPasswordModificationOldPasswordLayout"
+        android:id="@+id/ProfileScreenNameModificationNewLastnameLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/ProfileScreenPasswordModificationLeftGuideline"
-        app:layout_constraintRight_toRightOf="@id/ProfileScreenPasswordModificationRightGuideline"
+        app:layout_constraintLeft_toLeftOf="@id/ProfileScreenNameModificationLeftGuideline"
+        app:layout_constraintRight_toRightOf="@id/ProfileScreenNameModificationRightGuideline"
         android:hint=""
         app:hintEnabled="false"
         android:layout_marginBottom="30dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ProfileScreenPasswordModificationOldPasswordEditText"
+            android:id="@+id/ProfileScreenNameModificationNewLastnameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
             android:paddingTop="20dp"
             android:paddingStart="10dp"
             android:backgroundTint="@android:color/transparent"
-            android:hint="Old password"
+            android:hint="Old Lastname"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:fontFamily="@font/lato"
@@ -75,19 +75,19 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ProfileScreenPasswordModificationNewPasswordLayout"
+        android:id="@+id/ProfileScreenNameModificationNewFirstnameLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/ProfileScreenPasswordModificationOldPasswordLayout"
-        app:layout_constraintLeft_toLeftOf="@id/ProfileScreenPasswordModificationLeftGuideline"
-        app:layout_constraintRight_toRightOf="@id/ProfileScreenPasswordModificationRightGuideline"
+        app:layout_constraintTop_toBottomOf="@id/ProfileScreenNameModificationNewLastnameLayout"
+        app:layout_constraintLeft_toLeftOf="@id/ProfileScreenNameModificationLeftGuideline"
+        app:layout_constraintRight_toRightOf="@id/ProfileScreenNameModificationRightGuideline"
         android:hint=""
         app:hintEnabled="false"
         android:layout_marginBottom="30dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ProfileScreenPasswordModificationNewPasswordEditText"
+            android:id="@+id/ProfileScreenNameModificationNewFirstnameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -96,7 +96,7 @@
             android:paddingTop="20dp"
             android:paddingStart="10dp"
             android:backgroundTint="@android:color/transparent"
-            android:hint="New password"
+            android:hint="New Firstname"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:fontFamily="@font/lato"
@@ -107,19 +107,19 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ProfileScreenPasswordModificationNewPasswordConfirmLayout"
+        android:id="@+id/ProfileScreenNameModificationNewNicknameLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/ProfileScreenPasswordModificationNewPasswordLayout"
-        app:layout_constraintLeft_toLeftOf="@id/ProfileScreenPasswordModificationLeftGuideline"
-        app:layout_constraintRight_toRightOf="@id/ProfileScreenPasswordModificationRightGuideline"
+        app:layout_constraintTop_toBottomOf="@id/ProfileScreenNameModificationNewFirstnameLayout"
+        app:layout_constraintLeft_toLeftOf="@id/ProfileScreenNameModificationLeftGuideline"
+        app:layout_constraintRight_toRightOf="@id/ProfileScreenNameModificationRightGuideline"
         android:hint=""
         app:hintEnabled="false"
         android:layout_marginBottom="30dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ProfileScreenPasswordModificationNewPasswordConfirmEditText"
+            android:id="@+id/ProfileScreenNameModificationNewNickNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -139,32 +139,21 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/ProfileScreenPasswordModificationConfirmButton"
+        android:id="@+id/ProfileScreenNameModificationConfirmButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/ProfileScreenPasswordModificationBottomGuideline"
+        app:layout_constraintBottom_toBottomOf="@id/ProfileScreenNameModificationBottomGuideline"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:text="Confirm"/>
 
-    <ProgressBar
-        android:id="@+id/ProfileScreenPasswordModificationProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:visibility="invisible"/>
-
     <ImageButton
-        android:id="@+id/ProfileScreenPasswordModificationBackButton"
+        android:id="@+id/ProfileScreenNameModificationBackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/ProfileScreenPasswordModificationTopGuideline"
+        app:layout_constraintTop_toTopOf="@id/ProfileScreenNameModificationTopGuideline"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="@id/ProfileScreenPasswordModificationLeftGuideline"
+        app:layout_constraintRight_toRightOf="@id/ProfileScreenNameModificationLeftGuideline"
         android:src="@drawable/back_arrow_icon"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

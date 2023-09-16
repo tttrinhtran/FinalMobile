@@ -1,16 +1,12 @@
 package com.example.finalproject;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.finalproject.Setting.SettingScreen;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -18,8 +14,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.Objects;
+import com.google.firebase.auth.SignInMethodQueryResult;
 
 public class FirebaseAuthentication {
     boolean isCompleted = false;
@@ -133,7 +128,7 @@ public class FirebaseAuthentication {
         } else return null;
     }
 
-    public void changePassword(String email, String old_password, String new_pass){
+    public boolean changePassword(String email, String old_password, String new_pass){
         FirebaseUser user = getFirebaseCurrentUser();
 
         AuthCredential credential = EmailAuthProvider
@@ -141,6 +136,8 @@ public class FirebaseAuthentication {
 
         isCompleted = false;
         isSuccess = false;
+
+        boolean isPasswordChanged = false;
         user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -151,9 +148,6 @@ public class FirebaseAuthentication {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(context, "Password updated successfully", Toast.LENGTH_SHORT).show();
                                         isSuccess = true;
-
-                                        Intent intent = new Intent(context, SettingScreen.class);
-                                        startActivity(context, intent,null);
                                     } else {
                                         Toast.makeText(context, "Password update failed", Toast.LENGTH_SHORT).show();
                                     }
@@ -167,9 +161,28 @@ public class FirebaseAuthentication {
                         }
                     }
                 });
+        while(!isPasswordChanged){
+            isPasswordChanged = isComplete();
+        }
+        return isSuccess;
     }
 
     public void SignOut (){
         mAuth.signOut();
+    }
+
+    public boolean checkForDuplicatedEmail(String email) {
+
+        Task<SignInMethodQueryResult> task = mAuth.fetchSignInMethodsForEmail(email);
+
+        while (!task.isComplete()){}
+
+        SignInMethodQueryResult result = task.getResult();
+
+        if (result != null && result.getSignInMethods() != null && result.getSignInMethods().size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -47,6 +47,16 @@
                 android:textColor="@color/primary_blue"
                 android:textSize="24sp"/>
 
+            <ImageView
+                android:id="@+id/ProfileScreenNameEdit"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintTop_toTopOf="@id/ProfileScreenUsername"
+                app:layout_constraintBottom_toBottomOf="@id/ProfileScreenUsername"
+                app:layout_constraintLeft_toRightOf="@id/ProfileScreenUsername"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/modify_icon" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ProfileScreenLocationLayout"
                 android:layout_width="wrap_content"

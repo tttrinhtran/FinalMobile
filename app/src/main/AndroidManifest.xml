@@ -39,6 +39,12 @@
         android:theme="@style/Theme.FinalProject"
         tools:targetApi="33">
         <activity
+            android:name=".Profile.ProfileScreenNameModification"
+            android:exported="false" />
+        <activity
+            android:name=".Profile.ProfileScreenPhoneNumberModification"
+            android:exported="false" />
+        <activity
             android:name=".Profile.ProfileScreenPasswordModification"
             android:exported="false" />
         <activity

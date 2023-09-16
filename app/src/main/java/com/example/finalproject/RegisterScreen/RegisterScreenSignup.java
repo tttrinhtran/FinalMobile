@@ -54,16 +54,20 @@ public class RegisterScreenSignup extends AppCompatActivity {
         String password = _SignupPassword.getText().toString();
         String confirm_password = _SignupConfirmPassword.getText().toString();
 
+        FirebaseAuthentication firebaseAuthentication = new FirebaseAuthentication(RegisterScreenSignup.this);
+
 
         if (username.isEmpty() || password.isEmpty() || confirm_password.isEmpty()){
             Toast.makeText(RegisterScreenSignup.this, "Please full fill the information.", Toast.LENGTH_SHORT).show();
             return false;
-        }
-        else if (password.length() <= 6) {
-            Toast.makeText(RegisterScreenSignup.this, "Password must more than 6 characters", Toast.LENGTH_SHORT).show();
-            return false;
         } else if (!EmailValidator.Companion.isValidEmail(username)) {
             Toast.makeText(RegisterScreenSignup.this, "Invalid Email Format", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (firebaseAuthentication.checkForDuplicatedEmail(username)) {
+            Toast.makeText(RegisterScreenSignup.this, "Email is existed", Toast.LENGTH_SHORT).show();
+
+        } else if (password.length() <= 6) {
+            Toast.makeText(RegisterScreenSignup.this, "Password must more than 6 characters", Toast.LENGTH_SHORT).show();
             return false;
         }
         else {
@@ -76,7 +80,6 @@ public class RegisterScreenSignup extends AppCompatActivity {
                 return false;
             }
         }
+        return false;
     }
-
-
 }

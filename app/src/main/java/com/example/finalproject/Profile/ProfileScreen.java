@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.finalproject.Constants;
+import com.example.finalproject.FirebaseCloudStorageManager;
 import com.example.finalproject.FriendsScreen;
 import com.example.finalproject.Home.HomeScreen;
 import com.example.finalproject.R;
@@ -71,12 +72,15 @@ public class ProfileScreen extends AppCompatActivity {
         }
         binding.ProfileScreenPasswordText.setText(passwordhide);
 
-        binding.ProfileScreenUsername.setText(currentUser.get_UserFirstname() + " " + currentUser.get_UserLastname());
+        binding.ProfileScreenUsername.setText(currentUser.get_UserFirstname() + " " + currentUser.get_UserLastname() + " (" + currentUser.get_UserNickName() + ")");
 
         binding.ProfileScreenDistanceSlider.setValue(currentUser.get_UserDistancePref());
         binding.ProfileScreenDistanceText.setText( (int) currentUser.get_UserDistancePref() + " mi");
         binding.ProfileScreenAgeSlider.setValues(currentUser.get_UserMinAge(), currentUser.get_UserMaxAge());
         binding.ProfileScreenAgeText.setText( (int) currentUser.get_UserMinAge() + "-" + (int) currentUser.get_UserMaxAge());
+
+        FirebaseCloudStorageManager firebaseCloudStorageManager = new FirebaseCloudStorageManager();
+        firebaseCloudStorageManager.FetchingImageFromFirebase(currentUser, binding.ProfileScreenAvatar);
     }
 
     private void setListener() {
@@ -100,7 +104,23 @@ public class ProfileScreen extends AppCompatActivity {
             startActivity(intent);
         });
 
+        binding.ProfileScreenPhoneEditIcon.setOnClickListener( view -> {
+            Intent intent = new Intent(ProfileScreen.this, ProfileScreenPhoneNumberModification.class);
+            startActivity(intent);
+        });
 
+        binding.ProfileScreenUsername.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfileScreen.this, ProfileScreen.class);
+            startActivity(intent);
+        });
+
+        binding.ProfileScreenAvatar.setOnClickListener(view -> {
+            SettingScreenPersonalInformationBottomSheetFragment settingScreenPersonalInformationBottomSheetFragment = new SettingScreenPersonalInformationBottomSheetFragment();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("user", currentUser);
+            settingScreenPersonalInformationBottomSheetFragment.setArguments(bundle);
+            settingScreenPersonalInformationBottomSheetFragment.show(getSupportFragmentManager(), "settingScreenPersonalInformationBottomSheetFragment");
+        });
     }
 
     private void navBar(){

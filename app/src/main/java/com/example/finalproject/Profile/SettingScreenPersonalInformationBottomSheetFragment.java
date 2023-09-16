@@ -1,4 +1,4 @@
-package com.example.finalproject.Setting;
+package com.example.finalproject.Profile;
 
 import static com.example.finalproject.Constants.KEY_SHARED_PREFERENCE_USERS;
 
@@ -146,7 +146,7 @@ public class SettingScreenPersonalInformationBottomSheetFragment extends BottomS
         super.onDetach();
         Activity activity = getActivity();
         if (activity != null) {
-            ImageView avatarImageView = activity.findViewById(R.id.SettingPersonalInformationScreenAvatarImageView);
+            ImageView avatarImageView = activity.findViewById(R.id.ProfileScreenAvatar);
             if(newAvatarBitmap != null) {
                 avatarImageView.setImageBitmap(newAvatarBitmap);
             }
