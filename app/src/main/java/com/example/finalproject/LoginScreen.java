@@ -111,6 +111,8 @@ public class LoginScreen extends AppCompatActivity {
                 if(isLoginSuccessful) {
                     _LoginScreenUser = userFirebaseController.retrieveObjectsFirestoreByID(KEY_COLLECTION_USERS, EmailValidator.Companion.emailNormalization(userName));
                     Intent intent = new Intent(LoginScreen.this, SectionScreen.class);
+                    _LoginScreenUser = userFirebaseController.retrieveObjectsFirestoreByID(KEY_COLLECTION_USERS, userName);
+                    Intent intent = new Intent(LoginScreen.this, LocationUpdateActivity.class);
                     passOnUser();
                     startActivity(intent);
                 } else {

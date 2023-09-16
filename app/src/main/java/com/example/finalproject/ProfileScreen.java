@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.finalproject.Home.HomeScreen;
+import com.example.finalproject.Section.SectionScreen;
 import com.example.finalproject.databinding.ActivityProfileScreenBinding;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
@@ -37,8 +39,18 @@ public class ProfileScreen extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+
         SharedPreferenceManager<User> currentInstance = new SharedPreferenceManager<>(User.class, this);
         currentInstance.storeSerializableObjectToSharedPreference(currentUser, Constants.KEY_SHARED_PREFERENCE_USERS);
+
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        database.collection(Constants.KEY_COLLECTION_USERS)
+                .document(currentUser._UserName)
+                .update(
+                        "_UserMinAge", currentUser._UserMinAge,
+                        "_UserMaxAge", currentUser._UserMaxAge,
+                        "_UserDistancePref", currentUser._UserDistancePref
+                );
     }
 
     private void init() {
@@ -83,7 +95,7 @@ public class ProfileScreen extends AppCompatActivity {
 
         home = findViewById(R.id.NaviBarHomeIcon);
         section= findViewById(R.id.NaviBarSectionIcon);
-        friend= findViewById(R.id.NaviBarFriendIcon); friend.setImageResource(R.drawable.friend_icon_fill);
+        friend= findViewById(R.id.NaviBarFriendIcon);
         profile = findViewById(R.id.NaviBarProfile);
 
         home.setOnClickListener(new View.OnClickListener() {
@@ -92,21 +104,26 @@ public class ProfileScreen extends AppCompatActivity {
                 Intent intent = new Intent(ProfileScreen.this, HomeScreen.class);
                 Bundle b = ActivityOptions.makeSceneTransitionAnimation(ProfileScreen.this).toBundle();
                 startActivity(intent, b);
+                finish();
             }
         });
 
         section.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(ProfileScreen.this, SectionScreen.class);
+                Bundle b = ActivityOptions.makeSceneTransitionAnimation(ProfileScreen.this).toBundle();
+                startActivity(intent, b);
             }
         });
 
 
-        profile.setOnClickListener(new View.OnClickListener() {
+        friend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(ProfileScreen.this, FriendsScreen.class);
+                Bundle b = ActivityOptions.makeSceneTransitionAnimation(ProfileScreen.this).toBundle();
+                startActivity(intent, b);
             }
         });
     }

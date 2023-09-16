@@ -348,13 +348,6 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
     private void NavBar() {
         home.setImageResource(R.drawable.home_icon_fill);
 
-        section.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
         friend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -368,13 +361,15 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeScreen.this, ProfileScreen.class);
-                startActivity(intent);
+                Bundle b = ActivityOptions.makeSceneTransitionAnimation(HomeScreen.this).toBundle();
+                startActivity(intent, b);
             }
         });
 
         section.setOnClickListener(view -> {
             Intent intent = new Intent(HomeScreen.this, SectionScreen.class);
-            startActivity(intent);
+            Bundle b = ActivityOptions.makeSceneTransitionAnimation(HomeScreen.this).toBundle();
+            startActivity(intent, b);
         });
     }
 

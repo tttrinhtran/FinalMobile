@@ -5,103 +5,103 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Section.SectionScreen"
-    >
+    android:layout_marginHorizontal="20dp"
+    android:background="@color/white">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/white"
-        android:padding="20dp">
-        <RelativeLayout
+        <!-- Title -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/head"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <!-- Title -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/head"
-                android:background="@color/white">
-                <TextView
-                    android:id="@+id/SectionTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Section"
-                    android:textSize="24sp"
-                    android:padding="16dp"
-                    android:fontFamily="@font/tommy_medium"
-                    android:textColor="@color/primary_blue"
-                    android:layout_alignParentLeft="true"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <!-- Tab Layout -->
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@id/head"
-                android:id="@+id/tab">
-
-                <!-- Tab 1 -->
-                <Button
-                    android:id="@+id/Section_Tab"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Section"
-                    android:fontFamily="@font/lato"
-                    android:background="@android:color/transparent"
-                    android:textAllCaps="false"
-                    android:textColor="@color/primary_blue"
-                    android:gravity="center"
-                    />
-
-                <!-- Tab 2 -->
-                <Button
-                    android:id="@+id/MySection_Tab"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="My Section"
-                    android:fontFamily="@font/lato"
-                    android:background="@android:color/transparent"
-                    android:textAllCaps="false"
-                    android:textColor="@color/primary_blue"
-                    android:gravity="center" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp">
             <TextView
+                android:id="@+id/SectionTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Section"
+                android:textSize="24sp"
+                android:padding="16dp"
+                android:fontFamily="@font/tommy_medium"
+                android:textColor="@color/primary_blue"
+                android:layout_alignParentLeft="true"
+                android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/SectionScreenAddSectionButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/section_kind"
-                android:text="Section"
-                android:layout_below="@+id/tab"
-                android:fontFamily="@font/tommy_regular"
-                android:textColor="@color/primary"
-                android:textSize="20dp"
-                android:layout_marginLeft="0dp">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/add_button"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </TextView>
-            <!-- Content area to display the tab's content -->
-            <FrameLayout
+        <!-- Tab Layout -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/head"
+            android:id="@+id/tab">
+            <!-- Tab 1 -->
+            <Button
+                android:id="@+id/Section_Tab"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/section_kind"
-                android:layout_marginTop="20dp">
+                android:layout_weight="1"
+                android:text="Section"
+                android:fontFamily="@font/lato"
+                android:background="@android:color/transparent"
+                android:textAllCaps="false"
+                android:textColor="@color/primary_blue"
+                android:gravity="center"
+                />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/section_recycleView">
-                </androidx.recyclerview.widget.RecyclerView>
-            </FrameLayout>
-        </RelativeLayout>
+            <!-- Tab 2 -->
+            <Button
+                android:id="@+id/MySection_Tab"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="My Section"
+                android:fontFamily="@font/lato"
+                android:background="@android:color/transparent"
+                android:textAllCaps="false"
+                android:textColor="@color/primary_blue"
+                android:gravity="center" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/section_kind"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tab"
+            android:text="Section"
+            android:fontFamily="@font/tommy_regular"
+            android:textColor="@color/primary"
+            android:textSize="20dp"
+            android:layout_marginLeft="0dp">
+        </TextView>
+
+
+        <!-- Content area to display the tab's content -->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/section_kind"
+            android:id="@+id/section_recycleView">
+        </androidx.recyclerview.widget.RecyclerView>
 
     <include layout="@layout/nav_bar"></include>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
