@@ -35,6 +35,9 @@ public class FriendBio extends AppCompatActivity {
     private void loadUser() {
         // Get friend from intent
         currentFriend = (User) getIntent().getSerializableExtra(Constants.FRIEND_USER);
+        FirebaseFirestoreController<User> instance = new FirebaseFirestoreController<>(User.class);
+        currentFriend = instance.retrieveObjectsFirestoreByID( Constants.KEY_COLLECTION_USERS, currentFriend._UserName );
+        
         // Get current user from shared preference
         SharedPreferenceManager<User> currentInstance = new SharedPreferenceManager<>(User.class, this);
         currentUser = currentInstance.retrieveSerializableObjectFromSharedPreference( Constants.KEY_SHARED_PREFERENCE_USERS );

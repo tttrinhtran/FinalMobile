@@ -48,8 +48,7 @@
             android:name=".Profile.ProfileScreenPhoneNumberModification"
             android:exported="false" />
         <activity
-            android:name=".Home.MatchSplashScreen"
-            android:exported="false" />
+            android:name=".Home.MatchSplashScreen"/>
         <activity
             android:name=".FriendBio"
             android:exported="false" />
