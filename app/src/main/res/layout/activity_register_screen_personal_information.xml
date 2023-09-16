@@ -191,7 +191,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/InfoRegisterNicknameLayout"
         app:layout_constraintBottom_toBottomOf="@id/InfoRegisterNicknameLayout"
-        app:layout_constraintRight_toRightOf="@id/InfoRegisterNicknameLayout" />
+        app:layout_constraintRight_toRightOf="@id/InfoRegisterNicknameLayout"
+        android:text="0/10"/>
 
 
     <com.google.android.material.textfield.TextInputLayout

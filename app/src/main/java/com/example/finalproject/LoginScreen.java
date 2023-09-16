@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.finalproject.Home.HomeScreen;
+import com.example.finalproject.RegisterScreen.EmailValidator;
 import com.example.finalproject.RegisterScreen.RegisterScreenSignup;
 import com.example.finalproject.Section.SectionScreen;
 import com.google.gson.Gson;
@@ -108,7 +109,7 @@ public class LoginScreen extends AppCompatActivity {
                 boolean isLoginSuccessful =  firebaseAuthentication.UserSignUp(userName, password);
 
                 if(isLoginSuccessful) {
-                    _LoginScreenUser = userFirebaseController.retrieveObjectsFirestoreByID(KEY_COLLECTION_USERS, userName);
+                    _LoginScreenUser = userFirebaseController.retrieveObjectsFirestoreByID(KEY_COLLECTION_USERS, EmailValidator.Companion.emailNormalization(userName));
                     Intent intent = new Intent(LoginScreen.this, SectionScreen.class);
                     passOnUser();
                     startActivity(intent);

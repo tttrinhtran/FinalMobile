@@ -7,5 +7,9 @@ class EmailValidator {
         fun isValidEmail(email: String): Boolean {
             return email.matches(emailRegex.toRegex())
         }
+
+        fun emailNormalization(email: String):String {
+            return email.lowercase();
+        }
     }
 }

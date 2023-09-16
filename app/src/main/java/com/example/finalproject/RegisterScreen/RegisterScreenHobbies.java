@@ -16,6 +16,9 @@ import com.example.finalproject.RegisterScreen.Hobbies.HobbiesSelectListenerInte
 import com.example.finalproject.User;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterScreenHobbies extends AppCompatActivity implements HobbiesSelectListenerInterface {
 
@@ -28,12 +31,18 @@ public class RegisterScreenHobbies extends AppCompatActivity implements HobbiesS
     HobbiesAdapter _hobbiesAdapter;
     ArrayList<String> _hobbiesList;
     TextView _RegisterScreenHobbiesNextButton;
+    ArrayList<String> temp_hobbiesList;
+
+    private HashMap<String, Boolean> isChooosenHobby;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_screen_hobbies);
+
+        temp_hobbiesList = new ArrayList<>();
+        isChooosenHobby = new HashMap<>();
 
         user = (User) getIntent().getExtras().getSerializable("new_user");
 
@@ -46,6 +55,7 @@ public class RegisterScreenHobbies extends AppCompatActivity implements HobbiesS
         // "view -> {...}" is lambda format instead of "new View.OnClickListener(){...}"
         _RegisterScreenHobbiesNextButton.setOnClickListener(view -> {
             Intent intent = new Intent(RegisterScreenHobbies.this, RegisterScreenBiography.class);
+            user.set_UserHobbies(temp_hobbiesList);
             intent.putExtra("new_user", user);
             startActivity(intent);
         });
@@ -61,6 +71,10 @@ public class RegisterScreenHobbies extends AppCompatActivity implements HobbiesS
         _hobbiesList = new ArrayList<>();
         HobbiesDatabase = new FirebaseFirestoreController<>(String.class); // new Firebase controller for String type
         _hobbiesList = HobbiesDatabase.retrieveAllDocumentsIDOfaCollection(RegisterScreenHobbies.HobbieFirestoreKey); // Taking all popular hobbies (stored in firestore)
+
+        for (String s: _hobbiesList){
+            isChooosenHobby.put(s, false);
+        }
     }
 
     private void CreatingRecyclerViewForHobbiesOptions() {
@@ -72,13 +86,14 @@ public class RegisterScreenHobbies extends AppCompatActivity implements HobbiesS
 
     @Override
     public void onHobbiesClicked(int hobbieAdapter) {
-        String user_hobbies = user.get_UserHobbies();
-        if(user_hobbies == null) {
-            user_hobbies = _hobbiesList.get(hobbieAdapter);
+        String user_hobbies = _hobbiesList.get(hobbieAdapter);
+        if(Boolean.TRUE.equals(isChooosenHobby.get(user_hobbies))){
+            temp_hobbiesList.remove(user_hobbies);
+            isChooosenHobby.replace(user_hobbies, false);
+        }else {
+            temp_hobbiesList.add(user_hobbies);
+            isChooosenHobby.replace(user_hobbies, true);
         }
-        else user_hobbies = user_hobbies + ',' + _hobbiesList.get(hobbieAdapter);
-        user.set_UserHobbies(user_hobbies);
-
     }
 
     @Override

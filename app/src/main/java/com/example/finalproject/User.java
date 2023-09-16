@@ -23,7 +23,7 @@ public class User implements Serializable {
     String _UserPhone;
     boolean _UserActive;
     String _UserBio;
-    String _UserHobbies;
+    ArrayList<String> _UserHobbies;
     String _UserSchool;
     String _UserSpecialization;
     ArrayList<String> _UserFriend;
@@ -37,7 +37,7 @@ public class User implements Serializable {
 
     public User(){}
 
-    public User(String _UserName, String _UserPassword, String _UserFirstname, String _UserLastname, String _UserDoB, String _UserJoinDate, String _UserNickName, String _UserPhone, boolean _UserActive, String _UserBio, String _UserHobbies, String _UserSchool, String _UserSpecialization) {
+    public User(String _UserName, String _UserPassword, String _UserFirstname, String _UserLastname, String _UserDoB, String _UserJoinDate, String _UserNickName, String _UserPhone, boolean _UserActive, String _UserBio, ArrayList<String> _UserHobbies, String _UserSchool, String _UserSpecialization) {
         this._UserName = _UserName;
         this._UserPassword = _UserPassword;
         this._UserFirstname = _UserFirstname;
@@ -157,11 +157,11 @@ public class User implements Serializable {
         this._UserBio = _UserBio;
     }
 
-    public String get_UserHobbies() {
+    public ArrayList<String> get_UserHobbies() {
         return _UserHobbies;
     }
 
-    public void set_UserHobbies(String _UserHobbies) {
+    public void set_UserHobbies(ArrayList<String> _UserHobbies) {
         this._UserHobbies = _UserHobbies;
     }
 

@@ -68,7 +68,7 @@ public class RegisterScreenSignup extends AppCompatActivity {
         }
         else {
             if (password.equals(confirm_password)){
-                user.set_UserName(username);
+                user.set_UserName(EmailValidator.Companion.emailNormalization(username));
                 user.set_UserPassword(password);
                 return true;
             }else{

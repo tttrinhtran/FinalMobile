@@ -45,7 +45,18 @@
         app:layout_constraintRight_toRightOf="parent"
         android:hint="Biography"
         android:backgroundTint="@color/dark_blue"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="50dp"
+        android:maxLength="100"
+        android:paddingRight="50dp"/>
+
+    <TextView
+        android:id="@+id/RegisterScreenBiographyCharacterCounterTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="@id/RegisterScreenBiographyBioEditText"
+        app:layout_constraintTop_toTopOf="@id/RegisterScreenBiographyBioEditText"
+        app:layout_constraintBottom_toBottomOf="@id/RegisterScreenBiographyBioEditText"
+        android:text="0/100"/>
 
     <Button
         android:id="@+id/RegisterScreenBiographyFinishButton"

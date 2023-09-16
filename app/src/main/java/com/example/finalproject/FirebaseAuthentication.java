@@ -57,25 +57,38 @@ public class FirebaseAuthentication {
     public boolean UserSignUp(String email, String password){
         isCompleted = false;
         isSuccess = false;
-         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
-                            isSuccess = true;
-                            isCompleted = true;
 
-                        } else {
-                            isSuccess = false;
-                            isCompleted = true;
+        boolean complete_check = false;
 
-                        }
-                    }
-                });
-         while(!isCompleted){}
-         return isSuccess;
+        mAuth.signInWithEmailAndPassword(email, password)
+                 .addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
+                     @Override
+                     public void onComplete(@NonNull Task<AuthResult> task) {
+                         if (task.isSuccessful()) {
+                             // Sign in success, update UI with the signed-in user's information
+                             Log.d(TAG, "signInWithEmail:success");
+                             isSuccess = true;
+                             isCompleted = true;
+                         } else {
+                             isSuccess = false;
+                             isCompleted = true;
+                         }
+                     }
+                 });
+
+        while(!complete_check){
+            complete_check = isComplete();
+        }
+
+        return isSuccess;
+    }
+
+    private boolean isSuccessfull(){
+        return isSuccess;
+    }
+
+    private boolean isComplete(){
+        return isCompleted;
     }
 
     public FirebaseUser getFirebaseCurrentUser(){
