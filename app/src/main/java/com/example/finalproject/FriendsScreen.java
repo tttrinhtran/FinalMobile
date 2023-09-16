@@ -14,6 +14,7 @@ import com.example.finalproject.Home.HomeScreen;
 import com.example.finalproject.Listeners.UserListener;
 import com.example.finalproject.Message.ChatActivity;
 import com.example.finalproject.Message.ChatMessage;
+import com.example.finalproject.Section.SectionScreen;
 import com.example.finalproject.databinding.ActivityFriendsScreenBinding;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
@@ -96,7 +97,9 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
         section.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(FriendsScreen.this, SectionScreen.class);
+                Bundle b = ActivityOptions.makeSceneTransitionAnimation(FriendsScreen.this).toBundle();
+                startActivity(intent, b);
             }
         });
 
@@ -104,7 +107,9 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(FriendsScreen.this, ProfileScreen.class);
+                Bundle b = ActivityOptions.makeSceneTransitionAnimation(FriendsScreen.this).toBundle();
+                startActivity(intent, b);
             }
         });
     }

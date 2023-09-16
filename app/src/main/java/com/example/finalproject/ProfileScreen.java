@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.finalproject.Home.HomeScreen;
+import com.example.finalproject.Section.SectionScreen;
 import com.example.finalproject.databinding.ActivityProfileScreenBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -94,7 +95,7 @@ public class ProfileScreen extends AppCompatActivity {
 
         home = findViewById(R.id.NaviBarHomeIcon);
         section= findViewById(R.id.NaviBarSectionIcon);
-        friend= findViewById(R.id.NaviBarFriendIcon); friend.setImageResource(R.drawable.friend_icon_fill);
+        friend= findViewById(R.id.NaviBarFriendIcon);
         profile = findViewById(R.id.NaviBarProfile);
 
         home.setOnClickListener(new View.OnClickListener() {
@@ -110,15 +111,19 @@ public class ProfileScreen extends AppCompatActivity {
         section.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(ProfileScreen.this, SectionScreen.class);
+                Bundle b = ActivityOptions.makeSceneTransitionAnimation(ProfileScreen.this).toBundle();
+                startActivity(intent, b);
             }
         });
 
 
-        profile.setOnClickListener(new View.OnClickListener() {
+        friend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(ProfileScreen.this, FriendsScreen.class);
+                Bundle b = ActivityOptions.makeSceneTransitionAnimation(ProfileScreen.this).toBundle();
+                startActivity(intent, b);
             }
         });
     }
