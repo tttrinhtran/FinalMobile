@@ -43,7 +43,6 @@
             android:exported="false" />
         <activity
             android:name=".Profile.ProfileScreenPhoneNumberModification"
-            android:name=".Home.MatchSplashScreen"
             android:exported="false" />
         <activity
             android:name=".FriendBio"
