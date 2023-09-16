@@ -141,15 +141,15 @@ dependencies {
     //gson
     implementation 'com.google.code.gson:gson:2.10.1'
 
-    //Picasso
-    implementation 'com.squareup.picasso:picasso:2.8'
-    implementation 'com.squareup.picasso:picasso:2.6.0-SNAPSHOT'
-
-
     //Swipe
     implementation 'com.yuyakaido.android:card-stack-view:2.3.4'
     implementation 'com.squareup.picasso:picasso:2.71828'
 
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    //volley
+    implementation 'com.android.volley:volley:1.2.1'
+
+
 
 }

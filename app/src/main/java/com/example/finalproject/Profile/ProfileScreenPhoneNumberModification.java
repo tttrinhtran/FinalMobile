@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.finalproject.FirebaseFirestoreController;
@@ -22,9 +24,9 @@ public class ProfileScreenPhoneNumberModification extends AppCompatActivity {
     private FirebaseFirestoreController<User> userFirebaseFirestoreController;
     private SharedPreferenceManager<User> userSharedPreferenceManager;
 
-    private ImageButton _ProfileSettingPhoneNumberBackButton;
+    private ImageView _ProfileSettingPhoneNumberBackButton;
     private EditText _ProfileSettingNewPhoneNumberEditText;
-    private Button _ProfileSettingPhoneNumberConfirmButton;
+    private TextView _ProfileSettingPhoneNumberConfirmButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
