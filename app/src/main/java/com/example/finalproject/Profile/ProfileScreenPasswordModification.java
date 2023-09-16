@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,9 +37,9 @@ public class ProfileScreenPasswordModification extends AppCompatActivity {
     private EditText _ProfileScreenPasswordModificationOldPassword;
     private EditText _ProfileScreenPasswordModificationNewPassword;
     private EditText _ProfileScreenPasswordModificationNewPasswordConfirm;
-    private Button _ProfileScreenPasswordModificationConfirm;
+    private TextView _ProfileScreenPasswordModificationConfirm;
     private ProgressBar _ProfileScreenPasswordModificationProgressBar;
-    private ImageButton _ProfileScreenPasswordModificationBackButton;
+    private ImageView _ProfileScreenPasswordModificationBackButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

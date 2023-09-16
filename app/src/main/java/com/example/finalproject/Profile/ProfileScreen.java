@@ -1,5 +1,6 @@
 package com.example.finalproject.Profile;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityOptions;
@@ -9,9 +10,11 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.finalproject.Constants;
+import com.example.finalproject.FirebaseAuthentication;
 import com.example.finalproject.FirebaseCloudStorageManager;
 import com.example.finalproject.FriendsScreen;
 import com.example.finalproject.Home.HomeScreen;
+import com.example.finalproject.Login.LoginScreen;
 import com.example.finalproject.R;
 import com.example.finalproject.Section.SectionScreen;
 import com.example.finalproject.SharedPreferenceManager;
@@ -23,6 +26,7 @@ import java.util.List;
 
 public class ProfileScreen extends AppCompatActivity {
 
+    SharedPreferenceManager<User> currentInstance;
     private ActivityProfileScreenBinding binding;
     private User currentUser;
 
@@ -31,24 +35,33 @@ public class ProfileScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityProfileScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        init();
-        setListener();
-        navBar();
+
+        currentInstance = new SharedPreferenceManager<>(User.class, this);
+
+        currentUser = currentInstance.retrieveSerializableObjectFromSharedPreference( Constants.KEY_SHARED_PREFERENCE_USERS );
+
+
+        FirebaseCloudStorageManager firebaseCloudStorageManager = new FirebaseCloudStorageManager();
+        firebaseCloudStorageManager.FetchingImageFromFirebase(currentUser, binding.ProfileScreenAvatar);
+
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        currentInstance = new SharedPreferenceManager<>(User.class, this);
+
         init();
+
+        setListener();
+        navBar();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-
-        SharedPreferenceManager<User> currentInstance = new SharedPreferenceManager<>(User.class, this);
         currentInstance.storeSerializableObjectToSharedPreference(currentUser, Constants.KEY_SHARED_PREFERENCE_USERS);
-
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         database.collection(Constants.KEY_COLLECTION_USERS)
                 .document(currentUser.get_UserName())
@@ -60,8 +73,6 @@ public class ProfileScreen extends AppCompatActivity {
     }
 
     private void init() {
-
-        SharedPreferenceManager<User> currentInstance = new SharedPreferenceManager<>(User.class, this);
         currentUser = currentInstance.retrieveSerializableObjectFromSharedPreference( Constants.KEY_SHARED_PREFERENCE_USERS );
 
         binding.ProfileScreenPhoneText.setText(currentUser.get_UserPhone());
@@ -76,8 +87,18 @@ public class ProfileScreen extends AppCompatActivity {
         binding.ProfileScreenAgeSlider.setValues(currentUser.get_UserMinAge(), currentUser.get_UserMaxAge());
         binding.ProfileScreenAgeText.setText( (int) currentUser.get_UserMinAge() + "-" + (int) currentUser.get_UserMaxAge());
 
-        FirebaseCloudStorageManager firebaseCloudStorageManager = new FirebaseCloudStorageManager();
-        firebaseCloudStorageManager.FetchingImageFromFirebase(currentUser, binding.ProfileScreenAvatar);
+        binding.ProfileScreenNameEdit.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfileScreen.this, ProfileScreenNameModification.class);
+            startActivityForResult(intent, 1);
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);{
+            if(requestCode != 1 && resultCode != -1 && data != null);{
+            }
+        }
     }
 
     private void setListener() {
@@ -106,17 +127,25 @@ public class ProfileScreen extends AppCompatActivity {
             startActivity(intent);
         });
 
-        binding.ProfileScreenUsername.setOnClickListener(view -> {
-            Intent intent = new Intent(ProfileScreen.this, ProfileScreen.class);
+        binding.ProfileScreenNameEdit.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfileScreen.this, ProfileScreenNameModification.class);
             startActivity(intent);
         });
 
         binding.ProfileScreenAvatar.setOnClickListener(view -> {
             SettingScreenPersonalInformationBottomSheetFragment settingScreenPersonalInformationBottomSheetFragment = new SettingScreenPersonalInformationBottomSheetFragment();
             Bundle bundle = new Bundle();
-            bundle.putSerializable("user", currentUser);
+            bundle.putSerializable("user", currentUser.get_UserName());
             settingScreenPersonalInformationBottomSheetFragment.setArguments(bundle);
             settingScreenPersonalInformationBottomSheetFragment.show(getSupportFragmentManager(), "settingScreenPersonalInformationBottomSheetFragment");
+        });
+
+        binding.LogOutText.setOnClickListener(view -> {
+            FirebaseAuthentication firebaseAuthentication = new FirebaseAuthentication(ProfileScreen.this);
+            firebaseAuthentication.SignOut();
+
+            Intent intent = new Intent(ProfileScreen.this, LoginScreen.class);
+            startActivity(intent);
         });
     }
 

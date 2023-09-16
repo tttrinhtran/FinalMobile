@@ -64,7 +64,7 @@
             android:paddingTop="20dp"
             android:paddingStart="10dp"
             android:backgroundTint="@android:color/transparent"
-            android:hint="Old Lastname"
+            android:hint="New Lastname"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:fontFamily="@font/lato"

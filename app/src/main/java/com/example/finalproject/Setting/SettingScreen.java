@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.example.finalproject.FirebaseAuthentication;
-import com.example.finalproject.LoginScreen;
+import com.example.finalproject.Login.LoginScreen;
 import com.example.finalproject.R;
 
 public class SettingScreen extends AppCompatActivity {

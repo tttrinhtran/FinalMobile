@@ -39,10 +39,15 @@
         android:theme="@style/Theme.FinalProject"
         tools:targetApi="33">
         <activity
+            android:name=".Login.LoginScreenForgotPassword"
+            android:exported="false" />
+        <activity
             android:name=".Profile.ProfileScreenNameModification"
             android:exported="false" />
         <activity
             android:name=".Profile.ProfileScreenPhoneNumberModification"
+            android:exported="false" />
+        <activity
             android:name=".Home.MatchSplashScreen"
             android:exported="false" />
         <activity
@@ -141,7 +146,7 @@
             android:name=".RegisterScreen.RegisterScreenSignup"
             android:exported="false" />
         <activity
-            android:name=".LoginScreen"
+            android:name=".Login.LoginScreen"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
