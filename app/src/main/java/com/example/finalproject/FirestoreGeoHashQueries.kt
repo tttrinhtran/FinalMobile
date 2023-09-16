@@ -12,6 +12,8 @@ import com.google.firebase.firestore.QuerySnapshot
 class FirestoreGeoHashQueries {
     private val db = FirebaseFirestore.getInstance()
 
+    private var isComplete = false;
+
     constructor()
 
     fun UpdateLocationFirestore(user: User, pos: Position){
@@ -30,6 +32,9 @@ class FirestoreGeoHashQueries {
     }
 
     fun  QueryForLocationFireStore (user:User, pos: Position, distance: Double, container : ArrayList<User>) {
+        var isCompleteTasks = false;
+        isComplete = false;
+
         var ListNearByUserName : MutableList<DocumentSnapshot> = ArrayList()
         // Find cities within 50km of London
         val center = GeoLocation(pos.getGeopoint().latitude, pos.getGeopoint().longitude)
@@ -78,6 +83,14 @@ class FirestoreGeoHashQueries {
                         container.add(user_temp)
                     }
                 }
+                isComplete = true;
             }
+        while (!isCompleteTasks) {
+            isCompleteTasks = isCompleteProcess();
+        }
+    }
+
+    fun isCompleteProcess() : Boolean {
+        return this.isComplete;
     }
 }

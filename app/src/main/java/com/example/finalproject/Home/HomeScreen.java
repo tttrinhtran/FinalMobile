@@ -259,9 +259,7 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
     void checkSwipeLeft(User leftUser) {
         if (user.get_UserWaitingList().contains(leftUser.get_UserName())) {
             user.remove_WaitingList(leftUser.get_UserName());
-
         }
-
     }
 
     void setUp() {

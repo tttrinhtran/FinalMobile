@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.finalproject.FirebaseFirestoreController;
 import com.example.finalproject.R;
@@ -25,8 +26,13 @@ import com.example.finalproject.openvcall.ui.CallActivity;
 import com.example.finalproject.openvcall.ui.SectionRoomVideoChatScreen;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 
 public class SectionDetail extends BaseActivity {
 
@@ -84,7 +90,50 @@ public class SectionDetail extends BaseActivity {
             joinBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    forwardToRoom(SectionDetail.this, section._SectionName, "123");
+                    LocalDateTime currentDateTime = LocalDateTime.now();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+                    String sectionDate = section.get_SectionDate();
+                    String sectionTime = section.get_SectionHour();
+
+                    ArrayList<Integer> time = new ArrayList<Integer>(0); // {dd,mm,yyyy,hh,mm,ss}
+
+                    StringBuilder temp = new StringBuilder();
+
+                    for (char i : sectionDate.toCharArray()){
+                        if(i == '/'){
+                            time.add(Integer.parseInt(temp.toString()));
+                            temp = new StringBuilder();
+                        }else {
+                            temp.append(i);
+                        }
+                    }
+                    time.add(Integer.parseInt(temp.toString())); // add for the last element since dd/mm/yyyy there is no way
+                                                                    // to identify yyyy inside the loop
+                    temp = new StringBuilder();
+
+                    for (char i : sectionTime.toCharArray()){
+                        if(i == ':'){
+                            time.add(Integer.parseInt(temp.toString()));
+                            temp = new StringBuilder();
+                        }else {
+                            temp.append(i);
+                        }
+                    }
+                    time.add(Integer.parseInt(temp.toString())); // add for the last element since hh:mm:ss there is no way
+                                                                // to identify ss inside the loop
+
+
+                    int remain_attribute_of_time = time.size();
+                    for (int i = 0 ; i < 6 - remain_attribute_of_time; i++) time.add(0);
+
+                    LocalDateTime sectionDateAndTime = LocalDateTime.of(time.get(2), time.get(1), time.get(0), time.get(3), time.get(4), time.get(5));
+
+                    if(currentDateTime.isAfter(sectionDateAndTime)) {
+                        forwardToRoom(SectionDetail.this, section._SectionName, "123");
+                    } else {
+                        Toast.makeText(SectionDetail.this, "Section has not openned yet", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }
@@ -139,6 +188,7 @@ void hostUpdate()
         Intent i = new Intent(context, CallActivity.class);
         i.putExtra(ConstantApp.ACTION_KEY_CHANNEL_NAME, channel);
         i.putExtra(ConstantApp.ACTION_KEY_ENCRYPTION_KEY, encryption);
+        i.putExtra("nickname",user.get_UserNickName());
         startActivity(i);
     }
 }

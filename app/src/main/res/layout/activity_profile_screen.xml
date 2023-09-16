@@ -136,7 +136,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ProfileScreenEmailLayout"
+                android:id="@+id/ProfileScreenPasswordLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
@@ -147,19 +147,19 @@
                 android:backgroundTint="@color/light_blue">
 
                 <TextView
-                    android:id="@+id/ProfileScreenEmailTitle"
+                    android:id="@+id/ProfileScreenPasswordTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text="Email"
+                    android:text="Password"
                     android:fontFamily="@font/tommy_regular"
                     android:textColor="@color/dark_blue"
                     android:textSize="16sp"
                     />
 
                 <TextView
-                    android:id="@+id/ProfileScreenEmailText"
+                    android:id="@+id/ProfileScreenPasswordText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toStartOf="@id/ProfileScreenEmailEditIcon"
@@ -185,7 +185,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ProfileScreenEmailLayout"
+                app:layout_constraintTop_toBottomOf="@id/ProfileScreenPasswordLayout"
                 android:paddingVertical="20dp"
                 android:background="@drawable/border_bottom_black"
                 android:backgroundTint="@color/light_blue">

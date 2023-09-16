@@ -59,7 +59,7 @@ public class ProfileScreen extends AppCompatActivity {
         currentUser = currentInstance.retrieveSerializableObjectFromSharedPreference( Constants.KEY_SHARED_PREFERENCE_USERS );
 
         binding.ProfileScreenPhoneText.setText(currentUser._UserPhone);
-        binding.ProfileScreenEmailText.setText(currentUser._UserName);
+        binding.ProfileScreenPasswordText.setText(currentUser.get_UserPassword());
         binding.ProfileScreenUsername.setText(currentUser._UserFirstname + " " + currentUser._UserLastname);
 
         binding.ProfileScreenDistanceSlider.setValue(currentUser._UserDistancePref);

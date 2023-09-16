@@ -92,6 +92,7 @@ public class LoginScreen extends AppCompatActivity {
         }else{
             // taking the user's data based on username.
             progressBar.setVisibility(View.VISIBLE);
+            userName = EmailValidator.Companion.emailNormalization(userName);
             verifyAccount(userName, password);
         }
     }
@@ -105,7 +106,6 @@ public class LoginScreen extends AppCompatActivity {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-
                 boolean isLoginSuccessful =  firebaseAuthentication.UserSignUp(userName, password);
 
                 if(isLoginSuccessful) {

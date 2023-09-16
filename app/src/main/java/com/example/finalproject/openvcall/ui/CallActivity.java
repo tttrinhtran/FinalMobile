@@ -57,6 +57,7 @@ import io.agora.rtc.video.VideoEncoderConfiguration;
 
 public class CallActivity extends BaseActivity implements DuringCallEventHandler {
 
+    private String id;
     public static final int LAYOUT_TYPE_DEFAULT = 0;
     public static final int LAYOUT_TYPE_SMALL = 1;
 
@@ -90,6 +91,8 @@ public class CallActivity extends BaseActivity implements DuringCallEventHandler
         super.onCreate(savedInstanceState);
         makeActivityContentShownUnderStatusBar();
         setContentView(R.layout.activity_call);
+
+        id = getIntent().getStringExtra("nickname");
 
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
@@ -165,7 +168,7 @@ public class CallActivity extends BaseActivity implements DuringCallEventHandler
         mGridVideoViewContainer.initViewContainer(this, 0, mUidsList, mIsLandscape); // first is now full view
 
         initMessageList();
-        notifyMessageChanged(new Message(new User(0, null), "start join " + channelName + " as " + (config().mUid & 0xFFFFFFFFL)));
+        notifyMessageChanged(new Message(new User(0, null), "start join " + channelName + " as " + id));
 
         joinChannel(channelName, config().mUid);
 
@@ -524,20 +527,20 @@ public class CallActivity extends BaseActivity implements DuringCallEventHandler
 
     @Override
     public void onUserJoined(int uid) {
-        log.debug("onUserJoined " + (uid & 0xFFFFFFFFL));
+        log.debug("onUserJoined " + id);
         doRenderRemoteUi(uid);
 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                notifyMessageChanged(new Message(new User(0, null), "user " + (uid & 0xFFFFFFFFL) + " joined"));
+                notifyMessageChanged(new Message(new User(0, null), "user " + id + " joined"));
             }
         });
     }
 
     @Override
     public void onFirstRemoteVideoDecoded(int uid, int width, int height, int elapsed) {
-        log.debug("onFirstRemoteVideoDecoded " + (uid & 0xFFFFFFFFL) + " " + width + " " + height + " " + elapsed);
+        log.debug("onFirstRemoteVideoDecoded " + id + " " + width + " " + height + " " + elapsed);
 
     }
 
@@ -576,27 +579,27 @@ public class CallActivity extends BaseActivity implements DuringCallEventHandler
                 rtcEngine().setupRemoteVideo(new VideoCanvas(surfaceV, VideoCanvas.RENDER_MODE_HIDDEN, uid));
 
                 if (useDefaultLayout) {
-                    log.debug("doRenderRemoteUi LAYOUT_TYPE_DEFAULT " + (uid & 0xFFFFFFFFL));
+                    log.debug("doRenderRemoteUi LAYOUT_TYPE_DEFAULT " + id);
                     switchToDefaultVideoView();
                 } else {
                     int bigBgUid = mSmallVideoViewAdapter == null ? uid : mSmallVideoViewAdapter.getExceptedUid();
-                    log.debug("doRenderRemoteUi LAYOUT_TYPE_SMALL " + (uid & 0xFFFFFFFFL) + " " + (bigBgUid & 0xFFFFFFFFL));
+                    log.debug("doRenderRemoteUi LAYOUT_TYPE_SMALL " + id + " " + (bigBgUid & 0xFFFFFFFFL));
                     switchToSmallVideoView(bigBgUid);
                 }
 
-                notifyMessageChanged(new Message(new User(0, null), "video from user " + (uid & 0xFFFFFFFFL) + " decoded"));
+                notifyMessageChanged(new Message(new User(0, null), "video from user " + id + " decoded"));
             }
         });
     }
 
     @Override
     public void onJoinChannelSuccess(String channel, final int uid, int elapsed) {
-        log.debug("onJoinChannelSuccess " + channel + " " + (uid & 0xFFFFFFFFL) + " " + elapsed);
+        log.debug("onJoinChannelSuccess " + channel + " " + id+ " " + elapsed);
     }
 
     @Override
     public void onUserOffline(int uid, int reason) {
-        log.debug("onUserOffline " + (uid & 0xFFFFFFFFL) + " " + reason);
+        log.debug("onUserOffline " + id + " " + reason);
         doRemoveRemoteUi(uid);
     }
 
@@ -754,7 +757,7 @@ public class CallActivity extends BaseActivity implements DuringCallEventHandler
                     switchToSmallVideoView(bigBgUid);
                 }
 
-                notifyMessageChanged(new Message(new User(0, null), "user " + (uid & 0xFFFFFFFFL) + " left"));
+                notifyMessageChanged(new Message(new User(0, null), "user " + id + " left"));
             }
         });
     }
