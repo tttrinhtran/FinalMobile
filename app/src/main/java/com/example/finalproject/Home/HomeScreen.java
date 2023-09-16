@@ -91,6 +91,9 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
         firestoreGeoHashQueries = new FirestoreGeoHashQueries();
         positionfirebaseFirestoreController = new FirebaseFirestoreController<>(Position.class);
         isLocationUpdatedSharedPreference = new SharedPreferenceManager<>(Boolean.class,HomeScreen.this);
+
+        setUp();
+
     }
 
     private void HomeScren_UIElementsSetup(){
@@ -133,17 +136,15 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
 
                     @Override
                     public void run() {
+                        updateActiveStatus();
+                        swipe();
                         progressBar.setVisibility(View.INVISIBLE);
                         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     }
                 });
             }
         });
-
-        setUp();
-        updateActiveStatus();
         ActiveList();
-        swipe();
         NavBar();
     }
 
@@ -293,11 +294,14 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
                             Position pos = null;
                             pos = positionfirebaseFirestoreController.retrieveObjectsFirestoreByID(FIRESTORE_LOCATION_KEY, user.get_UserName());
                             firestoreGeoHashQueries.QueryForLocationFireStore(user, pos, 500, activeUsers);
+
                         }
                         handler.post(new Runnable() {
 
                             @Override
                             public void run() {
+                                updateActiveStatus();
+                                swipe();
                                 progressBar.setVisibility(View.INVISIBLE);
                                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             }
