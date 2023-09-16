@@ -29,9 +29,9 @@ public class User implements Serializable {
     ArrayList<String> _UserFriend;
     ArrayList<String> _UserWaitingList;
 
-    float _UserMinAge = 18;
-    float _UserMaxAge = 50;
-    float _UserDistancePref = 5000;
+    public float _UserMinAge = 18;
+    public float _UserMaxAge = 50;
+    public float _UserDistancePref = 5000;
 
 
 

@@ -1,4 +1,4 @@
-package com.example.finalproject;
+package com.example.finalproject.Profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,8 +8,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.finalproject.Constants;
+import com.example.finalproject.FriendsScreen;
 import com.example.finalproject.Home.HomeScreen;
+import com.example.finalproject.R;
 import com.example.finalproject.Section.SectionScreen;
+import com.example.finalproject.SharedPreferenceManager;
+import com.example.finalproject.User;
 import com.example.finalproject.databinding.ActivityProfileScreenBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -45,11 +50,11 @@ public class ProfileScreen extends AppCompatActivity {
 
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         database.collection(Constants.KEY_COLLECTION_USERS)
-                .document(currentUser._UserName)
+                .document(currentUser.get_UserName())
                 .update(
-                        "_UserMinAge", currentUser._UserMinAge,
-                        "_UserMaxAge", currentUser._UserMaxAge,
-                        "_UserDistancePref", currentUser._UserDistancePref
+                        "_UserMinAge", currentUser.get_UserMinAge(),
+                        "_UserMaxAge", currentUser.get_UserMaxAge(),
+                        "_UserDistancePref", currentUser.get_UserDistancePref()
                 );
     }
 
@@ -58,14 +63,20 @@ public class ProfileScreen extends AppCompatActivity {
         SharedPreferenceManager<User> currentInstance = new SharedPreferenceManager<>(User.class, this);
         currentUser = currentInstance.retrieveSerializableObjectFromSharedPreference( Constants.KEY_SHARED_PREFERENCE_USERS );
 
-        binding.ProfileScreenPhoneText.setText(currentUser._UserPhone);
-        binding.ProfileScreenPasswordText.setText(currentUser.get_UserPassword());
-        binding.ProfileScreenUsername.setText(currentUser._UserFirstname + " " + currentUser._UserLastname);
+        binding.ProfileScreenPhoneText.setText(currentUser.get_UserPhone());
 
-        binding.ProfileScreenDistanceSlider.setValue(currentUser._UserDistancePref);
-        binding.ProfileScreenDistanceText.setText( (int)currentUser._UserDistancePref + " mi");
-        binding.ProfileScreenAgeSlider.setValues( currentUser._UserMinAge, currentUser._UserMaxAge);
-        binding.ProfileScreenAgeText.setText( (int)currentUser._UserMinAge + "-" + (int)currentUser._UserMaxAge);
+        String passwordhide = "";
+        for (int i = 0; i < currentUser.get_UserPassword().toString().length(); i++){
+            passwordhide += "*";
+        }
+        binding.ProfileScreenPasswordText.setText(passwordhide);
+
+        binding.ProfileScreenUsername.setText(currentUser.get_UserFirstname() + " " + currentUser.get_UserLastname());
+
+        binding.ProfileScreenDistanceSlider.setValue(currentUser.get_UserDistancePref());
+        binding.ProfileScreenDistanceText.setText( (int) currentUser.get_UserDistancePref() + " mi");
+        binding.ProfileScreenAgeSlider.setValues(currentUser.get_UserMinAge(), currentUser.get_UserMaxAge());
+        binding.ProfileScreenAgeText.setText( (int) currentUser.get_UserMinAge() + "-" + (int) currentUser.get_UserMaxAge());
     }
 
     private void setListener() {
@@ -83,6 +94,12 @@ public class ProfileScreen extends AppCompatActivity {
 
             binding.ProfileScreenAgeText.setText( (int)currentUser._UserMinAge + "-" + (int)currentUser._UserMaxAge);
         } );
+
+        binding.ProfileScreenPasswordEditIcon.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfileScreen.this, ProfileScreenPasswordModification.class);
+            startActivity(intent);
+        });
+
 
     }
 

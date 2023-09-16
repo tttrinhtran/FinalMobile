@@ -39,10 +39,13 @@
         android:theme="@style/Theme.FinalProject"
         tools:targetApi="33">
         <activity
+            android:name=".Profile.ProfileScreenPasswordModification"
+            android:exported="false" />
+        <activity
             android:name=".Section.AddSectionScreen"
             android:exported="false" />
         <activity
-            android:name=".ProfileScreen"
+            android:name=".Profile.ProfileScreen"
             android:exported="false" />
         <activity
             android:name=".Setting.SettingAccountScreen"

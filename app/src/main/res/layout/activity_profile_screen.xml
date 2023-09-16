@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="20dp"
-    tools:context=".ProfileScreen">
+    tools:context=".Profile.ProfileScreen">
 
     <ScrollView
         android:id="@+id/ProfileScreenScrollView"
@@ -162,7 +162,7 @@
                     android:id="@+id/ProfileScreenPasswordText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toStartOf="@id/ProfileScreenEmailEditIcon"
+                    app:layout_constraintEnd_toStartOf="@id/ProfileScreenPasswordEditIcon"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginEnd="5dp"
                     android:text="abc@gmail.com"
@@ -171,7 +171,7 @@
                     android:textColor="@color/dark_blue"/>
 
                 <ImageView
-                    android:id="@+id/ProfileScreenEmailEditIcon"
+                    android:id="@+id/ProfileScreenPasswordEditIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"

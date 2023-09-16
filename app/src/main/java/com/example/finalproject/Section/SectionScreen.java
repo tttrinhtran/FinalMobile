@@ -19,11 +19,10 @@ import android.widget.TextView;
 import com.example.finalproject.FirebaseFirestoreController;
 import com.example.finalproject.FriendsScreen;
 import com.example.finalproject.Home.HomeScreen;
-import com.example.finalproject.ProfileScreen;
+import com.example.finalproject.Profile.ProfileScreen;
 import com.example.finalproject.R;
 import com.example.finalproject.SharedPreferenceManager;
 import com.example.finalproject.User;
-import com.example.finalproject.openvcall.ui.SectionRoomVideoChatScreen;
 
 import java.io.Serializable;
 import java.util.ArrayList;
