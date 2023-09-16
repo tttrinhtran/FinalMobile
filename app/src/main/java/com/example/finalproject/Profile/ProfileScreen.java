@@ -14,6 +14,7 @@ import com.example.finalproject.FriendsScreen;
 import com.example.finalproject.Home.HomeScreen;
 import com.example.finalproject.R;
 import com.example.finalproject.Section.SectionScreen;
+import com.example.finalproject.Setting.SettingScreenPersonalInformationBottomSheetFragment;
 import com.example.finalproject.SharedPreferenceManager;
 import com.example.finalproject.User;
 import com.example.finalproject.databinding.ActivityProfileScreenBinding;
@@ -148,6 +149,7 @@ public class ProfileScreen extends AppCompatActivity {
                 Intent intent = new Intent(ProfileScreen.this, SectionScreen.class);
                 Bundle b = ActivityOptions.makeSceneTransitionAnimation(ProfileScreen.this).toBundle();
                 startActivity(intent, b);
+                finish();
             }
         });
 
@@ -158,6 +160,7 @@ public class ProfileScreen extends AppCompatActivity {
                 Intent intent = new Intent(ProfileScreen.this, FriendsScreen.class);
                 Bundle b = ActivityOptions.makeSceneTransitionAnimation(ProfileScreen.this).toBundle();
                 startActivity(intent, b);
+                finish();
             }
         });
     }
