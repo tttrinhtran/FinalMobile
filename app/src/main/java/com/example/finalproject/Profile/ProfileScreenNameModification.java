@@ -6,6 +6,7 @@ import static com.example.finalproject.Constants.KEY_SHARED_PREFERENCE_USERS;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -33,6 +34,7 @@ public class ProfileScreenNameModification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_screen_name_modification);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         ProfileSettingName_UIElementsFetching();
 

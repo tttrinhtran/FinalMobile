@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.example.finalproject.databinding.ActivityFriendsScreenBinding;
@@ -25,6 +26,7 @@ public class FriendBio extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = FriendBioBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         loadUser();
         attachInfo();

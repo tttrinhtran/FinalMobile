@@ -45,6 +45,7 @@ public class ProfileScreenPasswordModification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_screen_password_modification);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         ProfileScreenPasswordModification_UIElementsFetching();
 
