@@ -49,6 +49,7 @@ public class FriendBio extends AppCompatActivity {
         binding.FriendBioAge.setText("Age: " + calculateAge(currentFriend._UserDoB));
         binding.FriendBioBiography.setText(currentFriend._UserBio);
         binding.FriendBioSpecialization.setText(currentFriend._UserSpecialization);
+        binding.FriendBioLocationInfo.setText(currentFriend.get_UserAddress());
 
         FirebaseCloudStorageManager firebaseCloudStorageManager = new FirebaseCloudStorageManager();
         binding.FriendAvatar.setScaleType(ImageView.ScaleType.CENTER_CROP);
