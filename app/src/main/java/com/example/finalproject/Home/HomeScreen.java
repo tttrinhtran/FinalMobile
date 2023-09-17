@@ -264,6 +264,10 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
             SharedPreferenceManager currentInstance = new SharedPreferenceManager<>(User.class, this);
             currentInstance.storeSerializableObjectToSharedPreference(user, Constants.KEY_SHARED_PREFERENCE_USERS);
 
+            // Update activeUsers list
+            activeUsers.remove(matchUser);
+            adapterSwipe.notifyDataSetChanged();
+
             Intent i = new Intent(HomeScreen.this, MatchSplashScreen.class);
             i.putExtra("USER_MATCH", matchUser);
             Bundle b = ActivityOptions.makeSceneTransitionAnimation(HomeScreen.this).toBundle();
