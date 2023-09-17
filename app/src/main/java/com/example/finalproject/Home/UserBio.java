@@ -50,8 +50,9 @@ public class UserBio extends AppCompatActivity {
         _backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(UserBio.this, HomeScreen.class);
-                startActivity(i);
+//                Intent i = new Intent(UserBio.this, HomeScreen.class);
+//                startActivity(i);
+                finish();
             }
         });
     }
