@@ -14,72 +14,54 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.finalproject.Constants;
 import com.example.finalproject.FirebaseCloudStorageManager;
+import com.example.finalproject.FriendsScreen;
 import com.example.finalproject.R;
 import com.example.finalproject.User;
+import com.example.finalproject.databinding.ActivityUserBioBinding;
 
 import org.w3c.dom.Text;
 
 public class UserBio extends AppCompatActivity {
 
-    TextView _lastName;
-    TextView _firstName;
-    TextView _age;
-    TextView _school;
-    TextView _biography;
-    TextView _specilization;
-    ImageView _backButton;
-    ImageView _userAvatar;
-
-
+    User user;
+    ActivityUserBioBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_bio);
+        binding = ActivityUserBioBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
+        user = (User) getIntent().getSerializableExtra("USER_OBJECT");
 
-        Intent i = getIntent();
-        User user = (User) i.getSerializableExtra("USER_OBJECT");
-
-        fetchUI();
         setDataBio(user);
         onButtonClicked();
     }
 
     private void onButtonClicked() {
-        _backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent i = new Intent(UserBio.this, HomeScreen.class);
-//                startActivity(i);
-                finish();
-            }
+        binding.ItemSwipeBackArrow.setOnClickListener( view -> {
+            Intent intent = new Intent(this, HomeScreen.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
         });
     }
 
     private void setDataBio(User user) {
-        _lastName.setText(user.get_UserLastname());
-        _firstName.setText(user.get_UserFirstname());
-        _age.setText(user.get_UserAge());
-        _school.setText(user.get_UserSchool());
-        _biography.setText(user.get_UserBio());
-        _specilization.setText(user.get_UserSpecialization());
+
+        binding.ItemSwipeLastName.setText(user.get_UserLastname());
+        binding.ItemSwipeFirstName.setText(user.get_UserFirstname());
+        binding.ItemSwipeAge.setText(user.get_UserAge());
+        binding.ItemSwipeSchool.setText(user.get_UserSchool());
+        binding.ItemSwipeBiography.setText(user.get_UserBio());
+        binding.ItemSwipeSpecialization.setText(user.get_UserSpecialization());
 
         FirebaseCloudStorageManager firebaseCloudStorageManager = new FirebaseCloudStorageManager();
-        firebaseCloudStorageManager.FetchingImageFromFirebase(user, _userAvatar);
-        _userAvatar.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        firebaseCloudStorageManager.FetchingImageFromFirebase(user, binding.ItemSwipeImage);
+        binding.ItemSwipeImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
     }
 
-    private void fetchUI() {
-        _lastName = (TextView) findViewById(R.id.ItemSwipeLastName);
-        _firstName = (TextView) findViewById(R.id.ItemSwipeFirstName);
-        _age = (TextView) findViewById(R.id.ItemSwipeAge);
-        _school = (TextView) findViewById(R.id.ItemSwipeSchool);
-        _biography = (TextView) findViewById(R.id.ItemSwipeBiography);
-        _specilization = (TextView) findViewById(R.id.ItemSwipeSpecialization);
-        _backButton = (ImageView) findViewById(R.id.ItemSwipeBackArrow);
-        _userAvatar = (ImageView) findViewById(R.id.ItemSwipeImage);
-    }
 }

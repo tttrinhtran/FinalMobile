@@ -131,6 +131,7 @@ class LocationUpdateActivity : AppCompatActivity(), SharedPreferences.OnSharedPr
             loadingProgressBar.visibility = VISIBLE
             val intent = Intent(this@LocationUpdateActivity, HomeScreen::class.java)
             startActivity(intent)
+            finish()
         }
     }
 

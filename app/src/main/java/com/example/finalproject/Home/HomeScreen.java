@@ -34,7 +34,9 @@ import com.example.finalproject.FirebaseFirestoreController;
 import com.example.finalproject.FirestoreGeoHashQueries;
 import com.example.finalproject.FriendsScreen;
 import com.example.finalproject.Home.Active.ActiveListAdapter;
+import com.example.finalproject.Listeners.CardListener;
 import com.example.finalproject.LocationUpdatePeriodicallyService;
+import com.example.finalproject.Message.ChatActivity;
 import com.example.finalproject.Position;
 import com.example.finalproject.Profile.ProfileScreen;
 import com.example.finalproject.R;
@@ -56,7 +58,7 @@ import java.util.concurrent.Executors;
 
 
 
-public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.OnItemClickListener {
+public class HomeScreen extends AppCompatActivity implements CardListener {
     private FirestoreGeoHashQueries firestoreGeoHashQueries;
     private FirebaseFirestoreController<Position> positionfirebaseFirestoreController;
     private static final String TAG = "HomeScreen";
@@ -115,6 +117,12 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d( "Vicluu", "onDestroy: " + "Home destroy");
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         Intent serviceIntent = new Intent(HomeScreen.this, LocationUpdatePeriodicallyService.class);
@@ -165,6 +173,7 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
     protected void onStop() {
         Intent serviceIntent = new Intent(HomeScreen.this, LocationUpdatePeriodicallyService.class);
         stopService(serviceIntent);
+        Log.d( "Vicluu", "onStop: " + "Home stop");
         super.onStop();
     }
 
@@ -235,10 +244,10 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
                 return 10.0f;
             }
         });
-        adapterSwipe = new cardSwipeAdapter((Context) this, activeUsers);
+        adapterSwipe = new cardSwipeAdapter( activeUsers, this);
         cardStackView.setLayoutManager(manager);
         cardStackView.setAdapter(adapterSwipe);
-        adapterSwipe.setOnItemClickListener(this);
+        // adapterSwipe.setOnItemClickListener(this);
         cardStackView.setItemAnimator(new DefaultItemAnimator());
 
 //        for(User u : activeUsers){
@@ -414,12 +423,10 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
     }
 
     @Override
-    public void onItemClick(User user) {
-        Intent i = new Intent(HomeScreen.this, UserBio.class);
-        User cur = user;
-        i.putExtra("USER_OBJECT", cur);
-        Bundle b = ActivityOptions.makeSceneTransitionAnimation(HomeScreen.this).toBundle();
-        startActivity(i, b);
+    public void onCardClicker( User user ) {
+        Intent intent = new Intent( getApplicationContext(), UserBio.class );
+        Log.d("Vicluu", "onCardClicker: " + getApplicationContext());
+        intent.putExtra( "USER_OBJECT", user );
+        startActivity(intent);
     }
-
 }

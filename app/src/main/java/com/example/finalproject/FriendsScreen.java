@@ -121,6 +121,7 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
     public void onUserClicker(User user) {
         Intent intent = new Intent( getApplicationContext(), ChatActivity.class );
         intent.putExtra( Constants.RECEIVED_USER, user );
+        Log.d( "Vicluu", "onUserClicker: " + getApplicationContext());
         startActivity(intent);
         // finish();
     }
