@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,6 +38,7 @@ public class RegisterScreenPersonalInformation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_screen_personal_information);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         user = (User) getIntent().getExtras().getSerializable("new_user"); // get User address from The Sign up screen.
 
@@ -85,7 +87,12 @@ public class RegisterScreenPersonalInformation extends AppCompatActivity {
         if (firstname.isEmpty() || lastname.isEmpty() || phone.isEmpty() || nickname.isEmpty() || DoB.isEmpty()){
             Toast.makeText(RegisterScreenPersonalInformation.this, "Please full fill the information.", Toast.LENGTH_SHORT).show();
             return false;
-        } else{
+        }
+        else if(getAge() == false){
+            Toast.makeText(RegisterScreenPersonalInformation.this, "User must be over 14", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else{
             user.set_UserFirstname(firstname);
             user.set_UserLastname(lastname);
             user.set_UserNickName(nickname);
@@ -120,6 +127,7 @@ public class RegisterScreenPersonalInformation extends AppCompatActivity {
                 int year = c.get(Calendar.YEAR);
                 int month = c.get(Calendar.MONTH);
                 int day = c.get(Calendar.DAY_OF_MONTH);
+                Calendar selectedDate = Calendar.getInstance();
 
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
                         RegisterScreenPersonalInformation.this,
@@ -128,17 +136,26 @@ public class RegisterScreenPersonalInformation extends AppCompatActivity {
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
                                 // Format the selected date and set it to the EditText
-                                Calendar selectedDate = Calendar.getInstance();
                                 selectedDate.set(year, monthOfYear, dayOfMonth);
                                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                                 tmp.setText(sdf.format(selectedDate.getTime()));
                             }
                         },
                         year, month, day);
+                datePickerDialog.getDatePicker().setMaxDate(selectedDate.getTimeInMillis());
                 datePickerDialog.show();
             }
         });
         return tmp;
     }
 
+    public boolean getAge() {
+        Calendar calendar = Calendar.getInstance();
+        int currentYear = calendar.get(Calendar.YEAR);
+        String dob = _PersonalInformationDoB.getText().toString();
+        int Useryear = Integer.parseInt(dob.substring(dob.length() - 4));
+        int tmp = currentYear - Useryear;
+        if (tmp <= 14) return false;
+        else return true;
+    }
 }

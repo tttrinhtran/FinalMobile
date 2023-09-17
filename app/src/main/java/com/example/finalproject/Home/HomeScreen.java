@@ -7,6 +7,7 @@ import static com.example.finalproject.Constants.LOCATION_UPDATE_STATUS;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.finalproject.Constants;
+import com.example.finalproject.FirebaseCloudStorageManager;
 import com.example.finalproject.FirebaseFirestoreController;
 import com.example.finalproject.FirestoreGeoHashQueries;
 import com.example.finalproject.FriendsScreen;
@@ -77,11 +79,13 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
     private ImageView section;
     private ImageView friend;
     private ImageView profile;
+    private ImageView avatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         HomeScren_UIElementsSetup();
 
@@ -107,6 +111,7 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
         section = findViewById(R.id.NaviBarSectionIcon);
         friend = findViewById(R.id.NaviBarFriendIcon);
         profile = findViewById(R.id.NaviBarProfile);
+        avatar = findViewById(R.id.HomeScreenAvatarTitle);
     }
 
     @Override
@@ -260,6 +265,10 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
             SharedPreferenceManager currentInstance = new SharedPreferenceManager<>(User.class, this);
             currentInstance.storeSerializableObjectToSharedPreference(user, Constants.KEY_SHARED_PREFERENCE_USERS);
 
+            // Update activeUsers list
+            activeUsers.remove(matchUser);
+            adapterSwipe.notifyDataSetChanged();
+
             Intent i = new Intent(HomeScreen.this, MatchSplashScreen.class);
             i.putExtra("USER_MATCH", matchUser);
             Bundle b = ActivityOptions.makeSceneTransitionAnimation(HomeScreen.this).toBundle();
@@ -289,8 +298,12 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
     void setUp() {
         // Setting for Hello Text
         getUser();
-        String temp = "Hello! " + user.get_UserFirstname();
+        String temp = "Hello, " + user.get_UserFirstname() + "!";
         titleText.setText(temp);
+
+        FirebaseCloudStorageManager firebaseCloudStorageManager = new FirebaseCloudStorageManager();
+        firebaseCloudStorageManager.FetchingImageFromFirebase(user, avatar);
+        avatar.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
 
         // Setting for refresh layout
@@ -324,7 +337,8 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
                             Position pos = null;
                             pos = positionfirebaseFirestoreController.retrieveObjectsFirestoreByID(FIRESTORE_LOCATION_KEY, user.get_UserName());
                             firestoreGeoHashQueries.QueryForLocationFireStore(user, pos, 500, activeUsers);
-//                            activeUsers.removeAll(user.get_UserFriend());
+                            activeUsers.removeAll(user.get_UserFriend());
+                            adapterSwipe.notifyDataSetChanged();
 
                         }
                         handler.post(new Runnable() {
@@ -388,8 +402,7 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeScreen.this, ProfileScreen.class);
-                Bundle b = ActivityOptions.makeSceneTransitionAnimation(HomeScreen.this).toBundle();
-                startActivity(intent, b);
+                startActivity(intent);
             }
         });
 

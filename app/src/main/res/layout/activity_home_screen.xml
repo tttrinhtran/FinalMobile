@@ -19,16 +19,17 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/border_bottom_black">
+            android:background="@drawable/border_bottom_black"
+            android:paddingVertical="15dp">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/HomeScreenAvatarTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:paddingVertical="20dp"
+
                 android:layout_marginStart="22dp"
                 android:background="@color/light_orange"
                 app:shapeAppearance="@style/Circular"

@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.finalproject.FirebaseAuthentication;
+import com.example.finalproject.Login.LoginScreen;
 import com.example.finalproject.R;
 import com.example.finalproject.User;
 
@@ -19,6 +21,7 @@ public class RegisterScreenSignup extends AppCompatActivity {
     private EditText _SignupPassword;
     private EditText _SignupConfirmPassword;
     private TextView _SignupNextButton;
+    private TextView _SigninButton;
 
     private User user;
 
@@ -26,6 +29,7 @@ public class RegisterScreenSignup extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_screen_signup);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         RegisterScreenSignupFetchUIElements();
 
@@ -40,6 +44,11 @@ public class RegisterScreenSignup extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        _SigninButton.setOnClickListener(view -> {
+            Intent intent = new Intent(RegisterScreenSignup.this, LoginScreen.class);
+            startActivity(intent);
+        });
     }
 
     private void RegisterScreenSignupFetchUIElements() {
@@ -47,6 +56,7 @@ public class RegisterScreenSignup extends AppCompatActivity {
         _SignupPassword = (EditText) findViewById(R.id.RegisterScreenPasswordEditText);
         _SignupConfirmPassword = (EditText) findViewById(R.id.RegisterScreenConfirmPasswordEditText);
         _SignupNextButton = (TextView) findViewById(R.id.RegisterScreenButton);
+        _SigninButton = (TextView) findViewById(R.id.RegisterScreenSignin);
     }
 
     private boolean CreateNewUsernameAndPassword() {

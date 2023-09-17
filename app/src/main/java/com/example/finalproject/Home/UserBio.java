@@ -5,7 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.Explode;
+import android.transition.Fade;
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,6 +37,8 @@ public class UserBio extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_bio);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
 
         Intent i = getIntent();
         User user = (User) i.getSerializableExtra("USER_OBJECT");
@@ -45,9 +52,9 @@ public class UserBio extends AppCompatActivity {
         _backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(UserBio.this, HomeScreen.class);
-                Bundle b = ActivityOptions.makeSceneTransitionAnimation(UserBio.this).toBundle();
-                startActivity(i, b);
+//                Intent i = new Intent(UserBio.this, HomeScreen.class);
+//                startActivity(i);
+                finish();
             }
         });
     }

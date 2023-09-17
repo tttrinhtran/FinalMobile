@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Section.SectionScreen"
-    android:layout_marginHorizontal="20dp"
+
     android:background="@color/white">
 
         <!-- Title -->
@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp">
             <TextView
                 android:id="@+id/SectionTitle"
@@ -47,7 +48,8 @@
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/head"
-            android:id="@+id/tab">
+            android:id="@+id/tab"
+            android:layout_marginHorizontal="20dp">
             <!-- Tab 1 -->
             <Button
                 android:id="@+id/Section_Tab"
@@ -86,7 +88,7 @@
             android:fontFamily="@font/tommy_regular"
             android:textColor="@color/primary"
             android:textSize="20dp"
-            android:layout_marginLeft="0dp">
+            android:layout_marginLeft="20dp">
         </TextView>
 
 
@@ -98,6 +100,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/section_kind"
+            android:layout_marginHorizontal="20dp"
             android:id="@+id/section_recycleView">
         </androidx.recyclerview.widget.RecyclerView>
 

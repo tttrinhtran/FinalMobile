@@ -36,10 +36,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/sample"
+                android:src="@drawable/section_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/SectionBioBackBtn" />
+                app:layout_constraintTop_toBottomOf="@id/SectionBioBackBtn"
+                android:layout_marginTop="10dp"
+                android:paddingHorizontal="20dp"/>
 
             <TextView
                 android:id="@+id/SectionBioName"

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +43,7 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityFriendsScreenBinding.inflate(getLayoutInflater());
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setContentView(binding.getRoot());
         setListener();
         getUser();
@@ -96,8 +98,7 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FriendsScreen.this, HomeScreen.class);
-                Bundle b = ActivityOptions.makeSceneTransitionAnimation(FriendsScreen.this).toBundle();
-                startActivity(intent, b);
+                startActivity(intent);
                 finish();
             }
         });
@@ -116,8 +117,7 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FriendsScreen.this, ProfileScreen.class);
-                Bundle b = ActivityOptions.makeSceneTransitionAnimation(FriendsScreen.this).toBundle();
-                startActivity(intent, b);
+                startActivity(intent);
             }
         });
     }

@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -43,6 +44,7 @@ public class SectionDetail extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_section_detail);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         sectionirebaseFirestoreController=new FirebaseFirestoreController<>(Section.class);
         getData();
         setUp();
@@ -80,7 +82,7 @@ public class SectionDetail extends BaseActivity {
         ImageButton backBtn = findViewById(R.id.SectionBioBackBtn);
 
         tvTitle.setText(section.get_SectionName());
-        tvHost.setText(section.get_SectionHost());
+        tvHost.setText("Host:  " + section.get_SectionHost());
         tvDate.setText(section.get_SectionDate().toString());
         tvDes.setText(section.get_SectionDescript());
 

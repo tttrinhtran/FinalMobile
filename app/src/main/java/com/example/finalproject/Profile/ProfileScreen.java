@@ -7,6 +7,7 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.example.finalproject.Constants;
@@ -35,6 +36,7 @@ public class ProfileScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityProfileScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         currentInstance = new SharedPreferenceManager<>(User.class, this);
 
@@ -142,6 +144,9 @@ public class ProfileScreen extends AppCompatActivity {
         });
 
         binding.LogoutLayout.setOnClickListener(view -> {
+
+            currentUser.set_UserActive(false);
+
             FirebaseAuthentication firebaseAuthentication = new FirebaseAuthentication(ProfileScreen.this);
             firebaseAuthentication.SignOut();
 
@@ -162,14 +167,13 @@ public class ProfileScreen extends AppCompatActivity {
         home = findViewById(R.id.NaviBarHomeIcon);
         section= findViewById(R.id.NaviBarSectionIcon);
         friend= findViewById(R.id.NaviBarFriendIcon);
-        profile = findViewById(R.id.NaviBarProfile);
+        profile = findViewById(R.id.NaviBarProfile); profile.setImageResource(R.drawable.profile_icon_fill);
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileScreen.this, HomeScreen.class);
-                Bundle b = ActivityOptions.makeSceneTransitionAnimation(ProfileScreen.this).toBundle();
-                startActivity(intent, b);
+                startActivity(intent);
                 finish();
             }
         });

@@ -37,7 +37,7 @@ public class ActiveListAdapter extends RecyclerView.Adapter<ActiveListAdapter.My
     }
     @Override
     public void onBindViewHolder(@NonNull ActiveListAdapter.MyViewHolder holder, int position) {
-        holder.name.setText(activeList.get(position).get_UserName());
+        holder.name.setText(activeList.get(position).get_UserFirstname());
 
         // holder.name.setIma
         if(activeList.get(position).is_UserActive() == true) {

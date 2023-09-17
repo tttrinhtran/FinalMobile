@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -50,6 +51,7 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityChatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         loadSenderDetails();
         loadReceiverDetails();
         setListener();
@@ -200,10 +202,14 @@ public class ChatActivity extends AppCompatActivity {
 
     private void addConversation( HashMap<String, Object> conversation ) {
 
+        String ID;
+        if( senderUser.get_UserName().compareTo(receiverUser.get_UserName()) < 0 ) ID = senderUser.get_UserName() + "+" + receiverUser.get_UserName();
+        else ID = receiverUser.get_UserName() + "+" + senderUser.get_UserName();
+
         database.collection(Constants.KEY_COLLECTION_CONVERSATION)
-                .document((String)conversation.get(Constants.KEY_SENDER_ID) + "+" + (String)conversation.get(Constants.KEY_RECEIVER_ID))
+                .document(ID)
                 .set(conversation)
-                .addOnSuccessListener( documentReference -> conversationId = (String)conversation.get(Constants.KEY_SENDER_ID) + "+" + (String)conversation.get(Constants.KEY_RECEIVER_ID) );
+                .addOnSuccessListener( documentReference -> conversationId = ID );
     }
 
     private void updateConversation( String message ) {
