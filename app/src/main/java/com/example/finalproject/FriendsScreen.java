@@ -14,6 +14,7 @@ import com.example.finalproject.Home.HomeScreen;
 import com.example.finalproject.Listeners.UserListener;
 import com.example.finalproject.Message.ChatActivity;
 import com.example.finalproject.Message.ChatMessage;
+import com.example.finalproject.Message.Chatbot.ChatbotActivity;
 import com.example.finalproject.Profile.ProfileScreen;
 import com.example.finalproject.Section.SectionScreen;
 import com.example.finalproject.databinding.ActivityFriendsScreenBinding;
@@ -49,6 +50,10 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
     }
 
     private void setListener() {
+        binding.FriendScreenChatBot.setOnClickListener(view -> {
+            Intent intent = new Intent(FriendsScreen.this, ChatbotActivity.class);
+            startActivity(intent);
+        });
 
     }
 

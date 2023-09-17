@@ -44,6 +44,16 @@
         android:layout_marginTop="20dp"
         android:layout_marginStart="10dp"/>
 
+    <ImageView
+        android:id="@+id/FriendScreenChatBot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/FriendScreenTitle"
+        app:layout_constraintBottom_toBottomOf="@id/FriendScreenTitle"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/ic_launcher"/>
+
     <include layout="@layout/nav_bar"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
