@@ -87,6 +87,14 @@ public class FriendBio extends AppCompatActivity {
                     .document(currentFriend._UserName)
                     .update("_UserFriend", currentFriend._UserFriend );
 
+            // Delete conversation
+            String deleteId;
+            if( currentUser._UserName.compareTo(currentFriend._UserName) < 0 ) deleteId = currentUser._UserName + "+" + currentFriend._UserName;
+            else deleteId = currentFriend._UserName + "+" + currentUser._UserName;
+            database.collection(Constants.KEY_COLLECTION_CONVERSATION)
+                    .document(deleteId)
+                    .delete();
+
             // Return to Friend Screen
             Intent intent = new Intent(this, FriendsScreen.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
