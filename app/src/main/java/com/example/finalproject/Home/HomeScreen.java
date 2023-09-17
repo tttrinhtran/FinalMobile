@@ -336,7 +336,8 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
                             Position pos = null;
                             pos = positionfirebaseFirestoreController.retrieveObjectsFirestoreByID(FIRESTORE_LOCATION_KEY, user.get_UserName());
                             firestoreGeoHashQueries.QueryForLocationFireStore(user, pos, 500, activeUsers);
-//                            activeUsers.removeAll(user.get_UserFriend());
+                            activeUsers.removeAll(user.get_UserFriend());
+                            adapterSwipe.notifyDataSetChanged();
 
                         }
                         handler.post(new Runnable() {
