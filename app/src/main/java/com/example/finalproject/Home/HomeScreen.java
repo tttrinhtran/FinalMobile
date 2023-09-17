@@ -145,6 +145,8 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
                     Position pos = null;
                     pos = positionfirebaseFirestoreController.retrieveObjectsFirestoreByID(FIRESTORE_LOCATION_KEY, user.get_UserName());
                     firestoreGeoHashQueries.QueryForLocationFireStore(user, pos, 500, activeUsers);
+                    // activeUsers.removeAll(user.get_UserFriend());
+                    activeUsers.removeIf( u -> user.get_UserFriend().contains(u.get_UserName()) );
                 }
                 handler.post(new Runnable() {
 
@@ -282,7 +284,7 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
             i.putExtra("USER_MATCH", matchUser);
             Bundle b = ActivityOptions.makeSceneTransitionAnimation(HomeScreen.this).toBundle();
             startActivity(i, b);
-
+            finish();
 
         } else {
             Log.d("MATCH_USER_NOT_CONTAINT", matchUser.get_UserName());
@@ -346,7 +348,8 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
                             Position pos = null;
                             pos = positionfirebaseFirestoreController.retrieveObjectsFirestoreByID(FIRESTORE_LOCATION_KEY, user.get_UserName());
                             firestoreGeoHashQueries.QueryForLocationFireStore(user, pos, 500, activeUsers);
-                            activeUsers.removeAll(user.get_UserFriend());
+                            // activeUsers.removeAll(user.get_UserFriend());
+                            activeUsers.removeIf( u -> user.get_UserFriend().contains(u.get_UserName()) );
                             adapterSwipe.notifyDataSetChanged();
 
                         }
