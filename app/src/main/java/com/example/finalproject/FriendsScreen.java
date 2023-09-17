@@ -145,15 +145,17 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
                 Log.d("Hoktro", "Added");
                 String senderId = documentChange.getDocument().getString(Constants.KEY_SENDER_ID);
                 String receiverId = documentChange.getDocument().getString(Constants.KEY_RECEIVER_ID);
-                if( !friendList.contains(receiverId) ) continue;
+
                 ChatMessage chatMessage = new ChatMessage();
                 chatMessage.senderId = senderId;
                 chatMessage.receiverId = receiverId;
                 if( currentUser.get_UserName().equals(senderId) ) {
+                    if( !friendList.contains(receiverId) ) continue;
                     chatMessage.conversationImage = documentChange.getDocument().getString(Constants.RECEIVER_IMAGE);
                     chatMessage.conversationId = documentChange.getDocument().getString(Constants.KEY_RECEIVER_ID);
                 }
                 else {
+                    if( !friendList.contains(senderId) ) continue;
                     chatMessage.conversationImage = documentChange.getDocument().getString(Constants.SENDER_IMAGE);
                     chatMessage.conversationId = documentChange.getDocument().getString(Constants.KEY_SENDER_ID);
                 }
