@@ -14,7 +14,7 @@ import android.widget.ImageView;
 
 import com.example.finalproject.FirebaseCloudStorageManager;
 import com.example.finalproject.FirebaseFirestoreController;
-import com.example.finalproject.Profile.SettingScreenPersonalInformationBottomSheetFragment;
+import com.example.finalproject.Profile.ImageSettingBottomSheetFragment;
 import com.example.finalproject.R;
 import com.example.finalproject.SharedPreferenceManager;
 import com.example.finalproject.User;
@@ -52,7 +52,7 @@ public class SettingScreenModifyPersonalInformation extends AppCompatActivity {
 
 
         _SettingPersonalInfoAvatar.setOnClickListener(view -> {
-            SettingScreenPersonalInformationBottomSheetFragment settingScreenPersonalInformationBottomSheetFragment = new SettingScreenPersonalInformationBottomSheetFragment();
+            ImageSettingBottomSheetFragment settingScreenPersonalInformationBottomSheetFragment = new ImageSettingBottomSheetFragment();
             Bundle bundle = new Bundle();
             bundle.putSerializable("user", user);
             settingScreenPersonalInformationBottomSheetFragment.setArguments(bundle);

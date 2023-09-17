@@ -133,7 +133,7 @@ public class ProfileScreen extends AppCompatActivity {
         });
 
         binding.ProfileScreenAvatar.setOnClickListener(view -> {
-            SettingScreenPersonalInformationBottomSheetFragment settingScreenPersonalInformationBottomSheetFragment = new SettingScreenPersonalInformationBottomSheetFragment();
+            ImageSettingBottomSheetFragment settingScreenPersonalInformationBottomSheetFragment = new ImageSettingBottomSheetFragment();
             Bundle bundle = new Bundle();
             bundle.putSerializable("user", currentUser.get_UserName());
             settingScreenPersonalInformationBottomSheetFragment.setArguments(bundle);

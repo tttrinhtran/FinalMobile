@@ -1,16 +1,11 @@
 package com.example.finalproject.Profile;
 
-import static com.example.finalproject.Constants.FIRESTORE_LOCATION_KEY;
-import static com.example.finalproject.Constants.KEY_SHARED_PREFERENCE_USERS;
-import static com.example.finalproject.Constants.LOCATION_UPDATE_STATUS;
-
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
 import android.app.Activity;
@@ -18,34 +13,22 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.finalproject.FirebaseCloudStorageManager;
-import com.example.finalproject.Position;
 import com.example.finalproject.R;
-import com.example.finalproject.SharedPreferenceManager;
-import com.example.finalproject.User;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.io.IOException;
-import java.util.Objects;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.zip.Inflater;
 
 
-
-public class SettingScreenPersonalInformationBottomSheetFragment extends BottomSheetDialogFragment {
+public class ImageSettingBottomSheetFragment extends BottomSheetDialogFragment {
 
     private String user_name;
     private final int REQUEST_IMAGE_CAPTURE_CAMERA = 1;
@@ -89,7 +72,7 @@ public class SettingScreenPersonalInformationBottomSheetFragment extends BottomS
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.activity_setting_screen_personal_information_bottom_sheet_fragment, container, false);
+        View view = inflater.inflate(R.layout.image_setting_bottom_sheet_fragment, container, false);
 
         View parent_view = getLayoutInflater().inflate(R.layout.activity_setting_screen_modify_personal_information, null,false);
 

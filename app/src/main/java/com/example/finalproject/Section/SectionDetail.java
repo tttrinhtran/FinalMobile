@@ -153,9 +153,6 @@ public class SectionDetail extends BaseActivity {
                 onBackPressed();
             }
         });
-
-
-
     }
 void hostUpdate()
 {

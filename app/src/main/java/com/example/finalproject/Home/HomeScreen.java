@@ -298,6 +298,7 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
                     public void run() {
                         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                        activeUsers.clear();
                         handler.post(new Runnable() {
 
                             @Override
