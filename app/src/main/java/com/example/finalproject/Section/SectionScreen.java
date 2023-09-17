@@ -4,6 +4,7 @@ import static com.example.finalproject.Constants.KEY_COLLECTION_SECTION;
 import static com.example.finalproject.Constants.KEY_SHARED_PREFERENCE_USERS;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,6 +42,7 @@ public class SectionScreen extends AppCompatActivity implements sectionListInter
     RecyclerView SectionRecyclerView;
     sectionListAdap sectionAdap;
     private User user;
+    private int tab = 1; // 1 = friend's section, 2 = my section
 
 
 
@@ -122,6 +124,10 @@ public class SectionScreen extends AppCompatActivity implements sectionListInter
         btnSection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+               btnSection.setTextColor(ContextCompat.getColor(SectionScreen.this, R.color.primary_blue));
+               btnMySection.setTextColor(ContextCompat.getColor(SectionScreen.this, R.color.secondary_text));
+               btnSection.setBackgroundResource(R.drawable.border_tab);
+               btnMySection.setBackgroundResource(android.R.color.transparent);
                sectionRecycler();
             }
         });
@@ -129,6 +135,10 @@ public class SectionScreen extends AppCompatActivity implements sectionListInter
         btnMySection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnSection.setTextColor(ContextCompat.getColor(SectionScreen.this, R.color.secondary_text));
+                btnMySection.setTextColor(ContextCompat.getColor(SectionScreen.this, R.color.primary_blue));
+                btnSection.setBackgroundResource(android.R.color.transparent);
+                btnMySection.setBackgroundResource(R.drawable.border_tab);
                 mySectionRecycler();
             }
         });
@@ -187,13 +197,13 @@ public class SectionScreen extends AppCompatActivity implements sectionListInter
         return false;
 
     }
-private void recyclerView(ArrayList<Section> recyclerViewList)
-{
-    SectionRecyclerView = findViewById(R.id.section_recycleView);
-    sectionAdap = new sectionListAdap(recyclerViewList, (Context) SectionScreen.this, this);
-    SectionRecyclerView.setAdapter(sectionAdap);
-    SectionRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-}
+    private void recyclerView(ArrayList<Section> recyclerViewList)
+    {
+        SectionRecyclerView = findViewById(R.id.section_recycleView);
+        sectionAdap = new sectionListAdap(recyclerViewList, (Context) SectionScreen.this, this);
+        SectionRecyclerView.setAdapter(sectionAdap);
+        SectionRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+    }
 
     private void mySectionRecycler()
     {

@@ -31,6 +31,7 @@ import android.os.IBinder
 import android.provider.Settings
 import android.util.Log
 import android.view.View.VISIBLE
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
@@ -38,7 +39,6 @@ import androidx.core.app.ActivityCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.coloros.ocs.mediaunit.BuildConfig
 import com.example.finalproject.Home.HomeScreen
-import com.example.finalproject.Message.Chatbot.ChatbotActivity
 import com.google.android.material.snackbar.Snackbar
 
 private const val TAG = "LocationUpdateActivity"
@@ -119,6 +119,7 @@ class LocationUpdateActivity : AppCompatActivity(), SharedPreferences.OnSharedPr
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_location_update)
+        window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 
         foregroundOnlyBroadcastReceiver = ForegroundOnlyBroadcastReceiver()
 

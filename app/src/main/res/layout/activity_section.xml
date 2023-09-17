@@ -58,9 +58,10 @@
                 android:layout_weight="1"
                 android:text="Section"
                 android:fontFamily="@font/lato"
-                android:background="@android:color/transparent"
+                android:background="@drawable/border_tab"
                 android:textAllCaps="false"
                 android:textColor="@color/primary_blue"
+                android:textStyle="bold"
                 android:gravity="center"
                 />
 
@@ -74,7 +75,8 @@
                 android:fontFamily="@font/lato"
                 android:background="@android:color/transparent"
                 android:textAllCaps="false"
-                android:textColor="@color/primary_blue"
+                android:textColor="@color/secondary_text"
+                android:textStyle="bold"
                 android:gravity="center" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -88,6 +90,7 @@
             android:fontFamily="@font/tommy_regular"
             android:textColor="@color/primary"
             android:textSize="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp">
         </TextView>
 
