@@ -91,8 +91,7 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FriendsScreen.this, HomeScreen.class);
-                Bundle b = ActivityOptions.makeSceneTransitionAnimation(FriendsScreen.this).toBundle();
-                startActivity(intent, b);
+                startActivity(intent);
                 finish();
             }
         });
@@ -111,8 +110,7 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FriendsScreen.this, ProfileScreen.class);
-                Bundle b = ActivityOptions.makeSceneTransitionAnimation(FriendsScreen.this).toBundle();
-                startActivity(intent, b);
+                startActivity(intent);
             }
         });
     }

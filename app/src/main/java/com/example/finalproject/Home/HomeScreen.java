@@ -7,6 +7,7 @@ import static com.example.finalproject.Constants.LOCATION_UPDATE_STATUS;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -388,8 +389,7 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeScreen.this, ProfileScreen.class);
-                Bundle b = ActivityOptions.makeSceneTransitionAnimation(HomeScreen.this).toBundle();
-                startActivity(intent, b);
+                startActivity(intent);
             }
         });
 

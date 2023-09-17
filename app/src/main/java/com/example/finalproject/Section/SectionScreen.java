@@ -70,8 +70,7 @@ public class SectionScreen extends AppCompatActivity implements sectionListInter
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SectionScreen.this, HomeScreen.class);
-                Bundle b = ActivityOptions.makeSceneTransitionAnimation(SectionScreen.this).toBundle();
-                startActivity(intent, b);
+                startActivity(intent);
             }
         });
 
@@ -89,8 +88,7 @@ public class SectionScreen extends AppCompatActivity implements sectionListInter
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SectionScreen.this, ProfileScreen.class);
-                Bundle b = ActivityOptions.makeSceneTransitionAnimation(SectionScreen.this).toBundle();
-                startActivity(intent, b);
+                startActivity(intent);
             }
         });
 

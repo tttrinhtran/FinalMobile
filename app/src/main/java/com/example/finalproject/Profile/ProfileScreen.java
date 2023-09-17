@@ -168,8 +168,7 @@ public class ProfileScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileScreen.this, HomeScreen.class);
-                Bundle b = ActivityOptions.makeSceneTransitionAnimation(ProfileScreen.this).toBundle();
-                startActivity(intent, b);
+                startActivity(intent);
                 finish();
             }
         });
