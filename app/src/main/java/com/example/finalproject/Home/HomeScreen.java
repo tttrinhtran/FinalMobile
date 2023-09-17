@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.finalproject.Constants;
+import com.example.finalproject.FirebaseCloudStorageManager;
 import com.example.finalproject.FirebaseFirestoreController;
 import com.example.finalproject.FirestoreGeoHashQueries;
 import com.example.finalproject.FriendsScreen;
@@ -78,6 +79,7 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
     private ImageView section;
     private ImageView friend;
     private ImageView profile;
+    private ImageView avatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +110,7 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
         section = findViewById(R.id.NaviBarSectionIcon);
         friend = findViewById(R.id.NaviBarFriendIcon);
         profile = findViewById(R.id.NaviBarProfile);
+        avatar = findViewById(R.id.HomeScreenAvatarTitle);
     }
 
     @Override
@@ -290,8 +293,12 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
     void setUp() {
         // Setting for Hello Text
         getUser();
-        String temp = "Hello! " + user.get_UserFirstname();
+        String temp = "Hello, " + user.get_UserFirstname() + "!";
         titleText.setText(temp);
+
+        FirebaseCloudStorageManager firebaseCloudStorageManager = new FirebaseCloudStorageManager();
+        firebaseCloudStorageManager.FetchingImageFromFirebase(user, avatar);
+        avatar.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
 
         // Setting for refresh layout

@@ -80,7 +80,7 @@ public class SectionDetail extends BaseActivity {
         ImageButton backBtn = findViewById(R.id.SectionBioBackBtn);
 
         tvTitle.setText(section.get_SectionName());
-        tvHost.setText(section.get_SectionHost());
+        tvHost.setText("Host:  " + section.get_SectionHost());
         tvDate.setText(section.get_SectionDate().toString());
         tvDes.setText(section.get_SectionDescript());
 

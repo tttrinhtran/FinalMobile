@@ -162,7 +162,7 @@ public class ProfileScreen extends AppCompatActivity {
         home = findViewById(R.id.NaviBarHomeIcon);
         section= findViewById(R.id.NaviBarSectionIcon);
         friend= findViewById(R.id.NaviBarFriendIcon);
-        profile = findViewById(R.id.NaviBarProfile);
+        profile = findViewById(R.id.NaviBarProfile); profile.setImageResource(R.drawable.profile_icon_fill);
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
