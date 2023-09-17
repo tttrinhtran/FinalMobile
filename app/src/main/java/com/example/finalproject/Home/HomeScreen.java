@@ -27,6 +27,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.finalproject.Constants;
 import com.example.finalproject.FirebaseFirestoreController;
 import com.example.finalproject.FirestoreGeoHashQueries;
 import com.example.finalproject.FriendsScreen;
@@ -245,13 +246,19 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
 
         if (user.get_UserWaitingList() != null && user.get_UserWaitingList().contains(matchUser.get_UserName())) {
             Log.d("MATCH_USER_CONTAIN", matchUser.get_UserName());
+
             user.add_Friend(matchUser.get_UserName());
             userFirebaseController.updateDocumentField("Users", user.get_UserName(), "_UserFriend", user.get_UserFriend());
+
             matchUser.add_Friend(user.get_UserName());
             userFirebaseController.updateDocumentField("Users", matchUser.get_UserName(), "_UserFriend", matchUser.get_UserFriend());
 
             user.remove_WaitingList(matchUser.get_UserName());
             userFirebaseController.updateDocumentField("Users", user.get_UserName(), "_UserWaitingList", user.get_UserWaitingList());
+
+            // Update shared preference
+            SharedPreferenceManager currentInstance = new SharedPreferenceManager<>(User.class, this);
+            currentInstance.storeSerializableObjectToSharedPreference(user, Constants.KEY_SHARED_PREFERENCE_USERS);
 
             Intent i = new Intent(HomeScreen.this, MatchSplashScreen.class);
             i.putExtra("USER_MATCH", matchUser);
@@ -269,8 +276,13 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
     void checkSwipeLeft(User leftUser) {
         Log.d("LEFT_USER", leftUser.get_UserName());
         if (user.get_UserWaitingList() != null && user.get_UserWaitingList().contains(leftUser.get_UserName())) {
+
             user.remove_WaitingList(leftUser.get_UserName());
             userFirebaseController.updateDocumentField("Users", user.get_UserName(), "_UserWaitingList", user.get_UserWaitingList());
+
+            // Update shared preference
+            SharedPreferenceManager currentInstance = new SharedPreferenceManager<>(User.class, this);
+            currentInstance.storeSerializableObjectToSharedPreference(user, Constants.KEY_SHARED_PREFERENCE_USERS);
         }
     }
 

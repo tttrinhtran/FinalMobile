@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.example.finalproject.Constants;
 import com.example.finalproject.FirebaseFirestoreController;
 import com.example.finalproject.R;
 import com.example.finalproject.SharedPreferenceManager;
@@ -57,6 +58,9 @@ public class ProfileScreenNameModification extends AppCompatActivity {
             userFirebaseFirestoreController.updateDocumentField(KEY_COLLECTION_USERS, user.get_UserName(), "_UserFirstname", newFirstname);
             userFirebaseFirestoreController.updateDocumentField(KEY_COLLECTION_USERS, user.get_UserName(), "_UserLastname", newLastname);
             userFirebaseFirestoreController.updateDocumentField(KEY_COLLECTION_USERS, user.get_UserName(), "_UserNickName", newNickname);
+
+            // Update local data
+            userSharedPreferenceManager.storeSerializableObjectToSharedPreference(user, Constants.KEY_SHARED_PREFERENCE_USERS);
 
             finish();
         });

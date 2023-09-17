@@ -57,7 +57,9 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
         SharedPreferenceManager<User> currentInstance = new SharedPreferenceManager<>(User.class, this);
         currentUser = currentInstance.retrieveSerializableObjectFromSharedPreference( Constants.KEY_SHARED_PREFERENCE_USERS );
 
-        friendList = currentUser.get_UserFriend();
+        if( currentUser.get_UserFriend() != null ) friendList = currentUser.get_UserFriend();
+        else friendList = new ArrayList<>();
+
         conversations = new ArrayList<>();
         friendActive = new ArrayList<>();
 

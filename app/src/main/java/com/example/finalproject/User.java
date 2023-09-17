@@ -26,9 +26,9 @@ public class User implements Serializable {
     ArrayList<String> _UserHobbies;
     String _UserSchool;
     String _UserSpecialization;
+    String _UserAddress;
     ArrayList<String> _UserFriend;
     ArrayList<String> _UserWaitingList;
-
     public float _UserMinAge = 18;
     public float _UserMaxAge = 50;
     public float _UserDistancePref = 5000;
@@ -71,6 +71,7 @@ public class User implements Serializable {
                 ", _UserFriend='" + _UserFriend + '\'' +
                 ", _UserWaitingList='" + _UserWaitingList + '\'' +
                 ", _UserSpecialization='" + _UserSpecialization + '\'' +
+                ", _UserAddress='" + _UserAddress + '\'' +
                 ", _UserMinAge='" + _UserMinAge + '\'' +
                 ", _UserMaxAge='" + _UserMaxAge + '\'' +
                 ", _UserDistancePref='" + _UserDistancePref + '\'' +
@@ -197,12 +198,36 @@ public class User implements Serializable {
         this._UserWaitingList = _UserWaitingList;
     }
 
-    public void set_UserMinAge( int value ) { this._UserMinAge = value; }
-    public float get_UserMinAge() { return this._UserMinAge; }
-    public void set_UserMaxAge( int value ) { this._UserMaxAge = value; }
-    public float get_UserMaxAge() { return this._UserMaxAge; }
-    public void set_UserDistancePref(int value ) { this._UserDistancePref = value; }
-    public float get_UserDistancePref() { return this._UserDistancePref; }
+    public String get_UserAddress() {
+        return _UserAddress;
+    }
+
+    public float get_UserMinAge() {
+        return _UserMinAge;
+    }
+
+    public float get_UserMaxAge() {
+        return _UserMaxAge;
+    }
+
+    public float get_UserDistancePref() {
+        return _UserDistancePref;
+    }
+    public void set_UserAddress(String _UserAddress) {
+        this._UserAddress = _UserAddress;
+    }
+
+    public void set_UserMinAge(float _UserMinAge) {
+        this._UserMinAge = _UserMinAge;
+    }
+
+    public void set_UserMaxAge(float _UserMaxAge) {
+        this._UserMaxAge = _UserMaxAge;
+    }
+
+    public void set_UserDistancePref(float _UserDistancePref) {
+        this._UserDistancePref = _UserDistancePref;
+    }
 
     public void add_Friend(String _UserFriend)
     {

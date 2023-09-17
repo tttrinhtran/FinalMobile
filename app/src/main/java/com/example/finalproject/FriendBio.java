@@ -49,6 +49,7 @@ public class FriendBio extends AppCompatActivity {
         binding.FriendBioAge.setText("Age: " + calculateAge(currentFriend._UserDoB));
         binding.FriendBioBiography.setText(currentFriend._UserBio);
         binding.FriendBioSpecialization.setText(currentFriend._UserSpecialization);
+        binding.FriendBioLocationInfo.setText(currentFriend.get_UserAddress());
 
         FirebaseCloudStorageManager firebaseCloudStorageManager = new FirebaseCloudStorageManager();
         binding.FriendAvatar.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -78,25 +79,22 @@ public class FriendBio extends AppCompatActivity {
             SharedPreferenceManager<User> currentInstance = new SharedPreferenceManager<>(User.class, this);
             currentInstance.storeSerializableObjectToSharedPreference(currentUser, Constants.KEY_SHARED_PREFERENCE_USERS);
 
-            SharedPreferenceManager<User> currentFriendInstance = new SharedPreferenceManager<>(User.class, this);
-            currentFriendInstance.storeSerializableObjectToSharedPreference(currentFriend, Constants.KEY_SHARED_PREFERENCE_USERS);
-
             // Update firebase
             FirebaseFirestore database = FirebaseFirestore.getInstance();
             database.collection(Constants.KEY_COLLECTION_USERS)
                     .document(currentUser._UserName)
-                    .update( "_UserFriend", currentUser._UserFriend );
+                    .update("_UserFriend", currentUser._UserFriend );
             database.collection(Constants.KEY_COLLECTION_USERS)
                     .document(currentFriend._UserName)
                     .update("_UserFriend", currentFriend._UserFriend );
 
             // Delete conversation
-            String deleteId;
-            if( currentUser._UserName.compareTo(currentFriend._UserName) < 0 ) deleteId = currentUser._UserName + "+" + currentFriend._UserName;
-            else deleteId = currentFriend._UserName + "+" + currentUser._UserName;
-            database.collection(Constants.KEY_COLLECTION_CONVERSATION)
-                    .document(deleteId)
-                    .delete();
+//            String deleteId;
+//            if( currentUser._UserName.compareTo(currentFriend._UserName) < 0 ) deleteId = currentUser._UserName + "+" + currentFriend._UserName;
+//            else deleteId = currentFriend._UserName + "+" + currentUser._UserName;
+//            database.collection(Constants.KEY_COLLECTION_CONVERSATION)
+//                    .document(deleteId)
+//                    .delete();
 
             // Return to Friend Screen
             Intent intent = new Intent(this, FriendsScreen.class);
