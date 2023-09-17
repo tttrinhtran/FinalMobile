@@ -15,6 +15,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewParent;
 import android.view.ViewStub;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -91,6 +92,7 @@ public class CallActivity extends BaseActivity implements DuringCallEventHandler
         super.onCreate(savedInstanceState);
         makeActivityContentShownUnderStatusBar();
         setContentView(R.layout.activity_call);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         id = getIntent().getStringExtra("nickname");
 

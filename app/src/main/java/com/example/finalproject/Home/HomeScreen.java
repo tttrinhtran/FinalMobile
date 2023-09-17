@@ -85,6 +85,7 @@ public class HomeScreen extends AppCompatActivity implements cardSwipeAdapter.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         HomeScren_UIElementsSetup();
 
