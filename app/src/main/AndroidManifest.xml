@@ -27,6 +27,13 @@
 
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
+    </queries>
+
+
     <application
         android:name=".openvcall.AGApplication"
         android:allowBackup="true"
@@ -39,8 +46,11 @@
         android:theme="@style/Theme.FinalProject"
         tools:targetApi="33">
         <activity
+            android:name=".Message.Chatbot.ChatbotActivity"
+            android:exported="false" />
+        <activity
             android:name=".Home.MatchSplashScreen"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Login.LoginScreenForgotPassword"
             android:exported="false" />

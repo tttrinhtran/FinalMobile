@@ -150,6 +150,16 @@ dependencies {
     //volley
     implementation 'com.android.volley:volley:1.2.1'
 
+    // Ktor
+    implementation "io.ktor:ktor-client-android:2.2.4"
 
+    // OpenAI
+    implementation "com.aallam.openai:openai-client:3.0.0"
 
+    // Hilt
+    implementation 'com.google.dagger:hilt-android:2.45'
+    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
+    kapt 'com.google.dagger:hilt-compiler:2.45'
+
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
 }

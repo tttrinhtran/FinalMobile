@@ -30,17 +30,15 @@ import android.os.Bundle
 import android.os.IBinder
 import android.provider.Settings
 import android.util.Log
-import android.view.View
 import android.view.View.VISIBLE
 import android.widget.Button
 import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.edit
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.coloros.ocs.mediaunit.BuildConfig
 import com.example.finalproject.Home.HomeScreen
+import com.example.finalproject.Message.Chatbot.ChatbotActivity
 import com.google.android.material.snackbar.Snackbar
 
 private const val TAG = "LocationUpdateActivity"

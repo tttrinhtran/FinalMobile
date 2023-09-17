@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalproject.FirebaseCloudStorageManager;
+import com.example.finalproject.Message.ChatMessage;
 import com.example.finalproject.User;
 import com.example.finalproject.databinding.ItemContainerReceivedMessageBinding;
 import com.example.finalproject.databinding.ItemContainerSentMessageBinding;
