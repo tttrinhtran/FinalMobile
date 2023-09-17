@@ -171,7 +171,7 @@
             android:fontFamily="@font/lato"/>
 
         <TextView
-            android:id="@+id/RegisterScreenRegisterEditText"
+            android:id="@+id/RegisterScreenSignin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
