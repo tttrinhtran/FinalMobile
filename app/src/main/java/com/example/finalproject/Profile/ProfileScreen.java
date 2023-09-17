@@ -142,6 +142,9 @@ public class ProfileScreen extends AppCompatActivity {
         });
 
         binding.LogoutLayout.setOnClickListener(view -> {
+
+            currentUser.set_UserActive(false);
+
             FirebaseAuthentication firebaseAuthentication = new FirebaseAuthentication(ProfileScreen.this);
             firebaseAuthentication.SignOut();
 
