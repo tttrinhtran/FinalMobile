@@ -78,14 +78,11 @@ public class FriendBio extends AppCompatActivity {
             SharedPreferenceManager<User> currentInstance = new SharedPreferenceManager<>(User.class, this);
             currentInstance.storeSerializableObjectToSharedPreference(currentUser, Constants.KEY_SHARED_PREFERENCE_USERS);
 
-            SharedPreferenceManager<User> currentFriendInstance = new SharedPreferenceManager<>(User.class, this);
-            currentFriendInstance.storeSerializableObjectToSharedPreference(currentFriend, Constants.KEY_SHARED_PREFERENCE_USERS);
-
             // Update firebase
             FirebaseFirestore database = FirebaseFirestore.getInstance();
             database.collection(Constants.KEY_COLLECTION_USERS)
                     .document(currentUser._UserName)
-                    .update( "_UserFriend", currentUser._UserFriend );
+                    .update("_UserFriend", currentUser._UserFriend );
             database.collection(Constants.KEY_COLLECTION_USERS)
                     .document(currentFriend._UserName)
                     .update("_UserFriend", currentFriend._UserFriend );
