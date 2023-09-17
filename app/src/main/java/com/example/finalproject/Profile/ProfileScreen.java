@@ -145,7 +145,9 @@ public class ProfileScreen extends AppCompatActivity {
             firebaseAuthentication.SignOut();
 
             Intent intent = new Intent(ProfileScreen.this, LoginScreen.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+            finish();
         });
     }
 
