@@ -1,8 +1,11 @@
 package com.example.finalproject.Message.Chatbot
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.TextView.VISIBLE
@@ -11,21 +14,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.Constants
+import com.example.finalproject.Position
 import com.example.finalproject.R
 import com.example.finalproject.SharedPreferenceManager
 import com.example.finalproject.User
-import com.google.gson.JsonObject
 import okhttp3.Call
 import okhttp3.Callback
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
-import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
+import java.util.concurrent.Executors
 
 
 class ChatbotActivity : AppCompatActivity() {
@@ -61,8 +63,7 @@ class ChatbotActivity : AppCompatActivity() {
         chatbot._UserName = "chatbot"
 
         messageArray = ArrayList()
-        messageArray.add("a")
-        messageArray.add("b")
+
         chatAdapter = ChatbotAdapter(
             this,
             messageArray
@@ -79,28 +80,26 @@ class ChatbotActivity : AppCompatActivity() {
                 if (queryEdt.text.toString().length > 0) {
                     messageArray.add(queryEdt.text.toString())
                     chatAdapter.notifyDataSetChanged()
+                    val quest = queryEdt.text.toString()
                     queryEdt.setText("")
                     // calling get response to get the response.
-                    getResponse(queryEdt.text.toString()){
-                        response -> messageArray.add(queryEdt.text.toString())
-                    }
-                    chatAdapter.notifyDataSetChanged()
+                    getResponse(quest)
                 } else {
-                    Toast.makeText(this, "Please enter your query..", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Please enter your query.", Toast.LENGTH_SHORT).show()
                 }
         })
     }
 
-    private fun getResponse(query: String, callback: (String) -> Unit) {
+    private fun getResponse(query: String) {
 
-        val chatgptAPI = "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";
-        val chatgptUrl = "https://api.openai.com/v1/completions"
+        val chatgptAPI = "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";
+        val chatgptUrl = "https://api.openai.com/v1/chat/completions"
 
         val requestBody = """
             {
-                "model": "text-davinci-003",
-                "prompt": "$query",
-                "max_tokens": 7,
+                "model": "gpt-3.5-turbo",
+                "messages": [{"role": "user", "content": "$query"}],
+                "max_tokens": 500,
                 "temperature": 0
             }
         """.trimIndent()
@@ -123,10 +122,19 @@ class ChatbotActivity : AppCompatActivity() {
                 if(body != null){
                     Log.d("ChatGPT", body)
                 }
-     /*           var jsonObject = JSONObject(body)
+                var jsonObject = JSONObject(body)
                 val jsonArray = jsonObject.getJSONArray("choices")
-                val result = jsonArray.getJSONObject(0).getString("text")
-                callback(result)*/
+                val result = jsonArray.getJSONObject(0).getJSONObject("message").getString("content")
+
+                val handler = Handler(Looper.getMainLooper())
+                val executorService = Executors.newSingleThreadExecutor()
+
+                executorService.execute(Runnable {
+                    messageArray.add(result)
+                    handler.post(Runnable {
+                        chatAdapter.notifyDataSetChanged()
+                    })
+                })
             }
         })
     }

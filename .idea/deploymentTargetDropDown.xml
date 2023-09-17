@@ -7,11 +7,13 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
+            <value value="$USER_HOME$/.android/avd/FinalProjectEmu.avd" />
             <value value="C:\Users\hhhorses\.android\avd\Shiba_Device.avd" />
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
+    <timeTargetWasSelectedWithDropDown value="2023-09-17T17:02:44.475142Z" />
     <timeTargetWasSelectedWithDropDown value="2023-09-17T15:24:19.474977200Z" />
   </component>
 </project>
