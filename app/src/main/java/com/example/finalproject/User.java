@@ -223,21 +223,29 @@ public class User implements Serializable {
         conversationMap.put(Constants.KEY_TIMESTAMP, new Date() );
 
         FirebaseFirestore database = FirebaseFirestore.getInstance();
-        String conversationID = _UserFriend + "+" + this.get_UserName();
+        String conversationID;
 
+//        String conversationID = _UserFriend + "+" + this.get_UserName();
+//
+//        database.collection(Constants.KEY_COLLECTION_CONVERSATION)
+//                .document(conversationID)
+//                .get()
+//                .addOnCompleteListener( task -> {
+//                    if( task.isSuccessful() ) {
+//                        DocumentSnapshot documentSnapshot = task.getResult();
+//                        if(!documentSnapshot.exists()) {
+//                            database.collection(Constants.KEY_COLLECTION_CONVERSATION)
+//                                    .document( this.get_UserName() + "+" + _UserFriend)
+//                                    .set(conversationMap);
+//                        }
+//                    }
+//                } );
+
+        if( this.get_UserName().compareTo(_UserFriend) < 0 ) conversationID = this.get_UserName() + "+" + _UserFriend;
+        else conversationID = _UserFriend + "+" + this.get_UserName();
         database.collection(Constants.KEY_COLLECTION_CONVERSATION)
-                .document(conversationID)
-                .get()
-                .addOnCompleteListener( task -> {
-                    if( task.isSuccessful() ) {
-                        DocumentSnapshot documentSnapshot = task.getResult();
-                        if( documentSnapshot.exists() == false ) {
-                            database.collection(Constants.KEY_COLLECTION_CONVERSATION)
-                                    .document( this.get_UserName() + "+" + _UserFriend)
-                                    .set(conversationMap);
-                        }
-                    }
-                } );
+                .document( conversationID )
+                .set(conversationMap);
     }
     public void add_WaitingList(String _UserWaiting)
     {

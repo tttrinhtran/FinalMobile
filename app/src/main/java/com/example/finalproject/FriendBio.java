@@ -72,7 +72,7 @@ public class FriendBio extends AppCompatActivity {
 
             // Update local
             currentUser._UserFriend.remove( currentFriend._UserName );
-            currentFriend._UserFriend.remove( currentFriend._UserName );
+            currentFriend._UserFriend.remove( currentUser._UserName );
 
             // Update share preference
             SharedPreferenceManager<User> currentInstance = new SharedPreferenceManager<>(User.class, this);
