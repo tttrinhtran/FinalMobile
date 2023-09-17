@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/HobbiesCardviewContainer"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="#FFF"
-    app:cardStrokeColor="#FFA500"
-    android:padding="4dp"
-    app:cardCornerRadius="20dp"
-    app:cardStrokeWidth="3dp">
+    android:id="@+id/HobbiesCardviewContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:background="@drawable/round_outline_btn"
+    android:layout_margin="8dp">
+        <LinearLayout
+            android:id="@+id/HobbiesCardLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:padding="10dp"
+            android:gravity="center">
 
         <TextView
             android:id="@+id/HobbiesCardviewText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             android:hint="hobbies"
             android:textSize="15sp"
-            android:background="none"/>
+            android:textColor="@color/black"
+            android:fontFamily="@font/tommy_regular"/>
+        </LinearLayout>
 
 </androidx.cardview.widget.CardView>

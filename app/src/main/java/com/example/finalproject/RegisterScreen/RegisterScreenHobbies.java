@@ -79,7 +79,7 @@ public class RegisterScreenHobbies extends AppCompatActivity implements HobbiesS
 
     private void CreatingRecyclerViewForHobbiesOptions() {
         _RegisterScreenHobbiesOptions.setHasFixedSize(true);
-        _RegisterScreenHobbiesOptions.setLayoutManager(new GridLayoutManager(RegisterScreenHobbies.this, 3)); // The RecyclerView is rendered by GridLayout format with 5 columns
+        _RegisterScreenHobbiesOptions.setLayoutManager(new GridLayoutManager(RegisterScreenHobbies.this, 2)); // The RecyclerView is rendered by GridLayout format with 5 columns
         _hobbiesAdapter = new HobbiesAdapter(RegisterScreenHobbies.this, _hobbiesList, this);
         _RegisterScreenHobbiesOptions.setAdapter(_hobbiesAdapter);
     }
