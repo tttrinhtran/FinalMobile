@@ -46,9 +46,15 @@ public class SectionDetail extends BaseActivity {
         setContentView(R.layout.activity_section_detail);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         sectionirebaseFirestoreController=new FirebaseFirestoreController<>(Section.class);
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         getData();
         setUp();
-
     }
 
     @Override
@@ -67,7 +73,7 @@ public class SectionDetail extends BaseActivity {
         user = sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_SHARED_PREFERENCE_USERS);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            section=getIntent().getSerializableExtra("section", Section.class);
+            section = getIntent().getSerializableExtra("section", Section.class);
         }
     }
 
@@ -177,7 +183,7 @@ public class SectionDetail extends BaseActivity {
     {
         if(section.get_SectionParticipate()==null)
         {
-            section._SectionParticipate=new ArrayList<>();
+            section._SectionParticipate = new ArrayList<>();
         }
         if(section.get_SectionHost().equals(user.get_UserName())||section.get_SectionParticipate().contains(user.get_UserName()))
         {
@@ -196,6 +202,8 @@ public class SectionDetail extends BaseActivity {
         i.putExtra(ConstantApp.ACTION_KEY_CHANNEL_NAME, channel);
         i.putExtra(ConstantApp.ACTION_KEY_ENCRYPTION_KEY, encryption);
         i.putExtra("nickname",user.get_UserNickName());
+        i.putExtra("section", section);
+        i.putExtra("username", user.get_UserName());
         startActivity(i);
     }
 }
