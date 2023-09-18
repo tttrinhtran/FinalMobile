@@ -98,8 +98,20 @@
         app:layout_constraintBottom_toTopOf="@id/ChatSendMessageLayout"
         app:layout_constraintTop_toBottomOf="@id/ChatActionbar"
         android:layout_marginVertical="10dp"/>
-    
-<!--    <ProgressBar-->
+    <com.qifan.library.ChatTypingIndicatorView
+        android:id="@+id/indicatorView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="36dp"
+        android:padding="10dp"
+        android:background="@drawable/typing_background"
+        app:layout_constraintBottom_toTopOf="@id/ChatSendMessageLayout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="invisible"/>
+
+
+    <!--    <ProgressBar-->
 <!--        android:id="@+id/progressBar"-->
 <!--        android:layout_width="25dp"-->
 <!--        android:layout_height="25dp"-->
@@ -128,6 +140,7 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ChatSendButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="4dp"

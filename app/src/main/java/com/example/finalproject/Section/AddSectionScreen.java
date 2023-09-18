@@ -64,6 +64,13 @@ public class AddSectionScreen extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        _backArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
 
