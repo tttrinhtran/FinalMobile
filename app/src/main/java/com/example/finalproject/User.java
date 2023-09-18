@@ -318,7 +318,7 @@ public class User implements Serializable {
 
         for (String element : this._UserHobbies) {
             stringBuilder.append(element);
-            stringBuilder.append(" ");
+            stringBuilder.append("     ");
         }
 
 
