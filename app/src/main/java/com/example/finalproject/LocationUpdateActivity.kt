@@ -34,6 +34,7 @@ import android.view.View.VISIBLE
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -99,6 +100,8 @@ class LocationUpdateActivity : AppCompatActivity(), SharedPreferences.OnSharedPr
 
     private lateinit var loadingProgressBar: ProgressBar
 
+    lateinit var checkingForPrivacy : SharedPreferences
+
     // Monitors connection to the while-in-use service.
     private val foregroundOnlyServiceConnection = object : ServiceConnection {
 
@@ -129,9 +132,15 @@ class LocationUpdateActivity : AppCompatActivity(), SharedPreferences.OnSharedPr
         LocationUpdate_UIElements()
 
         nextButt.setOnClickListener {
-            loadingProgressBar.visibility = VISIBLE
-            val intent = Intent(this@LocationUpdateActivity, HomeScreen::class.java)
-            startActivity(intent)
+            if (foregroundPermissionApproved()) {
+                loadingProgressBar.visibility = VISIBLE
+
+                checkingForPrivacy = getSharedPreferences(Constants.PRIVACY_SCREEN_ADD, MODE_PRIVATE)
+                checkingForPrivacy.edit().putBoolean("run", true).apply();
+
+                val intent = Intent(this@LocationUpdateActivity, HomeScreen::class.java)
+                startActivity(intent)
+            } else Toast.makeText(this, "You must enable location permisstion first", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -236,13 +245,16 @@ class LocationUpdateActivity : AppCompatActivity(), SharedPreferences.OnSharedPr
 
         when (requestCode) {
             REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE -> when {
-                grantResults.isEmpty() ->
+                grantResults.isEmpty() -> {
                     // If user interaction was interrupted, the permission request
                     // is cancelled and you receive empty arrays.
                     Log.d(TAG, "User interaction was cancelled.")
-                grantResults[0] == PackageManager.PERMISSION_GRANTED ->
+                    finish()
+                }
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED -> {
                     // Permission was granted.
                     foregroundOnlyLocationService?.subscribeToLocationUpdates()
+                }
                 else -> {
                     // Permission denied.
                     Snackbar.make(

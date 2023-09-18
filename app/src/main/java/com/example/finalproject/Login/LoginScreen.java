@@ -2,10 +2,14 @@ package com.example.finalproject.Login;
 
 import static com.example.finalproject.Constants.KEY_COLLECTION_USERS;
 import static com.example.finalproject.Constants.KEY_SHARED_PREFERENCE_USERS;
+import static com.example.finalproject.Constants.PRIVACY_SCREEN_ADD;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -26,6 +30,7 @@ import com.example.finalproject.RegisterScreen.RegisterScreenSignup;
 import com.example.finalproject.SharedPreferenceManager;
 import com.example.finalproject.User;
 
+import java.io.File;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -115,9 +120,15 @@ public class LoginScreen extends AppCompatActivity {
 
                 if(isLoginSuccessful) {
                     _LoginScreenUser = userFirebaseController.retrieveObjectsFirestoreByID(KEY_COLLECTION_USERS, userName);
-                    Intent intent = new Intent(LoginScreen.this, LocationUpdateActivity.class);
                     passOnUser();
-                    startActivity(intent);
+
+                    if(isAskForPrivacy()){
+                        Intent intent = new Intent(LoginScreen.this, HomeScreen.class);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(LoginScreen.this, LocationUpdateActivity.class);
+                        startActivity(intent);
+                    }
                 } else {
                     Looper.prepare();
                     Toast.makeText(LoginScreen.this, "Username or Password is Incorrect", Toast.LENGTH_SHORT).show();
@@ -137,5 +148,11 @@ public class LoginScreen extends AppCompatActivity {
     {
         SharedPreferenceManager<User> sharedPreferences = new SharedPreferenceManager<>(User.class, LoginScreen.this);
         sharedPreferences.storeSerializableObjectToSharedPreference(_LoginScreenUser, KEY_SHARED_PREFERENCE_USERS);
+    }
+
+    private boolean isAskForPrivacy(){
+        SharedPreferences sharedPreference = this.getSharedPreferences(PRIVACY_SCREEN_ADD, MODE_PRIVATE);
+        boolean isCalled = sharedPreference.getBoolean("run", false);
+        return isCalled;
     }
 }

@@ -40,4 +40,5 @@ public class Constants {
     public static final String FRIEND_USER = "friendUser";
 
     public static final String LOCATION_UPDATE_STATUS = "LOCATION_UPDATE_STATUS";
+    public static final String PRIVACY_SCREEN_ADD = "privacy";
 }
