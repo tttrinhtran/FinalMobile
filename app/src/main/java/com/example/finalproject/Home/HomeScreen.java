@@ -6,6 +6,7 @@ import static com.example.finalproject.Constants.KEY_SHARED_PREFERENCE_USERS;
 import static com.example.finalproject.Constants.LOCATION_UPDATE_STATUS;
 
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -44,6 +45,11 @@ import com.example.finalproject.R;
 import com.example.finalproject.Section.SectionScreen;
 import com.example.finalproject.SharedPreferenceManager;
 import com.example.finalproject.User;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
 import com.yuyakaido.android.cardstackview.CardStackListener;
 import com.yuyakaido.android.cardstackview.CardStackView;
@@ -93,14 +99,10 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
 
         databaseManagerInit();
 
+        startLocationService();
+
         setUp();
         NavBar();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        startLocationService();
 
         Handler handler = new Handler(Looper.getMainLooper());
         ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -138,6 +140,11 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
             }
         });
         ActiveList();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     private void startLocationService() {
@@ -367,6 +374,8 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
+                                ActiveList();
+                                adapterSwipe.notifyDataSetChanged();
                                 updateActiveStatus();
                                 swipe();
 
@@ -391,6 +400,21 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
     void getUser() {
         SharedPreferenceManager<User> sharedPreferenceManager = new SharedPreferenceManager<>(User.class, this);
         user = sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_SHARED_PREFERENCE_USERS);
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final DocumentReference docRef = db.collection(KEY_COLLECTION_USERS).document(user.get_UserName());
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                user = snapshot.toObject(User.class);
+            }
+        });
     }
 
     private void getActiveFriend() {
