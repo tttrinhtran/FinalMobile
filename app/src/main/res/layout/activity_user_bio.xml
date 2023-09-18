@@ -107,12 +107,19 @@
                 android:fontFamily="@font/tommy_regular"
                 android:textSize="12sp"
                 android:textColor="@color/black"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/ItemSwipeSchool"
+                android:id="@+id/bioHobbiesRecyclerview">
+
+            </androidx.recyclerview.widget.RecyclerView>
 
             <TextView
                 android:id="@+id/ItemSwipeBiographyTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/ItemSwipeSchool"
+                app:layout_constraintTop_toBottomOf="@id/bioHobbiesRecyclerview"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"

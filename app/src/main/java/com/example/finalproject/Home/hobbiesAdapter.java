@@ -15,7 +15,7 @@ import com.example.finalproject.R;
 import java.util.ArrayList;
 
 public class hobbiesAdapter extends RecyclerView.Adapter<hobbiesAdapter.MyViewHolder> {
-
+    //this one not clickable
     ArrayList<String> hobbiesList;
     Context context;
     public hobbiesAdapter(ArrayList<String> hobbiesList, Context context)

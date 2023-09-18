@@ -9,6 +9,7 @@ import static com.example.finalproject.Constants.LOCATION_UPDATE_STATUS;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -186,7 +187,6 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
 
     private void swipe() {
         final int[] curPos = new int[1];
-
         manager = new CardStackLayoutManager(HomeScreen.this, new CardStackListener() {
             @Override
             public void onCardDragging(Direction direction, float ratio) {
@@ -359,6 +359,7 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
                             public void run() {
                                 updateActiveStatus();
                                 swipe();
+
                                 progressBar.setVisibility(View.INVISIBLE);
                                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             }
@@ -423,6 +424,15 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
             Bundle b = ActivityOptions.makeSceneTransitionAnimation(HomeScreen.this).toBundle();
             startActivity(intent, b);
         });
+    }
+    void hobbies()
+    {
+        ArrayList<String>hobiesList=user.get_UserHobbies();
+        RecyclerView recyclerView=findViewById(R.id.SwipeItemHobbies);
+        hobbiesAdapter adapter= new hobbiesAdapter(hobiesList, this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new CustomLinearLayoutManager(this));
+
     }
 
     @Override
