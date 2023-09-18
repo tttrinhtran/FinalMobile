@@ -61,13 +61,12 @@ public class HobbiesAdapter extends RecyclerView.Adapter<HobbiesAdapter.HobbieVi
                         int pos = getAbsoluteAdapterPosition();
                         if(pos != RecyclerView.NO_POSITION){
                             hobbiesSelectListenerInterface.onHobbiesClicked(pos);
-                            hobbiesText.setBackgroundColor(R.drawable.btn_animation);
                             if(choose == true){
                                 cardViewList.setBackgroundResource(R.drawable.round_outline_btn);
                                 choose = false;
                             }
                             else if(choose == false){
-                                cardViewList.setBackgroundResource(R.drawable.border_full);
+                                cardViewList.setBackgroundResource(round_solid_btn);
                                 choose = true;
                             }
                         }

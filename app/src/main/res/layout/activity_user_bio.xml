@@ -159,6 +159,7 @@ Published a paper on machine learning for natural language processing in the Jou
                 android:fontFamily="@font/tommy_regular"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:textAlignment="viewStart"
                 android:textColor="@color/black"/>
 
             <TextView
@@ -167,7 +168,6 @@ Published a paper on machine learning for natural language processing in the Jou
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/ItemSwipeSpecializationTitle"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginStart="20dp"
                 android:paddingHorizontal="20dp"
                 android:layout_marginTop="3dp"
@@ -175,6 +175,7 @@ Published a paper on machine learning for natural language processing in the Jou
 Received the Google Anita Borg Memorial Scholarship in 2023
 Published a paper on machine learning for natural language processing in the Journal of Machine Learning Research in 2023"
                 android:fontFamily="@font/tommy_regular"
+                android:textAlignment="viewStart"
                 android:textSize="10sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"/>
