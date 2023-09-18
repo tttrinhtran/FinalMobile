@@ -91,46 +91,11 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
 
         HomeScren_UIElementsSetup();
 
-        userFirebaseController = new FirebaseFirestoreController<>(User.class);
-        activeFriend = new ArrayList<>();
-        activeUsers = new ArrayList<>();
-
-        firestoreGeoHashQueries = new FirestoreGeoHashQueries();
-        positionfirebaseFirestoreController = new FirebaseFirestoreController<>(Position.class);
-        isLocationUpdatedSharedPreference = new SharedPreferenceManager<>(Boolean.class,HomeScreen.this);
+        databaseManagerInit();
 
         setUp();
 
-    }
-
-    private void HomeScren_UIElementsSetup(){
-        swipeRefreshLayout = findViewById(R.id.HomeScreenRefreshLayout);
-        progressBar = findViewById(R.id.HomeScreenProgressBar);
-        cardStackView = findViewById(R.id.HomeScreenSwipeItem);
-        titleText = (TextView) findViewById(R.id.HomeScreenTitleText);
-        recyclerView = findViewById(R.id.HomeScreenFriendRecyclerView);
-        home = findViewById(R.id.NaviBarHomeIcon);
-        section = findViewById(R.id.NaviBarSectionIcon);
-        friend = findViewById(R.id.NaviBarFriendIcon);
-        profile = findViewById(R.id.NaviBarProfile);
-        avatar = findViewById(R.id.HomeScreenAvatarTitle);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d( "Vicluu", "onDestroy: " + "Home destroy");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Intent serviceIntent = new Intent(HomeScreen.this, LocationUpdatePeriodicallyService.class);
-
-        isLocationUpdatedSharedPreference.clearObject(LOCATION_UPDATE_STATUS);
-        isLocationUpdatedSharedPreference.storeSerializableObjectToSharedPreference(false, LOCATION_UPDATE_STATUS);
-
-        startService(serviceIntent);
+        startLocationService();
 
         Handler handler = new Handler(Looper.getMainLooper());
         ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -146,7 +111,7 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
                                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     }
                 });
-                
+
                 while (!isLocationUpdatedSharedPreference.retrieveSerializableObjectFromSharedPreference(LOCATION_UPDATE_STATUS)){}
                 if(isLocationUpdatedSharedPreference.retrieveSerializableObjectFromSharedPreference(LOCATION_UPDATE_STATUS)) {
                     Position pos = null;
@@ -169,7 +134,47 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
         });
         ActiveList();
         NavBar();
+
     }
+
+    private void startLocationService() {
+        Intent serviceIntent = new Intent(HomeScreen.this, LocationUpdatePeriodicallyService.class);
+
+        isLocationUpdatedSharedPreference.clearObject(LOCATION_UPDATE_STATUS);
+        isLocationUpdatedSharedPreference.storeSerializableObjectToSharedPreference(false, LOCATION_UPDATE_STATUS);
+
+        startService(serviceIntent);
+    }
+
+    private void databaseManagerInit() {
+        userFirebaseController = new FirebaseFirestoreController<>(User.class);
+        activeFriend = new ArrayList<>();
+        activeUsers = new ArrayList<>();
+
+        firestoreGeoHashQueries = new FirestoreGeoHashQueries();
+        positionfirebaseFirestoreController = new FirebaseFirestoreController<>(Position.class);
+        isLocationUpdatedSharedPreference = new SharedPreferenceManager<>(Boolean.class,HomeScreen.this);
+    }
+
+    private void HomeScren_UIElementsSetup(){
+        swipeRefreshLayout = findViewById(R.id.HomeScreenRefreshLayout);
+        progressBar = findViewById(R.id.HomeScreenProgressBar);
+        cardStackView = findViewById(R.id.HomeScreenSwipeItem);
+        titleText = (TextView) findViewById(R.id.HomeScreenTitleText);
+        recyclerView = findViewById(R.id.HomeScreenFriendRecyclerView);
+        home = findViewById(R.id.NaviBarHomeIcon);
+        section = findViewById(R.id.NaviBarSectionIcon);
+        friend = findViewById(R.id.NaviBarFriendIcon);
+        profile = findViewById(R.id.NaviBarProfile);
+        avatar = findViewById(R.id.HomeScreenAvatarTitle);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d( "Vicluu", "onDestroy: " + "Home destroy");
+    }
+
 
     @Override
     protected void onPause() {
