@@ -138,7 +138,7 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
                 if(isLocationUpdatedSharedPreference.retrieveSerializableObjectFromSharedPreference(LOCATION_UPDATE_STATUS)) {
                     Position pos = null;
                     pos = positionfirebaseFirestoreController.retrieveObjectsFirestoreByID(FIRESTORE_LOCATION_KEY, user.get_UserName());
-                    firestoreGeoHashQueries.QueryForLocationFireStore(user, pos, 500, activeUsers);
+                    firestoreGeoHashQueries.QueryForLocationFireStore(user, pos, user._UserDistancePref, activeUsers);
                     // activeUsers.removeAll(user.get_UserFriend());
                     activeUsers.removeIf( u -> user.get_UserFriend().contains(u.get_UserName()) );
                 }
@@ -377,7 +377,7 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
                         if(isLocationUpdatedSharedPreference.retrieveSerializableObjectFromSharedPreference(LOCATION_UPDATE_STATUS)) {
                             Position pos = null;
                             pos = positionfirebaseFirestoreController.retrieveObjectsFirestoreByID(FIRESTORE_LOCATION_KEY, user.get_UserName());
-                            firestoreGeoHashQueries.QueryForLocationFireStore(user, pos, 500, activeUsers);
+                            firestoreGeoHashQueries.QueryForLocationFireStore(user, pos, user._UserDistancePref, activeUsers);
                             activeUsers.removeIf( u -> user.get_UserFriend().contains(u.get_UserName()) );
                         }
                         handler.post(new Runnable() {

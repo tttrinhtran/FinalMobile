@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.finalproject.Constants
+import com.example.finalproject.FirebaseFirestoreController
 import com.example.finalproject.R
 import com.example.finalproject.SharedPreferenceManager
 import com.example.finalproject.User
@@ -35,8 +36,14 @@ class ProfileScreenCity : AppCompatActivity() {
         _confirm.setOnClickListener(View.OnClickListener {
             val newCity = _newCity.text.toString()
 
-            if(!newCity.isEmpty()){
-                user.city = newCity
+            if(newCity.isNotEmpty()){
+                user._UserCity = newCity
+
+                userSharedPreferenceManager.storeSerializableObjectToSharedPreference(user, Constants.KEY_SHARED_PREFERENCE_USERS);
+
+                val firebaseFirestoreController = FirebaseFirestoreController(User::class.java)
+                firebaseFirestoreController.updateDocumentField(Constants.KEY_COLLECTION_USERS, user._UserName, "_UserCity", newCity)
+
             } else Toast.makeText(this, "Fill the new city", Toast.LENGTH_SHORT).show()
 
         })

@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -88,6 +89,10 @@ public class RegisterScreenEmailVerification extends AppCompatActivity {
                         String strDate = dateFormat.format(date);
 
                         user.set_UserJoinDate(strDate);
+
+                        user.set_UserWaitingList(new ArrayList<>());
+                        user.set_UserFriend(new ArrayList<>());
+
                         UserDatabase.addToFirestore(KEY_COLLECTION_USERS, user.get_UserName(), user);
                         Toast.makeText(RegisterScreenEmailVerification.this, "Register Successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(RegisterScreenEmailVerification.this, LoginScreen.class);

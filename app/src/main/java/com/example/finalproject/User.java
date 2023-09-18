@@ -1,7 +1,6 @@
 package com.example.finalproject;
 
 
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.Serializable;
@@ -29,7 +28,7 @@ public class User implements Serializable {
     String _UserAddress;
     ArrayList<String> _UserFriend;
     ArrayList<String> _UserWaitingList;
-    String city;
+    String _UserCity;
     public float _UserMinAge = 18;
     public float _UserMaxAge = 50;
     public float _UserDistancePref = 5000;
@@ -52,7 +51,7 @@ public class User implements Serializable {
         this._UserHobbies = _UserHobbies;
         this._UserSchool = _UserSchool;
         this._UserSpecialization = _UserSpecialization;
-        this.city = city;
+        this._UserCity = city;
     }
 
     @Override
@@ -74,19 +73,19 @@ public class User implements Serializable {
                 ", _UserAddress='" + _UserAddress + '\'' +
                 ", _UserFriend=" + _UserFriend +
                 ", _UserWaitingList=" + _UserWaitingList +
-                ", city='" + city + '\'' +
+                ", _UserCity='" + _UserCity + '\'' +
                 ", _UserMinAge=" + _UserMinAge +
                 ", _UserMaxAge=" + _UserMaxAge +
                 ", _UserDistancePref=" + _UserDistancePref +
                 '}';
     }
 
-    public String getCity() {
-        return city;
+    public String get_UserCity() {
+        return _UserCity;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void set_UserCity(String _UserCity) {
+        this._UserCity = _UserCity;
     }
 
     public String get_UserName() {

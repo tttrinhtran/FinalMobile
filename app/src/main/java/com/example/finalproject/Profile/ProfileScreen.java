@@ -2,8 +2,6 @@ package com.example.finalproject.Profile;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -17,7 +15,6 @@ import com.example.finalproject.FirebaseAuthentication;
 import com.example.finalproject.FirebaseCloudStorageManager;
 import com.example.finalproject.FriendsScreen;
 import com.example.finalproject.Home.HomeScreen;
-import com.example.finalproject.Home.hobbiesAdapter;
 import com.example.finalproject.Login.LoginScreen;
 import com.example.finalproject.R;
 import com.example.finalproject.Section.SectionScreen;
@@ -26,8 +23,6 @@ import com.example.finalproject.User;
 import com.example.finalproject.databinding.ActivityProfileScreenBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.sql.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProfileScreen extends AppCompatActivity {
@@ -66,8 +61,8 @@ public class ProfileScreen extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
         currentInstance.storeSerializableObjectToSharedPreference(currentUser, Constants.KEY_SHARED_PREFERENCE_USERS);
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         database.collection(Constants.KEY_COLLECTION_USERS)
@@ -97,7 +92,7 @@ public class ProfileScreen extends AppCompatActivity {
         binding.ProfileScreenAgeSlider.setValues(currentUser.get_UserMinAge(), currentUser.get_UserMaxAge());
         binding.ProfileScreenAgeText.setText( (int) currentUser.get_UserMinAge() + "-" + (int) currentUser.get_UserMaxAge());
         binding.ProfileScreenLocationInfo.setText( currentUser.get_UserAddress() );
-        binding.ProfileScreenLocationInfo.setText(currentUser.getCity());
+        binding.ProfileScreenLocationInfo.setText(currentUser.get_UserCity());
 
         binding.ProfileScreenNameEdit.setOnClickListener(view -> {
             Intent intent = new Intent(ProfileScreen.this, ProfileScreenNameModification.class);
@@ -128,6 +123,7 @@ public class ProfileScreen extends AppCompatActivity {
 
             binding.ProfileScreenAgeText.setText( (int)currentUser._UserMinAge + "-" + (int)currentUser._UserMaxAge);
         } );
+
 
         binding.ProfileScreenPasswordEditIcon.setOnClickListener(view -> {
             Intent intent = new Intent(ProfileScreen.this, ProfileScreenPasswordModification.class);
@@ -193,7 +189,6 @@ public class ProfileScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileScreen.this, HomeScreen.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
             }

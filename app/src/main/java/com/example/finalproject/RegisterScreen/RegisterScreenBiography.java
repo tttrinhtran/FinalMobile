@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.aallam.openai.api.edits.Edit;
 import com.example.finalproject.R;
 import com.example.finalproject.User;
 
@@ -68,7 +67,7 @@ public class RegisterScreenBiography extends AppCompatActivity {
             Toast.makeText(RegisterScreenBiography.this, "Fill the City to continue", Toast.LENGTH_SHORT).show();
             return false;
         } else {
-            user.setCity(city);
+            user.set_UserCity(city);
             return true;
         }
     }
