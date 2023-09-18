@@ -101,9 +101,7 @@ public class SectionDetail extends BaseActivity {
                     LocalDateTime sectionDateAndTime = getSectionTime(sectionDate, sectionTime);
 
                     if(currentDateTime.isAfter(sectionDateAndTime)) {
-                        if(section._SectionParticipate.contains(section._SectionHost) || user.get_UserName().equals(section._SectionHost)) {
-                            forwardToRoom(SectionDetail.this, section._SectionName, "123");
-                        } else Toast.makeText(SectionDetail.this, "Waiting for Host to start the Section",Toast.LENGTH_SHORT).show();
+                        forwardToRoom(SectionDetail.this, section._SectionName, "123");
                     } else {
                         Toast.makeText(SectionDetail.this, "Section has not openned yet", Toast.LENGTH_SHORT).show();
                     }
