@@ -43,6 +43,8 @@ public class ProfileScreenNameModification extends AppCompatActivity {
 
         user = userSharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_SHARED_PREFERENCE_USERS);
 
+        getInitialValue();
+
         _ProfileScreenNameModificationBackButton.setOnClickListener(view -> finish());
 
         _ProfileScreenNameModificationConfirmButton.setOnClickListener( view -> {
@@ -66,6 +68,12 @@ public class ProfileScreenNameModification extends AppCompatActivity {
 
             finish();
         });
+    }
+
+    private void getInitialValue() {
+        _ProfileScreenNameModificationFirstname.setText(user.get_UserFirstname());
+        _ProfileScreenNameModificationLastname.setText(user.get_UserLastname());
+        _ProfileScreenNameModificationNickname.setText(user.get_UserNickName());
     }
 
     private void ProfileSettingName_UIElementsFetching() {

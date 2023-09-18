@@ -8,12 +8,14 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.FrameLayout
+import android.widget.TextView
 import android.widget.TextView.VISIBLE
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.Constants
+import com.example.finalproject.FirebaseFirestoreController
 import com.example.finalproject.Position
 import com.example.finalproject.R
 import com.example.finalproject.SharedPreferenceManager
@@ -41,6 +43,7 @@ class ChatbotActivity : AppCompatActivity() {
     lateinit var sendButton: FrameLayout
     lateinit var displayScreen: RecyclerView
     lateinit var queryEdt: EditText
+    lateinit var chatbotName:TextView
 
     lateinit var messageArray: ArrayList<String>
     lateinit var chatAdapter: ChatbotAdapter
@@ -55,6 +58,9 @@ class ChatbotActivity : AppCompatActivity() {
         sendButton = findViewById(R.id.layoutSend)
         displayScreen = findViewById(R.id.chatRecyclerView)
         queryEdt = findViewById(R.id.inputMessage)
+        chatbotName = findViewById(R.id.ChatUsername)
+
+        chatbotName.setText("chatbot")
 
         val userSharedPreference = SharedPreferenceManager<User>(User::class.java,this)
         sender = userSharedPreference.retrieveSerializableObjectFromSharedPreference(Constants.KEY_SHARED_PREFERENCE_USERS)
@@ -92,7 +98,9 @@ class ChatbotActivity : AppCompatActivity() {
 
     private fun getResponse(query: String) {
 
-        val chatgptAPI = "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";
+        val firestoreController = FirebaseFirestoreController<String>(String::class.java)
+        val chatgptListAPI = firestoreController.retrieveAllDocumentsIDOfaCollection("ChatgptAPI")
+        val chatgptAPI = chatgptListAPI[0]
         val chatgptUrl = "https://api.openai.com/v1/chat/completions"
 
         val requestBody = """

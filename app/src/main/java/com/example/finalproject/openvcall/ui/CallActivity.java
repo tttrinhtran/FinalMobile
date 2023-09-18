@@ -424,6 +424,7 @@ public class CallActivity extends BaseActivity implements DuringCallEventHandler
 
     private void doLeaveChannel() {
         leaveChannel(config().mChannel);
+
         preview(false, null, 0);
     }
 
