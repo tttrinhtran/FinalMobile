@@ -97,6 +97,7 @@ public class ProfileScreen extends AppCompatActivity {
         binding.ProfileScreenAgeSlider.setValues(currentUser.get_UserMinAge(), currentUser.get_UserMaxAge());
         binding.ProfileScreenAgeText.setText( (int) currentUser.get_UserMinAge() + "-" + (int) currentUser.get_UserMaxAge());
         binding.ProfileScreenLocationInfo.setText( currentUser.get_UserAddress() );
+        binding.ProfileScreenLocationInfo.setText(currentUser.getCity());
 
         binding.ProfileScreenNameEdit.setOnClickListener(view -> {
             Intent intent = new Intent(ProfileScreen.this, ProfileScreenNameModification.class);

@@ -49,6 +49,19 @@
         android:maxLength="100"
         android:paddingRight="50dp"/>
 
+    <EditText
+        android:id="@+id/RegisterScreenBiographyCityEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/RegisterScreenBiographyBioEditText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:hint="City"
+        android:backgroundTint="@color/dark_blue"
+        android:layout_marginTop="50dp"
+        android:maxLength="100"
+        android:paddingRight="50dp"/>
+
     <TextView
         android:id="@+id/RegisterScreenBiographyCharacterCounterTextView"
         android:layout_width="wrap_content"

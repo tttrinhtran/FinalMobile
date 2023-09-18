@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aallam.openai.api.edits.Edit;
 import com.example.finalproject.R;
 import com.example.finalproject.User;
 
@@ -21,6 +22,7 @@ public class RegisterScreenBiography extends AppCompatActivity {
     EditText _RegisterScreenBiographyBio;
     Button _RegisterScreenBiographyFinishButton;
     TextView _RegisterScreenBiographyCharacterCounter;
+    EditText _RegisterScreenBiographyCity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,8 @@ public class RegisterScreenBiography extends AppCompatActivity {
         RegisterScreenBiographyFetchingUIElements();
 
         _RegisterScreenBiographyFinishButton.setOnClickListener(view -> {
-            boolean isSuccessful = CreateBiographyForNewUser();
+            boolean isSuccessful = CreateBiographyForNewUser() && CreateCityForNewUser();
+            CreateCityForNewUser();
             if(isSuccessful == true){
                 Intent intent = new Intent(RegisterScreenBiography.this, RegisterScreenEmailVerification.class);
                 intent.putExtra("new_user", user);
@@ -59,6 +62,17 @@ public class RegisterScreenBiography extends AppCompatActivity {
         });
     }
 
+    private boolean CreateCityForNewUser() {
+        String city = _RegisterScreenBiographyCity.getText().toString();
+        if(city.isEmpty()){
+            Toast.makeText(RegisterScreenBiography.this, "Fill the City to continue", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            user.setCity(city);
+            return true;
+        }
+    }
+
     private boolean CreateBiographyForNewUser() {
         String bio = _RegisterScreenBiographyBio.getText().toString();
         if(bio.isEmpty()){
@@ -74,5 +88,6 @@ public class RegisterScreenBiography extends AppCompatActivity {
         _RegisterScreenBiographyBio = (EditText) findViewById(R.id.RegisterScreenBiographyBioEditText);
         _RegisterScreenBiographyFinishButton = (Button) findViewById(R.id.RegisterScreenBiographyFinishButton);
         _RegisterScreenBiographyCharacterCounter = (TextView) findViewById(R.id.RegisterScreenBiographyCharacterCounterTextView);
+        _RegisterScreenBiographyCity = findViewById(R.id.RegisterScreenBiographyCityEditText);
     }
 }
