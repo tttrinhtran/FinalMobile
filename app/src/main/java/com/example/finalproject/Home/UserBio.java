@@ -42,9 +42,7 @@ public class UserBio extends AppCompatActivity {
     }
 
     private void onButtonClicked() {
-        binding.ItemSwipeBackArrow.setOnClickListener( view -> {
-            finish();
-        });
+        binding.ItemSwipeBackArrow.setOnClickListener( view -> onBackPressed());
     }
 
     private void setDataBio(User user) {
