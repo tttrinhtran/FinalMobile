@@ -4,34 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterScreen.RegisterScreenEmailVerification">
+    tools:context=".RegisterScreen.RegisterScreenEmailVerification"
+    android:background="@drawable/sign_srceenbg">
+
+    <TextView
+        android:id="@+id/RegisterScreenVerificationEmailSentNotificationTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:fontFamily="@font/tommy_medium"
+        android:text="Verify email"
+        android:textColor="@color/primary_blue"
+        android:textSize="30sp"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/RegisterScreenVerificationEmailSentNotificationTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/lato"
+        android:text="Please check your email"
+        android:textAlignment="center"
+        android:textColor="@color/primary_blue"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/RegisterScreenVerificationEmailResendButton"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/RegisterScreenVerificationEmailSentNotificationTitle"></TextView>
 
     <Button
         android:id="@+id/RegisterScreenVerificationEmailResendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/RegisterScreenVerificationEmailSentNotificationTextView"
+        app:layout_constraintBottom_toTopOf="@id/RegisterScreenVerificationRegisteredButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="20dp"
-        android:text="Resent Email" />
+        android:text="Resent Email"
+        android:backgroundTint="@color/primary_blue"/>
 
     <Button
         android:id="@+id/RegisterScreenVerificationRegisteredButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/RegisterScreenVerificationEmailResendButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="next"/>
+        android:backgroundTint="@color/primary_blue"
+        android:text="next"
+       />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -68,6 +68,7 @@ public class cardSwipeAdapter extends RecyclerView.Adapter<cardSwipeAdapter.MyVi
             binding.HomeScreenUserName.setText(data.get_UserLastname() + " " + data.get_UserFirstname());
             binding.HomeScreenUserAge.setText(data.get_UserAge());
             binding.HomeScreenUserSchool.setText(data.get_UserSchool());
+            binding.HomeScreenUserHobbies.setText(data.hobbieArrayListToString());
             binding.getRoot().setOnClickListener( view -> listener.onCardClicker(data) );
 
             FirebaseCloudStorageManager firebaseCloudStorageManager = new FirebaseCloudStorageManager();

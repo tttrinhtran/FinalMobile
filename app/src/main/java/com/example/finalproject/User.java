@@ -314,4 +314,18 @@ public class User implements Serializable {
         int Useryear= Integer.parseInt(this._UserDoB.substring(this._UserDoB.length() - 4));
         return Integer.toString(currentYear-Useryear);
     }
+    public String hobbieArrayListToString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (String element : this._UserHobbies) {
+            stringBuilder.append(element);
+            stringBuilder.append(" ");
+        }
+
+
+        if (stringBuilder.length() > 0) {
+            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        }
+        return stringBuilder.toString();
+    }
 }
