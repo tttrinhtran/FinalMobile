@@ -460,15 +460,7 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
             startActivity(intent, b);
         });
     }
-    void hobbies()
-    {
-        ArrayList<String>hobiesList=user.get_UserHobbies();
-        RecyclerView recyclerView=findViewById(R.id.SwipeItemHobbies);
-        hobbiesAdapter adapter= new hobbiesAdapter(hobiesList, this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new CustomLinearLayoutManager(this));
 
-    }
 
     // eventListener
     private final EventListener<QuerySnapshot> eventListener = ( value, error ) -> {
@@ -511,6 +503,20 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
         Log.d("Vicluu", "onCardClicker: " + getApplicationContext());
         intent.putExtra( "USER_OBJECT", user );
         startActivity(intent);
+    }
+    public static String arrayListToString(ArrayList<String> arrayList) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (String element : arrayList) {
+            stringBuilder.append(element);
+            stringBuilder.append(" ");
+        }
+
+
+        if (stringBuilder.length() > 0) {
+            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        }
+        return stringBuilder.toString();
     }
 
 }

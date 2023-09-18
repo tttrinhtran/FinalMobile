@@ -89,14 +89,17 @@
                         android:text="University of Science"
                         android:fontFamily="@font/tommy_regular"
                         android:textSize="14sp"
+                        android:layout_marginTop="10dp"
                         android:textColor="@color/white"/>
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/SwipeItemHobbies"
-                        app:layout_constraintTop_toBottomOf="@id/HomeScreenUserSchool">
-
-                    </androidx.recyclerview.widget.RecyclerView>
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:id="@+id/HomeScreenUserHobbies"
+                       android:fontFamily="@font/lato"
+                       app:layout_constraintTop_toBottomOf="@id/HomeScreenUserSchool"
+                       android:textSize="12sp"
+                       android:textColor="@color/white"/>
+                       android:textColor="@color/white"/>
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
