@@ -138,6 +138,7 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
+
                 getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                         WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 while (!isLocationUpdatedSharedPreference.retrieveSerializableObjectFromSharedPreference(LOCATION_UPDATE_STATUS)){}
@@ -332,8 +333,13 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
                 executorService.execute(new Runnable() {
                     @Override
                     public void run() {
-                        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                            }
+                        });
                         activeUsers.clear();
                         handler.post(new Runnable() {
 

@@ -43,9 +43,6 @@ public class UserBio extends AppCompatActivity {
 
     private void onButtonClicked() {
         binding.ItemSwipeBackArrow.setOnClickListener( view -> {
-            Intent intent = new Intent(this, HomeScreen.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
             finish();
         });
     }
