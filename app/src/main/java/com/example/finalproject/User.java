@@ -29,6 +29,7 @@ public class User implements Serializable {
     String _UserAddress;
     ArrayList<String> _UserFriend;
     ArrayList<String> _UserWaitingList;
+    String city;
     public float _UserMinAge = 18;
     public float _UserMaxAge = 50;
     public float _UserDistancePref = 5000;
@@ -37,7 +38,7 @@ public class User implements Serializable {
 
     public User(){}
 
-    public User(String _UserName, String _UserPassword, String _UserFirstname, String _UserLastname, String _UserDoB, String _UserJoinDate, String _UserNickName, String _UserPhone, boolean _UserActive, String _UserBio, ArrayList<String> _UserHobbies, String _UserSchool, String _UserSpecialization) {
+    public User(String _UserName, String _UserPassword, String _UserFirstname, String _UserLastname, String _UserDoB, String _UserJoinDate, String _UserNickName, String _UserPhone, boolean _UserActive, String _UserBio, ArrayList<String> _UserHobbies, String _UserSchool, String _UserSpecialization, String city) {
         this._UserName = _UserName;
         this._UserPassword = _UserPassword;
         this._UserFirstname = _UserFirstname;
@@ -51,6 +52,7 @@ public class User implements Serializable {
         this._UserHobbies = _UserHobbies;
         this._UserSchool = _UserSchool;
         this._UserSpecialization = _UserSpecialization;
+        this.city = city;
     }
 
     @Override
@@ -66,16 +68,25 @@ public class User implements Serializable {
                 ", _UserPhone='" + _UserPhone + '\'' +
                 ", _UserActive=" + _UserActive +
                 ", _UserBio='" + _UserBio + '\'' +
-                ", _UserHobbies='" + _UserHobbies + '\'' +
+                ", _UserHobbies=" + _UserHobbies +
                 ", _UserSchool='" + _UserSchool + '\'' +
-                ", _UserFriend='" + _UserFriend + '\'' +
-                ", _UserWaitingList='" + _UserWaitingList + '\'' +
                 ", _UserSpecialization='" + _UserSpecialization + '\'' +
                 ", _UserAddress='" + _UserAddress + '\'' +
-                ", _UserMinAge='" + _UserMinAge + '\'' +
-                ", _UserMaxAge='" + _UserMaxAge + '\'' +
-                ", _UserDistancePref='" + _UserDistancePref + '\'' +
+                ", _UserFriend=" + _UserFriend +
+                ", _UserWaitingList=" + _UserWaitingList +
+                ", city='" + city + '\'' +
+                ", _UserMinAge=" + _UserMinAge +
+                ", _UserMaxAge=" + _UserMaxAge +
+                ", _UserDistancePref=" + _UserDistancePref +
                 '}';
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String get_UserName() {

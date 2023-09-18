@@ -33,7 +33,6 @@
         </intent>
     </queries>
 
-
     <application
         android:name=".openvcall.AGApplication"
         android:allowBackup="true"
@@ -45,6 +44,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject"
         tools:targetApi="33">
+        <activity
+            android:name=".Profile.ProfileScreenCity"
+            android:exported="false" />
         <activity
             android:name=".Message.Chatbot.ChatbotActivity"
             android:exported="false" />
