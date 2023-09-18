@@ -1,7 +1,5 @@
 package com.example.finalproject.openvcall.ui;
 
-import static com.example.finalproject.Constants.KEY_COLLECTION_SECTION;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -28,9 +26,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.finalproject.FirebaseFirestoreController;
 import com.example.finalproject.R;
-import com.example.finalproject.Section.Section;
 import com.example.finalproject.openvcall.model.AGEventHandler;
 import com.example.finalproject.openvcall.model.ConstantApp;
 import com.example.finalproject.openvcall.model.DuringCallEventHandler;
@@ -62,8 +58,6 @@ import io.agora.rtc.video.VideoEncoderConfiguration;
 
 public class CallActivity extends BaseActivity implements DuringCallEventHandler {
 
-    private String username;
-    private Section section;
     private String id;
     public static final int LAYOUT_TYPE_DEFAULT = 0;
     public static final int LAYOUT_TYPE_SMALL = 1;
@@ -101,8 +95,6 @@ public class CallActivity extends BaseActivity implements DuringCallEventHandler
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         id = getIntent().getStringExtra("nickname");
-        section = (Section) getIntent().getSerializableExtra("section");
-        username = getIntent().getStringExtra("username");
 
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
@@ -432,16 +424,6 @@ public class CallActivity extends BaseActivity implements DuringCallEventHandler
 
     private void doLeaveChannel() {
         leaveChannel(config().mChannel);
-        ArrayList<String> section_participate = section.get_SectionParticipate();
-        for (int i = 0; i < section_participate.size(); i++){
-            if(section_participate.get(i).equals(username)){
-                section_participate.remove(i);
-                break;
-            }
-        }
-
-        FirebaseFirestoreController<Section> sectionirebaseFirestoreController = new FirebaseFirestoreController<>(Section.class);
-        sectionirebaseFirestoreController.updateDocumentField(KEY_COLLECTION_SECTION, section.get_SectionName(), "_SectionParticipate", section_participate);
 
         preview(false, null, 0);
     }
