@@ -78,7 +78,6 @@ public class ImageSettingBottomSheetFragment extends BottomSheetDialogFragment {
 
         _SettingPersonalInformationBottomSheetCameraButton = view.findViewById(R.id.SettingPersonalInformationBottomSheetFragmentCameraButton);
         _SettingPersonalInformationBottomSheetLibraryButton = view.findViewById(R.id.SettingPersonalInformationBottomSheetFragmentLibraryButton);
-        _SettingPersonalInformationBottomSheetCancelButton = view.findViewById(R.id.SettingPersonalInformationBottomSheetFragmentCancelButton);
         _SettingPersonalInformationAvatarRender = parent_view.findViewById(R.id.SettingPersonalInformationScreenAvatarImageView);
 
         user_name = getArguments().getString("user");

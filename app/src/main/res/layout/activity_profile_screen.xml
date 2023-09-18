@@ -355,7 +355,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginEnd="5dp"
-                    android:text="5000 mi"
                     android:fontFamily="@font/lato"
                     android:textSize="14sp"
                     android:textColor="@color/dark_blue"/>

@@ -81,7 +81,6 @@ public class RegisterAvatarSettingBottomSheetFragment extends BottomSheetDialogF
 
         _RegisterAvatarBottomSheetCameraButton = view.findViewById(R.id.SettingPersonalInformationBottomSheetFragmentCameraButton);
         _RegisterAvatarBottomSheetLibraryButton = view.findViewById(R.id.SettingPersonalInformationBottomSheetFragmentLibraryButton);
-        _RegisterAvatarBottomSheetCancelButton = view.findViewById(R.id.SettingPersonalInformationBottomSheetFragmentCancelButton);
         _RegisterAvatarRender = parent_view.findViewById(R.id.RegisterScreenAvatarPreviewImageView);
 
         user_name = getArguments().getString("user");

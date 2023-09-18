@@ -3,8 +3,10 @@ package com.example.finalproject.Message.Chatbot
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.InputType
 import android.util.Log
 import android.view.View
+import android.view.View.GONE
 import android.view.View.INVISIBLE
 import android.widget.EditText
 import android.widget.FrameLayout
@@ -51,6 +53,8 @@ class ChatbotActivity : AppCompatActivity() {
     lateinit var chatbotName:TextView
     lateinit var backBtn:ImageView
     lateinit var typing:ChatTypingIndicatorView
+    lateinit var sendLayout: FrameLayout
+    lateinit var info:ImageView
 
     lateinit var messageArray: ArrayList<String>
     lateinit var chatAdapter: ChatbotAdapter
@@ -68,8 +72,15 @@ class ChatbotActivity : AppCompatActivity() {
         chatbotName = findViewById(R.id.ChatUsername)
         backBtn = findViewById(R.id.ChatBackArrow)
         typing = findViewById(R.id.indicatorView)
+        sendLayout = findViewById(R.id.layoutSend)
+        info = findViewById(R.id.ChatUserInfo)
+
+        info.visibility = GONE
+
+        queryEdt.inputType = InputType.TYPE_CLASS_TEXT
 
         sendButton.isEnabled = true
+        sendLayout.isEnabled = true
         sendButton.setColorFilter(R.color.light_blue)
 
         chatbotName.setText("chatbot")
@@ -90,7 +101,7 @@ class ChatbotActivity : AppCompatActivity() {
         displayScreen.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL ,false)
         displayScreen.visibility = VISIBLE
 
-        sendButton.setOnClickListener {
+        sendLayout.setOnClickListener {
             if (queryEdt.text.toString().isNotEmpty()) {
                 messageArray.add(queryEdt.text.toString())
                 chatAdapter.notifyDataSetChanged()
@@ -101,12 +112,10 @@ class ChatbotActivity : AppCompatActivity() {
 
                 queryEdt.isEnabled = false
                 sendButton.isEnabled = false
+                sendLayout.isEnabled = false
 
                 // calling get response to get the response.
                 getResponse(quest)
-
-                var timer = Timer()
-
             } else {
                 Toast.makeText(this, "Please enter your query.", Toast.LENGTH_SHORT).show()
             }
@@ -172,6 +181,7 @@ class ChatbotActivity : AppCompatActivity() {
                         typing.visibility = INVISIBLE
                         queryEdt.isEnabled = true
                         sendButton.isEnabled = true
+                        sendLayout.isEnabled = true
                         sendButton.setColorFilter(R.color.light_blue)
                     })
                 })
