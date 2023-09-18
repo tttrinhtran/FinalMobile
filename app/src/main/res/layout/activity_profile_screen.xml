@@ -144,6 +144,7 @@
                     android:src="@drawable/arrow_right_icon"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+<!--            password-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ProfileScreenPasswordLayout"
                 android:layout_width="match_parent"
@@ -188,6 +189,7 @@
                     android:src="@drawable/arrow_right_icon"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+<!--            location-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ProfileScreenLocationEditLayout"
                 android:layout_width="match_parent"
@@ -232,13 +234,104 @@
                     android:src="@drawable/arrow_right_icon"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+<!--            school-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ProfileScreenSchoolEditLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ProfileScreenLocationEditLayout"
+                android:paddingVertical="20dp"
+                android:background="@drawable/border_bottom_black"
+                android:backgroundTint="@color/light_blue">
+
+                <TextView
+                    android:id="@+id/ProfileScreenSchoolTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="School"
+                    android:fontFamily="@font/tommy_regular"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="16sp"
+                    />
+
+                <TextView
+                    android:id="@+id/ProfileScreenSchoolText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@id/ProfileScreenSchoolEditIcon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginEnd="5dp"
+                    android:text="HCMUS"
+                    android:fontFamily="@font/lato"
+                    android:textSize="14sp"
+                    android:textColor="@color/dark_blue"/>
+
+                <ImageView
+                    android:id="@+id/ProfileScreenSchoolEditIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/arrow_right_icon"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--            major-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ProfileScreenMajorEditLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ProfileScreenSchoolEditLayout"
+                android:paddingVertical="20dp"
+                android:background="@drawable/border_bottom_black"
+                android:backgroundTint="@color/light_blue">
+
+                <TextView
+                    android:id="@+id/ProfileScreenMajorTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="Major"
+                    android:fontFamily="@font/tommy_regular"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="16sp"
+                    />
+
+                <TextView
+                    android:id="@+id/ProfileScreenMajorText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@id/ProfileScreenMajorEditIcon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginEnd="5dp"
+                    android:text="Student"
+                    android:fontFamily="@font/lato"
+                    android:textSize="14sp"
+                    android:textColor="@color/dark_blue"/>
+
+                <ImageView
+                    android:id="@+id/ProfileScreenMajorEditIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/arrow_right_icon"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ProfileScreenDistanceLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ProfileScreenLocationEditLayout"
+                app:layout_constraintTop_toBottomOf="@id/ProfileScreenMajorEditLayout"
                 android:paddingVertical="10dp"
                 android:background="@drawable/border_bottom_black"
                 android:backgroundTint="@color/light_blue">
