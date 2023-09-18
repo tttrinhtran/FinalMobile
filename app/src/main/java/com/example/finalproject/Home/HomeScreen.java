@@ -5,15 +5,6 @@ import static com.example.finalproject.Constants.KEY_COLLECTION_USERS;
 import static com.example.finalproject.Constants.KEY_SHARED_PREFERENCE_USERS;
 import static com.example.finalproject.Constants.LOCATION_UPDATE_STATUS;
 
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
@@ -27,7 +18,12 @@ import android.view.animation.Interpolator;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.finalproject.Constants;
 import com.example.finalproject.FirebaseCloudStorageManager;
@@ -37,13 +33,16 @@ import com.example.finalproject.FriendsScreen;
 import com.example.finalproject.Home.Active.ActiveListAdapter;
 import com.example.finalproject.Listeners.CardListener;
 import com.example.finalproject.LocationUpdatePeriodicallyService;
-import com.example.finalproject.Message.ChatActivity;
 import com.example.finalproject.Position;
 import com.example.finalproject.Profile.ProfileScreen;
 import com.example.finalproject.R;
 import com.example.finalproject.Section.SectionScreen;
 import com.example.finalproject.SharedPreferenceManager;
 import com.example.finalproject.User;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
 import com.yuyakaido.android.cardstackview.CardStackListener;
 import com.yuyakaido.android.cardstackview.CardStackView;
@@ -52,7 +51,7 @@ import com.yuyakaido.android.cardstackview.StackFrom;
 import com.yuyakaido.android.cardstackview.SwipeableMethod;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -71,6 +70,7 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
 
     private TextView titleText;
     cardSwipeAdapter adapterSwipe;
+    ActiveListAdapter adapter;
     CardStackLayoutManager manager;
 
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -93,6 +93,7 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
 
         databaseManagerInit();
 
+        listenChange();
         setUp();
         NavBar();
     }
@@ -190,6 +191,7 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
     protected void onStop() {
         Intent serviceIntent = new Intent(HomeScreen.this, LocationUpdatePeriodicallyService.class);
         stopService(serviceIntent);
+
         Log.d( "Vicluu", "onStop: " + "Home stop");
         super.onStop();
     }
@@ -383,7 +385,7 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
 
     void ActiveList() {
         getActiveFriend();
-        ActiveListAdapter adapter = new ActiveListAdapter(activeFriend, (Context) this);
+        adapter = new ActiveListAdapter(activeFriend, (Context) this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     }
@@ -394,6 +396,8 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
     }
 
     private void getActiveFriend() {
+
+        activeFriend.clear();
         ArrayList<String> temp = user.get_UserFriend();
         if (temp != null) {
             for (int i = 0; i < temp.size(); i++) {
@@ -417,6 +421,7 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
                 Intent intent = new Intent(HomeScreen.this, FriendsScreen.class);
                 //Bundle b = ActivityOptions.makeSceneTransitionAnimation(HomeScreen.this).toBundle();
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -444,6 +449,41 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
 
     }
 
+    // eventListener
+    private final EventListener<QuerySnapshot> eventListener = ( value, error ) -> {
+        if( error != null || value == null ) return;
+        FirebaseFirestoreController<User> instance = new FirebaseFirestoreController<>(User.class);
+
+        for( DocumentChange documentChange : value.getDocumentChanges() ) {
+            if( documentChange.getType() == DocumentChange.Type.MODIFIED ) {
+                String current = documentChange.getDocument().getString("_UserName");
+                if(Objects.equals(current, user.get_UserName())) {
+                    user = documentChange.getDocument().toObject(User.class);
+
+                    // Update local
+                    SharedPreferenceManager currentInstance = new SharedPreferenceManager<>(User.class, this);
+                    currentInstance.storeSerializableObjectToSharedPreference(user, Constants.KEY_SHARED_PREFERENCE_USERS);
+
+                    // Update activeFriend
+                    getActiveFriend();
+                    adapter.notifyDataSetChanged();
+
+                    // Update activeUser
+                    activeUsers.removeIf( u -> user.get_UserFriend().contains(u.get_UserName()) );
+                    adapterSwipe.notifyDataSetChanged();
+                }
+            }
+        }
+    };
+
+    // Set query listener
+    private void listenChange() {
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+
+        database.collection(KEY_COLLECTION_USERS)
+                .addSnapshotListener(eventListener);
+    }
+
     @Override
     public void onCardClicker( User user ) {
         Intent intent = new Intent( getApplicationContext(), UserBio.class );
@@ -451,4 +491,5 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
         intent.putExtra( "USER_OBJECT", user );
         startActivity(intent);
     }
+
 }

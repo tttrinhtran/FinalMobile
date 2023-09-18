@@ -72,8 +72,12 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStop() {
+        super.onStop();
+
+        // Update local
+        SharedPreferenceManager currentInstance = new SharedPreferenceManager<>(User.class, this);
+        currentInstance.storeSerializableObjectToSharedPreference(currentUser, Constants.KEY_SHARED_PREFERENCE_USERS);
     }
 
     private void setListener() {
@@ -216,13 +220,15 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
         for( DocumentChange documentChange : value.getDocumentChanges() ) {
             if( documentChange.getType() == DocumentChange.Type.ADDED ) {
                 String friend = documentChange.getDocument().getString("_UserName");
-                // if( documentChange.getDocument().getBoolean(Constants.KEY_USER_ACTIVE) && friendList.contains(friend)) friendActive.add(instance.retrieveObjectsFirestoreByID(Constants.KEY_COLLECTION_USERS, friend));
                 if( friendList.contains(friend) ) friendActive.add(instance.retrieveObjectsFirestoreByID(Constants.KEY_COLLECTION_USERS, friend));
             }
             else if ( documentChange.getType() == DocumentChange.Type.MODIFIED ) {
                 Log.d("Hoktro", "Modified");
                 String friend = documentChange.getDocument().getString("_UserName");
                 for( User user : friendActive ) if(Objects.equals(user.get_UserName(), friend)) user._UserActive = documentChange.getDocument().getBoolean(Constants.KEY_USER_ACTIVE);
+                if(Objects.equals(friend, currentUser._UserName)) {
+                    currentUser = documentChange.getDocument().toObject(User.class);
+                }
             }
         }
 
