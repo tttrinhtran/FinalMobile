@@ -106,8 +106,13 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
 
         HomeScren_UIElementsSetup();
 
-        databaseManagerInit();
+        userFirebaseController = new FirebaseFirestoreController<>(User.class);
+        activeFriend = new ArrayList<>();
+        activeUsers = new ArrayList<>();
 
+        firestoreGeoHashQueries = new FirestoreGeoHashQueries();
+        positionfirebaseFirestoreController = new FirebaseFirestoreController<>(Position.class);
+        isLocationUpdatedSharedPreference = new SharedPreferenceManager<>(Boolean.class,HomeScreen.this);
         listenChange();
         startLocationService();
 
@@ -167,13 +172,6 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
     }
 
     private void databaseManagerInit() {
-        userFirebaseController = new FirebaseFirestoreController<>(User.class);
-        activeFriend = new ArrayList<>();
-        activeUsers = new ArrayList<>();
-
-        firestoreGeoHashQueries = new FirestoreGeoHashQueries();
-        positionfirebaseFirestoreController = new FirebaseFirestoreController<>(Position.class);
-        isLocationUpdatedSharedPreference = new SharedPreferenceManager<>(Boolean.class,HomeScreen.this);
     }
 
     private void HomeScren_UIElementsSetup(){
