@@ -72,7 +72,6 @@ public class UserBio extends AppCompatActivity {
     private void setHobies()
     {
         hobiesList=user.get_UserHobbies();
-
         RecyclerView recyclerView=findViewById(R.id.bioHobbiesRecyclerview);
          hobbiesAdapter adapter= new hobbiesAdapter(hobiesList, this);
         recyclerView.setAdapter(adapter);
