@@ -192,6 +192,8 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
                 }
                 chatMessage.message = documentChange.getDocument().getString(Constants.KEY_LAST_MESSAGE);
                 chatMessage.timestamp = documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP);
+
+                conversations.removeIf( chat -> (Objects.equals(chat.senderId, senderId) && Objects.equals(chat.receiverId, receiverId)) || (Objects.equals(chat.senderId, receiverId) && Objects.equals(chat.receiverId, senderId)) );
                 conversations.add(chatMessage);
             }
             else if ( documentChange.getType() == DocumentChange.Type.MODIFIED ) {

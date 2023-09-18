@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterScreen.RegisterScreenHobbies">
+    tools:context=".RegisterScreen.RegisterScreenHobbies"
+    android:background="@drawable/sign_srceenbg">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/RegisterScreenHobbiesBottomHorizontalGuideline"
@@ -22,30 +23,24 @@
         app:layout_constraintRight_toRightOf="parent"
         android:textStyle="bold"
         android:text="Hobbies"
-        android:layout_marginTop="10dp"/>
+        android:textColor="@color/primary_blue"
+        android:fontFamily="@font/tommy_medium"
+        android:textSize="24sp"
+        android:layout_marginTop="30dp"/>
 
-    <TextView
-        android:id="@+id/RegisterScreenHobbiesDescribeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/RegisterScreenHobbiesTitleText"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:textStyle="italic"
-        android:text="Optional"
-        android:layout_marginTop="10dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RegisterScreenHobbiesOptionsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/RegisterScreenHobbiesDescribeText"
+        app:layout_constraintTop_toBottomOf="@id/RegisterScreenHobbiesTitleText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="1.0"
         tools:layout_editor_absoluteX="0dp"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="40dp"
+        android:padding="20dp">
     </androidx.recyclerview.widget.RecyclerView>
 
     <TextView
@@ -59,7 +54,7 @@
         android:layout_marginBottom="30dp"
         android:text="Next"
         android:fontFamily="@font/lato"
-        android:textSize="14sp"
+        android:textSize="20sp"
         android:textColor="@color/white"
         android:background="@color/primary_blue"
         android:paddingVertical="10dp"

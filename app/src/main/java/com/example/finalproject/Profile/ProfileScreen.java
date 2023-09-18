@@ -117,7 +117,7 @@ public class ProfileScreen extends AppCompatActivity {
 
         binding.ProfileScreenDistanceSlider.addOnChangeListener( (slider, value, fromUser) -> {
             currentUser._UserDistancePref = value;
-            binding.ProfileScreenDistanceText.setText( (int)value + " mi");
+            binding.ProfileScreenDistanceText.setText( (int)value + " km");
         } );
 
         binding.ProfileScreenAgeSlider.addOnChangeListener( (rangeSlider, value, fromUser) -> {
@@ -164,6 +164,16 @@ public class ProfileScreen extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+
+        binding.ProfileScreenSchoolEditIcon.setOnClickListener(view ->{
+            Intent intent = new Intent(ProfileScreen.this, ProfileScreenSchoolModification.class);
+            startActivity(intent);
+        });
+
+        binding.ProfileScreenMajorEditIcon.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfileScreen.this, ProfileScreenMajorModification.class);
+            startActivity(intent);
+        });
     }
 
 
@@ -183,6 +193,7 @@ public class ProfileScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileScreen.this, HomeScreen.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
             }
@@ -193,6 +204,7 @@ public class ProfileScreen extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileScreen.this, SectionScreen.class);
                 Bundle b = ActivityOptions.makeSceneTransitionAnimation(ProfileScreen.this).toBundle();
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent, b);
                 finish();
             }
@@ -204,6 +216,7 @@ public class ProfileScreen extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileScreen.this, FriendsScreen.class);
                 Bundle b = ActivityOptions.makeSceneTransitionAnimation(ProfileScreen.this).toBundle();
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent, b);
                 finish();
             }

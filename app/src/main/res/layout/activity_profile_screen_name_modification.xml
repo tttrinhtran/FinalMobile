@@ -39,7 +39,11 @@
         app:layout_constraintBottom_toBottomOf="@id/ProfileScreenNameModificationBackButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="Edit Name"/>
+        android:text="Edit Your Name"
+        android:fontFamily="@font/tommy_regular"
+        android:textSize="25sp"
+        android:textColor="@color/primary_blue"
+        android:textStyle="bold"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ProfileScreenNameModificationNewLastnameLayout"
@@ -65,6 +69,7 @@
             android:paddingStart="10dp"
             android:backgroundTint="@android:color/transparent"
             android:hint="New Lastname"
+            android:textColorHint="@color/black"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:fontFamily="@font/lato"
@@ -97,6 +102,7 @@
             android:paddingStart="10dp"
             android:backgroundTint="@android:color/transparent"
             android:hint="New Firstname"
+            android:textColorHint="@color/black"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:fontFamily="@font/lato"
@@ -129,6 +135,7 @@
             android:paddingStart="10dp"
             android:backgroundTint="@android:color/transparent"
             android:hint="New password confirm"
+            android:textColorHint="@color/black"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:fontFamily="@font/lato"

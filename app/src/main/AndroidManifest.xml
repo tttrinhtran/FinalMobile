@@ -46,6 +46,12 @@
         tools:targetApi="33">
         <activity
             android:name=".Profile.ProfileScreenCity"
+            android:exported="false"/>
+        <activity
+            android:name=".Profile.ProfileScreenMajorModification"
+            android:exported="false" />
+        <activity
+            android:name=".Profile.ProfileScreenSchoolModification"
             android:exported="false" />
         <activity
             android:name=".Message.Chatbot.ChatbotActivity"
