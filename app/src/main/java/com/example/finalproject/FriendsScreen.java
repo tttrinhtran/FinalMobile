@@ -1,8 +1,13 @@
 package com.example.finalproject;
 
+import static com.example.finalproject.Constants.FIRESTORE_LOCATION_KEY;
+import static com.example.finalproject.Constants.LOCATION_UPDATE_STATUS;
+
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -28,6 +33,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class FriendsScreen extends AppCompatActivity implements UserListener {
 
@@ -45,10 +52,28 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
         binding = ActivityFriendsScreenBinding.inflate(getLayoutInflater());
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setContentView(binding.getRoot());
-        setListener();
+
+        SharedPreferenceManager<User> currentInstance = new SharedPreferenceManager<>(User.class, this);
+
+        friendList = new ArrayList<>();
+        currentUser = currentInstance.retrieveSerializableObjectFromSharedPreference( Constants.KEY_SHARED_PREFERENCE_USERS );
+
+        if( currentUser.get_UserFriend() != null ) friendList = currentUser.get_UserFriend();
+        else friendList = new ArrayList<>();
+        friendActive = new ArrayList<>();
+        conversations = new ArrayList<>();
+
+        getActiveList();
         getUser();
+
+        setListener();
         listenConversation();
         navBar();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     private void setListener() {
@@ -60,23 +85,17 @@ public class FriendsScreen extends AppCompatActivity implements UserListener {
     }
 
     private void getUser() {
-
-        SharedPreferenceManager<User> currentInstance = new SharedPreferenceManager<>(User.class, this);
-        currentUser = currentInstance.retrieveSerializableObjectFromSharedPreference( Constants.KEY_SHARED_PREFERENCE_USERS );
-
-        if( currentUser.get_UserFriend() != null ) friendList = currentUser.get_UserFriend();
-        else friendList = new ArrayList<>();
-
-        conversations = new ArrayList<>();
-        friendActive = new ArrayList<>();
-
         userAdapter = new UserAdapter( conversations, currentUser, this );
         binding.FriendScreenChat.setAdapter(userAdapter);
         binding.FriendScreenChat.setVisibility(View.VISIBLE);
 
+
+    }
+
+    private void getActiveList() {
         activeListAdapter = new ActiveListAdapter( friendActive, this );
         binding.FriendScreenActiveFriend.setAdapter(activeListAdapter);
-
+        binding.FriendScreenActiveFriend.setVisibility(View.VISIBLE);
     }
 
     private void showErrorMessage() {

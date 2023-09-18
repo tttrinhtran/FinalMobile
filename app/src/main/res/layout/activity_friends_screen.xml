@@ -42,7 +42,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"
-        android:layout_marginStart="10dp"/>
+        android:layout_marginStart="10dp"
+        android:visibility="visible"/>
 
     <ImageView
         android:id="@+id/FriendScreenChatBot"

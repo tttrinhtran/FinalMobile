@@ -344,18 +344,13 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
                 executorService.execute(new Runnable() {
                     @Override
                     public void run() {
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                            }
-                        });
                         activeUsers.clear();
                         handler.post(new Runnable() {
 
                             @Override
                             public void run() {
+                                getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                                 progressBar.setVisibility(View.VISIBLE);
                             }
                         });
@@ -422,8 +417,8 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeScreen.this, FriendsScreen.class);
-                Bundle b = ActivityOptions.makeSceneTransitionAnimation(HomeScreen.this).toBundle();
-                startActivity(intent, b);
+                //Bundle b = ActivityOptions.makeSceneTransitionAnimation(HomeScreen.this).toBundle();
+                startActivity(intent);
             }
         });
 

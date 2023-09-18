@@ -82,7 +82,10 @@ public class ProfileScreen extends AppCompatActivity {
         String passwordhide = new String(new char[currentUser.get_UserPassword().length()]).replace('\0', '*');
         binding.ProfileScreenPasswordText.setText(passwordhide);
 
-        binding.ProfileScreenUsername.setText(currentUser.get_UserFirstname() + " " + currentUser.get_UserLastname() + " (" + currentUser.get_UserNickName() + ")");
+        String nickname;
+        if(currentUser.get_UserNickName() == null || currentUser.get_UserNickName().isEmpty()) nickname = "";
+        else nickname = " (" + currentUser.get_UserNickName() + ")";
+        binding.ProfileScreenUsername.setText(currentUser.get_UserFirstname() + " " + currentUser.get_UserLastname() + nickname);
 
         binding.ProfileScreenDistanceSlider.setValue(currentUser.get_UserDistancePref());
         binding.ProfileScreenDistanceText.setText( (int) currentUser.get_UserDistancePref() + " mi");
