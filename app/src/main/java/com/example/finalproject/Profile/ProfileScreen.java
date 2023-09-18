@@ -117,7 +117,7 @@ public class ProfileScreen extends AppCompatActivity {
 
         binding.ProfileScreenDistanceSlider.addOnChangeListener( (slider, value, fromUser) -> {
             currentUser._UserDistancePref = value;
-            binding.ProfileScreenDistanceText.setText( (int)value + " mi");
+            binding.ProfileScreenDistanceText.setText( (int)value + " km");
         } );
 
         binding.ProfileScreenAgeSlider.addOnChangeListener( (rangeSlider, value, fromUser) -> {
@@ -163,6 +163,16 @@ public class ProfileScreen extends AppCompatActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
+        });
+
+        binding.ProfileScreenSchoolEditIcon.setOnClickListener(view ->{
+            Intent intent = new Intent(ProfileScreen.this, ProfileScreenSchoolModification.class);
+            startActivity(intent);
+        });
+
+        binding.ProfileScreenMajorEditIcon.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfileScreen.this, ProfileScreenMajorModification.class);
+            startActivity(intent);
         });
     }
 
