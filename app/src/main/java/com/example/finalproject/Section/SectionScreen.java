@@ -42,7 +42,7 @@ public class SectionScreen extends AppCompatActivity implements sectionListInter
     RecyclerView SectionRecyclerView;
     sectionListAdap sectionAdap;
     private User user;
-    private int tab = 1; // 1 = friend's section, 2 = my section
+    private int tab = 0; // 1 = friend's section, 2 = my section
 
 
 
@@ -120,7 +120,8 @@ public class SectionScreen extends AppCompatActivity implements sectionListInter
         btnMySection = findViewById(R.id.MySection_Tab);
         addSectionButton = findViewById(R.id.SectionScreenAddSectionButton);
 
-        sectionRecycler();
+        if(tab == 0) sectionRecycler();
+        else mySectionRecycler();
         btnSection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,6 +130,7 @@ public class SectionScreen extends AppCompatActivity implements sectionListInter
                btnSection.setBackgroundResource(R.drawable.border_tab);
                btnMySection.setBackgroundResource(android.R.color.transparent);
                sectionRecycler();
+               tab = 0;
             }
         });
 
@@ -140,6 +142,7 @@ public class SectionScreen extends AppCompatActivity implements sectionListInter
                 btnSection.setBackgroundResource(android.R.color.transparent);
                 btnMySection.setBackgroundResource(R.drawable.border_tab);
                 mySectionRecycler();
+                tab = 1;
             }
         });
 
@@ -210,8 +213,6 @@ public class SectionScreen extends AppCompatActivity implements sectionListInter
         sectionKind.setText("My Section");
         recyclerViewList = mySectionList;
         recyclerView(recyclerViewList);
-
-
     }
     private void sectionRecycler()
     {
