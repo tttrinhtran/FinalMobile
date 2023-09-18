@@ -88,7 +88,7 @@ public class ProfileScreen extends AppCompatActivity {
         binding.ProfileScreenUsername.setText(currentUser.get_UserFirstname() + " " + currentUser.get_UserLastname() + nickname);
 
         binding.ProfileScreenDistanceSlider.setValue(currentUser.get_UserDistancePref());
-        binding.ProfileScreenDistanceText.setText( (int) currentUser.get_UserDistancePref() + " mi");
+        binding.ProfileScreenDistanceText.setText( (int) currentUser.get_UserDistancePref() + " km");
         binding.ProfileScreenAgeSlider.setValues(currentUser.get_UserMinAge(), currentUser.get_UserMaxAge());
         binding.ProfileScreenAgeText.setText( (int) currentUser.get_UserMinAge() + "-" + (int) currentUser.get_UserMaxAge());
         binding.ProfileScreenLocationInfo.setText( currentUser.get_UserAddress() );

@@ -369,8 +369,8 @@
                     android:layout_marginTop="5dp"
 
                     android:valueFrom="1"
-                    android:valueTo="5000"
-                    android:value="5000"
+                    android:valueTo="500"
+                    android:value="500"
                     android:stepSize="1"
 
 

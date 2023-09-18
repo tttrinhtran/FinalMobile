@@ -31,7 +31,7 @@ public class User implements Serializable {
     String _UserCity;
     public float _UserMinAge = 18;
     public float _UserMaxAge = 50;
-    public float _UserDistancePref = 5000;
+    public float _UserDistancePref = 500;
 
 
 
