@@ -102,6 +102,7 @@ public class SectionDetail extends BaseActivity {
 
                     if(currentDateTime.isAfter(sectionDateAndTime)) {
                         if(section._SectionParticipate.contains(section._SectionHost) || user.get_UserName().equals(section._SectionHost)) {
+                            joinSection();
                             forwardToRoom(SectionDetail.this, section._SectionName, "123");
                         } else Toast.makeText(SectionDetail.this, "Waiting for Host to start the Section",Toast.LENGTH_SHORT).show();
                     } else {
@@ -115,7 +116,6 @@ public class SectionDetail extends BaseActivity {
             joinBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    joinSection();
                     finish();
                 }
             });
