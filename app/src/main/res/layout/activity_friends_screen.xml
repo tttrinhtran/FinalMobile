@@ -17,7 +17,7 @@
         android:fontFamily="@font/tommy_medium"
         android:textSize="24sp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="40dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/FriendScreenActiveFriend"
