@@ -413,20 +413,10 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
         SharedPreferenceManager<User> sharedPreferenceManager = new SharedPreferenceManager<>(User.class, this);
         user = sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_SHARED_PREFERENCE_USERS);
 
-//        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//        final DocumentReference docRef = db.collection(KEY_COLLECTION_USERS).document(user.get_UserName());
-//        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-//            @Override
-//            public void onEvent(@Nullable DocumentSnapshot snapshot,
-//                                @Nullable FirebaseFirestoreException e) {
-//                if (e != null) {
-//                    Log.w(TAG, "Listen failed.", e);
-//                    return;
-//                }
-//
-//                user = snapshot.toObject(User.class);
-//            }
-//        });
+        FirebaseFirestoreController<User> currentInstance = new FirebaseFirestoreController<>(User.class);
+        user = currentInstance.retrieveObjectsFirestoreByID(KEY_COLLECTION_USERS, user.get_UserName() );
+
+        sharedPreferenceManager.storeSerializableObjectToSharedPreference(user, KEY_SHARED_PREFERENCE_USERS);
     }
 
     private void getActiveFriend() {
