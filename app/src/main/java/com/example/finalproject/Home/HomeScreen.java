@@ -75,7 +75,6 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProgressBar progressBar;
     private CardStackView cardStackView;
-    private TextView tv;
     private RecyclerView recyclerView;
     private ImageView home;
     private ImageView section;
@@ -94,7 +93,12 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
         databaseManagerInit();
 
         setUp();
+        NavBar();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         startLocationService();
 
         Handler handler = new Handler(Looper.getMainLooper());
@@ -133,8 +137,6 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
             }
         });
         ActiveList();
-        NavBar();
-
     }
 
     private void startLocationService() {
@@ -211,10 +213,10 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
                 Log.d(TAG, "onCardSwiped: p=" + manager.getTopPosition() + " d=" + direction);
                 if (direction == Direction.Right) {
                     checkSwipeRight(activeUsers.get(curPos[0]));
-                    Toast.makeText(HomeScreen.this, "Direction Right", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(HomeScreen.this, "Direction Right", Toast.LENGTH_SHORT).show();
                 }
                 if (direction == Direction.Left) {
-                    Toast.makeText(HomeScreen.this, "Direction Left", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(HomeScreen.this, "Direction Left", Toast.LENGTH_SHORT).show();
                     checkSwipeLeft(activeUsers.get(curPos[0]));
                 }
 
@@ -340,11 +342,11 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
                 ExecutorService executorService = Executors.newSingleThreadExecutor();
 
                 progressBar.setVisibility(View.VISIBLE);
+                activeUsers.clear();
 
                 executorService.execute(new Runnable() {
                     @Override
                     public void run() {
-                        activeUsers.clear();
                         handler.post(new Runnable() {
 
                             @Override
@@ -360,15 +362,11 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
                             Position pos = null;
                             pos = positionfirebaseFirestoreController.retrieveObjectsFirestoreByID(FIRESTORE_LOCATION_KEY, user.get_UserName());
                             firestoreGeoHashQueries.QueryForLocationFireStore(user, pos, 500, activeUsers);
-                            // activeUsers.removeAll(user.get_UserFriend());
-
+                            activeUsers.removeIf( u -> user.get_UserFriend().contains(u.get_UserName()) );
                         }
                         handler.post(new Runnable() {
-
                             @Override
                             public void run() {
-                                activeUsers.removeIf( u -> user.get_UserFriend().contains(u.get_UserName()) );
-                                adapterSwipe.notifyDataSetChanged();
                                 updateActiveStatus();
                                 swipe();
                                 progressBar.setVisibility(View.INVISIBLE);
@@ -377,7 +375,6 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
                         });
                     }
                 });
-
                 swipeRefreshLayout.setRefreshing(false);
             }
         });

@@ -19,17 +19,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main) ;
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseFirestoreSettings settings =
-                new FirebaseFirestoreSettings.Builder(db.getFirestoreSettings())
-                        // Use memory-only cache
-                        .setLocalCacheSettings(MemoryCacheSettings.newBuilder().build())
-                        // Use persistent disk cache (default)
-                        .setLocalCacheSettings(PersistentCacheSettings.newBuilder()
-                                .build())
-                        .build();
-        db.setFirestoreSettings(settings);
-
         Intent intent = new Intent(MainActivity.this, LoginScreen.class);
         startActivity(intent);
 

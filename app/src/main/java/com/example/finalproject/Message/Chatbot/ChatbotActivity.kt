@@ -8,6 +8,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.TextView.VISIBLE
 import android.widget.Toast
@@ -44,6 +45,7 @@ class ChatbotActivity : AppCompatActivity() {
     lateinit var displayScreen: RecyclerView
     lateinit var queryEdt: EditText
     lateinit var chatbotName:TextView
+    lateinit var backBtn:ImageView
 
     lateinit var messageArray: ArrayList<String>
     lateinit var chatAdapter: ChatbotAdapter
@@ -59,6 +61,7 @@ class ChatbotActivity : AppCompatActivity() {
         displayScreen = findViewById(R.id.chatRecyclerView)
         queryEdt = findViewById(R.id.inputMessage)
         chatbotName = findViewById(R.id.ChatUsername)
+        backBtn = findViewById(R.id.ChatBackArrow)
 
         chatbotName.setText("chatbot")
 
@@ -94,6 +97,8 @@ class ChatbotActivity : AppCompatActivity() {
                     Toast.makeText(this, "Please enter your query.", Toast.LENGTH_SHORT).show()
                 }
         })
+
+        backBtn.setOnClickListener(View.OnClickListener { view -> finish() })
     }
 
     private fun getResponse(query: String) {
