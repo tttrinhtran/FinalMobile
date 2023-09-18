@@ -155,6 +155,7 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
     @Override
     protected void onResume() {
         super.onResume();
+        startLocationService();
     }
 
     private void startLocationService() {
