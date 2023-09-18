@@ -349,14 +349,14 @@ public class HomeScreen extends AppCompatActivity implements CardListener {
                             pos = positionfirebaseFirestoreController.retrieveObjectsFirestoreByID(FIRESTORE_LOCATION_KEY, user.get_UserName());
                             firestoreGeoHashQueries.QueryForLocationFireStore(user, pos, 500, activeUsers);
                             // activeUsers.removeAll(user.get_UserFriend());
-                            activeUsers.removeIf( u -> user.get_UserFriend().contains(u.get_UserName()) );
-                            adapterSwipe.notifyDataSetChanged();
 
                         }
                         handler.post(new Runnable() {
 
                             @Override
                             public void run() {
+                                activeUsers.removeIf( u -> user.get_UserFriend().contains(u.get_UserName()) );
+                                adapterSwipe.notifyDataSetChanged();
                                 updateActiveStatus();
                                 swipe();
                                 progressBar.setVisibility(View.INVISIBLE);

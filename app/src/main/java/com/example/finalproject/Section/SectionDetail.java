@@ -98,41 +98,12 @@ public class SectionDetail extends BaseActivity {
                     String sectionDate = section.get_SectionDate();
                     String sectionTime = section.get_SectionHour();
 
-                    ArrayList<Integer> time = new ArrayList<Integer>(0); // {dd,mm,yyyy,hh,mm,ss}
-
-                    StringBuilder temp = new StringBuilder();
-
-                    for (char i : sectionDate.toCharArray()){
-                        if(i == '/'){
-                            time.add(Integer.parseInt(temp.toString()));
-                            temp = new StringBuilder();
-                        }else {
-                            temp.append(i);
-                        }
-                    }
-                    time.add(Integer.parseInt(temp.toString())); // add for the last element since dd/mm/yyyy there is no way
-                                                                    // to identify yyyy inside the loop
-                    temp = new StringBuilder();
-
-                    for (char i : sectionTime.toCharArray()){
-                        if(i == ':'){
-                            time.add(Integer.parseInt(temp.toString()));
-                            temp = new StringBuilder();
-                        }else {
-                            temp.append(i);
-                        }
-                    }
-                    time.add(Integer.parseInt(temp.toString())); // add for the last element since hh:mm:ss there is no way
-                                                                // to identify ss inside the loop
-
-
-                    int remain_attribute_of_time = time.size();
-                    for (int i = 0 ; i < 6 - remain_attribute_of_time; i++) time.add(0);
-
-                    LocalDateTime sectionDateAndTime = LocalDateTime.of(time.get(2), time.get(1), time.get(0), time.get(3), time.get(4), time.get(5));
+                    LocalDateTime sectionDateAndTime = getSectionTime(sectionDate, sectionTime);
 
                     if(currentDateTime.isAfter(sectionDateAndTime)) {
-                        forwardToRoom(SectionDetail.this, section._SectionName, "123");
+                        if(section._SectionParticipate.contains(section._SectionHost) || user.get_UserName().equals(section._SectionHost)) {
+                            forwardToRoom(SectionDetail.this, section._SectionName, "123");
+                        } else Toast.makeText(SectionDetail.this, "Waiting for Host to start the Section",Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(SectionDetail.this, "Section has not openned yet", Toast.LENGTH_SHORT).show();
                     }
@@ -156,7 +127,44 @@ public class SectionDetail extends BaseActivity {
             }
         });
     }
-void hostUpdate()
+
+    private static LocalDateTime getSectionTime(String sectionDate, String sectionTime) {
+        ArrayList<Integer> time = new ArrayList<Integer>(0); // {dd,mm,yyyy,hh,mm,ss}
+
+        StringBuilder temp = new StringBuilder();
+
+        for (char i : sectionDate.toCharArray()){
+            if(i == '/'){
+                time.add(Integer.parseInt(temp.toString()));
+                temp = new StringBuilder();
+            }else {
+                temp.append(i);
+            }
+        }
+        time.add(Integer.parseInt(temp.toString())); // add for the last element since dd/mm/yyyy there is no way
+        // to identify yyyy inside the loop
+        temp = new StringBuilder();
+
+        for (char i : sectionTime.toCharArray()){
+            if(i == ':'){
+                time.add(Integer.parseInt(temp.toString()));
+                temp = new StringBuilder();
+            }else {
+                temp.append(i);
+            }
+        }
+        time.add(Integer.parseInt(temp.toString())); // add for the last element since hh:mm:ss there is no way
+        // to identify ss inside the loop
+
+
+        int remain_attribute_of_time = time.size();
+        for (int i = 0 ; i < 6 - remain_attribute_of_time; i++) time.add(0);
+
+        LocalDateTime sectionDateAndTime = LocalDateTime.of(time.get(2), time.get(1), time.get(0), time.get(3), time.get(4), time.get(5));
+        return sectionDateAndTime;
+    }
+
+    void hostUpdate()
 {
 }
     void joinSection()
