@@ -1,8 +1,11 @@
 package com.example.finalproject.Home;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.transition.Explode;
@@ -18,15 +21,20 @@ import com.example.finalproject.Constants;
 import com.example.finalproject.FirebaseCloudStorageManager;
 import com.example.finalproject.FriendsScreen;
 import com.example.finalproject.R;
+import com.example.finalproject.RegisterScreen.Hobbies.HobbiesAdapter;
 import com.example.finalproject.User;
 import com.example.finalproject.databinding.ActivityUserBioBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 public class UserBio extends AppCompatActivity {
 
     User user;
     ActivityUserBioBinding binding;
+    ArrayList<String> hobiesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +46,7 @@ public class UserBio extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra("USER_OBJECT");
 
         setDataBio(user);
+        setHobies();
         onButtonClicked();
     }
 
@@ -57,6 +66,18 @@ public class UserBio extends AppCompatActivity {
         FirebaseCloudStorageManager firebaseCloudStorageManager = new FirebaseCloudStorageManager();
         firebaseCloudStorageManager.FetchingImageFromFirebase(user, binding.ItemSwipeImage);
         binding.ItemSwipeImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+    }
+
+    private void setHobies()
+    {
+        hobiesList=user.get_UserHobbies();
+
+        RecyclerView recyclerView=findViewById(R.id.bioHobbiesRecyclerview);
+         hobbiesAdapter adapter= new hobbiesAdapter(hobiesList, this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
+
     }
 
 }

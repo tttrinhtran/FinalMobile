@@ -4,29 +4,35 @@
     android:id="@+id/HobbiesCardviewContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
-    android:background="@drawable/round_outline_btn"
-    android:layout_margin="8dp">
-        <LinearLayout
+    android:layout_margin="8dp"
+    app:cardElevation="0dp"
+    >
+
+        <ImageView
             android:id="@+id/HobbiesCardLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="1"
-            android:padding="10dp"
-            android:gravity="center">
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:gravity="center"
+            android:background="@drawable/hobies_btn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
 
         <TextView
             android:id="@+id/HobbiesCardviewText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/HobbiesCardLayout"
+            app:layout_constraintStart_toStartOf="@id/HobbiesCardLayout"
             android:hint="hobbies"
+            android:layout_gravity="center"
             android:textSize="15sp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/tommy_regular"/>
-        </LinearLayout>
+            android:textAlignment="center"
+            android:textColor="@color/light_orange"
+            android:fontFamily="@font/tommy_medium"
+            app:layout_constraintTop_toTopOf="@id/HobbiesCardLayout"
+            app:layout_constraintBottom_toBottomOf="@id/HobbiesCardLayout"/>
 
 </androidx.cardview.widget.CardView>

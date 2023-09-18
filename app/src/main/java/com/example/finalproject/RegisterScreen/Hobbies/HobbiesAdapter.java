@@ -6,6 +6,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -43,7 +44,7 @@ public class HobbiesAdapter extends RecyclerView.Adapter<HobbiesAdapter.HobbieVi
     public static class HobbieViewHolder extends RecyclerView.ViewHolder {
         TextView hobbiesText;
         CardView cardViewList;
-        LinearLayout cardLayout;
+        ImageView cardLayout;
         boolean choose;
         public HobbieViewHolder(@NonNull View itemView, HobbiesSelectListenerInterface hobbiesSelectListenerInterface) {
             super(itemView);
@@ -60,7 +61,7 @@ public class HobbiesAdapter extends RecyclerView.Adapter<HobbiesAdapter.HobbieVi
                         int pos = getAbsoluteAdapterPosition();
                         if(pos != RecyclerView.NO_POSITION){
                             hobbiesSelectListenerInterface.onHobbiesClicked(pos);
-//                            hobbiesText.setBackgroundColor(R.drawable.btn_animation);
+                            hobbiesText.setBackgroundColor(R.drawable.btn_animation);
                             if(choose == true){
                                 cardViewList.setBackgroundResource(R.drawable.round_outline_btn);
                                 choose = false;

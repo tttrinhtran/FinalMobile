@@ -2,6 +2,8 @@ package com.example.finalproject.Profile;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -15,6 +17,7 @@ import com.example.finalproject.FirebaseAuthentication;
 import com.example.finalproject.FirebaseCloudStorageManager;
 import com.example.finalproject.FriendsScreen;
 import com.example.finalproject.Home.HomeScreen;
+import com.example.finalproject.Home.hobbiesAdapter;
 import com.example.finalproject.Login.LoginScreen;
 import com.example.finalproject.R;
 import com.example.finalproject.Section.SectionScreen;
@@ -23,6 +26,8 @@ import com.example.finalproject.User;
 import com.example.finalproject.databinding.ActivityProfileScreenBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProfileScreen extends AppCompatActivity {
@@ -159,6 +164,7 @@ public class ProfileScreen extends AppCompatActivity {
             finish();
         });
     }
+
 
     private void navBar(){
         ImageView home;
